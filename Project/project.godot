@@ -10,11 +10,17 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "Resource",
+"class": "AllChickens",
+"language": "GDScript",
+"path": "res://AllChickens.gd"
+}, {
+"base": "Resource",
 "class": "Chicken",
 "language": "GDScript",
 "path": "res://chicken/chicken_stats.gd"
 } ]
 _global_script_class_icons={
+"AllChickens": "",
 "Chicken": ""
 }
 

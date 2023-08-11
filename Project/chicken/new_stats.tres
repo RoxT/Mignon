@@ -6,3 +6,5 @@
 script = ExtResource( 1 )
 speed = 0
 nom = ""
+colour = Color( 0, 0, 0, 1 )
+wins = 0

@@ -22,9 +22,10 @@ func _ready():
 		bar.rect_min_size = Vector2(get_viewport_rect().size.x,0)
 		
 		track += 1
-		
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _on_ToCoop_pressed():
+	var err := get_tree().change_scene("res://Coop.tscn")
+	if err != OK:
+		push_error("Error switching scenes: " + str(err))
+		assert(false)

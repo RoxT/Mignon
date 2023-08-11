@@ -3,7 +3,7 @@
 [ext_resource path="res://chicken/young_chicken.png" type="Texture" id=1]
 [ext_resource path="res://chicken/Racer.gd" type="Script" id=2]
 [ext_resource path="res://RaceTrack.gd" type="Script" id=3]
-[ext_resource path="res://aseprites/young_chicken_white.png" type="Texture" id=4]
+[ext_resource path="res://chicken/young_chicken_white.png" type="Texture" id=4]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )
@@ -67,3 +67,12 @@ scale = Vector2( 4, 4 )
 frames = SubResource( 6 )
 animation = "run"
 script = ExtResource( 2 )
+
+[node name="ToCoop" type="Button" parent="."]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 84.0
+margin_bottom = 32.0
+text = "TO COOP"
+
+[connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
