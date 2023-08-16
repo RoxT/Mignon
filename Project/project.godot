@@ -27,7 +27,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Mignon"
-run/main_scene="res://RaceTrack/RaceTrack.tscn"
+run/main_scene="res://Coop.tscn"
 config/icon="res://icon.png"
 
 [gui]

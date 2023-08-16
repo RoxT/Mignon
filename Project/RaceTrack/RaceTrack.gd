@@ -1,34 +1,43 @@
 extends Node2D
 
-const lane_offset_y := 32
-var save_game:AllChickens
+onready var Lane := preload("res://RaceTrack/Lane.tscn")
 
+const lane_offset_y := 32
+const lane_separation_y := 155
+var track := 0
+
+var save_game:AllChickens
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var track:=1
-#	var racers := get_tree().get_nodes_in_group("racer")
 	if AllChickens.exists():
 		save_game = load(AllChickens.PATH)
 	else:
 		save_game = AllChickens.new()
-#	var racer_lane = preload("res://RaceTrack/Lane.tscn").instance()
+	
+	var first_chicken:Chicken
 	if save_game.racer:
-		$Lane1.chicken = save_game.racer
+		first_chicken = save_game.racer
 	else:
-		print("No racer found, using first in list")
-		$Lane1.chicken = save_game.get_all()[0]
-		save_game.racer = $Lane1.chicken
+		first_chicken = save_game.get_by_index(0)
+	add_lane(first_chicken)
+	add_lane(Chicken.new())
+	add_lane(Chicken.new())
 	
 	for r in get_tree().get_nodes_in_group("racer"):
 		var err = r.connect("finished", self, "_on_racer_finished")
 		if err != OK: push_error("Error connect finished signal: " + str(err))
 	
-func _on_racer_finished(index:int):
+func _on_racer_finished():
 	get_tree().call_group("racer", "stop")
-	if index >= 0:
-		save_game.winner(index)
+	save_game.save()
 	
+func add_lane(stats:Chicken):
+	var lane := Lane.instance()
+	lane.stats = stats
+	add_child(lane)
+	lane.position.y = lane_offset_y + lane_separation_y * track
+	track += 1
 
 func _on_ToCoop_pressed():
 	var err := get_tree().change_scene("res://Coop.tscn")

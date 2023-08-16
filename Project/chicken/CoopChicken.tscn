@@ -4,7 +4,7 @@
 [ext_resource path="res://chicken/CoopChicken.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 54.0833
+radius = 54.0093
 
 [node name="Chicken" type="AnimatedSprite" groups=["meander"]]
 position = Vector2( 130, 121 )
@@ -29,6 +29,7 @@ text = "Hekllo"
 
 [node name="Rest" type="Timer" parent="."]
 
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
 [connection signal="timeout" from="Rest" to="." method="_on_Rest_timeout"]

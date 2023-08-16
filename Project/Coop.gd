@@ -14,21 +14,31 @@ func _ready():
 	chicken_stats = save_game.get_all()
 	if chicken_stats.empty():
 		_on_New_pressed()
-	get_tree().call_group("meander", "queue_free")
+	var marked
 	for stats in chicken_stats:
 		var chicken = preload("res://chicken/CoopChicken.tscn").instance()
-		add_child(chicken)
 		chicken.stats = stats
-		if save_game.racer == stats || !racer:
-			remove_child(dot)
-			set_racer(chicken)
+		add_child(chicken)
+		chicken.connect("clicked", self, "_on_chicken_clicked")
+		if save_game.racer == stats || !marked:
+			marked = chicken
+	set_racer(marked)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
 
+func _on_chicken_clicked(chicken:Node):
+	set_racer(chicken)
+	
+
 func set_racer(chicken:Node):
+	if racer:
+		racer.remove_child(dot)
+	else:
+		remove_child(dot)
 	racer = chicken
+	save_game.racer = chicken.stats
 	racer.add_child(dot)
 	
 

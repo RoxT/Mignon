@@ -2,24 +2,29 @@ extends Resource
 class_name AllChickens
 export(Array, Resource) var all setget , get_all
 export(Resource) var racer setget set_racer
-var racer_chicken:Chicken
 
 const PATH := "user://chickens.tres"
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = []):
+func _init(new_all = [], new_racer=null):
 	all = new_all
+	racer = new_racer
+		
 
 static func exists()->bool:
 	return ResourceLoader.exists(PATH)
 
 func get_all()->Array:
-	return all.duplicate()
+	return all
+	
+func get_by_index(index:int)->Chicken:
+	return all[index]
 
 func save():
-	ResourceSaver.save(PATH, self)
+	var err := ResourceSaver.save(PATH, self)
+	if err != OK: push_error("Error saving! " + str(err))
 	
 func add_chicken_stats(value:Chicken):
 	assert(value != null)
@@ -32,7 +37,8 @@ func reset():
 	save()
 
 func set_racer(value:Resource):
-	racer_chicken = value as Chicken
+	racer = value as Chicken
+	save()
 	
 func winner(index:int):
 	all[index].wins += 1

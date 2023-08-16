@@ -1,134 +1,10 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://chicken/young_chicken.png" type="Texture" id=1]
-[ext_resource path="res://chicken/CoopChicken.gd" type="Script" id=2]
-[ext_resource path="res://chicken/standing_chicken.png" type="Texture" id=3]
-[ext_resource path="res://chicken/standing_chicken_white.png" type="Texture" id=4]
-[ext_resource path="res://chicken/young_chicken_white.png" type="Texture" id=5]
 [ext_resource path="res://Coop.gd" type="Script" id=6]
-[ext_resource path="res://chicken/CoopChicken.tscn" type="PackedScene" id=7]
 [ext_resource path="res://chicken/racer_tag.png" type="Texture" id=8]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="SpriteFrames" id=4]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 3 ) ],
-"loop": true,
-"name": "stand",
-"speed": 5.0
-} ]
-
-[sub_resource type="CircleShape2D" id=5]
-radius = 54.0833
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 5 )
-region = Rect2( 16, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 4 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="SpriteFrames" id=9]
-animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
-"loop": true,
-"name": "run",
-"speed": 5.0
-}, {
-"frames": [ SubResource( 8 ) ],
-"loop": true,
-"name": "stand",
-"speed": 5.0
-} ]
 
 [node name="Coop" type="Node2D"]
 script = ExtResource( 6 )
-
-[node name="Chicken" parent="." instance=ExtResource( 7 )]
-
-[node name="Chicken2" type="AnimatedSprite" parent="." groups=["meander"]]
-position = Vector2( 130, 121 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 4 )
-animation = "stand"
-script = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="Chicken2"]
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chicken2/Area2D"]
-shape = SubResource( 5 )
-
-[node name="Label" type="Label" parent="Chicken2"]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 0.25, 0.25 )
-text = "Hekllo"
-
-[node name="Rest" type="Timer" parent="Chicken2"]
-
-[node name="Chicken3" type="AnimatedSprite" parent="." groups=["meander"]]
-position = Vector2( 130, 121 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 4 )
-animation = "stand"
-script = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="Chicken3"]
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chicken3/Area2D"]
-shape = SubResource( 5 )
-
-[node name="Label" type="Label" parent="Chicken3"]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 0.25, 0.25 )
-text = "Hekllo"
-
-[node name="Rest" type="Timer" parent="Chicken3"]
-
-[node name="Chicken4" type="AnimatedSprite" parent="." groups=["meander"]]
-position = Vector2( 130, 121 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 9 )
-animation = "stand"
-script = ExtResource( 2 )
-
-[node name="Area2D" type="Area2D" parent="Chicken4"]
-scale = Vector2( 0.25, 0.25 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Chicken4/Area2D"]
-shape = SubResource( 5 )
-
-[node name="Label" type="Label" parent="Chicken4"]
-margin_right = 40.0
-margin_bottom = 14.0
-rect_scale = Vector2( 0.25, 0.25 )
-text = "Hekllo"
-
-[node name="Rest" type="Timer" parent="Chicken4"]
 
 [node name="Reset" type="Button" parent="."]
 margin_left = 69.0
@@ -155,15 +31,6 @@ text = "RACE"
 show_behind_parent = true
 texture = ExtResource( 8 )
 
-[connection signal="mouse_entered" from="Chicken2/Area2D" to="Chicken2" method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="Chicken2/Area2D" to="Chicken2" method="_on_Area2D_mouse_exited"]
-[connection signal="timeout" from="Chicken2/Rest" to="Chicken2" method="_on_Rest_timeout"]
-[connection signal="mouse_entered" from="Chicken3/Area2D" to="Chicken3" method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="Chicken3/Area2D" to="Chicken3" method="_on_Area2D_mouse_exited"]
-[connection signal="timeout" from="Chicken3/Rest" to="Chicken3" method="_on_Rest_timeout"]
-[connection signal="mouse_entered" from="Chicken4/Area2D" to="Chicken4" method="_on_Area2D_mouse_entered"]
-[connection signal="mouse_exited" from="Chicken4/Area2D" to="Chicken4" method="_on_Area2D_mouse_exited"]
-[connection signal="timeout" from="Chicken4/Rest" to="Chicken4" method="_on_Rest_timeout"]
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Race" to="." method="_on_Race_pressed"]
