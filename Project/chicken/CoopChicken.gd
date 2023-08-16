@@ -14,7 +14,7 @@ func _ready():
 	label.hide()
 	if !stats:
 		set_stats(Chicken.new())
-	label.text = stats.nom + ". " + str(stats.wins) + " wins"
+	set_label()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,7 +32,7 @@ func _process(delta):
 		if randi() % 3 > 0:
 			var view:Rect2= get_viewport_rect()
 			var x = clamp(random_range(position.x), view.position.x+32,view.size.x-32)
-			var y = clamp(random_range(position.y), view.position.y+32,view.size.y-32)
+			var y = clamp(random_range(position.y), view.position.y+64,view.size.y-32)
 			target = Vector2(x, y)
 			meander = rand_range(0, stats.speed)
 			play("run")
@@ -47,10 +47,16 @@ func random_range(v:float)->float:
 func set_stats(value:Chicken):
 	stats = value
 	modulate = stats.colour
-	if label:
-		label.text = stats.nom + ". " + str(stats.wins) + " wins"
+	set_label()
 	if stats.white:
 		frames = load("res://chicken/animations_white.tres")
+
+func set_label():
+	if label:
+		var text = stats.nom + ". " + str(stats.wins) + " wins."
+		if stats.fatigue > 0:
+			text += " Fatigue: " + str(stats.fatigue)
+		label.text = text
 
 func _on_Area2D_mouse_entered():
 	label.show()

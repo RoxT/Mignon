@@ -12,6 +12,10 @@ func _init(new_all = [], new_racer=null):
 	all = new_all
 	racer = new_racer
 		
+func pass_day():
+	for c in all:
+		c.fatigue = max(c.fatigue-1, 0)
+	save()
 
 static func exists()->bool:
 	return ResourceLoader.exists(PATH)

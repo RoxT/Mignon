@@ -30,7 +30,9 @@ func _ready():
 	
 func _on_racer_finished():
 	get_tree().call_group("racer", "stop")
-	save_game.save()
+	var your_chicken := get_node("Lane/Racer")
+	your_chicken.stats.fatigue += 2
+	save_game.pass_day()
 	
 func add_lane(stats:Chicken):
 	var lane := Lane.instance()

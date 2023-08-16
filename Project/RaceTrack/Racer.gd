@@ -1,9 +1,11 @@
 extends AnimatedSprite
 
-var speed:int
+onready var sweat := $Sweat
+
 onready var FINISH_LINE:= get_viewport_rect().end.x-64
 
 export(Resource) var stats setget set_stats
+var speed
 
 signal finished
 
@@ -13,10 +15,22 @@ func _ready():
 	
 func start():
 	set_process(true)
+	if stats.fatigue > 0:
+		sweat.show()
+		if stats.fatigue < 3:
+			speed_scale = 0.7
+			sweat.play("1")
+		else:
+			speed_scale = 0.4
+			sweat.play("2")
+	else:
+		speed_scale = 1
+		sweat.hide()
 	playing = true
 	
 func stop():
 	set_process(false)
+	sweat.stop()
 	playing = false
 	
 
@@ -31,7 +45,7 @@ func _process(delta):
 func set_stats(value:Chicken):
 	if value:
 		stats = value
-		speed = stats.speed
+		speed = value.speed
 		modulate = stats.colour
 		if stats.white:
 			frames = load("res://chicken/animations_white.tres")
