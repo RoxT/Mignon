@@ -45,7 +45,7 @@ func _process(delta):
 func set_stats(value:Chicken):
 	if value:
 		stats = value
-		speed = value.speed
+		speed = value.get_speed()
 		modulate = stats.colour
 		if stats.white:
 			frames = load("res://chicken/animations_white.tres")

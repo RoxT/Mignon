@@ -6,6 +6,7 @@ onready var label : = $Label
 onready var rest := $Rest
 var target
 var meander:float
+var top_speed
 
 signal clicked(chicken)
 
@@ -34,7 +35,7 @@ func _process(delta):
 			var x = clamp(random_range(position.x), view.position.x+32,view.size.x-32)
 			var y = clamp(random_range(position.y), view.position.y+64,view.size.y-32)
 			target = Vector2(x, y)
-			meander = rand_range(0, stats.speed)
+			meander = rand_range(0, top_speed)
 			play("run")
 		else:
 			rest.start(rand_range(0.5, 2))
@@ -47,6 +48,7 @@ func random_range(v:float)->float:
 func set_stats(value:Chicken):
 	stats = value
 	modulate = stats.colour
+	top_speed = stats.get_speed()
 	set_label()
 	if stats.white:
 		frames = load("res://chicken/animations_white.tres")
