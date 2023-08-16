@@ -26,8 +26,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Chickens2"
-run/main_scene="res://RaceTrack.tscn"
+config/name="Mignon"
+run/main_scene="res://RaceTrack/RaceTrack.tscn"
 config/icon="res://icon.png"
 
 [gui]

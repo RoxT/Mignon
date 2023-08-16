@@ -1,6 +1,8 @@
 extends Resource
 class_name AllChickens
 export(Array, Resource) var all setget , get_all
+export(Resource) var racer setget set_racer
+var racer_chicken:Chicken
 
 const PATH := "user://chickens.tres"
 
@@ -21,9 +23,17 @@ func save():
 	
 func add_chicken_stats(value:Chicken):
 	assert(value != null)
+	value.index = all.size()
 	all.append(value)
 	save()
 	
 func reset():
 	all = []
+	save()
+
+func set_racer(value:Resource):
+	racer_chicken = value as Chicken
+	
+func winner(index:int):
+	all[index].wins += 1
 	save()
