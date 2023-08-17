@@ -60,7 +60,6 @@ position = Vector2( 32, 32 )
 scale = Vector2( 4, 4 )
 frames = SubResource( 3 )
 animation = "run"
-frame = 1
 playing = true
 script = ExtResource( 2 )
 
@@ -73,6 +72,7 @@ texture = ExtResource( 4 )
 visible = false
 frames = SubResource( 8 )
 animation = "2"
+frame = 1
 playing = true
 
 [node name="HSeparator" type="HSeparator" parent="."]
