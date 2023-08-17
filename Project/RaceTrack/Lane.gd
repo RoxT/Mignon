@@ -7,7 +7,7 @@ var stats:Chicken
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	bar.rect_min_size = Vector2(get_viewport_rect().size.x-2,0)
+	bar.rect_min_size = Vector2(ProjectSettings.get_setting("display/window/size/width")-2,0)
 	if not stats:
 		stats = Chicken.new()
 	$Name.text = stats.nom

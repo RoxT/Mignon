@@ -2,7 +2,7 @@ extends AnimatedSprite
 
 onready var sweat := $Sweat
 
-onready var FINISH_LINE:= get_viewport_rect().end.x-64
+onready var FINISH_LINE:int = ProjectSettings.get_setting("display/window/size/width")-64
 
 export(Resource) var stats setget set_stats
 var speed

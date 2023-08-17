@@ -34,7 +34,7 @@ func _process(delta):
 			var width:int = ProjectSettings.get_setting("display/window/size/width")
 			var height:int = ProjectSettings.get_setting("display/window/size/height")
 			var x = clamp(random_range(position.x), 32, width-32)
-			var y = clamp(random_range(position.y), 64, height-32)
+			var y = clamp(random_range(position.y), 128, height-32)
 			target = Vector2(x, y)
 			meander = rand_range(0, top_speed)
 			play("run")
