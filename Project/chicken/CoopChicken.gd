@@ -21,7 +21,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if target:
-		var new_pos:Vector2
+		var new_pos := Vector2(256, 256)
 		new_pos.x = move_toward(position.x, target.x, meander*delta)
 		new_pos.y = move_toward(position.y, target.y, meander*delta)
 		flip_h = new_pos.x < position.x
@@ -72,6 +72,6 @@ func _on_Rest_timeout():
 	set_process(true)
 
 
-func _on_Area2D_input_event(viewport:Node, event:InputEvent, shape_idx:int):
+func _on_Area2D_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if event.is_pressed():
 		emit_signal("clicked", self)

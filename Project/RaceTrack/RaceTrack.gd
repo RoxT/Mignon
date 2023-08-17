@@ -41,6 +41,7 @@ func _on_racer_finished():
 		$Winnings/Rice.emitting = true
 	else:
 		$Lost.show()
+	$ToCoop.grab_focus()
 	save_game.pass_day()
 	
 func add_lane(stats:Chicken):

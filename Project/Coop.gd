@@ -27,6 +27,7 @@ func _ready():
 	set_racer(marked)
 	$Money.text = "Money: $" + str(save_game.money)
 	$Race.text = "RACE ($" + str(COST_RACE) + ")"
+	$Race.call_deferred("grab_focus")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
