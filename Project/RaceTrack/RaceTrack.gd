@@ -4,6 +4,7 @@ onready var Lane := preload("res://RaceTrack/Lane.tscn")
 
 const lane_offset_y := 32
 const lane_separation_y := 155
+const winnings := 50
 var track := 0
 
 var save_game:AllChickens
@@ -23,6 +24,7 @@ func _ready():
 	add_lane(first_chicken)
 	add_lane(Chicken.new())
 	add_lane(Chicken.new())
+	add_lane(Chicken.new())
 	
 	for r in get_tree().get_nodes_in_group("racer"):
 		var err = r.connect("finished", self, "_on_racer_finished")
@@ -32,6 +34,13 @@ func _on_racer_finished():
 	get_tree().call_group("racer", "stop")
 	var your_chicken := get_node("Lane/Racer")
 	your_chicken.stats.fatigue += 2
+	if $Lane.did_win():
+		save_game.money += winnings
+		$Winnings.text = "YOU WON $" + str(winnings) 
+		$Winnings.show()
+		$Winnings/Rice.emitting = true
+	else:
+		$Lost.show()
 	save_game.pass_day()
 	
 func add_lane(stats:Chicken):

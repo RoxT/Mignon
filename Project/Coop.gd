@@ -1,6 +1,7 @@
 extends Node2D
 
 var save_game:AllChickens
+const COST_RACE := 5
 onready var dot := $Dot
 var racer:Node
 
@@ -24,6 +25,8 @@ func _ready():
 		if save_game.racer == stats || !marked:
 			marked = chicken
 	set_racer(marked)
+	$Money.text = "Money: $" + str(save_game.money)
+	$Race.text = "RACE ($" + str(COST_RACE) + ")"
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -45,9 +48,10 @@ func set_racer(chicken:Node):
 
 func _on_Reset_pressed():
 	get_tree().call_group("meander", "queue_free")
-	save_game.reset()
+	save_game = AllChickens.new()
+	save_game.save()
 	_on_New_pressed()
-
+	$Money.text = "Money: $" + str(save_game.money)
 
 func _on_New_pressed():
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
@@ -59,8 +63,9 @@ func _on_New_pressed():
 	add_child(new_chicken)
 	
 
-
 func _on_Race_pressed():
+	save_game.money -= COST_RACE
+	save_game.save()
 	var err := get_tree().change_scene("res://RaceTrack/RaceTrack.tscn")
 	if err != OK:
 		push_error("Error switching scenes: " + str(err))

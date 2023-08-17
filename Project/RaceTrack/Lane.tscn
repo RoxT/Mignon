@@ -72,7 +72,6 @@ texture = ExtResource( 4 )
 visible = false
 frames = SubResource( 8 )
 animation = "2"
-frame = 1
 playing = true
 
 [node name="HSeparator" type="HSeparator" parent="."]

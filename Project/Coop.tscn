@@ -31,6 +31,21 @@ text = "RACE"
 show_behind_parent = true
 texture = ExtResource( 8 )
 
+[node name="Label" type="Label" parent="Dot"]
+margin_left = -5.0
+margin_top = 10.0
+margin_right = 35.0
+margin_bottom = 24.0
+rect_scale = Vector2( 0.25, 0.25 )
+text = "Racer"
+
+[node name="Money" type="Label" parent="."]
+margin_left = 904.0
+margin_top = 560.0
+margin_right = 987.0
+margin_bottom = 574.0
+text = "Money: $100"
+
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Race" to="." method="_on_Race_pressed"]

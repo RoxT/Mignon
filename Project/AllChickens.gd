@@ -2,15 +2,17 @@ extends Resource
 class_name AllChickens
 export(Array, Resource) var all setget , get_all
 export(Resource) var racer setget set_racer
+export(int) var money
 
 const PATH := "user://chickens.tres"
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null):
+func _init(new_all = [], new_racer=null, new_money := 50):
 	all = new_all
 	racer = new_racer
+	money = new_money
 		
 func pass_day():
 	for c in all:
@@ -34,10 +36,6 @@ func add_chicken_stats(value:Chicken):
 	assert(value != null)
 	value.index = all.size()
 	all.append(value)
-	save()
-	
-func reset():
-	all = []
 	save()
 
 func set_racer(value:Resource):
