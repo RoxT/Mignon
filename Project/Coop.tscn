@@ -1,6 +1,8 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://BG.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
+[ext_resource path="res://chicken/portraits/brown1.png" type="Texture" id=3]
 [ext_resource path="res://Coop.gd" type="Script" id=6]
 [ext_resource path="res://chicken/racer_tag.png" type="Texture" id=8]
 
@@ -10,17 +12,17 @@ action = "reset"
 [sub_resource type="ShortCut" id=2]
 shortcut = SubResource( 1 )
 
-[sub_resource type="InputEventAction" id=3]
-action = "new_bird"
-
-[sub_resource type="ShortCut" id=4]
-shortcut = SubResource( 3 )
-
 [sub_resource type="InputEventAction" id=5]
 action = "race"
 
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
+
+[sub_resource type="InputEventAction" id=3]
+action = "new_bird"
+
+[sub_resource type="ShortCut" id=4]
+shortcut = SubResource( 3 )
 
 [node name="Coop" type="Node2D"]
 script = ExtResource( 6 )
@@ -38,6 +40,17 @@ focus_previous = NodePath("../Money")
 shortcut = SubResource( 2 )
 text = "RESET"
 
+[node name="Race" type="Button" parent="."]
+margin_left = 353.0
+margin_top = 16.0
+margin_right = 433.0
+margin_bottom = 36.0
+focus_neighbour_left = NodePath("../New")
+focus_next = NodePath("../Money")
+focus_previous = NodePath("../New")
+shortcut = SubResource( 6 )
+text = "RACE ($25)"
+
 [node name="New" type="Button" parent="."]
 margin_left = 205.0
 margin_top = 17.0
@@ -49,17 +62,6 @@ focus_next = NodePath("../Race")
 focus_previous = NodePath("../Reset")
 shortcut = SubResource( 4 )
 text = "NEW"
-
-[node name="Race" type="Button" parent="."]
-margin_left = 938.0
-margin_top = 14.0
-margin_right = 982.0
-margin_bottom = 34.0
-focus_neighbour_left = NodePath("../New")
-focus_next = NodePath("../Money")
-focus_previous = NodePath("../New")
-shortcut = SubResource( 6 )
-text = "RACE"
 
 [node name="Dot" type="Sprite" parent="."]
 show_behind_parent = true
@@ -74,14 +76,40 @@ rect_scale = Vector2( 0.25, 0.25 )
 text = "Racer"
 
 [node name="Money" type="Label" parent="."]
-margin_left = 904.0
-margin_top = 560.0
-margin_right = 987.0
-margin_bottom = 574.0
+margin_left = 12.0
+margin_top = 575.0
+margin_right = 95.0
+margin_bottom = 589.0
 focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
 text = "Money: $100"
 
+[node name="StatsPanel" type="Panel" parent="."]
+anchor_right = 1.0
+margin_left = 818.0
+margin_top = 19.0
+margin_right = 1002.0
+margin_bottom = 286.0
+mouse_filter = 2
+script = ExtResource( 2 )
+
+[node name="Portrait" type="Sprite" parent="StatsPanel"]
+position = Vector2( 91, 73 )
+texture = ExtResource( 3 )
+
+[node name="Name" type="Label" parent="StatsPanel"]
+margin_right = 40.0
+margin_bottom = 14.0
+text = "Mignon"
+
+[node name="RichTextStats" type="RichTextLabel" parent="StatsPanel"]
+margin_left = 32.0
+margin_top = 127.0
+margin_right = 162.0
+margin_bottom = 199.0
+text = "Wins: 5 
+Fatigue: 3"
+
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
-[connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="pressed" from="Race" to="." method="_on_Race_pressed"]
+[connection signal="pressed" from="New" to="." method="_on_New_pressed"]

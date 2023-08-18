@@ -45,9 +45,14 @@ func set_racer(chicken:Node):
 	racer = chicken
 	save_game.racer = chicken.stats
 	racer.add_child(dot)
+	$StatsPanel.stats = racer.stats
 	
 
 func _on_Reset_pressed():
+	if racer:
+		racer.remove_child(dot)
+		add_child(dot)
+		racer = null
 	get_tree().call_group("meander", "queue_free")
 	save_game = AllChickens.new()
 	save_game.save()
@@ -62,6 +67,7 @@ func _on_New_pressed():
 	new_chicken.stats = stats
 	save_game.add_chicken_stats(stats)
 	add_child(new_chicken)
+	new_chicken.connect("clicked", self, "_on_chicken_clicked")
 	
 
 func _on_Race_pressed():
