@@ -2,8 +2,13 @@ extends Node2D
 
 var save_game:AllChickens
 const COST_RACE := 5
-onready var dot := $Dot
+onready var racer_dot := $RacerDot
+onready var selected_dot := $SelectedDot
+onready var mate_dot := $MateDot
 var racer:Node
+var mate:Node
+
+var selected:Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -34,24 +39,23 @@ func _ready():
 #	pass
 
 func _on_chicken_clicked(chicken:Node):
-	set_racer(chicken)
+	selected = chicken
+	selected_dot.get_parent().remove_child(selected_dot)
+	selected.add_child(selected_dot)
+	$StatsPanel.stats = selected.stats
+	$StatsPanel.has_mate_ready(mate)
 	
 
 func set_racer(chicken:Node):
-	if racer:
-		racer.remove_child(dot)
-	else:
-		remove_child(dot)
+	racer_dot.get_parent().remove_child(racer_dot)
 	racer = chicken
 	save_game.racer = chicken.stats
-	racer.add_child(dot)
-	$StatsPanel.stats = racer.stats
+	racer.add_child(racer_dot)
 	
-
 func _on_Reset_pressed():
 	if racer:
-		racer.remove_child(dot)
-		add_child(dot)
+		racer.remove_child(racer_dot)
+		add_child(racer_dot)
 		racer = null
 	get_tree().call_group("meander", "queue_free")
 	save_game = AllChickens.new()
@@ -77,3 +81,17 @@ func _on_Race_pressed():
 	if err != OK:
 		push_error("Error switching scenes: " + str(err))
 		assert(false)
+
+func _on_StatsPanel_chose_racer():
+	set_racer(selected)
+
+func _on_StatsPanel_requested_breed(button_pressed:bool):
+	if button_pressed:
+		mate_dot.get_parent().remove_child(mate_dot)
+		mate = selected
+		mate.add_child(mate_dot)
+		
+	else:
+		mate_dot.get_parent().remove_child(mate_dot)
+		mate = null
+		add_child(mate_dot)
