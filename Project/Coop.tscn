@@ -83,16 +83,16 @@ scale = Vector2( 0.2, 0.2 )
 texture = ExtResource( 8 )
 
 [node name="MateDot" type="Sprite" parent="."]
-position = Vector2( 4, 2 )
+position = Vector2( 8, 2 )
 scale = Vector2( 0.2, 0.2 )
 z_index = 5
 texture = ExtResource( 4 )
 
 [node name="Money" type="Label" parent="."]
-margin_left = 12.0
-margin_top = 575.0
-margin_right = 95.0
-margin_bottom = 589.0
+margin_left = 16.0
+margin_top = 574.0
+margin_right = 99.0
+margin_bottom = 588.0
 focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
 text = "Money: $100"
@@ -135,7 +135,6 @@ margin_left = 4.0
 margin_top = 219.0
 margin_right = 108.0
 margin_bottom = 239.0
-toggle_mode = true
 text = "Breed Chicken"
 
 [node name="Label" type="Label" parent="StatsPanel/Breed"]
@@ -145,10 +144,16 @@ margin_right = 97.0
 margin_bottom = 34.0
 text = "Choose mate"
 
+[node name="Debug" type="RichTextLabel" parent="."]
+margin_left = 128.0
+margin_top = 493.0
+margin_right = 1019.0
+margin_bottom = 594.0
+
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="Race" to="." method="_on_Race_pressed"]
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]
 [connection signal="chose_racer" from="StatsPanel" to="." method="_on_StatsPanel_chose_racer"]
 [connection signal="requested_breed" from="StatsPanel" to="." method="_on_StatsPanel_requested_breed"]
 [connection signal="pressed" from="StatsPanel/Choose" to="StatsPanel" method="_on_Choose_pressed"]
-[connection signal="toggled" from="StatsPanel/Breed" to="StatsPanel" method="_on_Breed_toggled"]
+[connection signal="pressed" from="StatsPanel/Breed" to="StatsPanel" method="_on_Breed_pressed"]

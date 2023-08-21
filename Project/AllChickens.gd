@@ -25,8 +25,11 @@ static func exists()->bool:
 func get_all()->Array:
 	return all
 	
-func get_by_index(index:int)->Chicken:
-	return all[index]
+static func do_mating(a:Chicken, b:Chicken)->Chicken:
+	return Chicken.new(one_of_two(a, b, "top_speed"), Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "white"), one_of_two(a, b, "farm"), 2, one_of_two(a, b, "breed"))
+
+static func one_of_two(a:Chicken, b:Chicken, property:String):
+	return [a.get(property), b.get(property)][randi()%2]
 
 func save():
 	var err := ResourceSaver.save(PATH, self)
@@ -34,14 +37,9 @@ func save():
 	
 func add_chicken_stats(value:Chicken):
 	assert(value != null)
-	value.index = all.size()
 	all.append(value)
 	save()
 
 func set_racer(value:Resource):
 	racer = value as Chicken
-	save()
-	
-func winner(index:int):
-	all[index].wins += 1
 	save()

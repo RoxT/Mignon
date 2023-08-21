@@ -4,14 +4,14 @@ export(Resource) var stats setget set_stats
 onready var portrait := $Portrait
 onready var nom := $Name
 onready var block : = $RichTextStats
-onready var breed := $Breed
+onready var breed_btn := $Breed
 onready var mate_label := $Breed/Label
 
 const breed_str := "Breed"
 const breed_with_str := "Breed with "
 
 signal chose_racer
-signal requested_breed(value)
+signal requested_breed
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -33,21 +33,17 @@ func set_stats(value:Chicken):
 		show()
 	if block:
 		block.clear()
+		block.add_text("Breed: " + stats.breed)
+		block.newline()
 		block.add_text("Wins: " + str(stats.wins))
 		block.newline()
 		if stats.fatigue > 0:
 			block.add_text("Fatigue Level: " + str(stats.fatigue))
 	show()
 
-func has_mate_ready(mate):
-	if mate is Node:
-		breed.pressed = mate.stats == stats
-		if mate.stats != stats:
-			mate_label.text = breed_with_str + mate.stats.nom
-		else:mate_label.text = breed_str
-			
-	else:
-		mate_label.text = breed_str
+func set_mate(mate:Node):
+	if mate and mate.stats != stats:
+		breed_btn.text = breed_with_str + mate.stats.nom
 
 func show(value := true):
 	portrait.visible = value
@@ -59,6 +55,5 @@ func show(value := true):
 func _on_Choose_pressed():
 	emit_signal("chose_racer")
 
-func _on_Breed_toggled(button_pressed):
-	breed.pressed = button_pressed
-	emit_signal("requested_breed", button_pressed)
+func _on_Breed_pressed():
+	emit_signal("requested_breed")

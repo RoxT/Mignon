@@ -43,7 +43,7 @@ func _on_chicken_clicked(chicken:Node):
 	selected_dot.get_parent().remove_child(selected_dot)
 	selected.add_child(selected_dot)
 	$StatsPanel.stats = selected.stats
-	$StatsPanel.has_mate_ready(mate)
+	$StatsPanel.set_mate(mate)
 	
 
 func set_racer(chicken:Node):
@@ -53,19 +53,23 @@ func set_racer(chicken:Node):
 	racer.add_child(racer_dot)
 	
 func _on_Reset_pressed():
-	if racer:
-		racer.remove_child(racer_dot)
-		add_child(racer_dot)
-		racer = null
+	selected_dot.get_parent().remove_child(selected_dot)
+	add_child(selected_dot)
+	mate_dot.get_parent().remove_child(mate_dot)
+	add_child(mate_dot)
+	mate = null
+	racer_dot.get_parent().remove_child(racer_dot)
+	add_child(racer_dot)
+	racer = null
+	
 	get_tree().call_group("meander", "queue_free")
 	save_game = AllChickens.new()
 	save_game.save()
 	_on_New_pressed()
 	$Money.text = "Money: $" + str(save_game.money)
 
-func _on_New_pressed():
+func _on_New_pressed(stats:= Chicken.new()):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
-	var stats := Chicken.new()
 	stats.farm = "YOU"
 	
 	new_chicken.stats = stats
@@ -85,13 +89,25 @@ func _on_Race_pressed():
 func _on_StatsPanel_chose_racer():
 	set_racer(selected)
 
-func _on_StatsPanel_requested_breed(button_pressed:bool):
-	if button_pressed:
+func _on_StatsPanel_requested_breed():
+	if not mate:
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = selected
 		mate.add_child(mate_dot)
-		
-	else:
+	elif mate == selected:
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = null
 		add_child(mate_dot)
+	else:
+		var baby:Chicken = AllChickens.do_mating(selected.stats, mate.stats)
+		var d:RichTextLabel = $Debug
+		d.clear()
+		d.add_text("DEBUG")
+		d.newline()
+		d.add_text(str(selected.stats))
+		d.newline()
+		d.add_text(str(mate.stats))
+		d.newline()
+		d.add_text("--> BABY: " + str(baby))
+		
+		_on_New_pressed(baby)
