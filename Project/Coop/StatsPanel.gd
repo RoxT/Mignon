@@ -43,7 +43,9 @@ func set_stats(value:Chicken):
 
 func set_mate(mate:Node):
 	if mate and mate.stats != stats:
-		breed_btn.text = breed_with_str + mate.stats.nom
+			breed_btn.text = breed_with_str + mate.stats.nom
+	else:
+		breed_btn.text = breed_str
 
 func show(value := true):
 	portrait.visible = value

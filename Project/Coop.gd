@@ -111,3 +111,6 @@ func _on_StatsPanel_requested_breed():
 		d.add_text("--> BABY: " + str(baby))
 		
 		_on_New_pressed(baby)
+		mate.stats.fatigue += 1
+		selected.stats.fatigue += 1
+		
