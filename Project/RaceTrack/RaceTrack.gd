@@ -17,10 +17,7 @@ func _ready():
 		save_game = AllChickens.new()
 	
 	var first_chicken:Chicken
-	if save_game.racer:
-		first_chicken = save_game.racer
-	else:
-		first_chicken = save_game.get_by_index(0)
+	first_chicken = save_game.racer
 	add_lane(first_chicken)
 	add_lane(Chicken.new())
 	add_lane(Chicken.new())

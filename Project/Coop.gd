@@ -55,6 +55,7 @@ func set_racer(chicken:Node):
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
 	add_child(selected_dot)
+	selected = null
 	mate_dot.get_parent().remove_child(mate_dot)
 	add_child(mate_dot)
 	mate = null
@@ -76,7 +77,8 @@ func _on_New_pressed(stats:= Chicken.new()):
 	save_game.add_chicken_stats(stats)
 	add_child(new_chicken)
 	new_chicken.connect("clicked", self, "_on_chicken_clicked")
-	
+	if not racer: 
+		set_racer(new_chicken)
 
 func _on_Race_pressed():
 	save_game.money -= COST_RACE

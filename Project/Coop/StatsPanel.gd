@@ -5,7 +5,6 @@ onready var portrait := $Portrait
 onready var nom := $Name
 onready var block : = $RichTextStats
 onready var breed_btn := $Breed
-onready var mate_label := $Breed/Label
 
 const breed_str := "Breed"
 const breed_with_str := "Breed with "

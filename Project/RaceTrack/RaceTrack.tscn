@@ -25,6 +25,7 @@ margin_left = 12.0
 margin_top = 12.0
 margin_right = 84.0
 margin_bottom = 32.0
+rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 4 )
 text = "TO COOP"
 
