@@ -150,10 +150,6 @@ margin_top = 529.0
 margin_right = 1019.0
 margin_bottom = 594.0
 mouse_filter = 2
-text = "dfgdfg
-dfgfdg
-dfgdf
-dfgdfg"
 
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="Race" to="." method="_on_Race_pressed"]
