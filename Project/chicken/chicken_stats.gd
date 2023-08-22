@@ -3,7 +3,7 @@ class_name Chicken
 const LOW_SPEED := 40
 const HIGH_SPEED := 500
 const names := ["Aimeé","Belle","Bijou","Chérie","Coquette","Fleur","Lyonette","Mignon","Coco"]
-const breeds := ["brown", "white", "floof", "hot", "bigger floof"]
+const breeds := ["brown", "white", "floof", "bigger floof"]
 
 export(String) var nom
 export(int) var top_speed
