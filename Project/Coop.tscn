@@ -29,6 +29,9 @@ shortcut = SubResource( 3 )
 script = ExtResource( 6 )
 
 [node name="BG" parent="." instance=ExtResource( 1 )]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Reset" type="Button" parent="."]
 margin_left = 69.0

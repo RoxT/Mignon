@@ -18,17 +18,21 @@ func _ready():
 	else:
 		save_game = AllChickens.new()
 	chicken_stats = save_game.get_all()
+	
+	var marked
 	if chicken_stats.empty():
 		_on_New_pressed()
-	var marked
-	for stats in chicken_stats:
-		var chicken = preload("res://chicken/CoopChicken.tscn").instance()
-		chicken.stats = stats
-		add_child(chicken)
-		chicken.position = Vector2(rand_range(0, 256), rand_range(0, 256))
-		chicken.connect("clicked", self, "_on_chicken_clicked")
-		if save_game.racer == stats || !marked:
-			marked = chicken
+		marked = $Chicken
+	else:
+		for stats in chicken_stats:
+			var chicken = preload("res://chicken/CoopChicken.tscn").instance()
+			chicken.stats = stats
+			add_child(chicken)
+			chicken.position = Vector2(rand_range(0, 256), rand_range(0, 256))
+			chicken.connect("clicked", self, "_on_chicken_clicked")
+			if save_game.racer == stats || !marked:
+				marked = chicken
+		
 	set_racer(marked)
 	$Money.text = "Money: $" + str(save_game.money)
 	$Race.text = "RACE ($" + str(COST_RACE) + ")"
