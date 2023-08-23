@@ -43,9 +43,12 @@ func set_stats(value:Chicken):
 		block.add_text("Breed: " + stats.breed)
 		block.newline()
 		block.add_text("Wins: " + str(stats.wins))
-		block.newline()
 		if stats.fatigue > 0:
+			block.newline()
 			block.add_text("Fatigue Level: " + str(stats.fatigue))
+		block.newline()
+		var days_old := "%s day%s old"
+		block.add_text(days_old % [str(stats.age), "" if stats.age == 1 else "s"])
 	show()
 
 func set_mate(mate:Node):

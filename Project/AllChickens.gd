@@ -17,6 +17,7 @@ func _init(new_all = [], new_racer=null, new_money := 50):
 func pass_day():
 	for c in all:
 		c.fatigue = max(c.fatigue-1, 0)
+		c.age += 1
 	save()
 
 static func exists()->bool:

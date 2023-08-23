@@ -2,7 +2,7 @@ extends Node2D
 
 var save_game:AllChickens
 const COST_RACE := 5
-onready var racer_dot := $RacerDot
+onready var racer_label := $RacerLabel
 onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
 var racer:Node
@@ -35,7 +35,6 @@ func _ready():
 		
 	set_racer(marked)
 	$Money.text = "Money: $" + str(save_game.money)
-	$Race.text = "RACE ($" + str(COST_RACE) + ")"
 	#$Race.call_deferred("grab_focus")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,10 +50,11 @@ func _on_chicken_clicked(chicken:Node):
 	
 
 func set_racer(chicken:Node):
-	racer_dot.get_parent().remove_child(racer_dot)
+	racer_label.get_parent().remove_child(racer_label)
 	racer = chicken
 	save_game.racer = chicken.stats
-	racer.add_child(racer_dot)
+	racer.add_child(racer_label)
+	$Race.text = "RACE ($" + str(COST_RACE) + ") " + racer.stats.nom
 	
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
@@ -63,8 +63,8 @@ func _on_Reset_pressed():
 	mate_dot.get_parent().remove_child(mate_dot)
 	add_child(mate_dot)
 	mate = null
-	racer_dot.get_parent().remove_child(racer_dot)
-	add_child(racer_dot)
+	racer_label.get_parent().remove_child(racer_label)
+	add_child(racer_label)
 	racer = null
 	
 	get_tree().call_group("meander", "queue_free")
