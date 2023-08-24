@@ -1,6 +1,8 @@
 extends AnimatedSprite
 
 export(Resource) var stats setget set_stats
+const coop := Rect2(Vector2.ZERO, Vector2(2340, 1080))
+#const breeding_pen :=
 
 onready var label : = $Label
 onready var rest := $Rest

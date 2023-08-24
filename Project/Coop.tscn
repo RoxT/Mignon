@@ -58,10 +58,10 @@ shortcut = SubResource( 2 )
 text = "RESET"
 
 [node name="Race" type="Button" parent="."]
-margin_left = 383.0
-margin_top = 17.0
-margin_right = 463.0
-margin_bottom = 37.0
+margin_left = 593.0
+margin_top = 16.0
+margin_right = 833.0
+margin_bottom = 64.0
 rect_min_size = Vector2( 0, 48 )
 focus_neighbour_left = NodePath("../New")
 focus_next = NodePath("../Money")
@@ -70,10 +70,10 @@ shortcut = SubResource( 6 )
 text = "RACE ($5)"
 
 [node name="New" type="Button" parent="."]
-margin_left = 205.0
-margin_top = 17.0
-margin_right = 247.0
-margin_bottom = 37.0
+margin_left = 283.0
+margin_top = 22.0
+margin_right = 443.0
+margin_bottom = 70.0
 rect_min_size = Vector2( 0, 48 )
 focus_neighbour_left = NodePath("../Reset")
 focus_neighbour_right = NodePath("../Race")
@@ -114,17 +114,18 @@ focus_previous = NodePath("../Race")
 text = "Money: $100"
 
 [node name="StatsPanel" type="Panel" parent="."]
+anchor_left = 1.0
 anchor_right = 1.0
-margin_left = 773.0
-margin_top = 10.0
-margin_right = 1002.0
-margin_bottom = 513.0
+margin_left = 1092.0
+margin_top = 22.0
+margin_right = 1413.0
+margin_bottom = 646.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="Portrait" type="Sprite" parent="StatsPanel"]
-position = Vector2( 108, 157 )
-scale = Vector2( 0.0979004, 0.0979004 )
+position = Vector2( 162, 212 )
+scale = Vector2( 0.120666, 0.120666 )
 texture = ExtResource( 3 )
 
 [node name="Name" type="Label" parent="StatsPanel"]
@@ -135,10 +136,10 @@ margin_bottom = 20.0
 text = "Mignon"
 
 [node name="RichTextStats" type="RichTextLabel" parent="StatsPanel"]
-margin_left = 51.0
-margin_top = 303.0
-margin_right = 181.0
-margin_bottom = 375.0
+margin_left = 85.0
+margin_top = 393.0
+margin_right = 296.0
+margin_bottom = 573.0
 text = "Breed: brown
 Wins: 5 
 Fatigue: 3
@@ -146,18 +147,18 @@ Fatigue: 3
 "
 
 [node name="Choose" type="Button" parent="StatsPanel"]
-margin_left = 8.0
-margin_top = 375.0
-margin_right = 97.0
-margin_bottom = 423.0
+margin_left = 4.0
+margin_top = 491.0
+margin_right = 259.0
+margin_bottom = 539.0
 rect_min_size = Vector2( 0, 48 )
 text = "Set as Racer"
 
 [node name="Breed" type="Button" parent="StatsPanel"]
-margin_left = 8.0
-margin_top = 432.0
-margin_right = 112.0
-margin_bottom = 480.0
+margin_left = 4.0
+margin_top = 553.0
+margin_right = 270.0
+margin_bottom = 601.0
 rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 

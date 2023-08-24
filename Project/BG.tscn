@@ -5,15 +5,15 @@
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_left = -3.0
 margin_top = -3.0
-margin_right = 1027.0
-margin_bottom = 603.0
+margin_right = 1444.0
+margin_bottom = 905.0
 mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 1021.0
-margin_bottom = 597.0
+margin_right = 1435.0
+margin_bottom = 896.0
 mouse_filter = 2
 color = Color( 0.309804, 0.309804, 0.309804, 1 )
