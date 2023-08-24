@@ -19,7 +19,7 @@ export(int) var age
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_white:=_random_white(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=0):
+func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_white:=_random_white(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=2):
 	top_speed = new_top_speed
 	nom = new_nom
 	wins = new_wins

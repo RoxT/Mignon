@@ -41,14 +41,19 @@ func set_stats(value:Chicken):
 		show()
 	if block:
 		block.clear()
-		block.add_text("Breed: " + stats.breed)
-		block.newline()
-		block.add_text("Wins: " + str(stats.wins))
-		if stats.fatigue > 0:
+		if stats.age >= 2:
+			block.add_text("Breed: " + stats.breed)
 			block.newline()
-			block.add_text("Fatigue Level: " + str(stats.fatigue))
-		block.newline()
+			block.add_text("Wins: " + str(stats.wins))
+			if stats.fatigue > 0:
+				block.newline()
+				block.add_text("Fatigue Level: " + str(stats.fatigue))
+			block.newline()
 		block.add_text("%s day%s old" % [str(stats.age), "" if stats.age == 1 else "s"])
+		if stats.age < 2:
+			block.add_text(" (chick)")
+	$Choose.disabled = stats.age < 2
+	$Breed.disabled = stats.age < 2
 	show()
 
 func set_mate(mate:Node):

@@ -5,6 +5,7 @@ const COST_RACE := 5
 onready var racer_label := $RacerLabel
 onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
+onready var breeding_pos:Vector2 = $PenRect.rect_position + (0.5 * $PenRect.rect_size)
 var racer:Node
 var mate:Node
 
@@ -73,7 +74,7 @@ func _on_Reset_pressed():
 	_on_New_pressed()
 	$Money.text = "Money: $" + str(save_game.money)
 
-func _on_New_pressed(stats:= Chicken.new()):
+func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2.ZERO):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
 	
@@ -81,6 +82,8 @@ func _on_New_pressed(stats:= Chicken.new()):
 	save_game.add_chicken_stats(stats)
 	add_child(new_chicken)
 	new_chicken.connect("clicked", self, "_on_chicken_clicked")
+	if new_pos != Vector2.ZERO:
+		new_chicken.position = new_pos
 	if not racer: 
 		set_racer(new_chicken)
 
@@ -96,16 +99,22 @@ func _on_StatsPanel_chose_racer():
 	set_racer(selected)
 
 func _on_StatsPanel_requested_breed():
+	var breeding_pen := $PenRect
 	if not mate:
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = selected
 		mate.add_child(mate_dot)
+		mate.position = breeding_pos
+		mate.breeding = true
+		mate.wait()
 	elif mate == selected:
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = null
 		add_child(mate_dot)
 	else:
+		selected.position = breeding_pos
 		var baby:Chicken = AllChickens.do_mating(selected.stats, mate.stats)
+		baby.age = 0
 		var d:RichTextLabel = $Debug
 		d.clear()
 		d.add_text("DEBUG")
@@ -116,7 +125,17 @@ func _on_StatsPanel_requested_breed():
 		d.newline()
 		d.add_text("--> BABY: " + str(baby))
 		
-		_on_New_pressed(baby)
+		_on_New_pressed(baby, breeding_pos)
 		mate.stats.fatigue += 1
+		mate.breeding = false
+		mate.wait()
 		selected.stats.fatigue += 1
+		mate.wait()
+		remove_dot(mate_dot)
+		mate = null
+		$StatsPanel.set_mate(null)
 		
+
+func remove_dot(dot:Node):
+	dot.get_parent().remove_child(dot)
+	add_child(dot)

@@ -1,11 +1,14 @@
 extends AnimatedSprite
 
 export(Resource) var stats setget set_stats
-const coop := Rect2(Vector2.ZERO, Vector2(2340, 1080))
-#const breeding_pen :=
-
 onready var label : = $Label
 onready var rest := $Rest
+
+onready var window_width:int = ProjectSettings.get_setting("display/window/size/width")
+onready var window_height:int = ProjectSettings.get_setting("display/window/size/height")
+onready var breeding_pen:Rect2
+
+var breeding := false
 var target
 var meander:float
 var top_speed
@@ -18,6 +21,8 @@ func _ready():
 	if !stats:
 		set_stats(Chicken.new())
 	set_label()
+	var ren_reference := get_parent().get_node("PenRect") as ReferenceRect
+	breeding_pen = Rect2(ren_reference.rect_position, ren_reference.rect_size)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -33,20 +38,33 @@ func _process(delta):
 			position = new_pos
 	else:
 		if randi() % 3 > 0:
-			var width:int = ProjectSettings.get_setting("display/window/size/width")
-			var height:int = ProjectSettings.get_setting("display/window/size/height")
-			var x = clamp(random_range(position.x), 32, width-32)
-			var y = clamp(random_range(position.y), 128, height-32)
-			target = Vector2(x, y)
+			if breeding:
+				target = get_breeding_pen_target()
+			else:
+				target = get_pen_target()
 			meander = rand_range(0, top_speed)
 			play("run")
 		else:
-			rest.start(rand_range(0.5, 2))
-			set_process(false)
-			play("stand")
+			wait()
+			
+func wait():
+	target = null
+	rest.start(rand_range(0.5, 2))
+	set_process(false)
+	play("stand")	
 
-func random_range(v:float)->float:
-	return rand_range(v-600, v+600)
+func get_pen_target()->Vector2:
+	var x := clamp(random_meander(position.x), 32, window_width - breeding_pen.size.x-32)
+	var y := clamp(random_meander(position.y), 128, window_height-32)
+	return Vector2(x, y)
+
+func get_breeding_pen_target()->Vector2:
+	var x := rand_range(breeding_pen.position.x+32, breeding_pen.position.x + breeding_pen.size.x-32)
+	var y := rand_range(breeding_pen.position.y+32, breeding_pen.position.y + breeding_pen.size.y-32)
+	return Vector2(x, y)
+
+func random_meander(pos:float)->float:
+	return rand_range(pos-600, pos+600)
 
 func set_stats(value:Chicken):
 	stats = value
