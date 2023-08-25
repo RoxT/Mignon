@@ -139,8 +139,8 @@ mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="Portrait" type="Sprite" parent="StatsPanel"]
-position = Vector2( 162, 212 )
-scale = Vector2( 0.120666, 0.120666 )
+position = Vector2( 152, 191 )
+scale = Vector2( 0.0948638, 0.0948638 )
 texture = ExtResource( 3 )
 
 [node name="Name" type="Label" parent="StatsPanel"]
@@ -151,10 +151,10 @@ margin_bottom = 20.0
 text = "Mignon"
 
 [node name="RichTextStats" type="RichTextLabel" parent="StatsPanel"]
-margin_left = 85.0
-margin_top = 393.0
-margin_right = 296.0
-margin_bottom = 573.0
+margin_left = 38.0
+margin_top = 340.0
+margin_right = 290.0
+margin_bottom = 520.0
 text = "Breed: brown
 Wins: 5 
 Fatigue: 3
@@ -178,10 +178,10 @@ rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 
 [node name="Debug" type="RichTextLabel" parent="."]
-margin_left = 128.0
+margin_left = 166.0
 margin_top = 529.0
-margin_right = 1019.0
-margin_bottom = 594.0
+margin_right = 1092.0
+margin_bottom = 896.0
 mouse_filter = 2
 
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]

@@ -17,6 +17,6 @@ func _ready():
 func did_win()->bool:
 	return $Racer/Trophy.visible
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+
+func death():
+	$Racer.animation = "death"

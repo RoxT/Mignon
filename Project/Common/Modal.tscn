@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://RaceTrack/Modal.gd" type="Script" id=1]
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 0.109804 )
+
+[node name="Modal" type="CanvasLayer"]
+script = ExtResource( 1 )
+reason = "Death"
+
+[node name="Border" type="Panel" parent="."]
+margin_right = 1444.0
+margin_bottom = 905.0
+custom_styles/panel = SubResource( 5 )
+
+[node name="Panel" type="Panel" parent="Border"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -210.0
+margin_top = -219.5
+margin_right = 223.0
+margin_bottom = 118.5
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Border/Panel"]
+margin_left = 40.0
+margin_top = 40.0
+margin_right = 396.0
+margin_bottom = 239.0
+bbcode_enabled = true
+bbcode_text = "[center]______ has died of exhaustion!
+You have been fined $100
+
+RIP. She was never much of a runner. "
+text = "______ has died of exhaustion!
+You have been fined $100
+
+RIP. She was never much of a runner. "
+
+[node name="Okay" type="Button" parent="Border/Panel"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -40.0
+rect_min_size = Vector2( 0, 48 )
+text = "Okay"
+
+[connection signal="pressed" from="Border/Panel/Okay" to="." method="_on_Okay_pressed"]

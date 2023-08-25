@@ -8,7 +8,7 @@ onready var breed_btn := $Breed
 
 const breed_str := "Breed"
 const breed_with_str := "Breed with "
-const portrait_scaling := Vector2(0.121, 0.121)
+const portrait_scaling := Vector2(0.095, 0.095)
 
 signal chose_racer
 signal requested_breed

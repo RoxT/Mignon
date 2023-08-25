@@ -28,11 +28,20 @@ func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 
 	farm = new_farm
 	fatigue = new_fatigue
 	breed = new_breed
+	if breed == "white": white = true
 	age = new_age
 
 func get_speed()->int:
 	var s:float = clamp(fatigue * 0.1 * top_speed, 0, top_speed)
 	return top_speed - round(s)
+
+func is_exhausted()->bool:
+	return fatigue >= 3 and get_speed() <= LOW_SPEED
+
+func get_bracket()->String:
+	if top_speed < 200: return "poor"
+	elif top_speed < 350: return "good"
+	else: return "great"
 
 func _random_speed()->int:
 	randomize()

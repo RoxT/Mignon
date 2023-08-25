@@ -19,11 +19,14 @@ func _ready():
 	else:
 		save_game = AllChickens.new()
 	chicken_stats = save_game.get_all()
+	$Money.text = "Money: $" + str(save_game.money)
 	
 	var marked
 	if chicken_stats.empty():
-		_on_New_pressed()
-		marked = $Chicken
+		$Race.disabled = true
+		if save_game.deaths == 0:
+			_on_New_pressed()
+			marked = $Chicken
 	else:
 		for stats in chicken_stats:
 			var chicken = preload("res://chicken/CoopChicken.tscn").instance()
@@ -35,7 +38,7 @@ func _ready():
 				marked = chicken
 		
 	set_racer(marked)
-	$Money.text = "Money: $" + str(save_game.money)
+	
 	#$Race.call_deferred("grab_focus")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,6 +54,7 @@ func _on_chicken_clicked(chicken:Node):
 	
 
 func set_racer(chicken:Node):
+	if not chicken: return
 	racer_label.get_parent().remove_child(racer_label)
 	racer = chicken
 	save_game.racer = chicken.stats
@@ -86,6 +90,7 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2.ZERO):
 		new_chicken.position = new_pos
 	if not racer: 
 		set_racer(new_chicken)
+	$Race.disabled = false
 
 func _on_Race_pressed():
 	save_game.money -= COST_RACE
@@ -99,7 +104,6 @@ func _on_StatsPanel_chose_racer():
 	set_racer(selected)
 
 func _on_StatsPanel_requested_breed():
-	var breeding_pen := $PenRect
 	if not mate:
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = selected
@@ -108,6 +112,7 @@ func _on_StatsPanel_requested_breed():
 		mate.breeding = true
 		mate.wait()
 	elif mate == selected:
+		mate.breeding = false
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = null
 		add_child(mate_dot)

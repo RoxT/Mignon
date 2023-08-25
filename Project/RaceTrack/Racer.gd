@@ -29,6 +29,8 @@ func start():
 	playing = true
 	
 func stop():
+	if stats is Chicken and stats.is_exhausted():
+		play("death")
 	set_process(false)
 	sweat.stop()
 	playing = false
@@ -49,3 +51,4 @@ func set_stats(value:Chicken):
 		modulate = stats.colour
 		if stats.white:
 			frames = load("res://chicken/animations_white.tres")
+		animation = "run"
