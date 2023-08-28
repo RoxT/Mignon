@@ -153,7 +153,8 @@ func _on_Mating_timeout():
 		egg.position = mate.position
 	else:
 		egg.position = mate2.position
-	birthing.connect("timeout", self, "_on_Birthing_timeout", [egg])
+	var err := birthing.connect("timeout", self, "_on_Birthing_timeout", [egg])
+	if err != OK: push_error("err connecting " + str(err))
 	birthing.start(rand_range(3, 4))
 	
 

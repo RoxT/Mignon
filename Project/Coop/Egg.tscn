@@ -28,5 +28,4 @@ animations = [ {
 
 [node name="Egg" type="AnimatedSprite"]
 frames = SubResource( 1 )
-frame = 1
 playing = true
