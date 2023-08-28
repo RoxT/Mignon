@@ -66,6 +66,9 @@ margin_right = 180.0
 margin_bottom = -5.0
 text = "Small Farm Pen"
 
+[node name="Position2D" type="Position2D" parent="Pens/Large"]
+position = Vector2( 150, 144 )
+
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
 margin_left = 298.0
@@ -81,6 +84,9 @@ margin_top = -36.0
 margin_right = 157.0
 margin_bottom = -4.0
 text = "Backyard Pen"
+
+[node name="Position2D" type="Position2D" parent="Pens/Medium"]
+position = Vector2( 115, 108 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
@@ -98,6 +104,9 @@ margin_right = 230.0
 margin_bottom = -8.0
 text = "Covert Balcony Pen"
 
+[node name="Position2D" type="Position2D" parent="Pens/Starter"]
+position = Vector2( 139, 109 )
+
 [node name="PenRect" type="ReferenceRect" parent="."]
 margin_left = 1096.0
 margin_top = 646.0
@@ -107,6 +116,9 @@ mouse_filter = 1
 mouse_default_cursor_shape = 2
 border_color = Color( 0.054902, 0.592157, 0.254902, 0.643137 )
 border_width = 3.0
+
+[node name="Mating" type="Timer" parent="PenRect"]
+one_shot = true
 
 [node name="Fence" type="Sprite" parent="."]
 position = Vector2( 1114, 772.5 )
@@ -172,6 +184,12 @@ scale = Vector2( 0.2, 0.2 )
 z_index = 5
 texture = ExtResource( 4 )
 
+[node name="MateDot2" type="Sprite" parent="."]
+position = Vector2( 8, 2 )
+scale = Vector2( 0.2, 0.2 )
+z_index = 5
+texture = ExtResource( 4 )
+
 [node name="Money" type="Label" parent="."]
 margin_left = 12.0
 margin_top = 848.0
@@ -230,6 +248,7 @@ margin_bottom = 601.0
 rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 
+[connection signal="timeout" from="PenRect/Mating" to="." method="_on_Mating_timeout"]
 [connection signal="pressed" from="Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="Race" to="." method="_on_Race_pressed"]
 [connection signal="pressed" from="New" to="." method="_on_New_pressed"]

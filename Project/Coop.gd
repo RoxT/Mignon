@@ -5,9 +5,11 @@ const COST_RACE := 5
 onready var racer_label := $RacerLabel
 onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
+onready var mate_dot2 := $MateDot2
 onready var breeding_pos:Vector2 = $PenRect.rect_position + (0.5 * $PenRect.rect_size)
 var racer:Node
 var mate:Node
+var mate2:Node
 var pen:ReferenceRect
 
 var selected:Node
@@ -87,7 +89,7 @@ func _on_Reset_pressed():
 	_on_New_pressed()
 	$Money.text = "Money: $" + str(save_game.money)
 
-func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2.ZERO):
+func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
 	
@@ -95,8 +97,8 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2.ZERO):
 	save_game.add_chicken_stats(stats)
 	add_child(new_chicken)
 	new_chicken.connect("clicked", self, "_on_chicken_clicked")
-	if new_pos != Vector2.ZERO:
-		new_chicken.position = new_pos
+	new_chicken.pen = pen.get_rect()
+	new_chicken.position = new_pos
 	if not racer: 
 		set_racer(new_chicken)
 	$Race.disabled = false
@@ -122,25 +124,54 @@ func _on_StatsPanel_requested_breed():
 		mate.wait()
 	elif mate == selected:
 		mate.breeding = false
-		mate_dot.get_parent().remove_child(mate_dot)
-		mate = null
-		add_child(mate_dot)
-	else:
-		selected.position = breeding_pos
-		var baby:Chicken = AllChickens.do_mating(selected.stats, mate.stats)
-		baby.age = 0
-		
-		_on_New_pressed(baby, breeding_pos)
-		mate.stats.fatigue += 1
-		mate.breeding = false
-		mate.wait()
-		selected.stats.fatigue += 1
-		mate.wait()
 		remove_dot(mate_dot)
 		mate = null
-		$StatsPanel.set_mate(null)
-		
+	elif not mate2:
+		mate_dot2.get_parent().remove_child(mate_dot2)
+		mate2 = selected
+		mate2.add_child(mate_dot2)
+		mate2.position = breeding_pos
+		mate2.breeding = true
+		mate2.wait()
+	elif mate2 == selected:
+		mate2.breeding = false
+		remove_dot(mate_dot2)
+		mate2 = null
+	if mate and mate2:
+		$PenRect/Mating.start(rand_range(3, 4))
 
 func remove_dot(dot:Node):
 	dot.get_parent().remove_child(dot)
 	add_child(dot)
+
+func _on_Mating_timeout():
+	var egg:AnimatedSprite = load("res://Coop/Egg.tscn").instance()
+	var birthing:Timer = Timer.new()
+	add_child(egg)
+	egg.add_child(birthing)
+	if randi() % 2 == 0:
+		egg.position = mate.position
+	else:
+		egg.position = mate2.position
+	birthing.connect("timeout", self, "_on_Birthing_timeout", [egg])
+	birthing.start(rand_range(3, 4))
+	
+
+
+func _on_Birthing_timeout(egg:AnimatedSprite):
+	var baby:Chicken = AllChickens.do_mating(mate2.stats, mate.stats)
+	baby.age = 0
+	
+	_on_New_pressed(baby, egg.position)
+	mate.stats.fatigue += 1
+	mate.breeding = false
+	mate.wait()
+	mate2.stats.fatigue += 1
+	mate2.breeding = false
+	mate2.wait()
+	remove_dot(mate_dot)
+	remove_dot(mate_dot2)
+	mate = null
+	mate2 = null
+	$StatsPanel.set_mate(null)	
+	egg.queue_free()
