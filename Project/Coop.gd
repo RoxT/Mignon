@@ -8,6 +8,7 @@ onready var mate_dot := $MateDot
 onready var breeding_pos:Vector2 = $PenRect.rect_position + (0.5 * $PenRect.rect_size)
 var racer:Node
 var mate:Node
+var pen:ReferenceRect
 
 var selected:Node
 
@@ -38,12 +39,11 @@ func _ready():
 				marked = chicken
 		
 	set_racer(marked)
+	for p in $Pens.get_children():
+		p.get_node("Label").connect("pressed", self, "_on_Pen_pressed", [p.name])
+	_on_Pen_pressed("Starter")
 	
 	#$Race.call_deferred("grab_focus")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
 
 func _on_chicken_clicked(chicken:Node):
 	selected = chicken
@@ -51,6 +51,15 @@ func _on_chicken_clicked(chicken:Node):
 	selected.add_child(selected_dot)
 	$StatsPanel.stats = selected.stats
 	$StatsPanel.set_mate(mate)
+	
+func _on_Pen_pressed(pen_name:String):
+	if pen:
+		pen.border_color = Color.red
+		pen.modulate = Color("7fffffff")
+	pen = get_node("Pens/" + pen_name) as ReferenceRect
+	pen.border_color = Color.greenyellow
+	pen.modulate = Color.white
+	get_tree().set_group("meander", "pen", pen.get_rect())
 	
 
 func set_racer(chicken:Node):
@@ -120,15 +129,6 @@ func _on_StatsPanel_requested_breed():
 		selected.position = breeding_pos
 		var baby:Chicken = AllChickens.do_mating(selected.stats, mate.stats)
 		baby.age = 0
-		var d:RichTextLabel = $Debug
-		d.clear()
-		d.add_text("DEBUG")
-		d.newline()
-		d.add_text(str(selected.stats))
-		d.newline()
-		d.add_text(str(mate.stats))
-		d.newline()
-		d.add_text("--> BABY: " + str(baby))
 		
 		_on_New_pressed(baby, breeding_pos)
 		mate.stats.fatigue += 1

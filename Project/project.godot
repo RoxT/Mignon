@@ -90,6 +90,10 @@ coop={
  ]
 }
 
+[input_devices]
+
+pointing/emulate_touch_from_mouse=true
+
 [physics]
 
 common/enable_pause_aware_picking=true

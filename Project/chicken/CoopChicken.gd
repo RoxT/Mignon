@@ -7,6 +7,7 @@ onready var rest := $Rest
 onready var window_width:int = ProjectSettings.get_setting("display/window/size/width")
 onready var window_height:int = ProjectSettings.get_setting("display/window/size/height")
 onready var breeding_pen:Rect2
+var pen:Rect2 setget set_pen
 
 var breeding := false
 var target
@@ -52,10 +53,17 @@ func wait():
 	rest.start(rand_range(0.5, 2))
 	set_process(false)
 	play("stand")	
+	
+func set_pen(value:Rect2):
+	pen = value
+	if not breeding:
+		if !pen.has_point(position):
+			position = get_pen_target()
+	target = null
 
 func get_pen_target()->Vector2:
-	var x := clamp(random_meander(position.x), 32, window_width - breeding_pen.size.x-32)
-	var y := clamp(random_meander(position.y), 128, window_height-32)
+	var x := clamp(random_meander(position.x), pen.position.x + 32, pen.end.x-32)
+	var y := clamp(random_meander(position.y), pen.position.y + 32, pen.end.y-32)
 	return Vector2(x, y)
 
 func get_breeding_pen_target()->Vector2:
