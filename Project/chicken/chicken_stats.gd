@@ -2,7 +2,6 @@ extends Resource
 class_name Chicken
 const LOW_SPEED := 40
 const HIGH_SPEED := 500
-const names := ["Aimeé","Belle","Bijou","Chérie","Coquette","Fleur","Lyonette","Mignon","Coco"]
 const breeds := ["brown", "white", "floof", "bigger floof"]
 
 export(String) var nom
@@ -48,7 +47,7 @@ func _random_speed()->int:
 	return randi() % (HIGH_SPEED-LOW_SPEED) + LOW_SPEED
 
 static func random_name()->String:
-	return names[randi() % names.size()]
+	return EnemyChickens.get_random_nom()
 	
 func _random_colour()->Color:
 	var c := Color.white

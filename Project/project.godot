@@ -18,10 +18,16 @@ _global_script_classes=[ {
 "class": "Chicken",
 "language": "GDScript",
 "path": "res://chicken/chicken_stats.gd"
+}, {
+"base": "Resource",
+"class": "EnemyChickens",
+"language": "GDScript",
+"path": "res://EnemyChickens.gd"
 } ]
 _global_script_class_icons={
 "AllChickens": "",
-"Chicken": ""
+"Chicken": "",
+"EnemyChickens": ""
 }
 
 [application]
