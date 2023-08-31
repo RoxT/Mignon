@@ -2,7 +2,7 @@ extends Resource
 class_name Chicken
 const LOW_SPEED := 40
 const HIGH_SPEED := 500
-const breeds := ["brown", "white", "floof", "bigger floof"]
+const breeds := ["brown", "white", "floof", "bigger floof", "rooster"]
 
 export(String) var nom
 export(int) var top_speed

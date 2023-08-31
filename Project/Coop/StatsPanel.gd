@@ -28,6 +28,9 @@ func set_stats(value:Chicken):
 		elif stats.breed == "bigger floof":
 			portrait.texture = load("res://chicken/portraits/Test_Full_body.jpg")
 			portrait.scale = portrait_scaling
+		elif stats.breed == "rooster":
+			portrait.texture = load("res://chicken/portraits/rooster.jpg")
+			portrait.scale = Vector2(0.202, 0.202)
 		elif stats.white:
 			portrait.texture = load("res://chicken/portraits/white1.png")
 			portrait.scale = Vector2.ONE
