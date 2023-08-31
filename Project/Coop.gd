@@ -16,6 +16,7 @@ var selected:Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	get_tree().call_group("drop", "hide")
 	var chicken_stats := []
 	if AllChickens.exists():
 		save_game = load(AllChickens.PATH) as AllChickens
@@ -23,7 +24,7 @@ func _ready():
 		save_game = AllChickens.new()
 	chicken_stats = save_game.get_all()
 	$UI/Money.text = "Money: $" + str(save_game.money)
-	
+	save_game.temp_racer = null
 	var marked
 	if chicken_stats.empty():
 		$UI/Race.disabled = true
@@ -37,6 +38,7 @@ func _ready():
 			add_child(chicken)
 			chicken.position = Vector2(rand_range(0, 256), rand_range(0, 256))
 			chicken.connect("clicked", self, "_on_chicken_clicked")
+			chicken.connect("unclicked", self, "_on_chicken_unclicked")
 			if save_game.racer == stats || !marked:
 				marked = chicken
 		
@@ -53,7 +55,21 @@ func _on_chicken_clicked(chicken:Node):
 	selected.add_child(selected_dot)
 	$UI/StatsPanel.stats = selected.stats
 	$UI/StatsPanel.set_mate(mate)
-	
+	get_tree().call_group("drop", "show")
+	set_race_text(chicken.stats)
+
+func _on_chicken_unclicked(chicken:Node):
+	var drops:= get_tree().get_nodes_in_group("drop")
+	for drop in drops:
+		var d:ReferenceRect = drop as ReferenceRect
+		if  d.get_global_rect().has_point(get_viewport().get_mouse_position()):
+			var place:String = d.get_parent().name
+			print("Dropped chicken in " + place)
+			if place == "Race": _on_Race_pressed(chicken)
+			return
+		d.hide()
+	set_race_text(save_game.racer)
+
 func _on_Pen_pressed(pen_name:String):
 	if pen:
 		pen.border_color = Color.red
@@ -70,8 +86,11 @@ func set_racer(chicken:Node):
 	racer = chicken
 	save_game.racer = chicken.stats
 	racer.add_child(racer_label)
-	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + racer.stats.nom
+	set_race_text(chicken.stats)
 	
+func set_race_text(chicken:Chicken):
+	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + chicken.nom
+
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
 	add_child(selected_dot)
@@ -97,14 +116,16 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").
 	save_game.add_chicken_stats(stats)
 	add_child(new_chicken)
 	new_chicken.connect("clicked", self, "_on_chicken_clicked")
+	new_chicken.connect("unclicked", self, "_on_chicken_unclicked")
 	new_chicken.pen = pen.get_rect()
 	new_chicken.position = new_pos
 	if not racer: 
 		set_racer(new_chicken)
 	$UI/Race.disabled = false
 
-func _on_Race_pressed():
+func _on_Race_pressed(chicken=null):
 	save_game.money -= COST_RACE
+	save_game.temp_racer = chicken.stats
 	save_game.save()
 	var err := get_tree().change_scene("res://RaceTrack/RaceTrack.tscn")
 	if err != OK:

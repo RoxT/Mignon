@@ -17,6 +17,7 @@ var top_speed
 var dragging := false
 
 signal clicked(chicken)
+signal unclicked(chicken)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +27,7 @@ func _ready():
 	set_label()
 	var ren_reference := get_parent().get_node("PenRect") as ReferenceRect
 	breeding_pen = Rect2(ren_reference.rect_position, ren_reference.rect_size)
+	set_process_input(false)
 
 
 func _input(event:InputEvent):
@@ -115,14 +117,20 @@ func _on_Rest_timeout():
 	set_process(true)
 
 
-func _on_Area2D_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
-	if event.is_pressed():
-		emit_signal("clicked", self)
-		drag()
-
-
 func drag(value:=true):
 	dragging = value
 	set_process_input(value)
 	set_process(!value)
 	target = null
+	if value:
+		emit_signal("clicked", self)
+	else:
+		emit_signal("unclicked", self)
+
+
+func _on_TouchScreenButton_pressed():
+	drag()
+
+
+func _on_TouchScreenButton_released():
+	drag(false)
