@@ -14,6 +14,8 @@ var target
 var meander:float
 var top_speed
 
+var dragging := false
+
 signal clicked(chicken)
 
 # Called when the node enters the scene tree for the first time.
@@ -26,9 +28,21 @@ func _ready():
 	breeding_pen = Rect2(ren_reference.rect_position, ren_reference.rect_size)
 
 
+func _input(event:InputEvent):
+	if dragging:
+		
+		if event is InputEventMouseButton:
+			dragging = event.is_pressed()
+		elif event is InputEventMouseMotion:
+			position = get_viewport().get_mouse_position()
+	else:
+		drag(false)
+			
+		
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if target:
+	if target and not dragging:
 		var new_pos := Vector2(256, 256)
 		new_pos.x = move_toward(position.x, target.x, meander*delta)
 		new_pos.y = move_toward(position.y, target.y, meander*delta)
@@ -104,3 +118,11 @@ func _on_Rest_timeout():
 func _on_Area2D_input_event(_viewport:Node, event:InputEvent, _shape_idx:int):
 	if event.is_pressed():
 		emit_signal("clicked", self)
+		drag()
+
+
+func drag(value:=true):
+	dragging = value
+	set_process_input(value)
+	set_process(!value)
+	target = null

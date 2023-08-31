@@ -22,11 +22,11 @@ func _ready():
 	else:
 		save_game = AllChickens.new()
 	chicken_stats = save_game.get_all()
-	$Money.text = "Money: $" + str(save_game.money)
+	$UI/Money.text = "Money: $" + str(save_game.money)
 	
 	var marked
 	if chicken_stats.empty():
-		$Race.disabled = true
+		$UI/Race.disabled = true
 		if save_game.deaths == 0:
 			_on_New_pressed()
 			marked = $Chicken
@@ -51,8 +51,8 @@ func _on_chicken_clicked(chicken:Node):
 	selected = chicken
 	selected_dot.get_parent().remove_child(selected_dot)
 	selected.add_child(selected_dot)
-	$StatsPanel.stats = selected.stats
-	$StatsPanel.set_mate(mate)
+	$UI/StatsPanel.stats = selected.stats
+	$UI/StatsPanel.set_mate(mate)
 	
 func _on_Pen_pressed(pen_name:String):
 	if pen:
@@ -70,7 +70,7 @@ func set_racer(chicken:Node):
 	racer = chicken
 	save_game.racer = chicken.stats
 	racer.add_child(racer_label)
-	$Race.text = "RACE ($" + str(COST_RACE) + ") " + racer.stats.nom
+	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + racer.stats.nom
 	
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
@@ -87,7 +87,7 @@ func _on_Reset_pressed():
 	save_game = AllChickens.new()
 	save_game.save()
 	_on_New_pressed()
-	$Money.text = "Money: $" + str(save_game.money)
+	$UI/Money.text = "Money: $" + str(save_game.money)
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
@@ -101,7 +101,7 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").
 	new_chicken.position = new_pos
 	if not racer: 
 		set_racer(new_chicken)
-	$Race.disabled = false
+	$UI/Race.disabled = false
 
 func _on_Race_pressed():
 	save_game.money -= COST_RACE
@@ -174,5 +174,5 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	remove_dot(mate_dot2)
 	mate = null
 	mate2 = null
-	$StatsPanel.set_mate(null)	
+	$UI/StatsPanel.set_mate(null)	
 	egg.queue_free()
