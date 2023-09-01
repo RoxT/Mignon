@@ -125,7 +125,8 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").
 
 func _on_Race_pressed(chicken=null):
 	save_game.money -= COST_RACE
-	save_game.temp_racer = chicken.stats
+	if chicken:
+		save_game.temp_racer = chicken.stats
 	save_game.save()
 	var err := get_tree().change_scene("res://RaceTrack/RaceTrack.tscn")
 	if err != OK:
