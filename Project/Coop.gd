@@ -57,10 +57,11 @@ func _on_chicken_clicked(chicken:Node):
 	selected.add_child(selected_dot)
 	$UI/StatsPanel.stats = selected.stats
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
-	get_tree().call_group("drop", "show")
-	set_race_text(chicken.stats)
-	if chicken.breeding == true:
-		_on_StatsPanel_requested_breed(chicken)
+	if not chicken.stats.is_chick():
+		get_tree().call_group("drop", "show")
+		set_race_text(chicken.stats)
+		if chicken.breeding == true:
+			_on_StatsPanel_requested_breed(chicken)
 
 func _on_chicken_unclicked(chicken:Node):
 	var drops:= get_tree().get_nodes_in_group("drop")

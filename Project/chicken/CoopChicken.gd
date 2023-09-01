@@ -120,10 +120,11 @@ func _on_Rest_timeout():
 
 
 func drag(value:=true):
-	dragging = value
-	set_process_input(value)
-	set_process(!value)
-	target = null
+	if not stats.is_chick():
+		dragging = value
+		set_process_input(value)
+		set_process(!value)
+		target = null
 	if value:
 		emit_signal("clicked", self)
 	else:
