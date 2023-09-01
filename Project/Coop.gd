@@ -7,6 +7,8 @@ onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
 onready var mate_dot2 := $MateDot2
 onready var breeding_pos:Vector2 = $PenRect.rect_position + (0.5 * $PenRect.rect_size)
+onready var mating:Timer = $PenRect/Mating
+onready var birthing:Timer = $PenRect/Birthing
 var racer:Node
 var mate:Node
 var mate2:Node
@@ -57,6 +59,8 @@ func _on_chicken_clicked(chicken:Node):
 	$UI/StatsPanel.set_mate(mate)
 	get_tree().call_group("drop", "show")
 	set_race_text(chicken.stats)
+	if chicken.breeding == true:
+		_on_StatsPanel_requested_breed(chicken)
 
 func _on_chicken_unclicked(chicken:Node):
 	var drops:= get_tree().get_nodes_in_group("drop")
@@ -66,8 +70,9 @@ func _on_chicken_unclicked(chicken:Node):
 			var place:String = d.get_parent().name
 			print("Dropped chicken in " + place)
 			if place == "Race": _on_Race_pressed(chicken)
-			return
-		d.hide()
+			elif place == "PenRect": _on_StatsPanel_requested_breed(chicken)
+			break
+	get_tree().call_group("drop", "hide")
 	set_race_text(save_game.racer)
 
 func _on_Pen_pressed(pen_name:String):
@@ -136,31 +141,37 @@ func _on_Race_pressed(chicken=null):
 func _on_StatsPanel_chose_racer():
 	set_racer(selected)
 
-func _on_StatsPanel_requested_breed():
+func _on_StatsPanel_requested_breed(chicken:Node=null):
+	if birthing.time_left > 0: return
+	if not chicken:
+		chicken = selected
+
 	if not mate:
 		mate_dot.get_parent().remove_child(mate_dot)
-		mate = selected
+		mate = chicken
 		mate.add_child(mate_dot)
 		mate.position = breeding_pos
 		mate.breeding = true
 		mate.wait()
-	elif mate == selected:
+	elif mate == chicken:
+		mating.stop()
 		mate.breeding = false
 		remove_dot(mate_dot)
 		mate = null
 	elif not mate2:
 		mate_dot2.get_parent().remove_child(mate_dot2)
-		mate2 = selected
+		mate2 = chicken
 		mate2.add_child(mate_dot2)
 		mate2.position = breeding_pos
 		mate2.breeding = true
 		mate2.wait()
-	elif mate2 == selected:
+	elif mate2 == chicken:
+		mating.stop()
 		mate2.breeding = false
 		remove_dot(mate_dot2)
 		mate2 = null
 	if mate and mate2:
-		$PenRect/Mating.start(rand_range(3, 4))
+		mating.start(rand_range(5, 10))
 
 func remove_dot(dot:Node):
 	dot.get_parent().remove_child(dot)
@@ -168,20 +179,20 @@ func remove_dot(dot:Node):
 
 func _on_Mating_timeout():
 	var egg:AnimatedSprite = load("res://Coop/Egg.tscn").instance()
-	var birthing:Timer = Timer.new()
 	add_child(egg)
-	egg.add_child(birthing)
 	if randi() % 2 == 0:
 		egg.position = mate.position
 	else:
 		egg.position = mate2.position
 	var err := birthing.connect("timeout", self, "_on_Birthing_timeout", [egg])
 	if err != OK: push_error("err connecting " + str(err))
-	birthing.start(rand_range(3, 4))
+	birthing.start(rand_range(10, 20))
+	mate.birthing = true
+	mate2.birthing = true
+	$UI/Race.disabled = true
 	
-
-
 func _on_Birthing_timeout(egg:AnimatedSprite):
+	birthing.disconnect("timeout", self, "_on_Birthing_timeout")
 	var baby:Chicken = AllChickens.do_mating(mate2.stats, mate.stats)
 	baby.age = 0
 	
@@ -197,4 +208,5 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	mate = null
 	mate2 = null
 	$UI/StatsPanel.set_mate(null)	
+	$UI/Race.disabled = false
 	egg.queue_free()

@@ -126,6 +126,9 @@ margin_bottom = 250.0
 border_color = Color( 1, 0.901961, 0.709804, 1 )
 editor_only = false
 
+[node name="Birthing" type="Timer" parent="PenRect"]
+one_shot = true
+
 [node name="Fence" type="Sprite" parent="."]
 position = Vector2( 1114, 772.5 )
 scale = Vector2( 0.5, 0.658854 )

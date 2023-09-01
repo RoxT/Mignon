@@ -9,7 +9,8 @@ onready var window_height:int = ProjectSettings.get_setting("display/window/size
 onready var breeding_pen:Rect2
 var pen:Rect2 setget set_pen
 
-var breeding := false
+var breeding := false setget set_breeding
+var birthing := false
 var target
 var meander:float
 var top_speed
@@ -32,13 +33,10 @@ func _ready():
 
 func _input(event:InputEvent):
 	if dragging:
-		
 		if event is InputEventMouseButton:
 			dragging = event.is_pressed()
 		elif event is InputEventMouseMotion:
 			position = get_viewport().get_mouse_position()
-	else:
-		drag(false)
 			
 		
 
@@ -129,8 +127,14 @@ func drag(value:=true):
 
 
 func _on_TouchScreenButton_pressed():
-	drag()
+	if not birthing:
+		drag()
 
 
 func _on_TouchScreenButton_released():
-	drag(false)
+	if not birthing:
+		drag(false)
+
+func set_breeding(value:bool):
+	breeding = value
+	if not value: birthing = false
