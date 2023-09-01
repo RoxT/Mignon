@@ -8,6 +8,7 @@ onready var breed_btn := $Breed
 
 const breed_str := "Breed"
 const breed_with_str := "Breed with "
+const breed_stop_str := "Stop Breeding"
 const portrait_scaling := Vector2(0.095, 0.095)
 
 signal chose_racer
@@ -20,6 +21,9 @@ func _ready():
 		set_stats(stats)
 
 func set_stats(value:Chicken):
+	$Choose.disabled = false
+	breed_btn.disabled = false
+	breed_btn.text = breed_str
 	stats = value
 	if portrait:
 		if stats.breed == "floof":
@@ -53,15 +57,21 @@ func set_stats(value:Chicken):
 				block.add_text("Fatigue Level: " + str(stats.fatigue))
 			block.newline()
 		block.add_text("%s day%s old" % [str(stats.age), "" if stats.age == 1 else "s"])
-		if stats.age < 2:
+		if stats.is_chick():
 			block.add_text(" (chick)")
-	$Choose.disabled = stats.age < 2
-	$Breed.disabled = stats.age < 2
+	if stats.is_chick():
+		$Choose.disabled = true
+		breed_btn.disabled = true
 	show()
 
-func set_mate(mate:Node):
-	if mate and mate.stats != stats:
-			breed_btn.text = breed_with_str + mate.stats.nom
+func set_mate(mate:Node, mate2:Node, birthing:=false):
+	if birthing: breed_btn.disabled = true
+	if (mate and mate.stats == stats) or (mate2 and mate2.stats == stats):
+		breed_btn.text = breed_stop_str
+	elif mate2:
+		breed_btn.text = breed_with_str + mate2.stats.nom
+	elif mate:
+		breed_btn.text = breed_with_str + mate.stats.nom
 	else:
 		breed_btn.text = breed_str
 

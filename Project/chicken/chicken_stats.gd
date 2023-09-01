@@ -30,6 +30,9 @@ func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 
 	if breed == "white": white = true
 	age = new_age
 
+func is_chick()->bool:
+	return age < 2
+
 func get_speed()->int:
 	var s:float = clamp(fatigue * 0.1 * top_speed, 0, top_speed)
 	return top_speed - round(s)

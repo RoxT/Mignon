@@ -29,6 +29,7 @@ func _ready():
 	var ren_reference := get_parent().get_node("PenRect") as ReferenceRect
 	breeding_pen = Rect2(ren_reference.rect_position, ren_reference.rect_size)
 	set_process_input(false)
+	if stats.is_chick(): scale = scale/2
 
 
 func _input(event:InputEvent):
@@ -98,10 +99,13 @@ func set_stats(value:Chicken):
 
 func set_label():
 	if label:
-		var text = stats.nom + ". " + str(stats.wins) + " wins."
-		if stats.fatigue > 0:
-			text += " Fatigue: " + str(stats.fatigue)
-		label.text = text
+		if stats.is_chick():
+			label.text = stats.nom
+		else:
+			var text = stats.nom + ". " + "W: " + str(stats.wins)
+			if stats.fatigue > 0:
+				text += " F: " + str(stats.fatigue)
+			label.text = text
 
 func _on_Area2D_mouse_entered():
 	label.show()

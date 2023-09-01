@@ -56,7 +56,7 @@ func _on_chicken_clicked(chicken:Node):
 	selected_dot.get_parent().remove_child(selected_dot)
 	selected.add_child(selected_dot)
 	$UI/StatsPanel.stats = selected.stats
-	$UI/StatsPanel.set_mate(mate)
+	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 	get_tree().call_group("drop", "show")
 	set_race_text(chicken.stats)
 	if chicken.breeding == true:
@@ -145,12 +145,12 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 	if birthing.time_left > 0: return
 	if not chicken:
 		chicken = selected
-
+	if chicken.stats.is_chick(): return
 	if not mate:
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = chicken
 		mate.add_child(mate_dot)
-		mate.position = breeding_pos
+		mate.position = breeding_pos + Vector2(-64, 0)
 		mate.breeding = true
 		mate.wait()
 	elif mate == chicken:
@@ -162,7 +162,7 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		mate_dot2.get_parent().remove_child(mate_dot2)
 		mate2 = chicken
 		mate2.add_child(mate_dot2)
-		mate2.position = breeding_pos
+		mate2.position = breeding_pos + Vector2(64, 0)
 		mate2.breeding = true
 		mate2.wait()
 	elif mate2 == chicken:
@@ -172,6 +172,7 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		mate2 = null
 	if mate and mate2:
 		mating.start(rand_range(5, 10))
+	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 
 func remove_dot(dot:Node):
 	dot.get_parent().remove_child(dot)
@@ -189,6 +190,9 @@ func _on_Mating_timeout():
 	birthing.start(rand_range(10, 20))
 	mate.birthing = true
 	mate2.birthing = true
+	if selected == mate or selected == mate2: 
+		$UI/StatsPanel.show(false)
+		remove_dot(selected_dot)
 	$UI/Race.disabled = true
 	
 func _on_Birthing_timeout(egg:AnimatedSprite):
@@ -207,6 +211,6 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	remove_dot(mate_dot2)
 	mate = null
 	mate2 = null
-	$UI/StatsPanel.set_mate(null)	
+	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 	$UI/Race.disabled = false
 	egg.queue_free()
