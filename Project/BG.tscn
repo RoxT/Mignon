@@ -1,6 +1,7 @@
 [gd_scene format=2]
 
-[node name="BG" type="Node2D"]
+[node name="BG" type="CanvasLayer"]
+layer = -1
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_left = -3.0

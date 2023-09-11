@@ -83,6 +83,8 @@ func _on_Pen_pressed(pen_name:String):
 	pen = get_node("Pens/" + pen_name) as ReferenceRect
 	pen.border_color = Color.greenyellow
 	pen.modulate = Color.white
+	$BG2/TextureRect.texture = load("res://Coop/Grass%s.jpg" % pen_name)
+	$BG2/TextureRect.rect_position = pen.rect_position
 	get_tree().set_group("meander", "pen", pen.get_rect())
 	
 
