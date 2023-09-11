@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://chicken/animations.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://RaceTrack/Racer.gd" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://RaceTrack/trophy.png" type="Texture" id=4]
 [ext_resource path="res://RaceTrack/sweat1.png" type="Texture" id=5]
 [ext_resource path="res://RaceTrack/sweat2.png" type="Texture" id=6]
+[ext_resource path="res://RaceTrack/lane.jpg" type="Texture" id=7]
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 5 )
@@ -38,6 +39,13 @@ animations = [ {
 
 [node name="Lane" type="Node2D" groups=["Lane"]]
 script = ExtResource( 3 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 1.0
+margin_right = 1441.0
+margin_bottom = 155.0
+texture = ExtResource( 7 )
+expand = true
 
 [node name="Racer" type="AnimatedSprite" parent="." groups=["racer"]]
 position = Vector2( 32, 32 )

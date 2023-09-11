@@ -54,6 +54,7 @@ func _on_racer_finished():
 	
 	
 func add_lane(stats:Chicken):
+
 	var lane := Lane.instance()
 	lane.stats = stats
 	add_child(lane)
