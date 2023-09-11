@@ -217,3 +217,7 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 	$UI/Race.disabled = false
 	egg.queue_free()
+
+
+func _on_Info_pressed():
+	add_child(load("res://Common/ModalBig.tscn").instance())
