@@ -2,7 +2,7 @@ extends Node2D
 
 onready var Lane := preload("res://RaceTrack/Lane.tscn")
 
-const lane_offset_y := 64
+const lane_offset_y := 96
 const lane_separation_y := 155
 const winnings := 50
 var track := 0
@@ -41,11 +41,11 @@ func _on_racer_finished():
 		add_child(modal)
 	if $Lane.did_win():
 		save_game.money += winnings
-		$Winnings.text = "YOU WON $" + str(winnings) 
-		$Winnings.show()
-		$Winnings/Rice.emitting = true
+		$CL/Winnings.text = "YOU WON $" + str(winnings) 
+		$CL/Winnings.show()
+		$CL/Winnings/Rice.emitting = true
 	else:
-		$Lost.show()
+		$CL/Lost.show()
 	your_chicken.stats.fatigue += 2
 	has_tired = true
 	save_game.save()

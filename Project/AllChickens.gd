@@ -5,18 +5,20 @@ export(Resource) var racer setget set_racer
 export(Resource) var temp_racer setget set_temp_racer
 export(int) var money
 export(int) var deaths
+export(String) var pen
 
 const PATH := "user://chickens.tres"
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter"):
 	all = new_all
 	racer = new_racer
 	money = new_money
 	deaths = new_deaths
 	temp_racer = new_temp_racer
+	pen = new_pen
 		
 func pass_day():
 	for c in all:

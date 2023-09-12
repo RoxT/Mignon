@@ -34,8 +34,8 @@ expand = true
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 12.0
 margin_top = 12.0
-margin_right = 84.0
-margin_bottom = 32.0
+margin_right = 188.0
+margin_bottom = 96.0
 rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 4 )
 text = "TO COOP"
@@ -45,29 +45,31 @@ wait_time = 0.7
 one_shot = true
 autostart = true
 
-[node name="Winnings" type="Label" parent="."]
+[node name="CL" type="CanvasLayer" parent="."]
+
+[node name="Winnings" type="Label" parent="CL"]
 visible = false
-margin_left = 16.0
-margin_top = 64.0
-margin_right = 109.0
-margin_bottom = 78.0
+margin_left = 14.0
+margin_top = 115.0
+margin_right = 186.0
+margin_bottom = 147.0
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 custom_styles/normal = SubResource( 1 )
 text = "You won: $100"
 
-[node name="Rice" type="CPUParticles2D" parent="Winnings"]
+[node name="Rice" type="CPUParticles2D" parent="CL/Winnings"]
 position = Vector2( 2, -34 )
 emitting = false
 emission_shape = 1
 emission_sphere_radius = 30.64
 initial_velocity = 105.26
 
-[node name="Lost" type="Label" parent="."]
+[node name="Lost" type="Label" parent="CL"]
 visible = false
-margin_left = 16.0
-margin_top = 64.0
-margin_right = 80.0
-margin_bottom = 78.0
+margin_left = 12.0
+margin_top = 117.0
+margin_right = 132.0
+margin_bottom = 149.0
 custom_styles/normal = SubResource( 2 )
 text = "YOU LOST"
 

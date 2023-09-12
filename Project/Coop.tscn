@@ -78,27 +78,8 @@ position = Vector2( 150, 144 )
 [node name="Label" type="Button" parent="Pens/Large"]
 margin_top = -37.0
 margin_right = 192.0
-margin_bottom = 1.0
+margin_bottom = 18.0
 text = "Small Farm Pen"
-
-[node name="Starter" type="ReferenceRect" parent="Pens"]
-modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 538.0
-margin_top = 646.0
-margin_right = 1090.0
-margin_bottom = 893.0
-mouse_filter = 2
-mouse_default_cursor_shape = 2
-editor_only = false
-
-[node name="Position2D" type="Position2D" parent="Pens/Starter"]
-position = Vector2( 139, 109 )
-
-[node name="Label" type="Button" parent="Pens/Starter"]
-margin_top = -40.0
-margin_right = 236.0
-margin_bottom = -2.0
-text = "Covert Balcony Pen"
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
@@ -114,10 +95,29 @@ editor_only = false
 position = Vector2( 115, 108 )
 
 [node name="Label" type="Button" parent="Pens/Medium"]
-margin_top = -36.0
+margin_top = -57.0
 margin_right = 169.0
-margin_bottom = 2.0
+margin_bottom = -2.0
 text = "Backyard Pen"
+
+[node name="Starter" type="ReferenceRect" parent="Pens"]
+modulate = Color( 1, 1, 1, 0.498039 )
+margin_left = 538.0
+margin_top = 646.0
+margin_right = 1090.0
+margin_bottom = 893.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+editor_only = false
+
+[node name="Position2D" type="Position2D" parent="Pens/Starter"]
+position = Vector2( 139, 109 )
+
+[node name="Label" type="Button" parent="Pens/Starter"]
+margin_top = -64.0
+margin_right = 236.0
+margin_bottom = -2.0
+text = "Covert Balcony Pen"
 
 [node name="PenRect" type="ReferenceRect" parent="."]
 margin_left = 1096.0
@@ -189,7 +189,7 @@ layer = 2
 
 [node name="Reset" type="Button" parent="UI"]
 margin_left = 69.0
-margin_top = 16.0
+margin_top = 10.0
 margin_right = 158.0
 margin_bottom = 70.0
 rect_min_size = Vector2( 48, 48 )
@@ -201,7 +201,7 @@ text = "RESET"
 
 [node name="Race" type="Button" parent="UI"]
 margin_left = 596.0
-margin_top = 22.0
+margin_top = 16.0
 margin_right = 836.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 0, 48 )
@@ -222,7 +222,7 @@ editor_only = false
 
 [node name="New" type="Button" parent="UI"]
 margin_left = 283.0
-margin_top = 22.0
+margin_top = 16.0
 margin_right = 468.0
 margin_bottom = 76.0
 rect_min_size = Vector2( 0, 48 )
@@ -277,9 +277,9 @@ Fatigue: 3
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
 margin_left = 4.0
-margin_top = 491.0
+margin_top = 478.0
 margin_right = 259.0
-margin_bottom = 539.0
+margin_bottom = 541.0
 rect_min_size = Vector2( 0, 48 )
 text = "Set as Racer"
 
@@ -287,15 +287,15 @@ text = "Set as Racer"
 margin_left = 4.0
 margin_top = 553.0
 margin_right = 270.0
-margin_bottom = 601.0
+margin_bottom = 614.0
 rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 
 [node name="Info" type="Button" parent="UI"]
 margin_left = 945.0
-margin_top = 28.0
+margin_top = 22.0
 margin_right = 1005.0
-margin_bottom = 82.0
+margin_bottom = 76.0
 icon = ExtResource( 10 )
 
 [connection signal="timeout" from="PenRect/Mating" to="." method="_on_Mating_timeout"]

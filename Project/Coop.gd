@@ -47,7 +47,7 @@ func _ready():
 	set_racer(marked)
 	for p in $Pens.get_children():
 		p.get_node("Label").connect("pressed", self, "_on_Pen_pressed", [p.name])
-	_on_Pen_pressed("Starter")
+	_on_Pen_pressed(save_game.pen)
 	
 	#$Race.call_deferred("grab_focus")
 
@@ -77,6 +77,8 @@ func _on_chicken_unclicked(chicken:Node):
 	set_race_text(save_game.racer)
 
 func _on_Pen_pressed(pen_name:String):
+	save_game.pen = pen_name
+	save_game.save()
 	if pen:
 		pen.border_color = Color.red
 		pen.modulate = Color("7fffffff")
