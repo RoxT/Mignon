@@ -47,6 +47,7 @@ window/stretch/aspect="keep"
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+theme/custom="res://resources/default_theme.tres"
 theme/custom_font="res://resources/Roboto-Regular.tres"
 
 [importer_defaults]
