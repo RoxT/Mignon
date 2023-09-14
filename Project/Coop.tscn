@@ -246,7 +246,7 @@ text = "Money: $100"
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -348.0
-margin_top = 22.0
+margin_top = 5.0
 margin_right = -5.0
 margin_bottom = 646.0
 mouse_filter = 2
@@ -277,25 +277,25 @@ Fatigue: 3
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
 margin_left = 4.0
-margin_top = 478.0
+margin_top = 497.0
 margin_right = 167.0
-margin_bottom = 541.0
+margin_bottom = 560.0
 rect_min_size = Vector2( 0, 48 )
 text = "Set as Racer"
 
 [node name="Sell" type="Button" parent="UI/StatsPanel"]
 margin_left = 176.0
-margin_top = 478.0
+margin_top = 497.0
 margin_right = 340.0
-margin_bottom = 541.0
+margin_bottom = 560.0
 rect_min_size = Vector2( 0, 48 )
 text = "Sell ($5)"
 
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
 margin_left = 4.0
-margin_top = 553.0
+margin_top = 572.0
 margin_right = 270.0
-margin_bottom = 614.0
+margin_bottom = 633.0
 rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 
