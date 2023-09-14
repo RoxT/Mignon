@@ -10,9 +10,11 @@ const breed_str := "Breed"
 const breed_with_str := "Breed with "
 const breed_stop_str := "Stop Breeding"
 const portrait_scaling := Vector2(0.095, 0.095)
+const sell_str := "Sell ($%s)"
 
 signal chose_racer
 signal requested_breed
+signal sell_requested(price)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -21,6 +23,7 @@ func _ready():
 		set_stats(stats)
 
 func set_stats(value:Chicken):
+	$Sell.disabled = false
 	$Choose.disabled = false
 	breed_btn.disabled = false
 	breed_btn.text = breed_str
@@ -59,6 +62,7 @@ func set_stats(value:Chicken):
 		block.add_text("%s day%s old" % [str(stats.age), "" if stats.age == 1 else "s"])
 		if stats.is_chick():
 			block.add_text(" (chick)")
+	$Sell.text = sell_str % get_price()
 	if stats.is_chick():
 		$Choose.disabled = true
 		breed_btn.disabled = true
@@ -81,9 +85,19 @@ func show(value := true):
 	block.visible = value
 	$Choose.visible = value
 	$Breed.visible = value
+	$Sell.visible = value
+
+func stop_sell(value:bool):
+	$Sell.disabled = value
 
 func _on_Choose_pressed():
 	emit_signal("chose_racer")
 
 func _on_Breed_pressed():
 	emit_signal("requested_breed")
+
+func get_price()->int:
+	return 5
+
+func _on_Sell_pressed():
+	emit_signal("sell_requested", get_price())

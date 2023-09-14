@@ -41,7 +41,14 @@ static func one_of_two(a:Chicken, b:Chicken, property:String):
 func save():
 	var err := ResourceSaver.save(PATH, self)
 	if err != OK: push_error("Error saving! " + str(err))
-	
+
+func sell(chicken:Chicken, price:int):
+	if racer == chicken:
+		racer = null
+	all.erase(chicken)
+	money += price
+	save()
+
 func add_chicken_stats(value:Chicken):
 	assert(value != null)
 	all.append(value)

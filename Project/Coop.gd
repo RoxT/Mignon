@@ -29,10 +29,9 @@ func _ready():
 	save_game.temp_racer = null
 	var marked
 	if chicken_stats.empty():
-		$UI/Race.disabled = true
-		if save_game.deaths == 0:
-			_on_New_pressed()
-			marked = $Chicken
+		_on_Pen_pressed(save_game.pen)
+		_on_New_pressed()
+		marked = $Chicken
 	else:
 		for stats in chicken_stats:
 			var chicken = preload("res://chicken/CoopChicken.tscn").instance()
@@ -45,9 +44,10 @@ func _ready():
 				marked = chicken
 		
 	set_racer(marked)
+	
+	_on_Pen_pressed(save_game.pen)
 	for p in $Pens.get_children():
 		p.get_node("Label").connect("pressed", self, "_on_Pen_pressed", [p.name])
-	_on_Pen_pressed(save_game.pen)
 	
 	#$Race.call_deferred("grab_focus")
 
@@ -57,9 +57,11 @@ func _on_chicken_clicked(chicken:Node):
 	selected.add_child(selected_dot)
 	$UI/StatsPanel.stats = selected.stats
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
+	if get_adult_chicken(chicken) == null:
+		$UI/StatsPanel.stop_sell(true)
 	if not chicken.stats.is_chick():
 		get_tree().call_group("drop", "show")
-		set_race_text(chicken.stats)
+		set_race_text(chicken)
 		if chicken.breeding == true:
 			_on_StatsPanel_requested_breed(chicken)
 
@@ -74,7 +76,7 @@ func _on_chicken_unclicked(chicken:Node):
 			elif place == "PenRect": _on_StatsPanel_requested_breed(chicken)
 			break
 	get_tree().call_group("drop", "hide")
-	set_race_text(save_game.racer)
+	set_race_text(racer)
 
 func _on_Pen_pressed(pen_name:String):
 	save_game.pen = pen_name
@@ -91,15 +93,39 @@ func _on_Pen_pressed(pen_name:String):
 	
 
 func set_racer(chicken:Node):
-	if not chicken: return
-	racer_label.get_parent().remove_child(racer_label)
+	if not valid_adult_chicken(chicken):
+		chicken = get_adult_chicken()
+		if chicken == null:
+			remove_dot(racer_label)
+			racer = null
+			set_can_race()
+			return
 	racer = chicken
 	save_game.racer = chicken.stats
+	racer_label.get_parent().remove_child(racer_label)
 	racer.add_child(racer_label)
-	set_race_text(chicken.stats)
+	set_race_text(chicken)
+
+func get_adult_chicken(exclude=null):
+	var chickens:Array = get_tree().get_nodes_in_group("meander")
+	for c in chickens:
+		if valid_adult_chicken(c) and c != exclude:
+			return c
+	return null
+
+func valid_adult_chicken(c:Node)->bool:
+	return c != null and is_instance_valid(c) and not c.is_queued_for_deletion() and !c.stats.is_chick() 
+
+func set_race_text(chicken):
+	set_can_race()
+	var nom:String = chicken.stats.nom
+	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + nom
 	
-func set_race_text(chicken:Chicken):
-	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + chicken.nom
+func set_can_race():
+	if racer == null or save_game.all.empty() or $PenRect/Birthing.time_left > 0:
+		$UI/Race.disabled = true
+	else:
+		$UI/Race.disabled = false
 
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
@@ -117,6 +143,7 @@ func _on_Reset_pressed():
 	save_game.save()
 	_on_New_pressed()
 	$UI/Money.text = "Money: $" + str(save_game.money)
+	$UI/StatsPanel.show(false)
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
@@ -131,7 +158,8 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").
 	new_chicken.position = new_pos
 	if not racer: 
 		set_racer(new_chicken)
-	$UI/Race.disabled = false
+	set_can_race()
+	$UI/StatsPanel.stop_sell(get_adult_chicken(new_chicken) == null)
 
 func _on_Race_pressed(chicken=null):
 	save_game.money -= COST_RACE
@@ -180,7 +208,8 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 
 func remove_dot(dot:Node):
-	dot.get_parent().remove_child(dot)
+	if dot:
+		dot.get_parent().remove_child(dot)
 	add_child(dot)
 
 func _on_Mating_timeout():
@@ -198,7 +227,7 @@ func _on_Mating_timeout():
 	if selected == mate or selected == mate2: 
 		$UI/StatsPanel.show(false)
 		remove_dot(selected_dot)
-	$UI/Race.disabled = true
+	set_can_race()
 	
 func _on_Birthing_timeout(egg:AnimatedSprite):
 	birthing.disconnect("timeout", self, "_on_Birthing_timeout")
@@ -217,9 +246,31 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	mate = null
 	mate2 = null
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
-	$UI/Race.disabled = false
+	set_can_race()
 	egg.queue_free()
 
-
+	
 func _on_Info_pressed():
-	add_child(load("res://Common/ModalBig.tscn").instance())
+	var modal = load("res://Common/ModalBig.tscn").instance()
+	modal.set_text(modal.HELP)
+	add_child(modal)
+
+
+func _on_StatsPanel_sell_requested(price:int):
+	save_game.sell(selected.stats, price)
+	selected.queue_free()
+	if racer == selected:
+		set_racer(null)
+	if mate == selected:
+		remove_dot(mate_dot)
+		mate = null
+	elif mate2 == selected:
+		remove_dot(mate_dot2)
+		mate2 = null
+	remove_dot(selected_dot)
+	selected = null
+	$UI/Money.text = "Money: $" + str(save_game.money)
+	set_can_race()
+	$UI/StatsPanel.show(false)
+
+		

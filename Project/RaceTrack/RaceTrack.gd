@@ -33,7 +33,7 @@ func _on_racer_finished():
 	var your_chicken := get_node("Lane/Racer")
 	if your_chicken.stats.is_exhausted():
 		your_chicken.play("death")
-		var modal = load("res://Common/Modal.tscn").instance()
+		var modal = load("res://RaceTrack/ModalDeath.tscn").instance()
 		modal.nom = your_chicken.stats.nom
 		modal.epitaph = your_chicken.stats.get_bracket()
 		modal.reason = "Death"

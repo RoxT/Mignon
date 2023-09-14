@@ -247,7 +247,7 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -348.0
 margin_top = 22.0
-margin_right = -27.0
+margin_right = -5.0
 margin_bottom = 646.0
 mouse_filter = 2
 script = ExtResource( 2 )
@@ -278,10 +278,18 @@ Fatigue: 3
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
 margin_left = 4.0
 margin_top = 478.0
-margin_right = 259.0
+margin_right = 172.0
 margin_bottom = 541.0
 rect_min_size = Vector2( 0, 48 )
 text = "Set as Racer"
+
+[node name="Sell" type="Button" parent="UI/StatsPanel"]
+margin_left = 172.0
+margin_top = 478.0
+margin_right = 340.0
+margin_bottom = 541.0
+rect_min_size = Vector2( 0, 48 )
+text = "Sell ($5)"
 
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
 margin_left = 4.0
@@ -304,6 +312,8 @@ icon = ExtResource( 10 )
 [connection signal="pressed" from="UI/New" to="." method="_on_New_pressed"]
 [connection signal="chose_racer" from="UI/StatsPanel" to="." method="_on_StatsPanel_chose_racer"]
 [connection signal="requested_breed" from="UI/StatsPanel" to="." method="_on_StatsPanel_requested_breed"]
+[connection signal="sell_requested" from="UI/StatsPanel" to="." method="_on_StatsPanel_sell_requested"]
 [connection signal="pressed" from="UI/StatsPanel/Choose" to="UI/StatsPanel" method="_on_Choose_pressed"]
+[connection signal="pressed" from="UI/StatsPanel/Sell" to="UI/StatsPanel" method="_on_Sell_pressed"]
 [connection signal="pressed" from="UI/StatsPanel/Breed" to="UI/StatsPanel" method="_on_Breed_pressed"]
 [connection signal="pressed" from="UI/Info" to="." method="_on_Info_pressed"]
