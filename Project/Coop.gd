@@ -48,8 +48,6 @@ func _ready():
 	set_racer(marked)
 	update_food_box()
 	_on_Pen_pressed(save_game.pen)
-	for p in $Pens.get_children():
-		p.get_node("Label").connect("pressed", self, "_on_Pen_pressed", [p.name])
 	
 	#$Race.call_deferred("grab_focus")
 
@@ -153,6 +151,7 @@ func _on_Reset_pressed():
 	save_game.save()
 	_on_New_pressed()
 	update_money()
+	update_food_box()
 	$UI/StatsPanel.show(false)
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
@@ -300,14 +299,6 @@ func _on_BuyBest_pressed():
 	save_game.add_food(AllChickens.FOOD_TYPES.BEST, 5, cost)
 	update_food_box()
 
-
-func _on_BuyGood_pressed():
-	var cost := int($UI/BuyBest.text)
-	save_game.add_food(AllChickens.FOOD_TYPES.GOOD, 5, cost)
-	update_food_box()
-
-
-func _on_BuyBasic_pressed():
-	var cost := int($UI/BuyBest.text)
-	save_game.add_food(AllChickens.FOOD_TYPES.BASIC, 5, cost)
-	update_food_box()
+func _on_BuyFood_pressed(type:String, cost:int):
+	save_game.add_food(AllChickens.FOOD_TYPES[type.to_upper()], 5, cost)
+	update_food_box()	

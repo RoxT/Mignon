@@ -99,12 +99,6 @@ __meta__ = {
 [node name="Position2D" type="Position2D" parent="Pens/Large"]
 position = Vector2( 150, 144 )
 
-[node name="Label" type="Button" parent="Pens/Large"]
-margin_top = -37.0
-margin_right = 192.0
-margin_bottom = 18.0
-text = "Small Farm Pen"
-
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
 margin_left = 298.0
@@ -121,12 +115,6 @@ __meta__ = {
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
 position = Vector2( 115, 108 )
 
-[node name="Label" type="Button" parent="Pens/Medium"]
-margin_top = -57.0
-margin_right = 169.0
-margin_bottom = -2.0
-text = "Backyard Pen"
-
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
 margin_left = 538.0
@@ -142,12 +130,6 @@ __meta__ = {
 
 [node name="Position2D" type="Position2D" parent="Pens/Starter"]
 position = Vector2( 139, 109 )
-
-[node name="Label" type="Button" parent="Pens/Starter"]
-margin_top = -64.0
-margin_right = 236.0
-margin_bottom = -2.0
-text = "Covert Balcony Pen"
 
 [node name="PenRect" type="ReferenceRect" parent="."]
 margin_left = 1096.0
@@ -289,7 +271,7 @@ margin_right = 91.0
 margin_bottom = 688.0
 focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
-text = "$2"
+text = "$3"
 icon = ExtResource( 15 )
 
 [node name="BuyBasic" type="Button" parent="UI"]
@@ -299,7 +281,7 @@ margin_right = 91.0
 margin_bottom = 633.0
 focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
-text = "$2"
+text = "$1"
 icon = ExtResource( 12 )
 
 [node name="Food" type="Label" parent="UI"]
@@ -314,7 +296,7 @@ text = "Food:"
 [node name="Panel" type="PanelContainer" parent="UI/Food"]
 margin_left = 7.0
 margin_top = 32.0
-margin_right = 172.0
+margin_right = 88.0
 margin_bottom = 72.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -323,7 +305,7 @@ custom_styles/panel = SubResource( 8 )
 [node name="FoodBox" type="HBoxContainer" parent="UI/Food/Panel"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 163.0
+margin_right = 79.0
 margin_bottom = 38.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -333,14 +315,16 @@ margin_right = 51.0
 margin_bottom = 36.0
 
 [node name="GOOD" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 13 )]
+visible = false
 margin_left = 55.0
 margin_right = 106.0
 margin_bottom = 36.0
 food_type = 1
 
 [node name="BASIC" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 13 )]
-margin_left = 110.0
-margin_right = 161.0
+visible = false
+margin_left = 55.0
+margin_right = 106.0
 margin_bottom = 36.0
 food_type = 2
 
@@ -422,13 +406,34 @@ margin_bottom = 70.0
 icon = ExtResource( 10 )
 icon_align = 1
 
+[node name="Starter" type="Button" parent="UI"]
+margin_left = 21.0
+margin_top = 525.0
+margin_right = 104.0
+margin_bottom = 561.0
+text = "Starter"
+
+[node name="Medium" type="Button" parent="UI"]
+margin_left = 21.0
+margin_top = 474.0
+margin_right = 120.0
+margin_bottom = 510.0
+text = "Medium"
+
+[node name="Large" type="Button" parent="UI"]
+margin_left = 21.0
+margin_top = 421.0
+margin_right = 91.0
+margin_bottom = 457.0
+text = "Large"
+
 [connection signal="timeout" from="PenRect/Mating" to="." method="_on_Mating_timeout"]
 [connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="UI/Race" to="." method="_on_Race_pressed"]
 [connection signal="pressed" from="UI/New" to="." method="_on_New_pressed"]
-[connection signal="pressed" from="UI/BuyBest" to="." method="_on_BuyBest_pressed"]
-[connection signal="pressed" from="UI/BuyGood" to="." method="_on_BuyGood_pressed"]
-[connection signal="pressed" from="UI/BuyBasic" to="." method="_on_BuyBasic_pressed"]
+[connection signal="pressed" from="UI/BuyBest" to="." method="_on_BuyFood_pressed" binds= [ "BEST", 5 ]]
+[connection signal="pressed" from="UI/BuyGood" to="." method="_on_BuyFood_pressed" binds= [ "GOOD", 3 ]]
+[connection signal="pressed" from="UI/BuyBasic" to="." method="_on_BuyFood_pressed" binds= [ "BASIC", 1 ]]
 [connection signal="chose_racer" from="UI/StatsPanel" to="." method="_on_StatsPanel_chose_racer"]
 [connection signal="edited" from="UI/StatsPanel" to="." method="_on_StatsPanel_edited"]
 [connection signal="requested_breed" from="UI/StatsPanel" to="." method="_on_StatsPanel_requested_breed"]
@@ -439,3 +444,6 @@ icon_align = 1
 [connection signal="pressed" from="UI/StatsPanel/Breed" to="UI/StatsPanel" method="_on_Breed_pressed"]
 [connection signal="pressed" from="UI/StatsPanel/Edit" to="UI/StatsPanel" method="_on_Edit_pressed"]
 [connection signal="pressed" from="UI/Info" to="." method="_on_Info_pressed"]
+[connection signal="pressed" from="UI/Starter" to="." method="_on_Pen_pressed" binds= [ "Starter" ]]
+[connection signal="pressed" from="UI/Medium" to="." method="_on_Pen_pressed" binds= [ "Medium" ]]
+[connection signal="pressed" from="UI/Large" to="." method="_on_Pen_pressed" binds= [ "Large" ]]
