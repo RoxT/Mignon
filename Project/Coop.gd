@@ -26,7 +26,7 @@ func _ready():
 	else:
 		save_game = AllChickens.new()
 	chicken_stats = save_game.get_all()
-	$UI/Money.text = "Money: $" + str(save_game.money)
+	update_money()
 	save_game.temp_racer = null
 	var marked
 	if chicken_stats.empty():
@@ -128,6 +128,9 @@ func set_can_race():
 	else:
 		$UI/Race.disabled = false
 
+func update_money():
+	$UI/Money.text = "Money: $" + str(save_game.money)
+
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
 	add_child(selected_dot)
@@ -143,16 +146,16 @@ func _on_Reset_pressed():
 	save_game = AllChickens.new()
 	save_game.save()
 	_on_New_pressed()
-	$UI/Money.text = "Money: $" + str(save_game.money)
+	update_money()
 	$UI/StatsPanel.show(false)
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
-	
 	new_chicken.stats = stats
 	save_game.money -= COST_NEW
 	save_game.add_chicken_stats(stats)
+	update_money()
 	add_child(new_chicken)
 	new_chicken.connect("clicked", self, "_on_chicken_clicked")
 	new_chicken.connect("unclicked", self, "_on_chicken_unclicked")
@@ -260,6 +263,12 @@ func _on_Info_pressed():
 
 func _on_StatsPanel_sell_requested(price:int):
 	save_game.sell(selected.stats, price)
+	var floater = load("res://Common/Floater.tscn").instance()
+	if selected.stats.wins > 1: 
+		floater.texture = load("res://Common/dollar.png")
+	add_child(floater)
+	if selected.stats.is_chick(): floater.scale = Vector2(0.5, 0.5)
+	floater.position = selected.position
 	selected.queue_free()
 	if racer == selected:
 		set_racer(null)
@@ -271,7 +280,7 @@ func _on_StatsPanel_sell_requested(price:int):
 		mate2 = null
 	remove_dot(selected_dot)
 	selected = null
-	$UI/Money.text = "Money: $" + str(save_game.money)
+	update_money()
 	set_can_race()
 	$UI/StatsPanel.show(false)
 
