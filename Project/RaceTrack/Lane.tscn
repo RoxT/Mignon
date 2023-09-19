@@ -87,3 +87,10 @@ margin_top = 64.0
 margin_right = 323.0
 margin_bottom = 96.0
 text = "Farm:"
+
+[node name="Wins" type="Label" parent="."]
+margin_left = 609.0
+margin_top = 61.0
+margin_right = 675.0
+margin_bottom = 93.0
+text = "Wins:"

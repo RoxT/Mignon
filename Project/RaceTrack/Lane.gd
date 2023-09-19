@@ -14,6 +14,10 @@ func _ready():
 	$Name.text = stats.nom
 	$Farm.text = "Farm: " + stats.farm
 	$Racer.stats = stats
+	$Wins.text = "Wins " + str(stats.wins)
+	
+func update_wins():
+	$Wins.text = "Wins " + str(stats.wins)
 	
 func did_win()->bool:
 	return $Racer/Trophy.visible

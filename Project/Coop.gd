@@ -2,6 +2,7 @@ extends Node2D
 
 var save_game:AllChickens
 const COST_RACE := 5
+const COST_NEW := 10
 onready var racer_label := $RacerLabel
 onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
@@ -150,6 +151,7 @@ func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").
 	stats.farm = "YOU"
 	
 	new_chicken.stats = stats
+	save_game.money -= COST_NEW
 	save_game.add_chicken_stats(stats)
 	add_child(new_chicken)
 	new_chicken.connect("clicked", self, "_on_chicken_clicked")
@@ -273,4 +275,6 @@ func _on_StatsPanel_sell_requested(price:int):
 	set_can_race()
 	$UI/StatsPanel.show(false)
 
-		
+
+func _on_StatsPanel_edited():
+	save_game.save()

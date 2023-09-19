@@ -1,0 +1,65 @@
+{
+	"Vanchokons" : { "chickens": {
+		"Coco" :{ "top_speed":243},
+		"Coquette" :{ "top_speed":248},
+		"Fleur" :{ "top_speed":275},
+		"Eva" :{ "top_speed":362},
+		"Alix" :{ "top_speed":365},
+		"Mignon" :{ "top_speed":456},
+		"Apolline" :{ "top_speed":500}
+	}},
+	"Martot" :{ "chickens": {
+		"Léana" :{ "top_speed":143},
+		"Camille" :{ "top_speed":152},
+		"Zélie" :{ "top_speed":235},
+		"Romy" :{ "top_speed":340},
+		"Yasmine" :{ "top_speed":403},
+		"Bijou" :{ "top_speed":436},
+		"Lyonette" :{ "top_speed":445}
+	}},
+	"Apple Farms" :{ "chickens": {
+		"Margaux" :{ "top_speed":178},
+		"Faustine" :{ "top_speed":229},
+		"Mia" :{ "top_speed":254},
+		"Agathe" :{ "top_speed":284},
+		"Maryam" :{ "top_speed":338},
+		"Nour" :{ "top_speed":350},
+		"Laura" :{ "top_speed":367}
+	}},
+	"Bec-de-Beak" :{ "chickens": {
+		"Victoria" :{ "top_speed":182},
+		"Candice" :{ "top_speed":199},
+		"Lilou" :{ "top_speed":207},
+		"Sarah" :{ "top_speed":215},
+		"Jeanne" :{ "top_speed":279},
+		"Elsa" :{ "top_speed":320},
+		"Soline" :{ "top_speed":447}
+	}},
+	"QkChkns" :{ "chickens": {
+		"Inaya" :{ "top_speed":60},
+		"Charlotte" :{ "top_speed":79},
+		"Rose" :{ "top_speed":226},
+		"Inès" :{ "top_speed":230},
+		"Iris" :{ "top_speed":233},
+		"Pauline" :{ "top_speed":247},
+		"Capucine" :{ "top_speed":328}
+	}},
+	"St. Germain’s" :{ "chickens": {
+		"Luna" :{ "top_speed":57},
+		"Thaïs" :{ "top_speed":92},
+		"Marie" :{ "top_speed":152},
+		"Emy" :{ "top_speed":171},
+		"Olivia" :{ "top_speed":182},
+		"Iris" :{ "top_speed":189},
+		"Livia" :{ "top_speed":249}
+	}},
+	"Anualonacu" :{ "chickens": {
+		"Lou" :{ "top_speed":40},
+		"Lyna" :{ "top_speed":168},
+		"Elena" :{ "top_speed":201},
+		"Aya" :{ "top_speed":207},
+		"Assia" :{ "top_speed":227},
+		"Margot" :{ "top_speed":302},
+		"Mathilde" :{ "top_speed":303}
+}}
+	}

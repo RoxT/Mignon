@@ -4,6 +4,7 @@ onready var Lane := preload("res://RaceTrack/Lane.tscn")
 
 const lane_offset_y := 96
 const lane_separation_y := 155
+const lane_count := 4
 const winnings := 50
 var track := 0
 var has_tired := false
@@ -19,9 +20,11 @@ func _ready():
 	var first_chicken:Chicken
 	first_chicken = save_game.temp_racer if save_game.temp_racer else save_game.racer
 	add_lane(first_chicken)
-	add_lane(Chicken.new())
-	add_lane(Chicken.new())
-	add_lane(Chicken.new())
+	var competition := save_game.get_competition(lane_count-1)
+	for c in competition:
+		var r = randi() % 6 + 1
+		c.fatigue = r if r <= 3 else 0
+		add_lane(c)
 	$ToCoop.disabled = first_chicken.is_exhausted()
 	
 	for r in get_tree().get_nodes_in_group("racer"):
@@ -46,15 +49,16 @@ func _on_racer_finished():
 		$CL/Winnings/Rice.emitting = true
 	else:
 		$CL/Lost.show()
-	your_chicken.stats.fatigue += 2
+	if not has_tired:
+		your_chicken.stats.fatigue += 2
 	has_tired = true
 	save_game.save()
+	get_tree().call_group("Lane", "update_wins")
 	$ToCoop.disabled = false
 	$ToCoop.grab_focus()
 	
 	
 func add_lane(stats:Chicken):
-
 	var lane := Lane.instance()
 	lane.stats = stats
 	add_child(lane)

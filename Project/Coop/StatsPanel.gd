@@ -5,6 +5,7 @@ onready var portrait := $Portrait
 onready var nom := $Name
 onready var block : = $RichTextStats
 onready var breed_btn := $Breed
+onready var name_edit := $Name/NameEdit
 
 const breed_str := "Breed"
 const breed_with_str := "Breed with "
@@ -15,6 +16,7 @@ const sell_str := "Sell ($%s)"
 signal chose_racer
 signal requested_breed
 signal sell_requested(price)
+signal edited
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -26,6 +28,7 @@ func set_stats(value:Chicken):
 	$Sell.disabled = false
 	$Choose.disabled = false
 	breed_btn.disabled = false
+	name_edit.hide()
 	breed_btn.text = breed_str
 	stats = value
 	if portrait:
@@ -86,6 +89,7 @@ func show(value := true):
 	$Choose.visible = value
 	$Breed.visible = value
 	$Sell.visible = value
+	$Edit.visible = value
 
 func stop_sell(value:bool):
 	$Sell.disabled = value
@@ -97,7 +101,26 @@ func _on_Breed_pressed():
 	emit_signal("requested_breed")
 
 func get_price()->int:
-	return 5
+	var tired = 1-(stats.fatigue * 0.05)
+	if stats.wins == 0:
+		return int(5 * tired)
+	return 5 + int((stats.wins * 5) * tired)
 
 func _on_Sell_pressed():
 	emit_signal("sell_requested", get_price())
+
+
+func _on_Edit_pressed():
+	if name_edit.visible == true:
+		_on_NameEdit_text_entered(name_edit.text)
+	else:
+		name_edit.text = stats.nom
+		name_edit.show()
+		name_edit.grab_focus()
+
+
+func _on_NameEdit_text_entered(new_text):
+	stats.nom = new_text
+	$Name.text = stats.nom
+	name_edit.hide()
+	emit_signal("edited")

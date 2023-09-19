@@ -1,6 +1,7 @@
 extends Resource
 class_name AllChickens
 export(Array, Resource) var all:Array setget , get_all
+export(Array, Resource) var enemy_farms:Array setget , get_enemy_farms
 export(Resource) var racer setget set_racer
 export(Resource) var temp_racer setget set_temp_racer
 export(int) var money
@@ -12,13 +13,15 @@ const PATH := "user://chickens.tres"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter"):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list()):
 	all = new_all
 	racer = new_racer
 	money = new_money
 	deaths = new_deaths
 	temp_racer = new_temp_racer
 	pen = new_pen
+	enemy_farms = new_enemy_farms
+	save()
 		
 func pass_day():
 	for c in all:
@@ -31,6 +34,9 @@ static func exists()->bool:
 
 func get_all()->Array:
 	return all
+	
+func get_enemy_farms()->Array:
+	return enemy_farms
 	
 static func do_mating(a:Chicken, b:Chicken)->Chicken:
 	return Chicken.new(one_of_two(a, b, "top_speed"), Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "white"), one_of_two(a, b, "farm"), 2, one_of_two(a, b, "breed"))
@@ -70,3 +76,49 @@ func death(value:Chicken):
 	all.erase(value)
 	deaths += 1
 	save()
+	
+func get_competition(lanes:int)->Array:
+	if lanes > enemy_farms.size(): push_error("More lanes than Farms")
+	var competition := []
+	var farms = choose_farms(lanes, bag(lanes, enemy_farms.size()))
+	for f in farms:
+		f = f as Farm
+		competition.append(f.chickens[randi() % f.chickens.size()])
+	return competition
+
+func choose_farms(lanes, bag_of_indexes)->Array:
+	var farms := []
+	while farms.size() < lanes:
+		var i:int = bag_of_indexes[randi() % bag_of_indexes.size()]
+		farms.append(enemy_farms[i])
+		bag_of_indexes.erase(i)
+	
+	return farms
+
+func bag(lanes:int, things:int)->Array:
+	var bag := []
+	for i in range(things):
+		bag.append(i)
+	return bag
+
+func generate_enemy_list()->Array:
+	var e := []
+	var file := File.new()
+	file.open("res://Common/JSON/enemy_chickens.json", File.READ)
+	var content = file.get_as_text()
+	var list_of_farms:Dictionary = JSON.parse(content).result
+	for f_key in list_of_farms.keys():
+		var farm := Farm.new()
+		farm.nom = f_key
+		for c_key in list_of_farms[f_key].chickens.keys():
+			var chicken := Chicken.new()
+			chicken.nom = c_key
+			var this_chicken:Dictionary = list_of_farms[f_key].chickens[c_key]
+			for k in this_chicken.keys():
+				chicken.set(k,this_chicken[k])
+			chicken.farm = f_key
+			farm.chickens.append(chicken)
+		e.append(farm)
+	
+	file.close()
+	return e

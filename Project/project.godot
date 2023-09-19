@@ -23,11 +23,17 @@ _global_script_classes=[ {
 "class": "EnemyChickens",
 "language": "GDScript",
 "path": "res://EnemyChickens.gd"
+}, {
+"base": "Resource",
+"class": "Farm",
+"language": "GDScript",
+"path": "res://Common/Farm.gd"
 } ]
 _global_script_class_icons={
 "AllChickens": "",
 "Chicken": "",
-"EnemyChickens": ""
+"EnemyChickens": "",
+"Farm": ""
 }
 
 [application]
