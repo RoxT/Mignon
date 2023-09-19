@@ -10,6 +10,7 @@ onready var mate_dot2 := $MateDot2
 onready var breeding_pos:Vector2 = $PenRect.rect_position + (0.5 * $PenRect.rect_size)
 onready var mating:Timer = $PenRect/Mating
 onready var birthing:Timer = $PenRect/Birthing
+onready var food_box := $UI/Food/Panel/FoodBox
 var racer:Node
 var mate:Node
 var mate2:Node
@@ -45,7 +46,7 @@ func _ready():
 				marked = chicken
 		
 	set_racer(marked)
-	
+	update_food_box()
 	_on_Pen_pressed(save_game.pen)
 	for p in $Pens.get_children():
 		p.get_node("Label").connect("pressed", self, "_on_Pen_pressed", [p.name])
@@ -131,6 +132,11 @@ func set_can_race():
 func update_money():
 	$UI/Money.text = "Money: $" + str(save_game.money)
 
+func update_food_box():
+	food_box.get_node("BEST").count = save_game.foods[AllChickens.FOOD_TYPES.BEST]
+	food_box.get_node("GOOD").count = save_game.foods[AllChickens.FOOD_TYPES.GOOD]
+	food_box.get_node("BASIC").count = save_game.foods[AllChickens.FOOD_TYPES.BASIC]
+	
 func _on_Reset_pressed():
 	selected_dot.get_parent().remove_child(selected_dot)
 	add_child(selected_dot)
@@ -287,3 +293,21 @@ func _on_StatsPanel_sell_requested(price:int):
 
 func _on_StatsPanel_edited():
 	save_game.save()
+
+
+func _on_BuyBest_pressed():
+	var cost := int($UI/BuyBest.text)
+	save_game.add_food(AllChickens.FOOD_TYPES.BEST, 5, cost)
+	update_food_box()
+
+
+func _on_BuyGood_pressed():
+	var cost := int($UI/BuyBest.text)
+	save_game.add_food(AllChickens.FOOD_TYPES.GOOD, 5, cost)
+	update_food_box()
+
+
+func _on_BuyBasic_pressed():
+	var cost := int($UI/BuyBest.text)
+	save_game.add_food(AllChickens.FOOD_TYPES.BASIC, 5, cost)
+	update_food_box()

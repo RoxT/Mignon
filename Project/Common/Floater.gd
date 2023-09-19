@@ -4,7 +4,8 @@ extends Node2D
 export(Texture) var texture setget set_texture
 
 func _ready():
-	$Sprite.texture = texture
+	if texture:
+		$Sprite.texture = texture
 
 func set_texture(value:Texture):
 	texture = value

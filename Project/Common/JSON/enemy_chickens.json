@@ -17,7 +17,7 @@
 		"Bijou" :{ "top_speed":436},
 		"Lyonette" :{ "top_speed":445}
 	}},
-	"Apple Farms" :{ "chickens": {
+	"Jam Jar Farms" :{ "chickens": {
 		"Margaux" :{ "top_speed":178},
 		"Faustine" :{ "top_speed":229},
 		"Mia" :{ "top_speed":254},

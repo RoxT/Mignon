@@ -7,13 +7,15 @@ export(Resource) var temp_racer setget set_temp_racer
 export(int) var money
 export(int) var deaths
 export(String) var pen
+export(Array) var foods
+enum FOOD_TYPES {BEST, GOOD, BASIC}
 
 const PATH := "user://chickens.tres"
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list()):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,0,10]):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -21,12 +23,17 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	temp_racer = new_temp_racer
 	pen = new_pen
 	enemy_farms = new_enemy_farms
+	foods = new_foods
 	save()
 		
 func pass_day():
 	for c in all:
 		c.fatigue = max(c.fatigue-1, 0)
 		c.age += 1
+	for i in range(foods.size()):
+		if foods[i] > 0:
+			foods[i] -= 1
+			break
 	save()
 
 static func exists()->bool:
@@ -100,6 +107,11 @@ func bag(lanes:int, things:int)->Array:
 	for i in range(things):
 		bag.append(i)
 	return bag
+	
+func add_food(type:int, amount:int, cost:=0):
+	foods[type] += amount
+	money -= cost
+	save()
 
 func generate_enemy_list()->Array:
 	var e := []

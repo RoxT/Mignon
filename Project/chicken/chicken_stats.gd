@@ -15,6 +15,7 @@ export(int) var wins
 export(int) var fatigue
 export(int) var age
 
+
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
