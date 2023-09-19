@@ -2,8 +2,8 @@ extends Node2D
 
 onready var Lane := preload("res://RaceTrack/Lane.tscn")
 
-const lane_offset_y := 96
-const lane_separation_y := 155
+const lane_offset_y := 112
+const lane_separation_y := 192
 const lane_count := 4
 const winnings := 50
 var track := 0

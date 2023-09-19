@@ -4,13 +4,12 @@
 [ext_resource path="res://chicken/CoopChicken.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=5]
-radius = 54.0093
+radius = 128.062
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 13.5
+radius = 36.4
 
 [node name="Chicken" type="AnimatedSprite" groups=["meander"]]
-scale = Vector2( 4, 4 )
 frames = ExtResource( 1 )
 animation = "stand"
 script = ExtResource( 2 )
@@ -22,11 +21,10 @@ scale = Vector2( 0.25, 0.25 )
 shape = SubResource( 5 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = -8.25
-margin_top = -10.0
-margin_right = 32.75
-margin_bottom = 4.0
-rect_scale = Vector2( 0.25, 0.25 )
+margin_left = -37.0
+margin_top = -51.0
+margin_right = 36.0
+margin_bottom = -19.0
 text = "Hekllo"
 
 [node name="Rest" type="Timer" parent="."]

@@ -8,30 +8,30 @@
 [ext_resource path="res://RaceTrack/sweat2.png" type="Texture" id=6]
 [ext_resource path="res://RaceTrack/lane.jpg" type="Texture" id=7]
 
-[sub_resource type="AtlasTexture" id=4]
+[sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 5 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=5]
+[sub_resource type="AtlasTexture" id=10]
 atlas = ExtResource( 5 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 64, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=6]
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 6 )
-region = Rect2( 0, 0, 16, 16 )
+region = Rect2( 0, 0, 64, 64 )
 
-[sub_resource type="AtlasTexture" id=7]
+[sub_resource type="AtlasTexture" id=12]
 atlas = ExtResource( 6 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 64, 0, 64, 64 )
 
 [sub_resource type="SpriteFrames" id=8]
 animations = [ {
-"frames": [ SubResource( 4 ), SubResource( 5 ) ],
+"frames": [ SubResource( 9 ), SubResource( 10 ) ],
 "loop": true,
 "name": "1",
 "speed": 5.0
 }, {
-"frames": [ SubResource( 6 ), SubResource( 7 ) ],
+"frames": [ SubResource( 11 ), SubResource( 12 ) ],
 "loop": true,
 "name": "2",
 "speed": 5.0
@@ -41,15 +41,14 @@ animations = [ {
 script = ExtResource( 3 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 1.0
-margin_right = 1441.0
-margin_bottom = 155.0
+margin_right = 1440.0
+margin_bottom = 192.0
 texture = ExtResource( 7 )
 expand = true
 
 [node name="Racer" type="AnimatedSprite" parent="." groups=["racer"]]
-position = Vector2( 32, 32 )
-scale = Vector2( 4, 4 )
+position = Vector2( 42, 70 )
+scale = Vector2( 1.2, 1.2 )
 frames = ExtResource( 1 )
 animation = "run"
 frame = 1
@@ -58,39 +57,37 @@ script = ExtResource( 2 )
 
 [node name="Trophy" type="Sprite" parent="Racer"]
 visible = false
-scale = Vector2( 0.25, 0.25 )
 texture = ExtResource( 4 )
 
 [node name="Sweat" type="AnimatedSprite" parent="Racer"]
 visible = false
 frames = SubResource( 8 )
 animation = "2"
-frame = 1
 playing = true
 
 [node name="HSeparator" type="HSeparator" parent="."]
-margin_left = 1.0
-margin_top = 96.0
-margin_right = 1023.0
-margin_bottom = 113.0
+margin_left = 2.0
+margin_top = 159.0
+margin_right = 1024.0
+margin_bottom = 176.0
 
 [node name="Name" type="Label" parent="."]
-margin_left = 1.0
-margin_top = 64.0
-margin_right = 71.0
-margin_bottom = 96.0
+margin_left = 2.0
+margin_top = 127.0
+margin_right = 72.0
+margin_bottom = 159.0
 text = "Name"
 
 [node name="Farm" type="Label" parent="."]
-margin_left = 257.0
-margin_top = 64.0
-margin_right = 323.0
-margin_bottom = 96.0
+margin_left = 258.0
+margin_top = 127.0
+margin_right = 324.0
+margin_bottom = 159.0
 text = "Farm:"
 
 [node name="Wins" type="Label" parent="."]
-margin_left = 609.0
-margin_top = 61.0
-margin_right = 675.0
-margin_bottom = 93.0
+margin_left = 610.0
+margin_top = 124.0
+margin_right = 676.0
+margin_bottom = 156.0
 text = "Wins:"
