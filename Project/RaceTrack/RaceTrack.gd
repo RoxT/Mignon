@@ -17,6 +17,7 @@ func _ready():
 		save_game = load(AllChickens.PATH)
 	else:
 		save_game = AllChickens.new()
+		save_game.save()
 	var first_chicken:Chicken
 	first_chicken = save_game.temp_racer if save_game.temp_racer else save_game.racer
 	add_lane(first_chicken)
@@ -71,7 +72,6 @@ func _on_ToCoop_pressed():
 	var err := get_tree().change_scene("res://Coop.tscn")
 	if err != OK:
 		push_error("Error switching scenes: " + str(err))
-		assert(false)
 
 
 func _on_StartGun_timeout():

@@ -26,8 +26,9 @@ func _ready():
 		save_game = load(AllChickens.PATH) as AllChickens
 	else:
 		save_game = AllChickens.new()
+		save_game.save()
 	chicken_stats = save_game.get_all()
-	update_money()
+	
 	save_game.temp_racer = null
 	var marked
 	if chicken_stats.empty():
@@ -46,6 +47,7 @@ func _ready():
 				marked = chicken
 		
 	set_racer(marked)
+	update_money()
 	update_food_box()
 	_on_Pen_pressed(save_game.pen)
 	
@@ -293,12 +295,17 @@ func _on_StatsPanel_sell_requested(price:int):
 func _on_StatsPanel_edited():
 	save_game.save()
 
-
-func _on_BuyBest_pressed():
-	var cost := int($UI/BuyBest.text)
-	save_game.add_food(AllChickens.FOOD_TYPES.BEST, 5, cost)
-	update_food_box()
-
 func _on_BuyFood_pressed(type:String, cost:int):
 	save_game.add_food(AllChickens.FOOD_TYPES[type.to_upper()], 5, cost)
-	update_food_box()	
+	update_food_box()
+	update_money()
+
+
+func _on_Shop_pressed():
+	var shop := "res://Shop/Shop.tscn"
+	var err = get_tree().change_scene(shop)
+	match err:
+		 OK: return
+		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + shop + " path cannot be loaded into a PackedScene")
+		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + shop + " cannot be instantiated.")
+	push_error("Error " + str(err) + "changing to  " + shop + " ")

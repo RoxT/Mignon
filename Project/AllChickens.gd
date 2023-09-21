@@ -8,6 +8,7 @@ export(int) var money
 export(int) var deaths
 export(String) var pen
 export(Array) var foods
+
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
 const PATH := "user://chickens.tres"
@@ -15,7 +16,7 @@ const PATH := "user://chickens.tres"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,0,10]):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0]):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -24,7 +25,6 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	pen = new_pen
 	enemy_farms = new_enemy_farms
 	foods = new_foods
-	save()
 		
 func pass_day():
 	for c in all:
@@ -87,7 +87,7 @@ func death(value:Chicken):
 func get_competition(lanes:int)->Array:
 	if lanes > enemy_farms.size(): push_error("More lanes than Farms")
 	var competition := []
-	var farms = choose_farms(lanes, bag(lanes, enemy_farms.size()))
+	var farms = choose_farms(lanes, bag(enemy_farms.size()))
 	for f in farms:
 		f = f as Farm
 		competition.append(f.chickens[randi() % f.chickens.size()])
@@ -102,7 +102,7 @@ func choose_farms(lanes, bag_of_indexes)->Array:
 	
 	return farms
 
-func bag(lanes:int, things:int)->Array:
+func bag(things:int)->Array:
 	var bag := []
 	for i in range(things):
 		bag.append(i)
@@ -116,7 +116,8 @@ func add_food(type:int, amount:int, cost:=0):
 func generate_enemy_list()->Array:
 	var e := []
 	var file := File.new()
-	file.open("res://Common/JSON/enemy_chickens.json", File.READ)
+	var err = file.open("res://Common/JSON/enemy_chickens.json", File.READ)
+	if err != OK: push_error("Error opening enemy_chickens.json" + str(err))
 	var content = file.get_as_text()
 	var list_of_farms:Dictionary = JSON.parse(content).result
 	for f_key in list_of_farms.keys():

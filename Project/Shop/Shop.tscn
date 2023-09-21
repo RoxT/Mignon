@@ -1,6 +1,11 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://BG.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Common/AFood.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Shop/Shop.gd" type="Script" id=3]
+[ext_resource path="res://Common/food_basic.png" type="Texture" id=4]
+[ext_resource path="res://Common/food_best.png" type="Texture" id=5]
+[ext_resource path="res://Common/food_good.png" type="Texture" id=6]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 16.0
@@ -12,7 +17,27 @@ bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
 [sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
 
+[sub_resource type="InputEventAction" id=4]
+action = "coop"
+
+[sub_resource type="ShortCut" id=5]
+shortcut = SubResource( 4 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0.168627, 0.168627, 0.168627, 0.639216 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.741176, 0.992157, 0.968627, 0.615686 )
+border_blend = true
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
 [node name="Shop" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="BG" parent="." instance=ExtResource( 1 )]
 
@@ -29,29 +54,66 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 42.0
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/CovertBalconyPen"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_bottom = 322.0
-custom_constants/margin_top = 48
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/CovertBalconyPen/MarginContainer"]
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/CovertBalconyPen"]
 margin_top = 48.0
 margin_right = 1427.0
-margin_bottom = 366.0
+margin_bottom = 191.0
 bbcode_enabled = true
-bbcode_text = "Well [center] Hello"
-text = "Well  Hello"
+bbcode_text = "Food is used at the end of the day when coming back from the racetrack
+Highest quality food is used first"
+text = "Food is used at the end of the day when coming back from the racetrack
+Highest quality food is used first"
 
-[node name="BackyardPen" type="Label" parent="TabContainer"]
+[node name="BackyardPen" type="Control" parent="TabContainer"]
+visible = false
+
+[node name="Unlock" type="Button" parent="TabContainer/BackyardPen"]
+margin_left = 575.0
+margin_top = 180.0
+margin_right = 832.0
+margin_bottom = 274.0
+text = "Unlock for $500"
+
+[node name="Label" type="Label" parent="TabContainer/BackyardPen/Unlock"]
+margin_top = 148.0
+margin_right = 263.0
+margin_bottom = 180.0
+text = "More room for chickens"
+
+[node name="Label" type="Label" parent="TabContainer/BackyardPen"]
+margin_left = 13.0
+margin_top = 115.0
+margin_right = 388.0
+margin_bottom = 147.0
+text = "Food is used at the end of the day when coming back from the racetrack
+Highest quality food is used first
+
+Chickens eat 2 food per day now"
+
+[node name="SmallFarm" type="Control" parent="TabContainer"]
 visible = false
 margin_right = 40.0
 margin_bottom = 32.0
 
-[node name="Small Farm" type="Label" parent="TabContainer"]
-visible = false
-margin_right = 40.0
-margin_bottom = 32.0
+[node name="Unlock" type="Button" parent="TabContainer/SmallFarm"]
+margin_left = 575.0
+margin_top = 180.0
+margin_right = 832.0
+margin_bottom = 274.0
+text = "Unlock for $500"
+
+[node name="Label" type="Label" parent="TabContainer/SmallFarm/Unlock"]
+margin_top = 148.0
+margin_right = 263.0
+margin_bottom = 180.0
+text = "More room for chickens"
+
+[node name="Unknown" type="Label" parent="TabContainer/SmallFarm"]
+margin_left = 575.0
+margin_top = 293.0
+margin_right = 823.0
+margin_bottom = 325.0
+text = "???????????????????"
 
 [node name="Label" type="Label" parent="."]
 margin_left = 681.0
@@ -59,3 +121,104 @@ margin_top = 33.0
 margin_right = 749.0
 margin_bottom = 65.0
 text = "SHOP"
+
+[node name="ToCoop" type="Button" parent="."]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 188.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 0, 48 )
+shortcut = SubResource( 5 )
+text = "TO COOP"
+
+[node name="Money" type="Label" parent="."]
+margin_left = 12.0
+margin_top = 848.0
+margin_right = 162.0
+margin_bottom = 880.0
+focus_next = NodePath("../Reset")
+focus_previous = NodePath("../Race")
+text = "Money: $100"
+
+[node name="BuyBest" type="Button" parent="."]
+margin_left = 21.0
+margin_top = 677.0
+margin_right = 631.0
+margin_bottom = 725.0
+focus_next = NodePath("../Reset")
+focus_previous = NodePath("../Race")
+text = "$10 for 3 - A delicious blend of herbs and insects. "
+icon = ExtResource( 5 )
+
+[node name="BuyGood" type="Button" parent="."]
+margin_left = 21.0
+margin_top = 610.0
+margin_right = 313.0
+margin_bottom = 658.0
+rect_min_size = Vector2( 0, 48 )
+focus_next = NodePath("../Reset")
+focus_previous = NodePath("../Race")
+text = "$5 for 5 - Fine grasses"
+icon = ExtResource( 6 )
+
+[node name="BuyBasic" type="Button" parent="."]
+margin_left = 21.0
+margin_top = 544.0
+margin_right = 460.0
+margin_bottom = 592.0
+rect_min_size = Vector2( 0, 48 )
+focus_next = NodePath("../Reset")
+focus_previous = NodePath("../Race")
+text = "$5 for 10 - Nutritious pellets in bulk"
+icon = ExtResource( 4 )
+
+[node name="Food" type="Label" parent="."]
+margin_left = 12.0
+margin_top = 767.0
+margin_right = 100.0
+margin_bottom = 799.0
+focus_next = NodePath("../Reset")
+focus_previous = NodePath("../Race")
+text = "Food:"
+
+[node name="Panel" type="PanelContainer" parent="Food"]
+margin_left = 7.0
+margin_top = 32.0
+margin_right = 88.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 6 )
+
+[node name="FoodBox" type="HBoxContainer" parent="Food/Panel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 79.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BEST" parent="Food/Panel/FoodBox" instance=ExtResource( 2 )]
+margin_right = 51.0
+margin_bottom = 36.0
+
+[node name="GOOD" parent="Food/Panel/FoodBox" instance=ExtResource( 2 )]
+visible = false
+margin_left = 55.0
+margin_right = 106.0
+margin_bottom = 36.0
+food_type = 1
+
+[node name="BASIC" parent="Food/Panel/FoodBox" instance=ExtResource( 2 )]
+visible = false
+margin_left = 55.0
+margin_right = 106.0
+margin_bottom = 36.0
+food_type = 2
+
+[connection signal="pressed" from="TabContainer/BackyardPen/Unlock" to="." method="_on_UnlockBackyard_pressed"]
+[connection signal="pressed" from="TabContainer/SmallFarm/Unlock" to="." method="_on_UnlockSmallFarm_pressed"]
+[connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
+[connection signal="pressed" from="BuyBest" to="." method="_on_BuyFood_pressed" binds= [ "BEST" ]]
+[connection signal="pressed" from="BuyGood" to="." method="_on_BuyFood_pressed" binds= [ "GOOD" ]]
+[connection signal="pressed" from="BuyBasic" to="." method="_on_BuyFood_pressed" binds= [ "BASIC" ]]
