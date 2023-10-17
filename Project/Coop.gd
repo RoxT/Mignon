@@ -27,6 +27,7 @@ func _ready():
 	else:
 		save_game = AllChickens.new()
 		save_game.save()
+		print("New Game")
 	chicken_stats = save_game.get_all()
 	
 	save_game.temp_racer = null
@@ -151,6 +152,7 @@ func _on_Reset_pressed():
 	get_tree().call_group("meander", "queue_free")
 	save_game = AllChickens.new()
 	save_game.save()
+	_on_Pen_pressed(save_game.pen)
 	_on_New_pressed()
 	update_money()
 	update_food_box()
@@ -302,7 +304,7 @@ func _on_BuyFood_pressed(type:String, cost:int):
 
 
 func _on_Shop_pressed():
-	var shop := "res://Shop/Shop.tscn"
+	var shop := "res://Store/Store.tscn"
 	var err = get_tree().change_scene(shop)
 	match err:
 		 OK: return

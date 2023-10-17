@@ -14,6 +14,7 @@ export(String) var breed
 export(int) var wins
 export(int) var fatigue
 export(int) var age
+var boost := 1.0
 
 
 # Make sure that every parameter has a default value.
@@ -35,7 +36,7 @@ func is_chick()->bool:
 	return age < 2
 
 func get_speed()->int:
-	var s:float = clamp(fatigue * 0.1 * top_speed, 0, top_speed)
+	var s:float = clamp(fatigue * 0.1 * top_speed, 0, top_speed) * boost
 	return top_speed - round(s)
 
 func is_exhausted()->bool:

@@ -20,6 +20,8 @@ func _ready():
 		save_game.save()
 	var first_chicken:Chicken
 	first_chicken = save_game.temp_racer if save_game.temp_racer else save_game.racer
+	first_chicken.boost = save_game.speed_boost
+	save_game.speed_boost = 1.0
 	add_lane(first_chicken)
 	var competition := save_game.get_competition(lane_count-1)
 	for c in competition:
