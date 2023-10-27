@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://chicken/standing_chicken.png" type="Texture" id=1]
+[ext_resource path="res://Test/TestChicken.gd" type="Script" id=2]
+
+[node name="TestChicken" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -55.0
+margin_top = 35.0
+margin_right = 59.0
+margin_bottom = 102.0
+text = "Speed: 300
+Wins: 0
+Rate: 40%"

@@ -98,22 +98,22 @@ func death(value:Chicken):
 func get_competition(lanes:int)->Array:
 	if lanes > enemy_farms.size(): push_error("More lanes than Farms")
 	var competition := []
-	var farms = choose_farms(lanes, bag(enemy_farms.size()))
+	var farms = choose_farms(lanes, bag(enemy_farms.size()), enemy_farms)
 	for f in farms:
 		f = f as Farm
 		competition.append(f.chickens[randi() % f.chickens.size()])
 	return competition
 
-func choose_farms(lanes, bag_of_indexes)->Array:
+static func choose_farms(lanes, bag_of_indexes, enemies)->Array:
 	var farms := []
 	while farms.size() < lanes:
 		var i:int = bag_of_indexes[randi() % bag_of_indexes.size()]
-		farms.append(enemy_farms[i])
+		farms.append(enemies[i])
 		bag_of_indexes.erase(i)
 	
 	return farms
 
-func bag(things:int)->Array:
+static func bag(things:int)->Array:
 	var bag := []
 	for i in range(things):
 		bag.append(i)
@@ -124,7 +124,7 @@ func buy_food(type:int, amount:int, cost:=0):
 	money -= cost
 	save()
 
-func generate_enemy_list()->Array:
+static func generate_enemy_list()->Array:
 	var e := []
 	var file := File.new()
 	var err = file.open("res://Common/JSON/enemy_chickens.json", File.READ)
