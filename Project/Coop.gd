@@ -139,24 +139,9 @@ func update_food_box():
 	food_box.get_node("BASIC").count = save_game.foods[AllChickens.FOOD_TYPES.BASIC]
 	
 func _on_Reset_pressed():
-	selected_dot.get_parent().remove_child(selected_dot)
-	add_child(selected_dot)
-	selected = null
-	mate_dot.get_parent().remove_child(mate_dot)
-	add_child(mate_dot)
-	mate = null
-	racer_label.get_parent().remove_child(racer_label)
-	add_child(racer_label)
-	racer = null
-	
-	get_tree().call_group("meander", "queue_free")
 	save_game = AllChickens.new()
 	save_game.save()
-	_on_Pen_pressed(save_game.pen)
-	_on_New_pressed()
-	update_money()
-	update_food_box()
-	$UI/StatsPanel.show(false)
+	get_tree().change_scene("res://Coop.tscn")
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()

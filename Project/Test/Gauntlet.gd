@@ -1,6 +1,5 @@
 extends Node2D
 
-
 var enemies:Array
 export var total :float= 1000
 
@@ -15,7 +14,7 @@ func _ready():
 func do_runs(chicken):
 	var wins :float= 0
 	var stats :Chicken = chicken.stats
-	stats.top_speed = 260
+	stats.top_speed = 250
 	
 	for _i in range(total):
 		if do_run(stats):

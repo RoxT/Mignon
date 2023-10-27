@@ -13,11 +13,12 @@ export(bool) var speed_boost
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
 const PATH := "user://chickens.tres"
+const YOU := "YOU"
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0):
+func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -123,6 +124,29 @@ func buy_food(type:int, amount:int, cost:=0):
 	foods[type] += amount
 	money -= cost
 	save()
+	
+func generate_mignon()->Array:
+	var new_coop := []
+	var mignon := Chicken.new()
+	mignon.top_speed = 280
+	mignon.colour = Color.white
+	mignon.white = false
+	mignon.breed = "brown"
+	mignon.farm = YOU
+	mignon.nom = "Mignon"
+	new_coop.append(mignon)
+	
+	var one := Chicken.new()
+	one.top_speed = 240
+	one.farm = YOU
+	new_coop.append(one)
+	
+	var two := Chicken.new()
+	two.top_speed = 250
+	two.farm = YOU
+	new_coop.append(two)
+	
+	return new_coop
 
 static func generate_enemy_list()->Array:
 	var e := []
