@@ -39,7 +39,7 @@ func pass_day():
 				0: 
 					fatigue = 2
 					speed_boost = 1.15
-				1: fatigue = 2
+				1: speed_boost = 1.15
 				2: fatigue = 1
 			break
 	for c in all:
@@ -58,7 +58,8 @@ func get_enemy_farms()->Array:
 	return enemy_farms
 	
 static func do_mating(a:Chicken, b:Chicken)->Chicken:
-	return Chicken.new(one_of_two(a, b, "top_speed"), Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "white"), one_of_two(a, b, "farm"), 2, one_of_two(a, b, "breed"))
+	var bonus := rand_range(-2,5)
+	return Chicken.new(one_of_two(a, b, "top_speed")+bonus, Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "white"), one_of_two(a, b, "farm"), 2, one_of_two(a, b, "breed"))
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
 	return [a.get(property), b.get(property)][randi()%2]
