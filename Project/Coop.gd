@@ -7,10 +7,12 @@ onready var racer_label := $RacerLabel
 onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
 onready var mate_dot2 := $MateDot2
-onready var breeding_pos:Vector2 = $PenRect.rect_position + (0.5 * $PenRect.rect_size)
-onready var mating:Timer = $PenRect/Mating
-onready var birthing:Timer = $PenRect/Birthing
+onready var mating_pen := $BreedingPen/PenRect
+onready var breeding_pos:Vector2 = mating_pen.rect_position + (0.5 * $BreedingPen/PenRect.rect_size)
+onready var mating:Timer = $BreedingPen/PenRect/Mating
+onready var birthing:Timer = mating_pen.get_node("Birthing")
 onready var food_box := $UI/Food/Panel/FoodBox
+onready var camera := $Camera2D
 var racer:Node
 var mate:Node
 var mate2:Node
@@ -90,9 +92,14 @@ func _on_Pen_pressed(pen_name:String):
 	pen = get_node("Pens/" + pen_name) as ReferenceRect
 	pen.border_color = Color.greenyellow
 	pen.modulate = Color.white
-	$BG2/TextureRect.texture = load("res://Coop/Grass%s.jpg" % pen_name)
-	$BG2/TextureRect.rect_position = pen.rect_position
+	$TextureRect.texture = load("res://Coop/Grass%s.jpg" % pen_name)
+	$TextureRect.rect_position = pen.rect_position
 	get_tree().set_group("meander", "pen", pen.get_rect())
+	
+	match pen_name:
+		"Starter": camera.zoom = Vector2(0.7, 0.7)
+		"Medium": camera.zoom = Vector2(0.8, 0.8)
+		"Large": camera.zoom = Vector2(1.0, 1.0)
 	
 
 func set_racer(chicken:Node):
@@ -125,7 +132,7 @@ func set_race_text(chicken):
 	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + nom
 	
 func set_can_race():
-	if racer == null or save_game.all.empty() or $PenRect/Birthing.time_left > 0:
+	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0:
 		$UI/Race.disabled = true
 	else:
 		$UI/Race.disabled = false

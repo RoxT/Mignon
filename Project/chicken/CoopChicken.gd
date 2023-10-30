@@ -26,7 +26,7 @@ func _ready():
 	if !stats:
 		set_stats(Chicken.new())
 	set_label()
-	var ren_reference := get_parent().get_node("PenRect") as ReferenceRect
+	var ren_reference := get_parent().get_node("BreedingPen/PenRect") as ReferenceRect
 	breeding_pen = Rect2(ren_reference.rect_position, ren_reference.rect_size)
 	set_process_input(false)
 	if stats.is_chick(): scale = scale/2
@@ -37,7 +37,7 @@ func _input(event:InputEvent):
 		if event is InputEventMouseButton:
 			dragging = event.is_pressed()
 		elif event is InputEventMouseMotion:
-			position = get_viewport().get_mouse_position()
+			position = get_global_mouse_position()
 			
 		
 

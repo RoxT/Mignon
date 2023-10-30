@@ -68,10 +68,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="BG2" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="TextureRect" type="TextureRect" parent="BG2"]
+[node name="TextureRect" type="TextureRect" parent="."]
 margin_left = 12.0
 margin_top = 107.0
 margin_right = 1090.0
@@ -82,30 +79,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Pens" type="CanvasLayer" parent="."]
+[node name="BG2" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Pens" type="Node2D" parent="."]
 
 [node name="Large" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 12.0
-margin_top = 107.0
-margin_right = 1090.0
-margin_bottom = 893.0
+margin_left = 226.0
+margin_top = 243.0
+margin_right = 1304.0
+margin_bottom = 1029.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Position2D" type="Position2D" parent="Pens/Large"]
 position = Vector2( 150, 144 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 298.0
-margin_top = 343.0
-margin_right = 1090.0
-margin_bottom = 893.0
+margin_left = 440.0
+margin_top = 395.0
+margin_right = 1232.0
+margin_bottom = 945.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
@@ -118,8 +115,8 @@ position = Vector2( 115, 108 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 538.0
-margin_top = 646.0
+margin_left = 449.0
+margin_top = 525.0
 margin_right = 1090.0
 margin_bottom = 893.0
 mouse_filter = 2
@@ -132,38 +129,7 @@ __meta__ = {
 [node name="Position2D" type="Position2D" parent="Pens/Starter"]
 position = Vector2( 139, 109 )
 
-[node name="PenRect" type="ReferenceRect" parent="."]
-margin_left = 1096.0
-margin_top = 646.0
-margin_right = 1435.0
-margin_bottom = 896.0
-mouse_filter = 2
-mouse_default_cursor_shape = 2
-border_color = Color( 0.054902, 0.592157, 0.254902, 0.643137 )
-border_width = 3.0
-
-[node name="Mating" type="Timer" parent="PenRect"]
-one_shot = true
-
-[node name="Drop" type="ReferenceRect" parent="PenRect" groups=["drop"]]
-margin_right = 340.0
-margin_bottom = 250.0
-border_color = Color( 1, 0.901961, 0.709804, 1 )
-editor_only = false
-
-[node name="Birthing" type="Timer" parent="PenRect"]
-one_shot = true
-
-[node name="TextureRect" type="TextureRect" parent="PenRect"]
-margin_right = 40.0
-margin_bottom = 40.0
-mouse_filter = 2
-texture = ExtResource( 9 )
-
-[node name="Fence" type="Sprite" parent="."]
-position = Vector2( 1114, 772.5 )
-scale = Vector2( 0.5, 0.658854 )
-texture = ExtResource( 5 )
+[node name="PensCanvas" type="CanvasLayer" parent="."]
 
 [node name="RacerLabel" type="Label" parent="."]
 margin_left = -30.0
@@ -189,11 +155,12 @@ z_index = 5
 texture = ExtResource( 4 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
+position = Vector2( 935, 589 )
 current = true
+zoom = Vector2( 0.8, 0.8 )
 
 [node name="UI" type="CanvasLayer" parent="."]
-layer = 2
+layer = 3
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
 margin_left = 12.0
@@ -401,7 +368,43 @@ margin_right = 269.0
 margin_bottom = 100.0
 texture = ExtResource( 16 )
 
-[connection signal="timeout" from="PenRect/Mating" to="." method="_on_Mating_timeout"]
+[node name="BreedingPen" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="PenRect" type="ReferenceRect" parent="BreedingPen"]
+margin_left = 1096.0
+margin_top = 646.0
+margin_right = 1435.0
+margin_bottom = 896.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+border_color = Color( 0.054902, 0.592157, 0.254902, 0.643137 )
+border_width = 3.0
+
+[node name="Mating" type="Timer" parent="BreedingPen/PenRect"]
+one_shot = true
+
+[node name="Drop" type="ReferenceRect" parent="BreedingPen/PenRect" groups=["drop"]]
+margin_right = 340.0
+margin_bottom = 250.0
+border_color = Color( 1, 0.901961, 0.709804, 1 )
+editor_only = false
+
+[node name="Birthing" type="Timer" parent="BreedingPen/PenRect"]
+one_shot = true
+
+[node name="TextureRect" type="TextureRect" parent="BreedingPen/PenRect"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+
+[node name="Fence" type="TextureRect" parent="BreedingPen/PenRect"]
+margin_right = 34.0
+margin_bottom = 247.0
+texture = ExtResource( 5 )
+expand = true
+
 [connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="UI/Race" to="." method="_on_Race_pressed"]
 [connection signal="pressed" from="UI/New" to="." method="_on_New_pressed"]
@@ -416,3 +419,4 @@ texture = ExtResource( 16 )
 [connection signal="pressed" from="UI/StatsPanel/Edit" to="UI/StatsPanel" method="_on_Edit_pressed"]
 [connection signal="pressed" from="UI/Info" to="." method="_on_Info_pressed"]
 [connection signal="pressed" from="UI/Shop" to="." method="_on_Shop_pressed"]
+[connection signal="timeout" from="BreedingPen/PenRect/Mating" to="." method="_on_Mating_timeout"]
