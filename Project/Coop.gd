@@ -148,7 +148,9 @@ func update_food_box():
 func _on_Reset_pressed():
 	save_game = AllChickens.new()
 	save_game.save()
-	get_tree().change_scene("res://Coop.tscn")
+	var err := get_tree().change_scene("res://Coop.tscn")
+	if err != OK:
+		print("Error reseting game (loading coop)")
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
@@ -303,3 +305,13 @@ func _on_Shop_pressed():
 		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + shop + " path cannot be loaded into a PackedScene")
 		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + shop + " cannot be instantiated.")
 	push_error("Error " + str(err) + "changing to  " + shop + " ")
+
+
+func _on_PettingZoo_pressed():
+	var zoo := "res://PettingZoo/PettingZoo.tscn"
+	var err = get_tree().change_scene(zoo)
+	match err:
+		 OK: return
+		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + zoo + " path cannot be loaded into a PackedScene")
+		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + zoo + " cannot be instantiated.")
+	push_error("Error " + str(err) + "changing to  " + zoo + " ")

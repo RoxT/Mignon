@@ -2,8 +2,8 @@ extends Node2D
 
 var save_game:AllChickens
 const BASIC_PRICE := 1
-const GOOD_PRICE := 5
-const BEST_PRICE := 10
+const GOOD_PRICE := 10
+const BEST_PRICE := 50
 
 const STARTER := "Starter"
 const MEDIUM := "Medium"

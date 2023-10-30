@@ -42,7 +42,7 @@ icon = ExtResource( 2 )
 margin_top = 46.0
 margin_right = 321.0
 margin_bottom = 148.0
-text = " Nutritious pellets in bulk. Chickens recover 1 fatigue."
+text = "Nutritious pellets in bulk. Chickens recover 1 fatigue."
 autowrap = true
 
 [node name="BuyGood" type="Button" parent="."]
@@ -50,7 +50,7 @@ margin_left = 1081.0
 margin_top = 220.0
 margin_right = 1402.0
 margin_bottom = 256.0
-text = "Buy $5"
+text = "Buy $10"
 icon = ExtResource( 3 )
 
 [node name="BuyGoodL" type="Label" parent="BuyGood"]
@@ -65,7 +65,7 @@ margin_left = 1081.0
 margin_top = 354.0
 margin_right = 1402.0
 margin_bottom = 390.0
-text = "Buy $10"
+text = "Buy $50"
 icon = ExtResource( 4 )
 
 [node name="BuyBestL" type="Label" parent="BuyBest"]
@@ -110,7 +110,7 @@ margin_left = 209.0
 margin_top = 805.0
 margin_right = 1018.0
 margin_bottom = 872.0
-text = "Chickens eat one unit of food per day/race. They always eat the best available first. \"One unit\" is more expensive on larger farms"
+text = "Food is sold in bundles big enough to feed your chickens for one day. They will always eat the best food you have first."
 align = 1
 autowrap = true
 
@@ -188,6 +188,7 @@ margin_left = 1081.0
 margin_top = 732.0
 margin_right = 1359.0
 margin_bottom = 768.0
+disabled = true
 text = "Upgrade Pen $100"
 
 [connection signal="pressed" from="BuyBasic" to="." method="_on_BuyBasic_pressed"]

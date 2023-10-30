@@ -23,8 +23,6 @@ signal unclicked(chicken)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	label.hide()
-	if !stats:
-		set_stats(Chicken.new())
 	set_label()
 	var ren_reference := get_parent().get_node("BreedingPen/PenRect") as ReferenceRect
 	breeding_pen = Rect2(ren_reference.rect_position, ren_reference.rect_size)
