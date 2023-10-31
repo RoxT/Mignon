@@ -94,7 +94,7 @@ mouse_filter = 2
 mouse_default_cursor_shape = 2
 
 [node name="Position2D" type="Position2D" parent="Pens/Large"]
-position = Vector2( 252, 202 )
+position = Vector2( 0, 58 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
@@ -109,7 +109,7 @@ __meta__ = {
 }
 
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
-position = Vector2( 115, 108 )
+position = Vector2( 0, 72 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
@@ -124,7 +124,7 @@ __meta__ = {
 }
 
 [node name="Position2D" type="Position2D" parent="Pens/Starter"]
-position = Vector2( 139, 109 )
+position = Vector2( 331, 181 )
 
 [node name="PensCanvas" type="CanvasLayer" parent="."]
 
@@ -154,6 +154,7 @@ texture = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 935, 589 )
 current = true
+zoom = Vector2( 0.8, 0.8 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
@@ -351,6 +352,7 @@ rect_min_size = Vector2( 0, 48 )
 text = "Shop"
 
 [node name="PettingZoo" type="Button" parent="UI"]
+visible = false
 margin_left = 143.0
 margin_top = 118.0
 margin_right = 296.0

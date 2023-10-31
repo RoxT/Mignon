@@ -140,7 +140,7 @@ func _on_Reset_pressed():
 	if err != OK:
 		print("Error reseting game (loading coop)")
 
-func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2(100, 100)):
+func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2(pen.rect_position.x, pen.rect_position.y)):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
 	new_chicken.stats = stats
