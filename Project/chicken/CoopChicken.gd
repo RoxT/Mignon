@@ -6,8 +6,9 @@ onready var rest := $Rest
 
 onready var window_width:int = ProjectSettings.get_setting("display/window/size/width")
 onready var window_height:int = ProjectSettings.get_setting("display/window/size/height")
-onready var breeding_pen:Rect2
-var pen:Rect2 setget set_pen
+var breeding_pen:Rect2
+var pen:Rect2
+var zoom:float
 
 var breeding := false setget set_breeding
 var birthing := false
@@ -65,14 +66,7 @@ func wait():
 	target = null
 	rest.start(rand_range(0.5, 2))
 	set_process(false)
-	play("stand")	
-	
-func set_pen(value:Rect2):
-	pen = value
-	if not breeding:
-		if !pen.has_point(position):
-			position = get_pen_target()
-	target = null
+	play("stand")
 
 func get_pen_target()->Vector2:
 	var x := clamp(random_meander(position.x), pen.position.x + 32, pen.end.x-32)
@@ -80,9 +74,18 @@ func get_pen_target()->Vector2:
 	return Vector2(x, y)
 
 func get_breeding_pen_target()->Vector2:
-	var x := rand_range(breeding_pen.position.x+32, breeding_pen.position.x + breeding_pen.size.x-32)
-	var y := rand_range(breeding_pen.position.y+32, breeding_pen.position.y + breeding_pen.size.y-32)
+	var projected_pen := get_projected_pen()
+	var x := rand_range(projected_pen.position.x,projected_pen.end.x)
+	var y := rand_range(projected_pen.position.y, projected_pen.end.y)
 	return Vector2(x, y)
+	
+func get_projected_pen()->Rect2:
+	var p := Vector2(pen.end.x, pen.end.y-breeding_pen.size.y*zoom)
+	var s := breeding_pen.size*zoom
+	return Rect2(p, s)
+	
+func get_width()->int:
+	return frames.get_frame(animation, frame).get_width()
 
 func random_meander(pos:float)->float:
 	return rand_range(pos-600, pos+600)

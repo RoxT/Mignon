@@ -49,7 +49,7 @@ func get_bracket()->String:
 
 func _random_speed()->int:
 	randomize()
-	return randi() % (HIGH_SPEED-LOW_SPEED) + LOW_SPEED
+	return randi() % (HIGH_SPEED-100-LOW_SPEED) + LOW_SPEED
 
 static func random_name()->String:
 	return EnemyChickens.get_random_nom()

@@ -1,15 +1,23 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Coop/GrassLarge.jpg" type="Texture" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
 [ext_resource path="res://chicken/portraits/rooster.jpg" type="Texture" id=3]
+[ext_resource path="res://PettingZoo/peon_child.png" type="Texture" id=4]
 [ext_resource path="res://PettingZoo/PettingZoo.gd" type="Script" id=5]
+[ext_resource path="res://PettingZoo/peon_adult.png" type="Texture" id=6]
+[ext_resource path="res://PettingZoo/PeonChild.gd" type="Script" id=7]
 
 [sub_resource type="InputEventAction" id=5]
 action = "coop"
 
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
+
+[sub_resource type="CircleShape2D" id=7]
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 99.0454
 
 [node name="PettingZoo" type="Node2D"]
 script = ExtResource( 5 )
@@ -119,4 +127,35 @@ rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 6 )
 text = "TO COOP"
 
+[node name="PeonAdult" type="Sprite" parent="."]
+position = Vector2( 706, 507 )
+texture = ExtResource( 6 )
+
+[node name="PeonChild" type="KinematicBody2D" parent="."]
+position = Vector2( 486, 453 )
+collision_layer = 2
+collision_mask = 2
+input_pickable = true
+script = ExtResource( 7 )
+
+[node name="PeonChild" type="Sprite" parent="PeonChild"]
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PeonChild"]
+visible = false
+shape = SubResource( 7 )
+
+[node name="ChickenSearch" type="Area2D" parent="PeonChild"]
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PeonChild/ChickenSearch"]
+shape = SubResource( 8 )
+
+[node name="Line2D" type="Line2D" parent="PeonChild"]
+
+[node name="Label" type="Label" parent="PeonChild"]
+margin_right = 40.0
+margin_bottom = 32.0
+
 [connection signal="pressed" from="UI/ToCoop" to="." method="_on_ToCoop_pressed"]
+[connection signal="area_entered" from="PeonChild/ChickenSearch" to="PeonChild" method="_on_ChickenSearch_area_entered"]

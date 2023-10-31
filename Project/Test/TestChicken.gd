@@ -2,7 +2,7 @@ extends Sprite
 
 
 var stats : Chicken
-const t := "Speed: %s\nWins: %s\nRatio: %s"
+const t := "Speed: %s\nWins: %s\nRatio: %s%%"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

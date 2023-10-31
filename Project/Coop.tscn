@@ -92,12 +92,9 @@ margin_right = 1304.0
 margin_bottom = 1029.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Position2D" type="Position2D" parent="Pens/Large"]
-position = Vector2( 150, 144 )
+position = Vector2( 252, 202 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
@@ -116,10 +113,10 @@ position = Vector2( 115, 108 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 449.0
-margin_top = 525.0
-margin_right = 1090.0
-margin_bottom = 893.0
+margin_left = 552.0
+margin_top = 535.0
+margin_right = 1193.0
+margin_bottom = 903.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 __meta__ = {
@@ -157,7 +154,6 @@ texture = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 935, 589 )
 current = true
-zoom = Vector2( 0.8, 0.8 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
@@ -408,7 +404,7 @@ mouse_filter = 2
 texture = ExtResource( 9 )
 
 [node name="Fence" type="TextureRect" parent="BreedingPen/PenRect"]
-margin_right = 34.0
+margin_right = 19.0
 margin_bottom = 247.0
 texture = ExtResource( 5 )
 expand = true

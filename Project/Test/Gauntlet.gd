@@ -2,6 +2,7 @@ extends Node2D
 
 var enemies:Array
 export var total :float= 1000
+export var my_speed := 350
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +15,7 @@ func _ready():
 func do_runs(chicken):
 	var wins :float= 0
 	var stats :Chicken = chicken.stats
-	stats.top_speed = 250
+	stats.top_speed = my_speed
 	
 	for _i in range(total):
 		if do_run(stats):

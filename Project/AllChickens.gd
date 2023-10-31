@@ -31,19 +31,22 @@ func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_dea
 		
 func pass_day():
 	speed_boost = 1
-	var fatigue := 0
+	var recovery := 0
 	for i in range(foods.size()):
 		if foods[i] > 0:
 			foods[i] -= 1
 			match i:
 				0: 
-					fatigue = 2
+					recovery = 2
 					speed_boost = 1.15
-				1: speed_boost = 1.15
-				2: fatigue = 1
+				1: 
+					recovery = 1
+					speed_boost = 1.15
+				2: 
+					recovery = 1
 			break
 	for c in all:
-		c.fatigue = max(c.fatigue-fatigue, 0)
+		c.fatigue = max(c.fatigue-recovery, 0)
 		c.age += 1
 	save()
 

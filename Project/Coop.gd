@@ -8,7 +8,6 @@ onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
 onready var mate_dot2 := $MateDot2
 onready var mating_pen := $BreedingPen/PenRect
-onready var breeding_pos:Vector2 = mating_pen.rect_position + (0.5 * $BreedingPen/PenRect.rect_size)
 onready var mating:Timer = $BreedingPen/PenRect/Mating
 onready var birthing:Timer = mating_pen.get_node("Birthing")
 onready var food_box := $UI/Food/Panel/FoodBox
@@ -32,27 +31,35 @@ func _ready():
 		print("New Game")
 	chicken_stats = save_game.get_all()
 	
+	pen = get_node("Pens/" + save_game.pen) as ReferenceRect
+	pen.border_color = Color.greenyellow
+	pen.modulate = Color.white
+	$TextureRect.texture = load("res://Coop/Grass%s.jpg" % save_game.pen)
+	$TextureRect.rect_position = pen.rect_position
+	
+	match save_game.pen:
+		"Starter": camera.zoom = Vector2(0.7, 0.7)
+		"Medium": camera.zoom = Vector2(0.8, 0.8)
+		"Large": camera.zoom = Vector2(1.0, 1.0)
+	
 	save_game.temp_racer = null
 	var marked
-	if chicken_stats.empty():
-		_on_Pen_pressed(save_game.pen)
-		_on_New_pressed()
-		marked = $Chicken
-	else:
-		for stats in chicken_stats:
-			var chicken = preload("res://chicken/CoopChicken.tscn").instance()
-			chicken.stats = stats
-			add_child(chicken)
-			chicken.position = Vector2(rand_range(0, 256), rand_range(0, 256))
-			chicken.connect("clicked", self, "_on_chicken_clicked")
-			chicken.connect("unclicked", self, "_on_chicken_unclicked")
-			if save_game.racer == stats || !marked:
-				marked = chicken
+	for stats in chicken_stats:
+		var chicken = preload("res://chicken/CoopChicken.tscn").instance()
+		chicken.stats = stats
+		add_child(chicken)
+		var bottom = pen.get_end().y + 16*camera.zoom.y
+		chicken.position = Vector2(943, bottom)
+		chicken.connect("clicked", self, "_on_chicken_clicked")
+		chicken.connect("unclicked", self, "_on_chicken_unclicked")
+		if save_game.racer == stats || !marked:
+			marked = chicken
+		chicken.pen = Rect2(pen.rect_position, pen.rect_size)
+		chicken.zoom = camera.zoom.x
 		
 	set_racer(marked)
 	update_money()
 	update_food_box()
-	_on_Pen_pressed(save_game.pen)
 	
 	#$Race.call_deferred("grab_focus")
 
@@ -82,25 +89,6 @@ func _on_chicken_unclicked(chicken:Node):
 			break
 	get_tree().call_group("drop", "hide")
 	set_race_text(racer)
-
-func _on_Pen_pressed(pen_name:String):
-	save_game.pen = pen_name
-	save_game.save()
-	if pen:
-		pen.border_color = Color.red
-		pen.modulate = Color("7fffffff")
-	pen = get_node("Pens/" + pen_name) as ReferenceRect
-	pen.border_color = Color.greenyellow
-	pen.modulate = Color.white
-	$TextureRect.texture = load("res://Coop/Grass%s.jpg" % pen_name)
-	$TextureRect.rect_position = pen.rect_position
-	get_tree().set_group("meander", "pen", pen.get_rect())
-	
-	match pen_name:
-		"Starter": camera.zoom = Vector2(0.7, 0.7)
-		"Medium": camera.zoom = Vector2(0.8, 0.8)
-		"Large": camera.zoom = Vector2(1.0, 1.0)
-	
 
 func set_racer(chicken:Node):
 	if not valid_adult_chicken(chicken):
@@ -152,7 +140,7 @@ func _on_Reset_pressed():
 	if err != OK:
 		print("Error reseting game (loading coop)")
 
-func _on_New_pressed(stats:= Chicken.new(), new_pos:=pen.get_node("Position2D").position):
+func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2(100, 100)):
 	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
 	new_chicken.stats = stats
@@ -191,7 +179,9 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = chicken
 		mate.add_child(mate_dot)
-		mate.position = breeding_pos + Vector2(-64, 0)
+		var projected_center:Vector2 = chicken.get_projected_pen().get_center()
+		var projected_width:int = 32*camera.zoom.x
+		mate.position = Vector2(projected_center.x+projected_width*2, projected_center.y)
 		mate.breeding = true
 		mate.wait()
 	elif mate == chicken:
@@ -203,7 +193,9 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		mate_dot2.get_parent().remove_child(mate_dot2)
 		mate2 = chicken
 		mate2.add_child(mate_dot2)
-		mate2.position = breeding_pos + Vector2(64, 0)
+		var projected_center:Vector2 = chicken.get_projected_pen().get_center()
+		var projected_width:int = 32*camera.zoom.x
+		mate2.position = Vector2(projected_center.x-projected_width*2, projected_center.y)
 		mate2.breeding = true
 		mate2.wait()
 	elif mate2 == chicken:
@@ -212,7 +204,7 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		remove_dot(mate_dot2)
 		mate2 = null
 	if mate and mate2:
-		mating.start(rand_range(5, 10))
+		mating.start(rand_range(4, 8))
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 
 func remove_dot(dot:Node):
@@ -229,7 +221,7 @@ func _on_Mating_timeout():
 		egg.position = mate2.position
 	var err := birthing.connect("timeout", self, "_on_Birthing_timeout", [egg])
 	if err != OK: push_error("err connecting " + str(err))
-	birthing.start(rand_range(10, 20))
+	birthing.start(rand_range(5, 8))
 	mate.birthing = true
 	mate2.birthing = true
 	if selected == mate or selected == mate2: 

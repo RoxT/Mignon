@@ -111,7 +111,7 @@ func get_price()->int:
 	var tired = 1-(stats.fatigue * 0.05)
 	if stats.wins == 0:
 		return int(5 * tired)
-	return 5 + int((stats.wins * 5) * tired)
+	return 5 + int((stats.wins * 10) * tired)
 
 func _on_Sell_pressed():
 	emit_signal("sell_requested", get_price())

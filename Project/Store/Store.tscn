@@ -57,14 +57,14 @@ icon = ExtResource( 3 )
 margin_top = 46.0
 margin_right = 321.0
 margin_bottom = 79.0
-text = "Fine grasses. Chickens recover 2 fatigue."
+text = "Fine grasses. Chickens recover 1 fatigue and gain a small speed boot next race"
 autowrap = true
 
 [node name="BuyBest" type="Button" parent="."]
 margin_left = 1081.0
-margin_top = 354.0
+margin_top = 400.0
 margin_right = 1402.0
-margin_bottom = 390.0
+margin_bottom = 436.0
 text = "Buy $50"
 icon = ExtResource( 4 )
 
@@ -75,7 +75,7 @@ margin_bottom = 115.0
 text = "A delicious blend of herbs and insects. Chickens recover 2 fatigue and gain a small speed boost next race."
 autowrap = true
 
-[node name="Label" type="Label" parent="."]
+[node name="FoodTitle" type="Label" parent="."]
 margin_left = 1081.0
 margin_top = 42.0
 margin_right = 1359.0
@@ -83,29 +83,34 @@ margin_bottom = 74.0
 text = "FOOD"
 align = 1
 
-[node name="Label2" type="Label" parent="."]
+[node name="Farm" type="Label" parent="."]
 margin_left = 1081.0
-margin_top = 617.0
+margin_top = 664.0
 margin_right = 1359.0
-margin_bottom = 649.0
+margin_bottom = 696.0
 text = "FARM"
 align = 1
 
-[node name="Current" type="Label" parent="."]
-margin_left = 1081.0
-margin_top = 659.0
-margin_right = 1402.0
-margin_bottom = 694.0
+[node name="Current" type="Label" parent="Farm"]
+margin_top = 46.0
+margin_right = 321.0
+margin_bottom = 81.0
 text = "Current: Covert Balcony pen"
 
-[node name="Next" type="Label" parent="."]
-margin_left = 1081.0
-margin_top = 690.0
-margin_right = 1402.0
-margin_bottom = 732.0
+[node name="Next" type="Label" parent="Farm"]
+margin_top = 77.0
+margin_right = 321.0
+margin_bottom = 119.0
 text = "Next: Small Farm pen"
 
-[node name="Label3" type="Label" parent="."]
+[node name="Upgrade" type="Button" parent="Farm"]
+margin_top = 119.0
+margin_right = 278.0
+margin_bottom = 155.0
+disabled = true
+text = "Upgrade Pen $100"
+
+[node name="InfoLabel" type="Label" parent="."]
 margin_left = 209.0
 margin_top = 805.0
 margin_right = 1018.0
@@ -183,16 +188,8 @@ margin_right = 106.0
 margin_bottom = 36.0
 food_type = 2
 
-[node name="Upgrade" type="Button" parent="."]
-margin_left = 1081.0
-margin_top = 732.0
-margin_right = 1359.0
-margin_bottom = 768.0
-disabled = true
-text = "Upgrade Pen $100"
-
 [connection signal="pressed" from="BuyBasic" to="." method="_on_BuyBasic_pressed"]
 [connection signal="pressed" from="BuyGood" to="." method="_on_BuyGood_pressed"]
 [connection signal="pressed" from="BuyBest" to="." method="_on_BuyBest_pressed"]
+[connection signal="pressed" from="Farm/Upgrade" to="." method="_on_Upgrade_pressed"]
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
-[connection signal="pressed" from="Upgrade" to="." method="_on_Upgrade_pressed"]

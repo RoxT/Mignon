@@ -68,8 +68,8 @@ func refresh_UI():
 	$BuyGood.text = "Buy $" + str(GOOD_PRICE*multiplier())
 	$BuyBest.text = "Buy $" + str(BEST_PRICE*multiplier())
 	
-	var current:Label = $Current
-	var next:Label = $Next
+	var current:Label = $Farm/Current
+	var next:Label = $Farm/Next
 	match save_game.pen:
 		"Starter":
 			current.text = CURRENT + "Covert Balcony Pen"
@@ -81,7 +81,7 @@ func refresh_UI():
 			current.text = CURRENT + "Large Farm Pen"
 			next.text = ""
 	
-	var upgrade:Button = $Upgrade
+	var upgrade:Button = $Farm/Upgrade
 	match save_game.pen:
 		"Starter":
 			upgrade.text = "Upgrade Farm $" + str(MEDIUM_PRICE*multiplier())
