@@ -56,37 +56,6 @@ Once the egg is dropped, you will not be able to leave the farm (race) or distur
 
 Pens: Tap the name of a pen to move all chickens there. In the future, you will have to use your hard earned racing money to move to a bigger pen. "
 
-[node name="RichTextLabel2" type="RichTextLabel" parent="Border/Panel"]
-margin_left = 23.0
-margin_top = 17.0
-margin_right = 1055.0
-margin_bottom = 621.0
-bbcode_enabled = true
-bbcode_text = "[center]HOW TO PLAY MIGNON ALPHA[/center]
-
-RESET:  New game, new chickens
-NEW CHICKEN: Random new chicken
-RACE: Pay to enter race. Tap the button to race the default racer or drag a chicken onto the button to race it
-
-Stats: Tap a chicken to see it's portrait and stats. You can make it the defaut racer or put it in the breeding pen
-
-Breeding: Drag a chicken into the breeding pen in the bottom right or tap Breed from its portrait. Once 2 chickens are in the pen they will start breeding. 
-Once the egg is dropped, you will not be able to leave the farm (race) or disturb the parents until it hatches. The parents will automatically return to the regular pen after (some are slow). 
-
-Pens: Tap the name of a pen to move all chickens there. In the future, you will have to use your hard earned racing money to move to a bigger pen. "
-text = "HOW TO PLAY MIGNON ALPHA
-
-RESET:  New game, new chickens
-NEW CHICKEN: Random new chicken
-RACE: Pay to enter race. Tap the button to race the default racer or drag a chicken onto the button to race it
-
-Stats: Tap a chicken to see it's portrait and stats. You can make it the defaut racer or put it in the breeding pen
-
-Breeding: Drag a chicken into the breeding pen in the bottom right or tap Breed from its portrait. Once 2 chickens are in the pen they will start breeding. 
-Once the egg is dropped, you will not be able to leave the farm (race) or disturb the parents until it hatches. The parents will automatically return to the regular pen after (some are slow). 
-
-Pens: Tap the name of a pen to move all chickens there. In the future, you will have to use your hard earned racing money to move to a bigger pen. "
-
 [node name="Okay" type="Button" parent="Border/Panel"]
 anchor_top = 1.0
 anchor_right = 1.0

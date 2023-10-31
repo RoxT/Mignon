@@ -252,8 +252,8 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	
 func _on_Info_pressed():
 	var modal = load("res://Common/ModalBig.tscn").instance()
-	modal.set_text(modal.HELP)
 	add_child(modal)
+	modal.set_text(modal.HELP)
 
 
 func _on_StatsPanel_sell_requested(price:int):
