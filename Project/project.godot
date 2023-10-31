@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="Mignon"
 run/main_scene="res://Coop.tscn"
-config/icon="res://chicken_icon.webp"
+config/icon="res://android/chicken_icon.webp"
 
 [display]
 
