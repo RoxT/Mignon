@@ -1,12 +1,10 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Coop/GrassLarge.jpg" type="Texture" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
 [ext_resource path="res://chicken/portraits/rooster.jpg" type="Texture" id=3]
-[ext_resource path="res://PettingZoo/peon_child.png" type="Texture" id=4]
 [ext_resource path="res://PettingZoo/PettingZoo.gd" type="Script" id=5]
-[ext_resource path="res://PettingZoo/peon_adult.png" type="Texture" id=6]
-[ext_resource path="res://PettingZoo/PeonChild.gd" type="Script" id=7]
+[ext_resource path="res://Coop/street_view.jpg" type="Texture" id=8]
 
 [sub_resource type="InputEventAction" id=5]
 action = "coop"
@@ -14,13 +12,16 @@ action = "coop"
 [sub_resource type="ShortCut" id=6]
 shortcut = SubResource( 5 )
 
-[sub_resource type="CircleShape2D" id=7]
-
-[sub_resource type="CircleShape2D" id=8]
-radius = 99.0454
-
 [node name="PettingZoo" type="Node2D"]
 script = ExtResource( 5 )
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+margin_left = -312.0
+margin_top = -113.0
+margin_right = 766.0
+margin_bottom = 673.0
+mouse_filter = 2
+texture = ExtResource( 8 )
 
 [node name="Pens" type="Node2D" parent="."]
 
@@ -33,6 +34,9 @@ margin_bottom = 797.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="Pens/Large"]
 position = Vector2( 150, 144 )
@@ -46,6 +50,9 @@ margin_bottom = 657.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
 position = Vector2( 115, 108 )
@@ -127,35 +134,24 @@ rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 6 )
 text = "TO COOP"
 
-[node name="PeonAdult" type="Sprite" parent="."]
-position = Vector2( 706, 507 )
-texture = ExtResource( 6 )
+[node name="AdmissionsLabel" type="Label" parent="UI"]
+margin_left = 38.0
+margin_top = 832.0
+margin_right = 215.0
+margin_bottom = 864.0
+text = "Admissions: $"
 
-[node name="PeonChild" type="KinematicBody2D" parent="."]
-position = Vector2( 486, 453 )
-collision_layer = 2
-collision_mask = 2
-input_pickable = true
-script = ExtResource( 7 )
+[node name="Admissions" type="Label" parent="UI"]
+margin_left = 203.0
+margin_top = 832.0
+margin_right = 364.0
+margin_bottom = 864.0
+text = "0"
 
-[node name="PeonChild" type="Sprite" parent="PeonChild"]
-texture = ExtResource( 4 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PeonChild"]
-visible = false
-shape = SubResource( 7 )
-
-[node name="ChickenSearch" type="Area2D" parent="PeonChild"]
-input_pickable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PeonChild/ChickenSearch"]
-shape = SubResource( 8 )
-
-[node name="Line2D" type="Line2D" parent="PeonChild"]
-
-[node name="Label" type="Label" parent="PeonChild"]
-margin_right = 40.0
-margin_bottom = 32.0
+[node name="Start" type="Timer" parent="."]
+wait_time = 2.5
+one_shot = true
+autostart = true
 
 [connection signal="pressed" from="UI/ToCoop" to="." method="_on_ToCoop_pressed"]
-[connection signal="area_entered" from="PeonChild/ChickenSearch" to="PeonChild" method="_on_ChickenSearch_area_entered"]
+[connection signal="timeout" from="Start" to="." method="_on_Start_timeout"]

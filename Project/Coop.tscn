@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://BG.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
@@ -6,11 +6,12 @@
 [ext_resource path="res://chicken/mate_tag.png" type="Texture" id=4]
 [ext_resource path="res://Coop/fence.png" type="Texture" id=5]
 [ext_resource path="res://Coop.gd" type="Script" id=6]
-[ext_resource path="res://Coop/GrassLarge.jpg" type="Texture" id=7]
+[ext_resource path="res://Coop/street_view.jpg" type="Texture" id=7]
 [ext_resource path="res://chicken/racer_tag.png" type="Texture" id=8]
 [ext_resource path="res://Coop/BreedingPen.jpg" type="Texture" id=9]
 [ext_resource path="res://Common/info.png" type="Texture" id=10]
 [ext_resource path="res://Common/button/edit.png" type="Texture" id=11]
+[ext_resource path="res://Coop/GrassMedium.jpg" type="Texture" id=12]
 [ext_resource path="res://Common/AFood.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Coop/title.png" type="Texture" id=16]
 
@@ -68,16 +69,28 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_left = 12.0
-margin_top = 107.0
-margin_right = 1090.0
-margin_bottom = 893.0
-mouse_filter = 2
+[node name="street_view" type="TextureRect" parent="BG"]
+visible = false
+margin_left = 535.0
+margin_top = 10.0
+margin_right = 1990.0
+margin_bottom = 907.0
 texture = ExtResource( 7 )
-__meta__ = {
-"_edit_lock_": true
-}
+
+[node name="building_view" type="TextureRect" parent="BG"]
+margin_left = -294.0
+margin_top = 72.0
+margin_right = 784.0
+margin_bottom = 858.0
+texture = ExtResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 296.0
+margin_top = 348.0
+margin_right = 1374.0
+margin_bottom = 1134.0
+mouse_filter = 2
+texture = ExtResource( 12 )
 
 [node name="BG2" type="CanvasLayer" parent="."]
 layer = -1
@@ -92,6 +105,9 @@ margin_right = 1304.0
 margin_bottom = 1029.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="Pens/Large"]
 position = Vector2( 0, 58 )
@@ -276,7 +292,7 @@ mouse_filter = 2
 script = ExtResource( 2 )
 
 [node name="Portrait" type="Sprite" parent="UI/StatsPanel"]
-position = Vector2( 148.5, 195.672 )
+position = Vector2( 148.5, 185.672 )
 scale = Vector2( 0.201642, 0.201642 )
 texture = ExtResource( 3 )
 
@@ -295,13 +311,14 @@ max_length = 17
 
 [node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
 margin_left = 38.0
-margin_top = 340.0
+margin_top = 329.0
 margin_right = 290.0
-margin_bottom = 520.0
+margin_bottom = 509.0
 text = "Breed: brown
 Wins: 5 
 Fatigue: 3
 5 days old
+Speed:  400
 "
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
@@ -352,13 +369,28 @@ rect_min_size = Vector2( 0, 48 )
 text = "Shop"
 
 [node name="PettingZoo" type="Button" parent="UI"]
-visible = false
 margin_left = 143.0
 margin_top = 118.0
 margin_right = 296.0
 margin_bottom = 166.0
 rect_min_size = Vector2( 0, 48 )
 text = "Petting Zoo"
+
+[node name="LeagueRace" type="Button" parent="UI"]
+margin_left = 332.0
+margin_top = 118.0
+margin_right = 485.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 0, 48 )
+text = "League Race"
+
+[node name="Diary" type="Button" parent="UI"]
+margin_left = 521.0
+margin_top = 118.0
+margin_right = 674.0
+margin_bottom = 166.0
+rect_min_size = Vector2( 0, 48 )
+text = "Diary"
 
 [node name="Blahg" type="Panel" parent="UI"]
 margin_left = -32.0
@@ -426,4 +458,6 @@ expand = true
 [connection signal="pressed" from="UI/Info" to="." method="_on_Info_pressed"]
 [connection signal="pressed" from="UI/Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="UI/PettingZoo" to="." method="_on_PettingZoo_pressed"]
+[connection signal="pressed" from="UI/LeagueRace" to="." method="_on_LeagueRace_pressed"]
+[connection signal="pressed" from="UI/Diary" to="." method="_on_Diary_pressed"]
 [connection signal="timeout" from="BreedingPen/PenRect/Mating" to="." method="_on_Mating_timeout"]

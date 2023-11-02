@@ -9,6 +9,7 @@ export(int) var deaths
 export(String) var pen
 export(Array) var foods
 export(bool) var speed_boost
+export(bool) var has_day1
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -18,7 +19,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0):
+func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -28,6 +29,7 @@ func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_dea
 	enemy_farms = new_enemy_farms
 	foods = new_foods
 	speed_boost = new_speed_boost
+	has_day1 = new_has_day1
 		
 func pass_day():
 	speed_boost = 1

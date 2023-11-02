@@ -15,12 +15,13 @@ export(int) var wins
 export(int) var fatigue
 export(int) var age
 var boost := 1.0
+export(float)var speed_guess setget set_speed_guess
 
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_white:=_random_white(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=2):
+func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_white:=_random_white(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=2, new_speed_guess=-1.0):
 	top_speed = new_top_speed
 	nom = new_nom
 	wins = new_wins
@@ -31,16 +32,22 @@ func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 
 	breed = new_breed
 	if breed == "white": white = true
 	age = new_age
+	speed_guess = new_speed_guess
 
 func is_chick()->bool:
 	return age < 2
 
 func get_speed()->int:
-	var s:float = clamp(fatigue * 0.1 * top_speed, 0, top_speed) * boost
-	return top_speed - round(s)
+	
+	var entropy:float = 1.0 - fatigue*0.1
+	return top_speed * entropy * boost
 
 func is_exhausted()->bool:
 	return fatigue >= 3 and get_speed() <= LOW_SPEED
+	
+func set_speed_guess(value:float):
+	if speed_guess == top_speed: return
+	speed_guess = value
 
 func get_bracket()->String:
 	if top_speed < 200: return "poor"
@@ -62,7 +69,7 @@ func _random_colour()->Color:
 	return c
 	
 func _random_white()->bool:
-	return randi() % 5 == 0
+	return randi() % 4 == 0
 	
 func _random_breed()->String:
 	return breeds[randi() % breeds.size()]

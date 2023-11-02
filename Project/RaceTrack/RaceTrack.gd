@@ -8,6 +8,7 @@ const lane_count := 4
 const winnings := 50
 var track := 0
 var has_tired := false
+var speed_guess := -1
 
 var save_game:AllChickens
 
@@ -21,7 +22,9 @@ func _ready():
 	var first_chicken:Chicken
 	first_chicken = save_game.temp_racer if save_game.temp_racer else save_game.racer
 	first_chicken.boost = save_game.speed_boost
+	speed_guess = first_chicken.get_speed()
 	save_game.speed_boost = 1.0
+
 	add_lane(first_chicken)
 	var competition := save_game.get_competition(lane_count-1)
 	for c in competition:
@@ -55,6 +58,7 @@ func _on_racer_finished():
 	if not has_tired:
 		your_chicken.stats.fatigue += 2
 	has_tired = true
+	your_chicken.stats.speed_guess = speed_guess
 	save_game.save()
 	get_tree().call_group("Lane", "update_wins")
 	$ToCoop.disabled = false

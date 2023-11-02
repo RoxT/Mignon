@@ -1,0 +1,35 @@
+[gd_scene format=2]
+
+[node name="League" type="Node2D"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_left = 109.0
+margin_top = 33.0
+margin_right = 1321.0
+margin_bottom = 819.0
+
+[node name="Label" type="Label" parent="Panel"]
+visible = false
+margin_right = 1212.0
+margin_bottom = 86.0
+text = "WELCOME TO BRONZE LEAGUE"
+align = 1
+valign = 1
+
+[node name="Label2" type="Label" parent="Panel"]
+visible = false
+margin_top = 86.0
+margin_right = 1212.0
+margin_bottom = 786.0
+text = "Three days of races, if you want to win you must win them all.
+
+ "
+
+[node name="Diary" type="Label" parent="Panel"]
+margin_top = 86.0
+margin_right = 1212.0
+margin_bottom = 786.0
+text = "Dear Diary,
+I'm really doing it. My cousin got me three racing chickens. I put down some turf and straw on the balcony of my apartment and put up a flag so you can't see them from the street. I found a great website, ChickenWeb, about rasing and racing them. I drove out to the farm store for food and they gave me a sample pack of 5 days of their specialty grasses. 
+The fastest chicken I got  is Mignon. My cousin said she's the offspring of a chicken from the famous Vanchokens racing farm that didn't meet expectations so she was cheap. There's a race every day, I guess Ill see how she does!"
+autowrap = true

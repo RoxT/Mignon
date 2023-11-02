@@ -1,0 +1,127 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
+
+[node name="Browser" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 220.0
+margin_top = 31.0
+margin_right = 1339.0
+margin_bottom = 857.0
+color = Color( 0.145098, 0.180392, 0.329412, 1 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+margin_left = 220.0
+margin_top = 31.0
+margin_right = 1339.0
+margin_bottom = 857.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 4.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="."]
+margin_left = 220.0
+margin_top = 31.0
+margin_right = 1339.0
+margin_bottom = 95.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 4.0
+editor_only = false
+
+[node name="Square" type="ColorRect" parent="."]
+margin_left = 262.0
+margin_top = 51.0
+margin_right = 287.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.352941, 0.458824, 1 )
+
+[node name="Square2" type="ColorRect" parent="."]
+margin_left = 294.0
+margin_top = 51.0
+margin_right = 319.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.352941, 0.458824, 1 )
+
+[node name="Square3" type="ColorRect" parent="."]
+margin_left = 327.0
+margin_top = 51.0
+margin_right = 352.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.352941, 0.458824, 1 )
+
+[node name="Square4" type="ColorRect" parent="."]
+margin_left = 360.0
+margin_top = 51.0
+margin_right = 385.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.352941, 0.458824, 1 )
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="."]
+margin_left = 425.0
+margin_top = 51.0
+margin_right = 1304.0
+margin_bottom = 76.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 4.0
+editor_only = false
+
+[node name="Button" type="Button" parent="."]
+margin_left = 17.0
+margin_top = 51.0
+margin_right = 195.0
+margin_bottom = 87.0
+text = "< Back to Coop"
+
+[node name="TabContainer" type="TabContainer" parent="."]
+margin_left = 262.0
+margin_top = 118.0
+margin_right = 1290.0
+margin_bottom = 815.0
+custom_styles/tab_bg = SubResource( 1 )
+custom_styles/panel = SubResource( 2 )
+tab_align = 0
+
+[node name="Care And Feeding" type="Label" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 42.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Care And Feeding"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 33.0
+text = "Chickens need to eat every day. They are happy to eat cheap nutritious pellets but will thirve with more variety. Chickens will eat the best food possible as soon as they need it - you just have to have it around. Talk to your local chicken feed supplier about what they have. They will typically sell you bundles with a day's worth of food, so larger farms are more expensive."
+
+[node name="Racing" type="Label" parent="TabContainer"]
+margin_right = 40.0
+margin_bottom = 32.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Racing"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 62.0
+margin_right = 1002.0
+margin_bottom = 665.0
+text = "There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events
+
+EVERY DAY RACES
+In order to be part of the racing circut, you must compete  in one the races held every day. Every farm in the circuit competes but because there are multiple races held on the same day your racer will only face 3 other farms per race. This is a great way to show off your flock and maybe earn some money.
+
+LEAGUE RACES
+These are special event you can enter. They are multiple days long and to win you must  win every race. "
+
+[node name="Breeding" type="Label" parent="TabContainer"]
+margin_right = 40.0
+margin_bottom = 32.0

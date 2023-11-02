@@ -27,8 +27,11 @@ func _ready():
 		save_game = load(AllChickens.PATH) as AllChickens
 	else:
 		save_game = AllChickens.new()
-		save_game.save()
 		print("New Game")
+	save_game.save()
+	
+	if !save_game.has_day1:
+		_goto_scene("res://Diary/Diary.tscn")
 	chicken_stats = save_game.get_all()
 	
 	pen = get_node("Pens/" + save_game.pen) as ReferenceRect
@@ -291,19 +294,22 @@ func _on_BuyFood_pressed(type:String, cost:int):
 
 func _on_Shop_pressed():
 	var shop := "res://Store/Store.tscn"
-	var err = get_tree().change_scene(shop)
-	match err:
-		 OK: return
-		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + shop + " path cannot be loaded into a PackedScene")
-		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + shop + " cannot be instantiated.")
-	push_error("Error " + str(err) + "changing to  " + shop + " ")
-
+	_goto_scene(shop)
 
 func _on_PettingZoo_pressed():
 	var zoo := "res://PettingZoo/PettingZoo.tscn"
-	var err = get_tree().change_scene(zoo)
+	_goto_scene(zoo)
+
+func _on_LeagueRace_pressed():
+	_goto_scene("res://League/League.tscn")
+
+func _on_Diary_pressed():
+	_goto_scene("res://Diary/Diary.tscn")
+	
+func _goto_scene(path:String):
+	var err = get_tree().change_scene(path)
 	match err:
 		 OK: return
-		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + zoo + " path cannot be loaded into a PackedScene")
-		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + zoo + " cannot be instantiated.")
-	push_error("Error " + str(err) + "changing to  " + zoo + " ")
+		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + path + " path cannot be loaded into a PackedScene")
+		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + path + " cannot be instantiated.")
+	push_error("Error " + str(err) + "changing to  " + path + " ")
