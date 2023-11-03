@@ -27,7 +27,7 @@ tracks/1/keys = {
 "times": PoolRealArray( 0, 24.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ false, true ]
+"values": [ true, true ]
 }
 
 [sub_resource type="Animation" id=2]
@@ -217,7 +217,7 @@ There's a race every day, I guess I'll see how she does!
 
 <3"
 autowrap = true
-percent_visible = -0.00204918
+percent_visible = -0.00199601
 
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 21.0
