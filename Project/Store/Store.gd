@@ -85,10 +85,10 @@ func refresh_UI():
 	match save_game.pen:
 		"Starter":
 			upgrade.text = "Upgrade Farm $" + str(MEDIUM_PRICE*multiplier())
-			upgrade.disabled = save_game.money < MEDIUM_PRICE*multiplier()
+#			upgrade.disabled = save_game.money < MEDIUM_PRICE*multiplier()
 		"Medium":
 			upgrade.text = "Upgrade Farm $" + str(LARGE_PRICE*multiplier())
-			upgrade.disabled = save_game.money < LARGE_PRICE*multiplier()
+#			upgrade.disabled = save_game.money < LARGE_PRICE*multiplier()
 		"Large":
 			upgrade.disabled = true
 			upgrade.text = "Farm Completely Upgraded"

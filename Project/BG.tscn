@@ -2,6 +2,7 @@
 
 [node name="BG" type="CanvasLayer"]
 layer = -1
+visible = false
 
 [node name="ColorRect2" type="ColorRect" parent="."]
 margin_left = -3.0

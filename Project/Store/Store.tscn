@@ -107,7 +107,6 @@ text = "Next: Small Farm pen"
 margin_top = 119.0
 margin_right = 278.0
 margin_bottom = 155.0
-disabled = true
 text = "Upgrade Pen $100"
 
 [node name="InfoLabel" type="Label" parent="."]

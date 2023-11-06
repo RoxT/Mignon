@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/coop_pressed.svg-d1803be6d37d7f8ad2bfdc0e8920e5d3.stex"
+path="res://.import/coop.svg-f0dced9aa528ada8025d7ce6d9d1b823.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Shop/coop_pressed.svg"
-dest_files=[ "res://.import/coop_pressed.svg-d1803be6d37d7f8ad2bfdc0e8920e5d3.stex" ]
+source_file="res://Store/coop.svg"
+dest_files=[ "res://.import/coop.svg-f0dced9aa528ada8025d7ce6d9d1b823.stex" ]
 
 [params]
 

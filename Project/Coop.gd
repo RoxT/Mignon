@@ -51,8 +51,9 @@ func _ready():
 		var chicken = preload("res://chicken/CoopChicken.tscn").instance()
 		chicken.stats = stats
 		add_child(chicken)
-		var bottom = pen.get_end().y + 16*camera.zoom.y
-		chicken.position = Vector2(943, bottom)
+		var x := rand_range(pen.get_begin().x, pen.get_end().x)
+		var y := rand_range(pen.get_begin().y, pen.get_end().y)
+		chicken.position = Vector2(x, y)
 		chicken.connect("clicked", self, "_on_chicken_clicked")
 		chicken.connect("unclicked", self, "_on_chicken_unclicked")
 		if save_game.racer == stats || !marked:
