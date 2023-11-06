@@ -49,6 +49,5 @@ func set_stats(value:Chicken):
 		stats = value
 		speed = value.get_speed()
 		modulate = stats.colour
-		if stats.white:
-			frames = load("res://chicken/animations_white.tres")
+		frames = stats.get_sprite_frames()
 		animation = "run"

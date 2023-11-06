@@ -74,6 +74,18 @@ func _random_white()->bool:
 func _random_breed()->String:
 	return breeds[randi() % breeds.size()]
 
+func get_sprite_frames()->SpriteFrames:
+	var path := ""
+	match breed:
+		"brown": path = "res://chicken/breeds/brown_spf.tres"
+		"white": path = "res://chicken/breeds/white_spf.tres"
+		"rooster": path = "res://chicken/breeds/brown_rooster_spf.tres"
+		"floof": path = "res://chicken/breeds/brown_varied.tres"
+		"bigger floof": path = "res://chicken/breeds/fat_brown_spf.tres"
+		var b: push_error("Unknown breed: " + b)
+	
+	return load(path) as SpriteFrames
+
 func _to_string():
 	var text := ""
 	for p in get_property_list():
