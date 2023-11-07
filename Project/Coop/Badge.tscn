@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Coop/Badge.gd" type="Script" id=1]
+[ext_resource path="res://Coop/badge3.png" type="Texture" id=2]
+
+[node name="Badge" type="Sprite"]
+position = Vector2( 31, 23 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

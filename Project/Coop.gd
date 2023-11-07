@@ -1,6 +1,7 @@
 extends Node2D
 
 var save_game:AllChickens
+var Badge:PackedScene = load("res://Coop/Badge.tscn")
 const COST_RACE := 5
 const COST_NEW := 10
 onready var racer_label := $RacerLabel
@@ -45,9 +46,11 @@ func _ready():
 		"Medium": camera.zoom = Vector2(0.8, 0.8)
 		"Large": camera.zoom = Vector2(1.0, 1.0)
 	
+	var winners := []
 	save_game.temp_racer = null
 	var marked
 	for stats in chicken_stats:
+		stats = stats as Chicken
 		var chicken = preload("res://chicken/CoopChicken.tscn").instance()
 		chicken.stats = stats
 		add_child(chicken)
@@ -60,12 +63,31 @@ func _ready():
 			marked = chicken
 		chicken.pen = Rect2(pen.rect_position, pen.rect_size)
 		chicken.zoom = camera.zoom.x
+
+		var sorted:Array = get_tree().get_nodes_in_group("meander")
+		if sorted.size() >= 3:
+			sorted.sort_custom(self, "compare_wins")
+			add_badge(sorted[0],3)
+			add_badge(sorted[1],2)
+			add_badge(sorted[2],1)
+		else:
+			for c in sorted: add_badge(c, 1)
+	
 		
 	set_racer(marked)
 	update_money()
 	update_food_box()
 	
-	#$Race.call_deferred("grab_focus")
+	#$Race.call_deferred("grab_focus") 
+	
+func compare_wins(a, b)->bool:
+	return a.stats.wins > b.stats.wins
+
+func add_badge(chicken, rank):
+	if chicken and chicken.stats.wins > 0:
+		var b = Badge.instance()
+		b.rank = rank
+		chicken.add_child(b)
 
 func _on_chicken_clicked(chicken:Node):
 	selected = chicken
