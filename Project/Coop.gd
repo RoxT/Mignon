@@ -42,8 +42,8 @@ func _ready():
 	$TextureRect.rect_position = pen.rect_position
 	
 	match save_game.pen:
-		"Starter": camera.zoom = Vector2(0.7, 0.7)
-		"Medium": camera.zoom = Vector2(0.8, 0.8)
+		"Starter": camera.zoom = Vector2(0.6, 0.6)
+		"Medium": camera.zoom = Vector2(0.7, 0.7)
 		"Large": camera.zoom = Vector2(1.0, 1.0)
 	
 	var winners := []

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Coop/GrassLarge.jpg" type="Texture" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
-[ext_resource path="res://chicken/portraits/rooster.jpg" type="Texture" id=3]
+[ext_resource path="res://PettingZoo/Report.gd" type="Script" id=3]
 [ext_resource path="res://PettingZoo/PettingZoo.gd" type="Script" id=5]
 [ext_resource path="res://Coop/street_view.jpg" type="Texture" id=8]
 
@@ -43,16 +43,13 @@ position = Vector2( 150, 144 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 38.0
+margin_left = 215.0
 margin_top = 107.0
-margin_right = 830.0
+margin_right = 1007.0
 margin_bottom = 657.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
 position = Vector2( 115, 108 )
@@ -90,41 +87,6 @@ current = true
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="StatsPanel" type="Panel" parent="UI"]
-anchor_left = 1092.0
-anchor_top = 5.0
-anchor_right = 1092.0
-anchor_bottom = 5.0
-margin_left = -1.57139e+06
-margin_top = -4489.0
-margin_right = -1.57105e+06
-margin_bottom = -3848.0
-mouse_filter = 2
-script = ExtResource( 2 )
-
-[node name="Portrait" type="Sprite" parent="UI/StatsPanel"]
-position = Vector2( 148.5, 195.672 )
-scale = Vector2( 0.201642, 0.201642 )
-texture = ExtResource( 3 )
-
-[node name="Name" type="Label" parent="UI/StatsPanel"]
-margin_left = 4.0
-margin_top = 6.0
-margin_right = 51.0
-margin_bottom = 20.0
-text = "Mignon"
-
-[node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
-margin_left = 38.0
-margin_top = 340.0
-margin_right = 290.0
-margin_bottom = 520.0
-text = "Breed: brown
-Wins: 5 
-Fatigue: 3
-5 days old
-"
-
 [node name="ToCoop" type="Button" parent="UI"]
 margin_left = 12.0
 margin_top = 12.0
@@ -134,19 +96,72 @@ rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 6 )
 text = "TO COOP"
 
-[node name="AdmissionsLabel" type="Label" parent="UI"]
-margin_left = 38.0
-margin_top = 832.0
-margin_right = 215.0
-margin_bottom = 864.0
-text = "Admissions: $"
+[node name="StatsPanel" type="Panel" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -380.0
+margin_top = 152.0
+margin_right = -37.0
+margin_bottom = 793.0
+mouse_filter = 2
+script = ExtResource( 2 )
 
-[node name="Admissions" type="Label" parent="UI"]
-margin_left = 203.0
-margin_top = 832.0
-margin_right = 364.0
-margin_bottom = 864.0
-text = "0"
+[node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
+margin_left = 38.0
+margin_top = 21.0
+margin_right = 290.0
+margin_bottom = 618.0
+text = "Breed: brown
+Wins: 5 
+Fatigue: 3
+5 days old
+Speed:  400
+"
+
+[node name="ReportPanel" type="Panel" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -1844.0
+margin_top = 194.0
+margin_right = -1501.0
+margin_bottom = 835.0
+mouse_filter = 2
+script = ExtResource( 3 )
+
+[node name="FinalReport" type="RichTextLabel" parent="UI/ReportPanel"]
+margin_left = 27.0
+margin_top = 164.0
+margin_right = 317.0
+margin_bottom = 618.0
+text = "Final Report Pending..."
+
+[node name="Label" type="Label" parent="UI/ReportPanel"]
+margin_right = 343.0
+margin_bottom = 46.0
+text = "Report"
+align = 1
+valign = 1
+
+[node name="ChildCount" type="Label" parent="UI/ReportPanel"]
+margin_left = 27.0
+margin_top = 46.0
+margin_right = 149.0
+margin_bottom = 78.0
+text = "Children: 0"
+
+[node name="AdultCount" type="Label" parent="UI/ReportPanel"]
+margin_left = 27.0
+margin_top = 78.0
+margin_right = 149.0
+margin_bottom = 110.0
+text = "Adults: 0"
+
+[node name="Admissions" type="Label" parent="UI/ReportPanel"]
+margin_left = 27.0
+margin_top = 110.0
+margin_right = 219.0
+margin_bottom = 142.0
+text = "Admissions: $0"
 
 [node name="Start" type="Timer" parent="."]
 wait_time = 2.5

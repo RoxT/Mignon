@@ -14,6 +14,8 @@ const SOFT := "So soft..."
 const HERE := "Here birdy birdy"
 const CHILD_THOUGHTS := [PET, SOFT, HERE]
 
+const TIRED := "That chicken looks tired"
+
 const FAST := "So fast..."
 const SEE := "Did you see that!?"
 const ADULT_THOGUHTS := [FAST, SEE]
@@ -34,13 +36,19 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 	var wow = Floater.instance()
 	wow.texture = Wow
 	$Sprite.look_at(area.global_position)
+	
+	if thoughts.size() >= 10: return
 	if child:
-		if chicken.meander < 200:
+		if chicken.stats.fatigue >= 3:
+			thoughts.append(TIRED)
+		elif chicken.meander < 200:
 			add_child(wow)
 			thoughts.append(CHILD_THOUGHTS[randi()%CHILD_THOUGHTS.size()])
 	else:
 		var thought := ""
-		if chicken.meander > 150:
+		if chicken.stats.fatigue >= 3:
+			thoughts.append(TIRED)
+		elif chicken.meander > 150:
 			add_child(wow)
 			thought = ADULT_THOGUHTS[randi()%ADULT_THOGUHTS.size()]
 			if RARE.find(chicken.stats.breed) >= 0:
@@ -48,6 +56,6 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 					thought = BREED
 			thoughts.append(thought)
 
-func _on_Peon_input_event(viewport: Node, event: InputEvent, shape_idx: int):
+func _on_Peon_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton:
 		emit_signal("clicked", child, thoughts)

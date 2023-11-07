@@ -106,25 +106,22 @@ position = Vector2( 0, 58 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 607.0
-margin_top = 350.0
-margin_right = 1399.0
-margin_bottom = 900.0
+margin_left = 547.0
+margin_top = 392.0
+margin_right = 1339.0
+margin_bottom = 942.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
 position = Vector2( 0, 72 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 700.0
-margin_top = 493.0
-margin_right = 1341.0
-margin_bottom = 861.0
+margin_left = 640.0
+margin_top = 454.0
+margin_right = 1281.0
+margin_bottom = 822.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 __meta__ = {
@@ -162,6 +159,7 @@ texture = ExtResource( 4 )
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 935, 589 )
 current = true
+zoom = Vector2( 0.7, 0.7 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
@@ -275,10 +273,10 @@ food_type = 2
 [node name="StatsPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -377.0
-margin_top = 36.0
-margin_right = -34.0
-margin_bottom = 677.0
+margin_left = -380.0
+margin_top = 152.0
+margin_right = -37.0
+margin_bottom = 793.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
@@ -337,10 +335,10 @@ rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 
 [node name="Edit" type="Button" parent="UI/StatsPanel"]
-visible = false
-margin_left = 290.0
-margin_right = 342.0
-margin_bottom = 52.0
+margin_left = 284.0
+margin_top = 6.0
+margin_right = 336.0
+margin_bottom = 58.0
 icon = ExtResource( 11 )
 
 [node name="Info" type="Button" parent="UI"]
@@ -402,10 +400,10 @@ texture = ExtResource( 16 )
 layer = -1
 
 [node name="PenRect" type="ReferenceRect" parent="BreedingPen"]
-margin_left = 1543.0
-margin_top = 680.0
-margin_right = 1882.0
-margin_bottom = 930.0
+margin_left = 1540.0
+margin_top = 799.0
+margin_right = 1879.0
+margin_bottom = 1049.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 border_color = Color( 0.054902, 0.592157, 0.254902, 0.643137 )

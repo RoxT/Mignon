@@ -1,14 +1,19 @@
 extends Node2D
 
-onready var camera := $Camera2D
-onready var admissions := $UI/Admissions
 onready var Adult:PackedScene= preload("res://PettingZoo/PeonAdult.tscn")
 onready var Child:PackedScene= preload("res://PettingZoo/PeonChild.tscn")
+onready var camera := $Camera2D
+onready var report = $UI/ReportPanel
+onready var final_report:RichTextLabel = $UI/ReportPanel/FinalReport
 
 var save_game:AllChickens
 var pen:ReferenceRect
 var child_count := 0.0
 var adult_count := 0.0
+var fatigue_penalty := false
+const FATIGUE_MULTIPLIER := 0.85
+var modifiers := []
+var total:float
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -27,7 +32,7 @@ func _ready():
 		"Medium": camera.zoom = Vector2(0.8, 0.8)
 		"Large": camera.zoom = Vector2(1.0, 1.0)
 	
-	
+	var tired := 0
 	for stats in chicken_stats:
 		var chicken = preload("res://PettingZoo/PettingChicken.tscn").instance()
 		chicken.stats = stats
@@ -40,34 +45,51 @@ func _ready():
 			adult_count += 1
 		else:
 			child_count += 1
+		if stats.fatigue >= 3:
+			tired += 1
 	
 
-		
+	if tired >= 2:
+		fatigue_penalty = true
+		modifiers.append(FATIGUE_MULTIPLIER)
 	save_game.save()
 
 func _on_chicken_clicked(chicken:Node2D):
 		$UI/StatsPanel.stats = chicken.stats
 		
-func _add_human(total:int, rate:float):
-	if total > 0:
+func _add_human(count:int, rate:float):
+	if count <= 0:
+		final_report.clear()
+		if fatigue_penalty:
+			final_report.add_text("Tired Chickens: -" + str(1.0-FATIGUE_MULTIPLIER) + "%")
+			final_report.newline()
+		final_report.add_text("Total Guests: " + str(round(total)))
+	if count > 0:
 		var peon:Node2D
 		if randf() <= rate:
 			peon = Adult.instance()
+			report.adult()
 		else:
 			peon = Child.instance()
+			report.child()
 		add_child(peon)
 		peon.position = Vector2(rand_range(pen.rect_position.x, pen.rect_position.x + pen.rect_size.x), rand_range(pen.rect_position.y, pen.rect_position.y + pen.rect_size.y))
-		peon.connect("clicked", $UI/StatsPanel, "_on_Human_clicked")
-		admissions.text = str(int(admissions.text) + 1)
+		var err = peon.connect("clicked", $UI/StatsPanel, "_on_Human_clicked")
+		if err != OK:
+			push_error("Error connecting to peon: " + str(err))
 		
 		var t := Timer.new()
-		t.connect("timeout", self, "_add_human", [total-1, rate])
+		err = t.connect("timeout", self, "_add_human", [count-1, rate])
+		if err != OK:
+			push_error("Error connecting to timer: " + str(err))
 		t.one_shot = true
 		add_child(t)
 		t.start(rand_range(0.8, 1.2))
 		
 
 func _on_ToCoop_pressed():
+	save_game.money += report.collect_money()
+	save_game.save()
 	var coop := "res://Coop.tscn"
 	var err = get_tree().change_scene(coop)
 	match err:
@@ -77,6 +99,10 @@ func _on_ToCoop_pressed():
 	push_error("Error " + str(err) + "changing to  " + coop + " ")
 
 
+
 func _on_Start_timeout():
 	var rate:float = adult_count/(adult_count+child_count)
-	_add_human(adult_count + child_count, rate)
+	var total = adult_count + child_count
+	for m in modifiers:
+		total *= m
+	_add_human(round(total), rate)

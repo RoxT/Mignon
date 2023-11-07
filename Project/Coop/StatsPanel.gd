@@ -1,8 +1,8 @@
 extends Panel
 
 export(Resource) var stats setget set_stats
-onready var portrait := $Portrait
-onready var nom := $Name
+onready var portrait
+onready var nom
 onready var block : = $RichTextStats
 onready var breed_btn
 onready var name_edit
@@ -24,6 +24,8 @@ func _ready():
 	if breed_btn:
 		breed_btn = $Breed
 		name_edit = $Name/NameEdit
+		portrait = $Portrait
+		nom = $Name
 	show(false)
 	if stats:
 		set_stats(stats)
@@ -98,10 +100,10 @@ func set_mate(mate:Node, mate2:Node, birthing:=false):
 		breed_btn.text = breed_str
 
 func show(value := true):
-	portrait.visible = value
-	nom.visible = value
 	block.visible = value
 	if breed_btn:
+		portrait.visible = value
+		nom.visible = value
 		$Choose.visible = value
 		$Breed.visible = value
 		$Sell.visible = value
@@ -115,8 +117,10 @@ func _on_Human_clicked(child:bool, thoughts:Array):
 	else:
 		block.add_text("Age: Adult")
 	block.newline()
+	block.newline()
+	block.newline()
 	for thought in thoughts:
-		block.add_text(thought)
+		block.add_text("\"" + thought + "\"")
 		block.newline()
 	block.show()
 
