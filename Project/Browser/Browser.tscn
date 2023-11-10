@@ -1,19 +1,12 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[sub_resource type="StyleBoxFlat" id=1]
-bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
-
-[sub_resource type="StyleBoxFlat" id=2]
-bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
+[ext_resource path="res://Browser/Browser.gd" type="Script" id=1]
 
 [node name="Browser" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+rect_pivot_offset = Vector2( 173, 309 )
+script = ExtResource( 1 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = 220.0
@@ -40,80 +33,31 @@ border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
 border_width = 4.0
 editor_only = false
 
-[node name="Square" type="ColorRect" parent="."]
-margin_left = 262.0
-margin_top = 51.0
-margin_right = 287.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.352941, 0.458824, 1 )
-
-[node name="Square2" type="ColorRect" parent="."]
-margin_left = 294.0
-margin_top = 51.0
-margin_right = 319.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.352941, 0.458824, 1 )
-
-[node name="Square3" type="ColorRect" parent="."]
-margin_left = 327.0
-margin_top = 51.0
-margin_right = 352.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.352941, 0.458824, 1 )
-
-[node name="Square4" type="ColorRect" parent="."]
-margin_left = 360.0
-margin_top = 51.0
-margin_right = 385.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.352941, 0.458824, 1 )
-
-[node name="ReferenceRect3" type="ReferenceRect" parent="."]
-margin_left = 425.0
-margin_top = 51.0
-margin_right = 1304.0
-margin_bottom = 76.0
-border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
-border_width = 4.0
-editor_only = false
-
-[node name="Button" type="Button" parent="."]
+[node name="ToCoop" type="Button" parent="."]
 margin_left = 17.0
 margin_top = 51.0
 margin_right = 195.0
 margin_bottom = 87.0
 text = "< Back to Coop"
 
-[node name="TabContainer" type="TabContainer" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 262.0
-margin_top = 118.0
-margin_right = 1290.0
-margin_bottom = 815.0
-custom_styles/tab_bg = SubResource( 1 )
-custom_styles/panel = SubResource( 2 )
-tab_align = 0
-
-[node name="Care And Feeding" type="Label" parent="TabContainer"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 42.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Care And Feeding"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 33.0
+margin_top = 193.0
+margin_right = 262.0
+margin_bottom = 160.0
 text = "Chickens need to eat every day. They are happy to eat cheap nutritious pellets but will thirve with more variety. Chickens will eat the best food possible as soon as they need it - you just have to have it around. Talk to your local chicken feed supplier about what they have. They will typically sell you bundles with a day's worth of food, so larger farms are more expensive."
 
-[node name="Racing" type="Label" parent="TabContainer"]
-margin_right = 40.0
-margin_bottom = 32.0
-
-[node name="RichTextLabel" type="RichTextLabel" parent="TabContainer/Racing"]
+[node name="RichTextLabel2" type="RichTextLabel" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 62.0
-margin_right = 1002.0
-margin_bottom = 665.0
+margin_left = 262.0
+margin_top = 222.0
+margin_right = 1264.0
+margin_bottom = 825.0
 text = "There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events
 
 EVERY DAY RACES
@@ -122,6 +66,174 @@ In order to be part of the racing circut, you must compete  in one the races hel
 LEAGUE RACES
 These are special event you can enter. They are multiple days long and to win you must  win every race. "
 
-[node name="Breeding" type="Label" parent="TabContainer"]
+[node name="Squares" type="Control" parent="."]
 margin_right = 40.0
-margin_bottom = 32.0
+margin_bottom = 40.0
+
+[node name="Square" type="ColorRect" parent="Squares"]
+margin_left = 262.0
+margin_top = 51.0
+margin_right = 287.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square2" type="ColorRect" parent="Squares"]
+margin_left = 294.0
+margin_top = 51.0
+margin_right = 319.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square3" type="ColorRect" parent="Squares"]
+margin_left = 327.0
+margin_top = 51.0
+margin_right = 352.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square4" type="ColorRect" parent="Squares"]
+margin_left = 360.0
+margin_top = 51.0
+margin_right = 385.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square5" type="ColorRect" parent="Squares"]
+margin_left = 412.0
+margin_top = 51.0
+margin_right = 437.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square6" type="ColorRect" parent="Squares"]
+margin_left = 444.0
+margin_top = 51.0
+margin_right = 469.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square7" type="ColorRect" parent="Squares"]
+margin_left = 477.0
+margin_top = 51.0
+margin_right = 502.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square8" type="ColorRect" parent="Squares"]
+margin_left = 510.0
+margin_top = 51.0
+margin_right = 535.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square9" type="ColorRect" parent="Squares"]
+margin_left = 549.0
+margin_top = 51.0
+margin_right = 574.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square10" type="ColorRect" parent="Squares"]
+margin_left = 581.0
+margin_top = 51.0
+margin_right = 606.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square11" type="ColorRect" parent="Squares"]
+margin_left = 614.0
+margin_top = 51.0
+margin_right = 639.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square12" type="ColorRect" parent="Squares"]
+margin_left = 647.0
+margin_top = 51.0
+margin_right = 672.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square13" type="ColorRect" parent="Squares"]
+margin_left = 687.0
+margin_top = 51.0
+margin_right = 712.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square14" type="ColorRect" parent="Squares"]
+margin_left = 719.0
+margin_top = 51.0
+margin_right = 744.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square15" type="ColorRect" parent="Squares"]
+margin_left = 752.0
+margin_top = 51.0
+margin_right = 777.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square16" type="ColorRect" parent="Squares"]
+margin_left = 785.0
+margin_top = 51.0
+margin_right = 810.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="URLRect" type="ReferenceRect" parent="Squares"]
+margin_left = 883.0
+margin_top = 51.0
+margin_right = 1304.0
+margin_bottom = 76.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 4.0
+editor_only = false
+
+[node name="Content" type="RichTextLabel" parent="."]
+margin_left = 262.0
+margin_top = 193.0
+margin_right = 1290.0
+margin_bottom = 813.0
+bbcode_enabled = true
+bbcode_text = "[b]HEADLINE[/b]
+There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events\\n\\n[b]EVERY DAY RACES[/b]\\nIn order to be part of the racing circut, you must compete  in one the races held every day. Every farm in the circuit competes but because there are multiple races held on the same day your racer will only face 3 other farms per race. This is a great way to show off your flock and maybe earn some money.\\n\\n[b]LEAGUE RACES[/b]\\nThese are special event you can enter. They are multiple days long and to win you must win every race."
+text = "HEADLINE
+There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events\\n\\nEVERY DAY RACES\\nIn order to be part of the racing circut, you must compete  in one the races held every day. Every farm in the circuit competes but because there are multiple races held on the same day your racer will only face 3 other farms per race. This is a great way to show off your flock and maybe earn some money.\\n\\nLEAGUE RACES\\nThese are special event you can enter. They are multiple days long and to win you must win every race."
+
+[node name="Links" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Diary" type="LinkButton" parent="Links"]
+margin_left = 319.0
+margin_top = 117.0
+margin_right = 426.0
+margin_bottom = 149.0
+theme_type_variation = "LinkButton2"
+toggle_mode = true
+text = "My Diary"
+
+[node name="Care" type="LinkButton" parent="Links"]
+margin_left = 523.0
+margin_top = 117.0
+margin_right = 752.0
+margin_bottom = 149.0
+theme_type_variation = "LinkButton2"
+toggle_mode = true
+text = "Care and Feeding"
+
+[node name="Racing" type="LinkButton" parent="Links"]
+margin_left = 784.0
+margin_top = 117.0
+margin_right = 908.0
+margin_bottom = 149.0
+theme_type_variation = "LinkButton2"
+toggle_mode = true
+text = "Racing"
+
+[connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
+[connection signal="toggled" from="Links/Diary" to="." method="_on_Diary_toggled"]
+[connection signal="toggled" from="Links/Care" to="." method="_on_Care_toggled"]
+[connection signal="toggled" from="Links/Racing" to="." method="_on_Racing_toggled"]

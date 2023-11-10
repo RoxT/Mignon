@@ -96,7 +96,7 @@ rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 6 )
 text = "TO COOP"
 
-[node name="StatsPanel" type="Panel" parent="UI"]
+[node name="PeonStatsPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -380.0
@@ -106,7 +106,7 @@ margin_bottom = 793.0
 mouse_filter = 2
 script = ExtResource( 2 )
 
-[node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
+[node name="RichTextStats" type="RichTextLabel" parent="UI/PeonStatsPanel"]
 margin_left = 38.0
 margin_top = 21.0
 margin_right = 290.0

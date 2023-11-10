@@ -326,9 +326,6 @@ func _on_PettingZoo_pressed():
 func _on_LeagueRace_pressed():
 	_goto_scene("res://League/League.tscn")
 
-func _on_Diary_pressed():
-	_goto_scene("res://Diary/Diary.tscn")
-	
 func _goto_scene(path:String):
 	var err = get_tree().change_scene(path)
 	match err:
@@ -336,3 +333,6 @@ func _goto_scene(path:String):
 		 ERR_CANT_OPEN: push_error("ERR_CANT_OPEN " + path + " path cannot be loaded into a PackedScene")
 		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + path + " cannot be instantiated.")
 	push_error("Error " + str(err) + "changing to  " + path + " ")
+
+func _on_WebChickens_pressed():
+	_goto_scene("res://Browser/Browser.tscn")

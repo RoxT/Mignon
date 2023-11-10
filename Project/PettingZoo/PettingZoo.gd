@@ -55,7 +55,7 @@ func _ready():
 	save_game.save()
 
 func _on_chicken_clicked(chicken:Node2D):
-		$UI/StatsPanel.stats = chicken.stats
+		$UI/PeonStatsPanel.stats = chicken.stats
 		
 func _add_human(count:int, rate:float):
 	if count <= 0:
@@ -74,7 +74,7 @@ func _add_human(count:int, rate:float):
 			report.child()
 		add_child(peon)
 		peon.position = Vector2(rand_range(pen.rect_position.x, pen.rect_position.x + pen.rect_size.x), rand_range(pen.rect_position.y, pen.rect_position.y + pen.rect_size.y))
-		var err = peon.connect("clicked", $UI/StatsPanel, "_on_Human_clicked")
+		var err = peon.connect("clicked", $UI/PeonStatsPanel, "_on_Human_clicked")
 		if err != OK:
 			push_error("Error connecting to peon: " + str(err))
 		
@@ -102,7 +102,7 @@ func _on_ToCoop_pressed():
 
 func _on_Start_timeout():
 	var rate:float = adult_count/(adult_count+child_count)
-	var total = adult_count + child_count
+	total = adult_count + child_count
 	for m in modifiers:
 		total *= m
 	_add_human(round(total), rate)

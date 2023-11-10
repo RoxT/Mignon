@@ -85,118 +85,6 @@ border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
 border_width = 4.0
 editor_only = false
 
-[node name="Square" type="ColorRect" parent="."]
-margin_left = 262.0
-margin_top = 51.0
-margin_right = 287.0
-margin_bottom = 76.0
-color = Color( 0.447059, 0.458824, 0.32549, 1 )
-
-[node name="Square2" type="ColorRect" parent="."]
-margin_left = 294.0
-margin_top = 51.0
-margin_right = 319.0
-margin_bottom = 76.0
-color = Color( 0.447059, 0.458824, 0.32549, 1 )
-
-[node name="Square3" type="ColorRect" parent="."]
-margin_left = 327.0
-margin_top = 51.0
-margin_right = 352.0
-margin_bottom = 76.0
-color = Color( 0.447059, 0.458824, 0.32549, 1 )
-
-[node name="Square4" type="ColorRect" parent="."]
-margin_left = 360.0
-margin_top = 51.0
-margin_right = 385.0
-margin_bottom = 76.0
-color = Color( 0.447059, 0.458824, 0.32549, 1 )
-
-[node name="Square5" type="ColorRect" parent="."]
-margin_left = 433.0
-margin_top = 51.0
-margin_right = 458.0
-margin_bottom = 76.0
-color = Color( 0.458824, 0.32549, 0.439216, 1 )
-
-[node name="Square6" type="ColorRect" parent="."]
-margin_left = 465.0
-margin_top = 51.0
-margin_right = 490.0
-margin_bottom = 76.0
-color = Color( 0.458824, 0.32549, 0.439216, 1 )
-
-[node name="Square7" type="ColorRect" parent="."]
-margin_left = 498.0
-margin_top = 51.0
-margin_right = 523.0
-margin_bottom = 76.0
-color = Color( 0.458824, 0.32549, 0.439216, 1 )
-
-[node name="Square8" type="ColorRect" parent="."]
-margin_left = 531.0
-margin_top = 51.0
-margin_right = 556.0
-margin_bottom = 76.0
-color = Color( 0.458824, 0.32549, 0.439216, 1 )
-
-[node name="Square9" type="ColorRect" parent="."]
-margin_left = 661.0
-margin_top = 51.0
-margin_right = 686.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.439216, 0.458824, 1 )
-
-[node name="Square10" type="ColorRect" parent="."]
-margin_left = 693.0
-margin_top = 51.0
-margin_right = 718.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.439216, 0.458824, 1 )
-
-[node name="Square11" type="ColorRect" parent="."]
-margin_left = 726.0
-margin_top = 51.0
-margin_right = 751.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.439216, 0.458824, 1 )
-
-[node name="Square12" type="ColorRect" parent="."]
-margin_left = 759.0
-margin_top = 51.0
-margin_right = 784.0
-margin_bottom = 76.0
-color = Color( 0.32549, 0.439216, 0.458824, 1 )
-
-[node name="Square13" type="ColorRect" parent="."]
-margin_left = 805.0
-margin_top = 51.0
-margin_right = 830.0
-margin_bottom = 76.0
-color = Color( 0.223529, 0.25098, 0.356863, 1 )
-
-[node name="Square14" type="ColorRect" parent="."]
-margin_left = 837.0
-margin_top = 51.0
-margin_right = 862.0
-margin_bottom = 76.0
-color = Color( 0.223529, 0.25098, 0.356863, 1 )
-
-[node name="Square15" type="ColorRect" parent="."]
-margin_left = 870.0
-margin_top = 51.0
-margin_right = 895.0
-margin_bottom = 76.0
-color = Color( 0.223529, 0.25098, 0.356863, 1 )
-
-[node name="Square16" type="ColorRect" parent="."]
-margin_left = 903.0
-margin_top = 51.0
-margin_right = 928.0
-margin_bottom = 76.0
-color = Color( 0.223529, 0.25098, 0.356863, 1 )
-
 [node name="Contents" type="Label" parent="."]
 margin_left = 262.0
 margin_top = 141.0
@@ -207,7 +95,7 @@ text = "Day 1
 Dear Diary,
 I'm really doing it. My cousin got me three racing chickens. 
 
-I put down some turf and straw on the balcony of my apartment and put up a flag so you can't see them from the street. I found a great website, ChickenWeb, about raising and racing them. 
+I put down some turf and straw on the balcony of my apartment and put up a flag so you can't see them from the street. I found a great website, WebChicken, about raising and racing them. 
 
 I drove out to the farm store for food and they gave me a sample pack of 5 days of their specialty grasses. 
 
@@ -217,7 +105,7 @@ There's a race every day, I guess I'll see how she does!
 
 <3"
 autowrap = true
-percent_visible = -0.00199601
+percent_visible = -0.00204918
 
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 21.0
@@ -230,5 +118,121 @@ text = "<-- To Coop"
 root_node = NodePath("../Contents")
 anims/Day1 = SubResource( 1 )
 anims/RESET = SubResource( 2 )
+
+[node name="Squares" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Square" type="ColorRect" parent="Squares"]
+margin_left = 262.0
+margin_top = 51.0
+margin_right = 287.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square2" type="ColorRect" parent="Squares"]
+margin_left = 294.0
+margin_top = 51.0
+margin_right = 319.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square3" type="ColorRect" parent="Squares"]
+margin_left = 327.0
+margin_top = 51.0
+margin_right = 352.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square4" type="ColorRect" parent="Squares"]
+margin_left = 360.0
+margin_top = 51.0
+margin_right = 385.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square5" type="ColorRect" parent="Squares"]
+margin_left = 433.0
+margin_top = 51.0
+margin_right = 458.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square6" type="ColorRect" parent="Squares"]
+margin_left = 465.0
+margin_top = 51.0
+margin_right = 490.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square7" type="ColorRect" parent="Squares"]
+margin_left = 498.0
+margin_top = 51.0
+margin_right = 523.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square8" type="ColorRect" parent="Squares"]
+margin_left = 531.0
+margin_top = 51.0
+margin_right = 556.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square9" type="ColorRect" parent="Squares"]
+margin_left = 661.0
+margin_top = 51.0
+margin_right = 686.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square10" type="ColorRect" parent="Squares"]
+margin_left = 693.0
+margin_top = 51.0
+margin_right = 718.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square11" type="ColorRect" parent="Squares"]
+margin_left = 726.0
+margin_top = 51.0
+margin_right = 751.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square12" type="ColorRect" parent="Squares"]
+margin_left = 759.0
+margin_top = 51.0
+margin_right = 784.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square13" type="ColorRect" parent="Squares"]
+margin_left = 805.0
+margin_top = 51.0
+margin_right = 830.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square14" type="ColorRect" parent="Squares"]
+margin_left = 837.0
+margin_top = 51.0
+margin_right = 862.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square15" type="ColorRect" parent="Squares"]
+margin_left = 870.0
+margin_top = 51.0
+margin_right = 895.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square16" type="ColorRect" parent="Squares"]
+margin_left = 903.0
+margin_top = 51.0
+margin_right = 928.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
 
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]

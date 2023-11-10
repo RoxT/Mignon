@@ -374,13 +374,13 @@ rect_min_size = Vector2( 0, 48 )
 disabled = true
 text = "League Race"
 
-[node name="Diary" type="Button" parent="UI"]
+[node name="WebChickens" type="Button" parent="UI"]
 margin_left = 21.0
 margin_top = 493.0
 margin_right = 172.0
 margin_bottom = 541.0
 rect_min_size = Vector2( 0, 48 )
-text = "Diary"
+text = "WebChickens"
 
 [node name="Blahg" type="Panel" parent="UI"]
 margin_left = -32.0
@@ -449,5 +449,5 @@ expand = true
 [connection signal="pressed" from="UI/Shop" to="." method="_on_Shop_pressed"]
 [connection signal="pressed" from="UI/PettingZoo" to="." method="_on_PettingZoo_pressed"]
 [connection signal="pressed" from="UI/LeagueRace" to="." method="_on_LeagueRace_pressed"]
-[connection signal="pressed" from="UI/Diary" to="." method="_on_Diary_pressed"]
+[connection signal="pressed" from="UI/WebChickens" to="." method="_on_WebChickens_pressed"]
 [connection signal="timeout" from="BreedingPen/PenRect/Mating" to="." method="_on_Mating_timeout"]
