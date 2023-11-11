@@ -11,9 +11,12 @@ var pen:ReferenceRect
 var child_count := 0.0
 var adult_count := 0.0
 var fatigue_penalty := false
-const FATIGUE_MULTIPLIER := 0.85
+var many_fatigue_penalty := false
+const FATIGUE_MULTIPLIER := 0.80
+const MANY_FATIGUE_MULIPLIER := 0.4
 var modifiers := []
 var total:float
+var pen_modifier := 1.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,12 +31,18 @@ func _ready():
 	$TextureRect.rect_position = pen.rect_position
 		
 	match pen_name:
-		"Starter": camera.zoom = Vector2(0.7, 0.7)
-		"Medium": camera.zoom = Vector2(0.8, 0.8)
-		"Large": camera.zoom = Vector2(1.0, 1.0)
+		"Starter": 
+			camera.zoom = Vector2(0.7, 0.7)
+		"Medium": 
+			camera.zoom = Vector2(0.8, 0.8)
+			pen_modifier = 0.6
+		"Large": 
+			camera.zoom = Vector2(1.0, 1.0)
+			pen_modifier = 0.25
 	
 	var tired := 0
 	for stats in chicken_stats:
+		stats = stats as Chicken
 		var chicken = preload("res://PettingZoo/PettingChicken.tscn").instance()
 		chicken.stats = stats
 		add_child(chicken)
@@ -45,11 +54,17 @@ func _ready():
 			adult_count += 1
 		else:
 			child_count += 1
-		if stats.fatigue >= 3:
+		if stats.is_chick():
+			if stats.fatigue >= 5:
+				tired += 1
+		elif stats.fatigue >= 3:
 			tired += 1
 	
 
-	if tired >= 2:
+	if tired/(adult_count+child_count) >= 0.5:
+		many_fatigue_penalty = true
+		modifiers.append(MANY_FATIGUE_MULIPLIER)
+	elif tired >= 2:
 		fatigue_penalty = true
 		modifiers.append(FATIGUE_MULTIPLIER)
 	save_game.save()
@@ -57,13 +72,21 @@ func _ready():
 func _on_chicken_clicked(chicken:Node2D):
 		$UI/PeonStatsPanel.stats = chicken.stats
 		
+func multiplier_to_str(value:float)->String:
+	return str( (1.0-value) * 100) + "%"
+		
 func _add_human(count:int, rate:float):
 	if count <= 0:
 		final_report.clear()
 		if fatigue_penalty:
-			final_report.add_text("Tired Chickens: -" + str(1.0-FATIGUE_MULTIPLIER) + "%")
+			final_report.add_text("Tired Chickens: -" + multiplier_to_str(FATIGUE_MULTIPLIER))
+			final_report.newline()
+		if many_fatigue_penalty:
+			final_report.add_text("Most Chickens Tired: -" + multiplier_to_str(MANY_FATIGUE_MULIPLIER))
 			final_report.newline()
 		final_report.add_text("Total Guests: " + str(round(total)))
+		for stats in save_game.get_all():
+			stats.fatigue += 1
 	if count > 0:
 		var peon:Node2D
 		if randf() <= rate:
@@ -84,7 +107,7 @@ func _add_human(count:int, rate:float):
 			push_error("Error connecting to timer: " + str(err))
 		t.one_shot = true
 		add_child(t)
-		t.start(rand_range(0.8, 1.2))
+		t.start(rand_range(0.7, 1.7) * pen_modifier)
 		
 
 func _on_ToCoop_pressed():

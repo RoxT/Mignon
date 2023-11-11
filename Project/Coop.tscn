@@ -360,16 +360,16 @@ text = "Shop"
 [node name="PettingZoo" type="Button" parent="UI"]
 margin_left = 143.0
 margin_top = 118.0
-margin_right = 296.0
+margin_right = 332.0
 margin_bottom = 166.0
 rect_min_size = Vector2( 0, 48 )
 text = "Petting Zoo"
 
 [node name="LeagueRace" type="Button" parent="UI"]
-margin_left = 21.0
-margin_top = 677.0
-margin_right = 174.0
-margin_bottom = 725.0
+margin_left = 16.0
+margin_top = 672.0
+margin_right = 226.0
+margin_bottom = 736.0
 rect_min_size = Vector2( 0, 48 )
 disabled = true
 text = "League Race"
@@ -377,8 +377,8 @@ text = "League Race"
 [node name="WebChickens" type="Button" parent="UI"]
 margin_left = 21.0
 margin_top = 493.0
-margin_right = 172.0
-margin_bottom = 541.0
+margin_right = 226.0
+margin_bottom = 558.0
 rect_min_size = Vector2( 0, 48 )
 text = "WebChickens"
 

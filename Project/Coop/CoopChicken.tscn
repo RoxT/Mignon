@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Coop/CoopChicken.gd" type="Script" id=2]
+[ext_resource path="res://chicken/breeds/white_spf.tres" type="SpriteFrames" id=3]
+
+[sub_resource type="CircleShape2D" id=5]
+radius = 128.062
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 36.4
+
+[node name="Chicken" type="AnimatedSprite" groups=["meander"]]
+frames = ExtResource( 3 )
+animation = "stand"
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+scale = Vector2( 0.25, 0.25 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 5 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = -37.0
+margin_top = -51.0
+margin_right = 36.0
+margin_bottom = -19.0
+text = "Hekllo"
+
+[node name="Rest" type="Timer" parent="."]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="."]
+shape = SubResource( 6 )
+shape_centered = false
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
+[connection signal="timeout" from="Rest" to="." method="_on_Rest_timeout"]
+[connection signal="pressed" from="TouchScreenButton" to="." method="_on_TouchScreenButton_pressed"]
+[connection signal="released" from="TouchScreenButton" to="." method="_on_TouchScreenButton_released"]

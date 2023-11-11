@@ -48,7 +48,7 @@ func set_stats(value:Chicken):
 		elif stats.breed == "rooster":
 			portrait.texture = load("res://chicken/portraits/rooster.jpg")
 			portrait.scale = Vector2(0.202, 0.202)
-		elif stats.white:
+		elif stats.breed == "white":
 			portrait.texture = load("res://chicken/portraits/white1.png")
 			portrait.scale = Vector2.ONE
 		else:
@@ -78,7 +78,7 @@ func set_stats(value:Chicken):
 		elif stats.speed_guess == stats.top_speed:
 			block.add_text("Speed: " + str(stats.top_speed))
 		else:
-			block.add_text("Speed: " + str(stats.speed_guess) + "?")
+			block.add_text("Speed: " + str(round(stats.speed_guess)) + "?")
 			
 			
 	if breed_btn:

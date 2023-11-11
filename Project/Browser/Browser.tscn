@@ -197,9 +197,9 @@ margin_top = 193.0
 margin_right = 1290.0
 margin_bottom = 813.0
 bbcode_enabled = true
-bbcode_text = "[b]HEADLINE[/b]
+bbcode_text = "[b]BOLD[/b]
 There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events\\n\\n[b]EVERY DAY RACES[/b]\\nIn order to be part of the racing circut, you must compete  in one the races held every day. Every farm in the circuit competes but because there are multiple races held on the same day your racer will only face 3 other farms per race. This is a great way to show off your flock and maybe earn some money.\\n\\n[b]LEAGUE RACES[/b]\\nThese are special event you can enter. They are multiple days long and to win you must win every race."
-text = "HEADLINE
+text = "BOLD
 There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events\\n\\nEVERY DAY RACES\\nIn order to be part of the racing circut, you must compete  in one the races held every day. Every farm in the circuit competes but because there are multiple races held on the same day your racer will only face 3 other farms per race. This is a great way to show off your flock and maybe earn some money.\\n\\nLEAGUE RACES\\nThese are special event you can enter. They are multiple days long and to win you must win every race."
 
 [node name="Links" type="Control" parent="."]
@@ -225,15 +225,26 @@ toggle_mode = true
 text = "Care and Feeding"
 
 [node name="Racing" type="LinkButton" parent="Links"]
-margin_left = 784.0
+margin_left = 777.0
 margin_top = 117.0
-margin_right = 908.0
+margin_right = 901.0
 margin_bottom = 149.0
 theme_type_variation = "LinkButton2"
 toggle_mode = true
 text = "Racing"
 
+[node name="Breeding" type="LinkButton" parent="Links"]
+margin_left = 883.0
+margin_top = 117.0
+margin_right = 1007.0
+margin_bottom = 149.0
+focus_mode = 2
+theme_type_variation = "LinkButton2"
+toggle_mode = true
+text = "Breeding"
+
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
 [connection signal="toggled" from="Links/Diary" to="." method="_on_Diary_toggled"]
 [connection signal="toggled" from="Links/Care" to="." method="_on_Care_toggled"]
 [connection signal="toggled" from="Links/Racing" to="." method="_on_Racing_toggled"]
+[connection signal="toggled" from="Links/Breeding" to="." method="_on_Breeding_toggled"]

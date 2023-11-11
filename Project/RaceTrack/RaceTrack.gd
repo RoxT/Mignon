@@ -53,8 +53,10 @@ func _on_racer_finished():
 		$CL/Winnings.text = "YOU WON $" + str(winnings) 
 		$CL/Winnings.show()
 		$CL/Winnings/Rice.emitting = true
+		save_game.wins += 1
 	else:
 		$CL/Lost.show()
+		save_game.losses += 1
 	if not has_tired:
 		your_chicken.stats.fatigue += 2
 	has_tired = true

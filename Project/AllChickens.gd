@@ -10,6 +10,9 @@ export(String) var pen
 export(Array) var foods
 export(bool) var speed_boost
 export(bool) var has_day1
+export(int) var day
+export(int) var wins
+export(int) var losses
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -19,7 +22,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false):
+func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -30,8 +33,12 @@ func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_dea
 	foods = new_foods
 	speed_boost = new_speed_boost
 	has_day1 = new_has_day1
+	day = new_day
+	wins = new_wins
+	losses = new_losses
 		
 func pass_day():
+	day += 1
 	speed_boost = 1
 	var recovery := 0
 	for i in range(foods.size()):
@@ -64,7 +71,11 @@ func get_enemy_farms()->Array:
 	
 static func do_mating(a:Chicken, b:Chicken)->Chicken:
 	var bonus := rand_range(-2,5)
-	return Chicken.new(one_of_two(a, b, "top_speed")+bonus, Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "white"), one_of_two(a, b, "farm"), 2, one_of_two(a, b, "breed"))
+	var breed = a.breed
+	if (a.breed == "white" or b.breed == "white") and (a.breed == "brown" or b.breed == "brown"):
+		breed = "mottled"
+	else: breed = one_of_two(a, b, "breed")
+	return Chicken.new(one_of_two(a, b, "top_speed")+bonus, Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "farm"), 2, breed)
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
 	return [a.get(property), b.get(property)][randi()%2]
@@ -136,7 +147,6 @@ func generate_mignon()->Array:
 	var mignon := Chicken.new()
 	mignon.top_speed = 280
 	mignon.colour = Color.white
-	mignon.white = false
 	mignon.breed = "brown"
 	mignon.farm = YOU
 	mignon.nom = "Mignon"

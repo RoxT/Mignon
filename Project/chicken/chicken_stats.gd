@@ -7,7 +7,6 @@ const breeds := ["brown", "white", "floof", "bigger floof", "rooster"]
 export(String) var nom
 export(int) var top_speed
 export(Color) var colour
-export(bool) var white
 export(String) var farm
 export(String) var breed
 
@@ -21,16 +20,14 @@ export(float)var speed_guess setget set_speed_guess
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_white:=_random_white(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=2, new_speed_guess=-1.0):
+func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=2, new_speed_guess=-1.0):
 	top_speed = new_top_speed
 	nom = new_nom
 	wins = new_wins
 	colour = new_colour
-	white = new_white
 	farm = new_farm
 	fatigue = new_fatigue
 	breed = new_breed
-	if breed == "white": white = true
 	age = new_age
 	speed_guess = new_speed_guess
 
@@ -68,9 +65,6 @@ func _random_colour()->Color:
 	c.b -= rand_range(0, 0.35)
 	return c
 	
-func _random_white()->bool:
-	return randi() % 4 == 0
-	
 func _random_breed()->String:
 	return breeds[randi() % breeds.size()]
 
@@ -82,6 +76,7 @@ func get_sprite_frames()->SpriteFrames:
 		"rooster": path = "res://chicken/breeds/brown_rooster_spf.tres"
 		"floof": path = "res://chicken/breeds/brown_varied.tres"
 		"bigger floof": path = "res://chicken/breeds/fat_brown_spf.tres"
+		"mottled": path = "res://chicken/breeds/mottled_spf.tres"
 		var b: push_error("Unknown breed: " + b)
 	
 	return load(path) as SpriteFrames

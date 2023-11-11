@@ -27,10 +27,10 @@ texture = ExtResource( 8 )
 
 [node name="Large" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = -131.0
-margin_top = 11.0
-margin_right = 947.0
-margin_bottom = 797.0
+margin_left = 59.0
+margin_top = -71.0
+margin_right = 1137.0
+margin_bottom = 715.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
@@ -43,23 +43,26 @@ position = Vector2( 150, 144 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 215.0
+margin_left = 188.0
 margin_top = 107.0
-margin_right = 1007.0
+margin_right = 980.0
 margin_bottom = 657.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
 position = Vector2( 115, 108 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 132.0
-margin_top = 218.0
-margin_right = 773.0
-margin_bottom = 586.0
+margin_left = 242.0
+margin_top = 194.0
+margin_right = 883.0
+margin_bottom = 562.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 editor_only = false
@@ -121,7 +124,7 @@ Speed:  400
 [node name="ReportPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1844.0
+margin_left = -1887.0
 margin_top = 194.0
 margin_right = -1501.0
 margin_bottom = 835.0
@@ -131,7 +134,7 @@ script = ExtResource( 3 )
 [node name="FinalReport" type="RichTextLabel" parent="UI/ReportPanel"]
 margin_left = 27.0
 margin_top = 164.0
-margin_right = 317.0
+margin_right = 348.0
 margin_bottom = 618.0
 text = "Final Report Pending..."
 

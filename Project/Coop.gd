@@ -45,13 +45,12 @@ func _ready():
 		"Starter": camera.zoom = Vector2(0.6, 0.6)
 		"Medium": camera.zoom = Vector2(0.7, 0.7)
 		"Large": camera.zoom = Vector2(1.0, 1.0)
-	
-	var winners := []
+
 	save_game.temp_racer = null
 	var marked
 	for stats in chicken_stats:
 		stats = stats as Chicken
-		var chicken = preload("res://chicken/CoopChicken.tscn").instance()
+		var chicken = preload("res://Coop/CoopChicken.tscn").instance()
 		chicken.stats = stats
 		add_child(chicken)
 		var x := rand_range(pen.get_begin().x, pen.get_end().x)
@@ -167,7 +166,7 @@ func _on_Reset_pressed():
 		print("Error reseting game (loading coop)")
 
 func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2(pen.rect_position.x, pen.rect_position.y)):
-	var new_chicken = preload("res://chicken/CoopChicken.tscn").instance()
+	var new_chicken = preload("res://Coop/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
 	new_chicken.stats = stats
 	save_game.money -= COST_NEW
@@ -230,7 +229,8 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		remove_dot(mate_dot2)
 		mate2 = null
 	if mate and mate2:
-		mating.start(rand_range(4, 8))
+		var fatigue = max(mate.stats.fatigue, mate2.stats.fatigue)
+		mating.start(rand_range(2, 5) * (1 + fatigue))
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 
 func remove_dot(dot:Node):

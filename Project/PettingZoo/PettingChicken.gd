@@ -58,8 +58,7 @@ func set_stats(value:Chicken):
 	modulate = stats.colour
 	top_speed = stats.get_speed()
 	set_label()
-	if stats.white:
-		frames = load("res://chicken/animations_white.tres")
+	frames = stats.get_sprite_frames()
 
 func set_label():
 	if label:
