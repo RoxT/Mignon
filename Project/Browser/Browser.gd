@@ -14,10 +14,10 @@ var CHICKEN_COUNT := "[b]Day %s[/b]\nChickens in coop: %s\n"
 var WINS_AND_LOSSES := "Wins: %s\nLosses: %s\n"
 var RIVAL := "Greatest Rival: %s (%s wins against you) from %s\n"
 
+const BEAST := "res://Browser/Beast.tscn"
 
 onready var content := $Content
 onready var links := $Links
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,13 +29,15 @@ func _ready():
 	$Links/Diary.pressed = true
 
 func switch_to(target:LinkButton):
+	content.clear()
+	get_tree().call_group("beast", "queue_free")
 	for l in links.get_children():
 		if l != target:
 			l.pressed = false
 
-func _on_Diary_toggled(_button_pressed):
+func _on_Diary_toggled(button_pressed):
+	if !button_pressed: return
 	switch_to($Links/Diary)
-	content.clear()
 	content.append_bbcode(CHICKEN_COUNT % [save_game.day, str(save_game.get_all().size())])
 	content.append_bbcode(WINS_AND_LOSSES % [save_game.wins, save_game.losses])
 	if save_game.day == 1: 
@@ -51,15 +53,15 @@ func _on_Diary_toggled(_button_pressed):
 	content.append_bbcode(DIARY1)
 
 
-func _on_Care_toggled(_button_pressed):
-	switch_to($Links/Care)
-	content.clear()
-	content.bbcode_text = CARE
+func _on_Care_toggled(button_pressed):
+	if button_pressed:
+		switch_to($Links/Care)
+		content.bbcode_text = CARE
 
-func _on_Racing_toggled(_button_pressed):
-	switch_to($Links/Racing)
-	content.clear()
-	content.bbcode_text = RACING
+func _on_Racing_toggled(button_pressed):
+	if button_pressed:
+		switch_to($Links/Racing)
+		content.bbcode_text = RACING
 
 
 func _on_ToCoop_pressed():
@@ -70,6 +72,25 @@ func _on_ToCoop_pressed():
 
 
 func _on_Breeding_toggled(button_pressed):
-	switch_to($Links/Breeding)
-	content.clear()
-	content.bbcode_text = BREEDING
+	if button_pressed:
+		switch_to($Links/Breeding)
+		content.bbcode_text = BREEDING
+
+func _on_Beastiary_toggled(button_pressed):
+	if button_pressed:
+		switch_to($Links/Beastiary)
+		var breeds:Dictionary = save_game.calculate_active_breeds()
+		var i := 0
+		for key in breeds.keys():
+			if breeds[key]:
+				add_beast(key, i)
+			else: 
+				add_beast("unknown", i)
+			i += 1
+	
+func add_beast(nom:String, i:int):
+	var beast:Control = load(BEAST).instance()
+	beast.nom = nom
+	content.add_child(beast)
+	beast.rect_position.y = i * 128
+	

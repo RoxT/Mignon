@@ -2,7 +2,7 @@ extends Resource
 class_name Chicken
 const LOW_SPEED := 40
 const HIGH_SPEED := 500
-const breeds := ["brown", "white", "floof", "bigger floof", "rooster"]
+const breeds := ["brown", "white", "mottled", "floof", "bigger_floof", "brown_rooster"]
 
 export(String) var nom
 export(int) var top_speed
@@ -73,11 +73,10 @@ func get_sprite_frames()->SpriteFrames:
 	match breed:
 		"brown": path = "res://chicken/breeds/brown_spf.tres"
 		"white": path = "res://chicken/breeds/white_spf.tres"
-		"rooster": path = "res://chicken/breeds/brown_rooster_spf.tres"
-		"floof": path = "res://chicken/breeds/brown_varied.tres"
-		"bigger floof": path = "res://chicken/breeds/fat_brown_spf.tres"
+		"brown_rooster": path = "res://chicken/breeds/brown_rooster_spf.tres"
+		"floof": path = "res://chicken/breeds/floof_spf.tres"
+		"bigger_floof": path = "res://chicken/breeds/bigger_floof_spf.tres"
 		"mottled": path = "res://chicken/breeds/mottled_spf.tres"
-		var b: push_error("Unknown breed: " + b)
 	
 	return load(path) as SpriteFrames
 

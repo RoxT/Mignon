@@ -142,6 +142,15 @@ func buy_food(type:int, amount:int, cost:=0):
 	money -= cost
 	save()
 	
+	
+func calculate_active_breeds()->Dictionary:
+	var d:= {}
+	for breed in Chicken.breeds:
+		d[breed] = false
+	for c in get_all():
+		d[c.breed] = true
+	return d
+	
 func generate_mignon()->Array:
 	var new_coop := []
 	var mignon := Chicken.new()
@@ -186,3 +195,4 @@ static func generate_enemy_list()->Array:
 	
 	file.close()
 	return e
+
