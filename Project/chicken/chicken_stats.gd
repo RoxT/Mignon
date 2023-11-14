@@ -2,7 +2,6 @@ extends Resource
 class_name Chicken
 const LOW_SPEED := 40
 const HIGH_SPEED := 500
-const breeds := ["brown", "white", "mottled", "floof", "bigger_floof", "brown_rooster"]
 
 export(String) var nom
 export(int) var top_speed
@@ -16,6 +15,7 @@ export(int) var age
 var boost := 1.0
 export(float)var speed_guess setget set_speed_guess
 
+const TEXTURE_PATH := "res://chicken/breeds/%s_spf.tres"
 
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
@@ -66,19 +66,10 @@ func _random_colour()->Color:
 	return c
 	
 func _random_breed()->String:
-	return breeds[randi() % breeds.size()]
+	return M.DEFUALT_BREEDS[randi() % M.DEFUALT_BREEDS.size()]
 
 func get_sprite_frames()->SpriteFrames:
-	var path := ""
-	match breed:
-		"brown": path = "res://chicken/breeds/brown_spf.tres"
-		"white": path = "res://chicken/breeds/white_spf.tres"
-		"brown_rooster": path = "res://chicken/breeds/brown_rooster_spf.tres"
-		"floof": path = "res://chicken/breeds/floof_spf.tres"
-		"bigger_floof": path = "res://chicken/breeds/bigger_floof_spf.tres"
-		"mottled": path = "res://chicken/breeds/mottled_spf.tres"
-	
-	return load(path) as SpriteFrames
+	return load(TEXTURE_PATH % breed) as SpriteFrames
 
 func _to_string():
 	var text := ""

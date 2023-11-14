@@ -13,6 +13,7 @@ export(bool) var has_day1
 export(int) var day
 export(int) var wins
 export(int) var losses
+export(Dictionary) var discovered
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -22,7 +23,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0):
+func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = generate_new_discovered()):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -36,6 +37,7 @@ func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_dea
 	day = new_day
 	wins = new_wins
 	losses = new_losses
+	discovered = new_discovered
 		
 func pass_day():
 	day += 1
@@ -69,12 +71,16 @@ func get_all()->Array:
 func get_enemy_farms()->Array:
 	return enemy_farms
 	
-static func do_mating(a:Chicken, b:Chicken)->Chicken:
+func do_mating(a:Chicken, b:Chicken)->Chicken:
 	var bonus := rand_range(-2,5)
-	var breed = a.breed
-	if (a.breed == "white" or b.breed == "white") and (a.breed == "brown" or b.breed == "brown"):
-		breed = "mottled"
-	else: breed = one_of_two(a, b, "breed")
+	var breed
+	for key in M.pairs.keys():
+		if key == a.breed:
+			for subkey in M.pairs[key].keys():
+				if subkey == b.breed:
+					breed = M.pairs[key][subkey]
+					discovered[breed] = true
+	if not breed: breed = one_of_two(a, b, "breed")
 	return Chicken.new(one_of_two(a, b, "top_speed")+bonus, Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "farm"), 2, breed)
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
@@ -142,15 +148,6 @@ func buy_food(type:int, amount:int, cost:=0):
 	money -= cost
 	save()
 	
-	
-func calculate_active_breeds()->Dictionary:
-	var d:= {}
-	for breed in Chicken.breeds:
-		d[breed] = false
-	for c in get_all():
-		d[c.breed] = true
-	return d
-	
 func generate_mignon()->Array:
 	var new_coop := []
 	var mignon := Chicken.new()
@@ -172,7 +169,15 @@ func generate_mignon()->Array:
 	new_coop.append(two)
 	
 	return new_coop
-
+	
+func generate_new_discovered()->Dictionary:
+	var new_discovered := {}
+	for b in M.BREEDS_LIST:
+		new_discovered[b] = false
+	for d in M.DEFUALT_BREEDS:
+		new_discovered[d] = true
+	return new_discovered
+	
 static func generate_enemy_list()->Array:
 	var e := []
 	var file := File.new()
@@ -185,6 +190,7 @@ static func generate_enemy_list()->Array:
 		farm.nom = f_key
 		for c_key in list_of_farms[f_key].chickens.keys():
 			var chicken := Chicken.new()
+			chicken.breed = M.BREEDS_LIST[randi() % M.BREEDS_LIST.size()]
 			chicken.nom = c_key
 			var this_chicken:Dictionary = list_of_farms[f_key].chickens[c_key]
 			for k in this_chicken.keys():

@@ -12,7 +12,7 @@ var BREEDING := "Racing chickens need very little to get in the mood - just a pr
 
 var CHICKEN_COUNT := "[b]Day %s[/b]\nChickens in coop: %s\n"
 var WINS_AND_LOSSES := "Wins: %s\nLosses: %s\n"
-var RIVAL := "Greatest Rival: %s (%s wins against you) from %s\n"
+var RIVAL := "%s (%s wins against you) from %s"
 
 const BEAST := "res://Browser/Beast.tscn"
 
@@ -40,16 +40,18 @@ func _on_Diary_toggled(button_pressed):
 	switch_to($Links/Diary)
 	content.append_bbcode(CHICKEN_COUNT % [save_game.day, str(save_game.get_all().size())])
 	content.append_bbcode(WINS_AND_LOSSES % [save_game.wins, save_game.losses])
-	if save_game.day == 1: 
-		content.append_bbcode("Greatest Rival: ")
-	else:
+	content.append_bbcode("Greatest Rival: ")
+	if save_game.day > 1: 
 		var rival:Chicken = save_game.enemy_farms[0].get_enemies()[0]
 		for farm in save_game.enemy_farms:
 			for enemy in farm.chickens:
 				if enemy.wins > rival.wins:
 					rival = enemy
-		content.append_bbcode(RIVAL % [rival.nom, rival.wins, rival.farm])
-	content.append_bbcode("\n")
+		if rival.wins > 0:
+			content.append_bbcode(RIVAL % [rival.nom, rival.wins, rival.farm])
+		else:
+			content.append_bbcode("None yet")
+	content.append_bbcode("\n\n")
 	content.append_bbcode(DIARY1)
 
 
@@ -79,18 +81,17 @@ func _on_Breeding_toggled(button_pressed):
 func _on_Beastiary_toggled(button_pressed):
 	if button_pressed:
 		switch_to($Links/Beastiary)
-		var breeds:Dictionary = save_game.calculate_active_breeds()
 		var i := 0
-		for key in breeds.keys():
-			if breeds[key]:
+		for key in save_game.discovered.keys():
+			if save_game.discovered[key]:
 				add_beast(key, i)
 			else: 
 				add_beast("unknown", i)
 			i += 1
 	
-func add_beast(nom:String, i:int):
+func add_beast(breed:String, i:int):
 	var beast:Control = load(BEAST).instance()
-	beast.nom = nom
+	beast.breed = breed
 	content.add_child(beast)
 	beast.rect_position.y = i * 128
 	

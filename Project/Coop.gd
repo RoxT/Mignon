@@ -257,7 +257,7 @@ func _on_Mating_timeout():
 	
 func _on_Birthing_timeout(egg:AnimatedSprite):
 	birthing.disconnect("timeout", self, "_on_Birthing_timeout")
-	var baby:Chicken = AllChickens.do_mating(mate2.stats, mate.stats)
+	var baby:Chicken = save_game.do_mating(mate2.stats, mate.stats)
 	baby.age = 0
 	
 	_on_New_pressed(baby, egg.position)

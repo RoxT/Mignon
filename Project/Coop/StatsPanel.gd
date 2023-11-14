@@ -62,7 +62,7 @@ func set_stats(value:Chicken):
 	if block:
 		block.clear()
 		if stats.age >= 2:
-			block.add_text("Breed: " + stats.breed)
+			block.add_text("Breed: " + stats.breed.capitalize())
 			block.newline()
 			block.add_text("Wins: " + str(stats.wins))
 			if stats.fatigue > 0:

@@ -42,6 +42,10 @@ config/name="Mignon"
 run/main_scene="res://Coop.tscn"
 config/icon="res://android/chicken_icon.webp"
 
+[autoload]
+
+M="*res://Mignon.gd"
+
 [display]
 
 window/size/width=1920
