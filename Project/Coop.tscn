@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://BG.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
@@ -13,6 +13,8 @@
 [ext_resource path="res://Common/button/edit.png" type="Texture" id=11]
 [ext_resource path="res://Coop/GrassMedium.jpg" type="Texture" id=12]
 [ext_resource path="res://Common/AFood.tscn" type="PackedScene" id=13]
+[ext_resource path="res://resources/race_stylebox.tres" type="StyleBox" id=14]
+[ext_resource path="res://resources/race_stylebox_hover.tres" type="StyleBox" id=15]
 [ext_resource path="res://Coop/title.png" type="Texture" id=16]
 
 [sub_resource type="StyleBoxFlat" id=7]
@@ -165,18 +167,11 @@ zoom = Vector2( 0.7, 0.7 )
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
 
-[node name="ColorRect" type="ColorRect" parent="UI"]
-margin_left = 12.0
-margin_top = 767.0
-margin_right = 181.0
-margin_bottom = 880.0
-color = Color( 0, 0, 0, 0.298039 )
-
 [node name="Reset" type="Button" parent="UI"]
 margin_left = 21.0
-margin_top = 301.0
-margin_right = 156.0
-margin_bottom = 361.0
+margin_top = 312.0
+margin_right = 300.0
+margin_bottom = 394.0
 rect_min_size = Vector2( 48, 48 )
 focus_neighbour_right = NodePath("../New")
 focus_next = NodePath("../New")
@@ -185,14 +180,16 @@ shortcut = SubResource( 2 )
 text = "RESET"
 
 [node name="Race" type="Button" parent="UI"]
-margin_left = 21.0
-margin_top = 395.0
-margin_right = 261.0
-margin_bottom = 455.0
+margin_left = 1349.0
+margin_top = 36.0
+margin_right = 1887.0
+margin_bottom = 105.0
 rect_min_size = Vector2( 0, 48 )
 focus_neighbour_left = NodePath("../New")
 focus_next = NodePath("../Money")
 focus_previous = NodePath("../New")
+custom_styles/hover = ExtResource( 15 )
+custom_styles/normal = ExtResource( 14 )
 shortcut = SubResource( 6 )
 text = "RACE ($5) "
 
@@ -207,10 +204,10 @@ editor_only = false
 
 [node name="New" type="Button" parent="UI"]
 margin_left = 21.0
-margin_top = 197.0
+margin_top = 215.0
 margin_right = 300.0
-margin_bottom = 257.0
-rect_min_size = Vector2( 0, 48 )
+margin_bottom = 297.0
+rect_min_size = Vector2( 82, 48 )
 focus_neighbour_left = NodePath("../Reset")
 focus_neighbour_right = NodePath("../Race")
 focus_next = NodePath("../Race")
@@ -218,29 +215,35 @@ focus_previous = NodePath("../Reset")
 shortcut = SubResource( 4 )
 text = "NEW CHICKEN ($10)"
 
+[node name="ColorRect" type="ColorRect" parent="UI"]
+margin_left = 16.0
+margin_top = 893.0
+margin_right = 219.0
+margin_bottom = 1043.0
+color = Color( 0, 0, 0, 0.298039 )
+
 [node name="Money" type="Label" parent="UI"]
-margin_left = 12.0
-margin_top = 848.0
-margin_right = 162.0
-margin_bottom = 880.0
+margin_left = 32.0
+margin_top = 996.0
+margin_right = 182.0
+margin_bottom = 1028.0
 focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
 text = "Money: $100"
 
 [node name="Food" type="Label" parent="UI"]
-margin_left = 12.0
-margin_top = 767.0
-margin_right = 100.0
-margin_bottom = 799.0
+margin_left = 32.0
+margin_top = 901.0
+margin_right = 120.0
+margin_bottom = 933.0
 focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
 text = "Food:"
 
 [node name="Panel" type="PanelContainer" parent="UI/Food"]
-margin_left = 7.0
-margin_top = 32.0
-margin_right = 88.0
-margin_bottom = 72.0
+margin_top = 36.0
+margin_right = 81.0
+margin_bottom = 76.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 8 )
@@ -271,11 +274,20 @@ margin_right = 106.0
 margin_bottom = 36.0
 food_type = 2
 
+[node name="Label" type="Label" parent="UI/Food/Panel/FoodBox"]
+visible = false
+margin_left = 55.0
+margin_top = 2.0
+margin_right = 165.0
+margin_bottom = 34.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "NO FOOD"
+
 [node name="StatsPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -380.0
-margin_top = 152.0
+margin_top = 118.0
 margin_right = -37.0
 margin_bottom = 793.0
 mouse_filter = 2
@@ -303,35 +315,34 @@ max_length = 17
 margin_left = 38.0
 margin_top = 329.0
 margin_right = 290.0
-margin_bottom = 509.0
+margin_bottom = 516.0
 text = "Breed: brown
 Wins: 5 
 Fatigue: 3
 5 days old
-Speed:  400
-"
+Speed:  400"
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
-margin_left = 6.0
-margin_top = 497.0
-margin_right = 167.0
-margin_bottom = 560.0
+margin_left = 181.0
+margin_top = 525.0
+margin_right = 336.0
+margin_bottom = 588.0
 rect_min_size = Vector2( 0, 48 )
 text = "Set as Racer"
 
 [node name="Sell" type="Button" parent="UI/StatsPanel"]
-margin_left = 176.0
-margin_top = 497.0
-margin_right = 332.0
-margin_bottom = 560.0
+margin_left = 10.0
+margin_top = 525.0
+margin_right = 166.0
+margin_bottom = 588.0
 rect_min_size = Vector2( 0, 48 )
 text = "Sell ($5)"
 
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
-margin_left = 6.0
-margin_top = 572.0
-margin_right = 270.0
-margin_bottom = 633.0
+margin_left = 10.0
+margin_top = 603.0
+margin_right = 274.0
+margin_bottom = 664.0
 rect_min_size = Vector2( 0, 48 )
 text = "Breed Chicken"
 
@@ -344,42 +355,41 @@ icon = ExtResource( 11 )
 
 [node name="Info" type="Button" parent="UI"]
 margin_left = 21.0
-margin_top = 589.0
-margin_right = 87.0
-margin_bottom = 649.0
+margin_top = 507.0
+margin_right = 300.0
+margin_bottom = 589.0
 icon = ExtResource( 10 )
 icon_align = 1
 
 [node name="Shop" type="Button" parent="UI"]
 margin_left = 21.0
 margin_top = 118.0
-margin_right = 112.0
-margin_bottom = 166.0
-rect_min_size = Vector2( 0, 48 )
+margin_right = 300.0
+margin_bottom = 200.0
+rect_min_size = Vector2( 82, 48 )
 text = "Shop"
 
 [node name="PettingZoo" type="Button" parent="UI"]
-margin_left = 143.0
-margin_top = 118.0
-margin_right = 332.0
-margin_bottom = 166.0
+margin_left = 21.0
+margin_top = 701.0
+margin_right = 300.0
+margin_bottom = 783.0
 rect_min_size = Vector2( 0, 48 )
 text = "Petting Zoo"
 
 [node name="LeagueRace" type="Button" parent="UI"]
-margin_left = 16.0
-margin_top = 672.0
-margin_right = 226.0
-margin_bottom = 736.0
+margin_left = 21.0
+margin_top = 604.0
+margin_right = 300.0
+margin_bottom = 686.0
 rect_min_size = Vector2( 0, 48 )
-disabled = true
 text = "League Race"
 
 [node name="WebChickens" type="Button" parent="UI"]
 margin_left = 21.0
-margin_top = 493.0
-margin_right = 226.0
-margin_bottom = 558.0
+margin_top = 409.0
+margin_right = 300.0
+margin_bottom = 491.0
 rect_min_size = Vector2( 0, 48 )
 text = "WebChickens"
 

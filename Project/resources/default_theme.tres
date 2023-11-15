@@ -5,7 +5,7 @@
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.1682, 0.19053, 0.29, 1 )
 
-[sub_resource type="StyleBoxFlat" id=4]
+[sub_resource type="StyleBoxFlat" id=8]
 bg_color = Color( 0.32549, 0.352941, 0.458824, 1 )
 border_width_left = 2
 border_width_top = 2
@@ -55,7 +55,7 @@ font_data = ExtResource( 1 )
 [resource]
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.509804 )
 Button/styles/disabled = SubResource( 5 )
-Button/styles/hover = SubResource( 4 )
+Button/styles/hover = SubResource( 8 )
 Button/styles/normal = SubResource( 3 )
 LinkButton/colors/font_color_focus = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_hover = Color( 0.564706, 0.545098, 0.960784, 1 )

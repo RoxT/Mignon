@@ -160,6 +160,7 @@ func update_money():
 	$UI/Money.text = "Money: $" + str(save_game.money)
 
 func update_food_box():
+	food_box.get_node("Label").visible = save_game.foods == [0,0,0]
 	food_box.get_node("BEST").count = save_game.foods[AllChickens.FOOD_TYPES.BEST]
 	food_box.get_node("GOOD").count = save_game.foods[AllChickens.FOOD_TYPES.GOOD]
 	food_box.get_node("BASIC").count = save_game.foods[AllChickens.FOOD_TYPES.BASIC]

@@ -64,6 +64,7 @@ func refresh_UI():
 	$UI/Food/Panel/FoodBox/GOOD.count = save_game.foods[save_game.FOOD_TYPES.GOOD]
 	$UI/Food/Panel/FoodBox/BASIC.count = save_game.foods[save_game.FOOD_TYPES.BASIC]
 	
+	$UI/Food/Panel/FoodBox/Label.visible = save_game.foods == [0,0,0]
 	$BuyBasic.text = "Buy $" + str(BASIC_PRICE*multiplier())
 	$BuyGood.text = "Buy $" + str(GOOD_PRICE*multiplier())
 	$BuyBest.text = "Buy $" + str(BEST_PRICE*multiplier())
