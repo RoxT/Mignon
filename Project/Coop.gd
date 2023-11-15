@@ -62,6 +62,8 @@ func _ready():
 			marked = chicken
 		chicken.pen = Rect2(pen.rect_position, pen.rect_size)
 		chicken.zoom = camera.zoom.x
+		if save_game.last_racer == stats:
+			select_chicken(chicken)
 
 		var sorted:Array = get_tree().get_nodes_in_group("meander")
 		if sorted.size() >= 3:
@@ -89,6 +91,15 @@ func add_badge(chicken, rank):
 		chicken.add_child(b)
 
 func _on_chicken_clicked(chicken:Node):
+	select_chicken(chicken)
+	if not chicken.stats.is_chick():
+		get_tree().call_group("drop", "show")
+		set_race_text(chicken)
+		if chicken.breeding == true:
+			_on_StatsPanel_requested_breed(chicken)
+			
+func select_chicken(chicken:Node):
+	if chicken == null:return
 	selected = chicken
 	selected_dot.get_parent().remove_child(selected_dot)
 	selected.add_child(selected_dot)
@@ -96,11 +107,6 @@ func _on_chicken_clicked(chicken:Node):
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 	if get_adult_chicken(chicken) == null:
 		$UI/StatsPanel.stop_sell(true)
-	if not chicken.stats.is_chick():
-		get_tree().call_group("drop", "show")
-		set_race_text(chicken)
-		if chicken.breeding == true:
-			_on_StatsPanel_requested_breed(chicken)
 
 func _on_chicken_unclicked(chicken:Node):
 	var drops:= get_tree().get_nodes_in_group("drop")

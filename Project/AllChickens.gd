@@ -14,6 +14,7 @@ export(int) var day
 export(int) var wins
 export(int) var losses
 export(Dictionary) var discovered
+export(Resource) var last_racer
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -23,7 +24,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = generate_new_discovered()):
+func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = generate_new_discovered(), new_last_racer=null):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -38,6 +39,7 @@ func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_dea
 	wins = new_wins
 	losses = new_losses
 	discovered = new_discovered
+	last_racer = new_last_racer
 		
 func pass_day():
 	day += 1
@@ -80,8 +82,17 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 				if subkey == b.breed:
 					breed = M.pairs[key][subkey]
 					discovered[breed] = true
+					bonus += 5
 	if not breed: breed = one_of_two(a, b, "breed")
-	return Chicken.new(one_of_two(a, b, "top_speed")+bonus, Chicken.random_name(), 0, one_of_two(a, b, "colour"), one_of_two(a, b, "farm"), 2, breed)
+	
+	return Chicken.new(
+		round(one_of_two(a, b, "top_speed")+bonus), 
+		Chicken.random_name(), 
+		0, 
+		one_of_two(a, b, "colour"), 
+		one_of_two(a, b, "farm"), 
+		2, 
+		breed)
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
 	return [a.get(property), b.get(property)][randi()%2]

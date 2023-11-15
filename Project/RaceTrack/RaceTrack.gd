@@ -17,10 +17,10 @@ func _ready():
 	if AllChickens.exists():
 		save_game = load(AllChickens.PATH)
 	else:
-		save_game = AllChickens.new()
-		save_game.save()
+		push_error("No save file found")
 	var first_chicken:Chicken
 	first_chicken = save_game.temp_racer if save_game.temp_racer else save_game.racer
+	save_game.last_racer = first_chicken
 	first_chicken.boost = save_game.speed_boost
 	speed_guess = first_chicken.get_speed()
 	save_game.speed_boost = 1.0

@@ -70,6 +70,7 @@ __meta__ = {
 }
 
 [node name="building_view" type="TextureRect" parent="."]
+visible = false
 margin_left = 231.0
 margin_top = 229.0
 margin_right = 1309.0
@@ -91,10 +92,10 @@ layer = -1
 
 [node name="Large" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 437.0
-margin_top = 190.0
-margin_right = 1515.0
-margin_bottom = 976.0
+margin_left = 461.0
+margin_top = 257.0
+margin_right = 1539.0
+margin_bottom = 1043.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 __meta__ = {
@@ -106,9 +107,9 @@ position = Vector2( 0, 58 )
 
 [node name="Medium" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 547.0
+margin_left = 542.0
 margin_top = 392.0
-margin_right = 1339.0
+margin_right = 1334.0
 margin_bottom = 942.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
@@ -118,10 +119,10 @@ position = Vector2( 0, 72 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 640.0
-margin_top = 454.0
-margin_right = 1281.0
-margin_bottom = 822.0
+margin_left = 632.0
+margin_top = 540.0
+margin_right = 1273.0
+margin_bottom = 908.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 __meta__ = {
