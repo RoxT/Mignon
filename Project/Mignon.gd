@@ -18,9 +18,6 @@ const BREEDS_LIST := [
 	WHITE, BROWN, MOTTLED, FLOOF, BIGGER_FLOOF, BROWN_ROOSTER
 ]
 
-	
-
-
 const pairs := {WHITE: {
 					BROWN: MOTTLED, 
 					FLOOF: BIGGER_FLOOF},
@@ -34,6 +31,12 @@ const pairs := {WHITE: {
 					BROWN: BROWN_ROOSTER,
 					WHITE: BIGGER_FLOOF}
 				}
+
+static func get_uncommon_list()->Array:
+	var u := BREEDS_LIST.duplicate()
+	for d in DEFUALT_BREEDS:
+		u.erase(d)
+	return u
 
 static func parents(breed:String)->Array:
 	for a in pairs.keys():

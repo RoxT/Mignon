@@ -8,6 +8,7 @@ onready var Floater:PackedScene = preload("res://Common/Floater.tscn")
 onready var Wow:Texture = preload("res://PettingZoo/speech_bubble_WOW.png")
 var thoughts := []
 onready var child:bool = $ChickenSearch/CollisionShape2D.shape.radius < 50
+var rare_breeds:Array
 
 const PET := "I pet the chicken!"
 const SOFT := "So soft..."
@@ -19,15 +20,13 @@ const TIRED := "That chicken looks tired"
 const FAST := "So fast..."
 const SEE := "Did you see that!?"
 const ADULT_THOGUHTS := [FAST, SEE]
-const BREED := "Is that a rare breed?"
-const RARE := ["floof", "bigger floof"]
+const BREED_THOUGHTS := ["Is that a rare breed?", "What is that?", "Is that a duck?"]
 
 signal clicked(child, thoughts)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	add_to_group("Human")
-	pass
+	rare_breeds = M.get_uncommon_list()
 		
 
 func _on_ChickenSearch_area_entered(area:Area2D):
@@ -51,9 +50,8 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 		elif chicken.meander > 150:
 			add_child(wow)
 			thought = ADULT_THOGUHTS[randi()%ADULT_THOGUHTS.size()]
-			if RARE.find(chicken.stats.breed) >= 0:
-				if randf() > 0.5:
-					thought = BREED
+			if chicken.stats.breed in rare_breeds and randf() < 0.2:
+				thought = rare_breeds[randi()%rare_breeds.size()]
 			thoughts.append(thought)
 
 func _on_Peon_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):

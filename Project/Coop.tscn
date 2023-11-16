@@ -183,7 +183,7 @@ text = "RESET"
 margin_left = 1349.0
 margin_top = 36.0
 margin_right = 1887.0
-margin_bottom = 105.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 0, 48 )
 focus_neighbour_left = NodePath("../New")
 focus_next = NodePath("../Money")
@@ -370,12 +370,14 @@ rect_min_size = Vector2( 82, 48 )
 text = "Shop"
 
 [node name="PettingZoo" type="Button" parent="UI"]
-margin_left = 21.0
-margin_top = 701.0
-margin_right = 300.0
-margin_bottom = 783.0
+margin_left = 963.0
+margin_top = 36.0
+margin_right = 1270.0
+margin_bottom = 118.0
 rect_min_size = Vector2( 0, 48 )
-text = "Petting Zoo"
+custom_styles/hover = ExtResource( 15 )
+custom_styles/normal = ExtResource( 14 )
+text = "Start Petting Zoo"
 
 [node name="LeagueRace" type="Button" parent="UI"]
 margin_left = 21.0

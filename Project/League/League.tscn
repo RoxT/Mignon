@@ -1,11 +1,14 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://League/League.gd" type="Script" id=1]
 
 [node name="League" type="Node2D"]
+script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 109.0
+margin_left = 295.0
 margin_top = 33.0
-margin_right = 1321.0
+margin_right = 1507.0
 margin_bottom = 819.0
 
 [node name="Label" type="Label" parent="Panel"]
@@ -29,7 +32,12 @@ text = "Three days of races, if you want to win you must win them all.
 margin_top = 86.0
 margin_right = 1212.0
 margin_bottom = 786.0
-text = "Dear Diary,
-I'm really doing it. My cousin got me three racing chickens. I put down some turf and straw on the balcony of my apartment and put up a flag so you can't see them from the street. I found a great website, ChickenWeb, about rasing and racing them. I drove out to the farm store for food and they gave me a sample pack of 5 days of their specialty grasses. 
-The fastest chicken I got  is Mignon. My cousin said she's the offspring of a chicken from the famous Vanchokens racing farm that didn't meet expectations so she was cheap. There's a race every day, I guess Ill see how she does!"
+text = "TBD ;)"
 autowrap = true
+
+[node name="ToCoop" type="Button" parent="."]
+margin_right = 240.0
+margin_bottom = 100.0
+text = "<-- Back To Coop"
+
+[connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]

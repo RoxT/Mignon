@@ -14,12 +14,24 @@ var fatigue_penalty := false
 var many_fatigue_penalty := false
 const FATIGUE_MULTIPLIER := 0.80
 const MANY_FATIGUE_MULIPLIER := 0.4
+const FLUSH_MULTIPLIER := 1.7
+const TWO_PAIR_MULTIPLIER := 1.5
+const RAINBOW_MODIFIER := 1.2
+const MANY_BREEDS_MODIFIER := 1.15
+const ALL_BREEDS_MODIFIER := 1.2
+var uncommon_chickens := 0
+var uncommon_breeds:Array = M.get_uncommon_list().duplicate()
 var modifiers := []
 var total:float
 var pen_modifier := 1.0
+var breeds := []
+var colours:= []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$UI/PeonStatsPanel/RichTextStats.text = "Click on a guest to see what they're saying"
+	$UI/PeonStatsPanel/RichTextStats.show()
+	
 	var chicken_stats := []
 	save_game = load(AllChickens.PATH) as AllChickens
 	save_game.save()
@@ -50,10 +62,23 @@ func _ready():
 		var rect := pen.get_rect()
 		chicken.pen = rect
 		chicken.position = Vector2(rand_range(rect.position.x, rect.position.x + rect.size.x), rand_range(rect.position.y, rect.position.y + rect.size.y))
+		if not stats.breed in breeds: 
+			breeds.append(stats.breed)
+		if not stats.colour in colours: 
+			colours.append(stats.colour)
+		
+		
 		if stats.top_speed >= 280:
 			adult_count += 1
+			if uncommon_breeds.has(stats.breed):
+				uncommon_chickens += 1
+				adult_count += 1			
 		else:
 			child_count += 1
+			if uncommon_breeds.has(stats.breed):
+				uncommon_chickens += 1
+				child_count += 1
+		
 		if stats.is_chick():
 			if stats.fatigue >= 5:
 				tired += 1
@@ -67,27 +92,64 @@ func _ready():
 	elif tired >= 2:
 		fatigue_penalty = true
 		modifiers.append(FATIGUE_MULTIPLIER)
-	save_game.save()
+	
+	if breeds.size() == 1:
+		modifiers.append(FLUSH_MULTIPLIER)
+	elif breeds.size() == 2:
+		modifiers.append(TWO_PAIR_MULTIPLIER)
+	elif breeds.size() == M.BREEDS_LIST.size():
+		modifiers.append(ALL_BREEDS_MODIFIER)
+	elif breeds.size() > 0.5 * M.BREEDS_LIST.size():
+		modifiers.append(MANY_BREEDS_MODIFIER)
+		
+	if breeds.size() >= 5:
+		modifiers.append(RAINBOW_MODIFIER)
+		
+	total = adult_count + child_count
+	for m in modifiers:
+		total *= m
 
 func _on_chicken_clicked(chicken:Node2D):
 		$UI/PeonStatsPanel.stats = chicken.stats
 		
 func multiplier_to_str(value:float)->String:
-	return str( (1.0-value) * 100) + "%"
+	var text := str( -(1.0-value) * 100) + "%"
+	if value > 1:
+		text = "+" + text
+	return text
+
+func add_line_to_report(text:String, multiplier:float):
+	final_report.add_text(text + multiplier_to_str(multiplier))
+	final_report.newline()
 		
 func _add_human(count:int, rate:float):
 	if count <= 0:
 		final_report.clear()
 		if fatigue_penalty:
-			final_report.add_text("Tired Chickens: -" + multiplier_to_str(FATIGUE_MULTIPLIER))
+			final_report.add_text("Tired Chickens: " + multiplier_to_str(FATIGUE_MULTIPLIER))
 			final_report.newline()
 		if many_fatigue_penalty:
-			final_report.add_text("Most Chickens Tired: -" + multiplier_to_str(MANY_FATIGUE_MULIPLIER))
+			final_report.add_text("Most Chickens Tired: " + multiplier_to_str(MANY_FATIGUE_MULIPLIER))
 			final_report.newline()
+		if breeds.size() == 1:
+			add_line_to_report("All " + breeds[0].capitalize() + " chickens: ", FLUSH_MULTIPLIER)
+		elif breeds.size() == 2:
+			var line := "All %s and %s: "
+			add_line_to_report(
+				line % [breeds[0].capitalize(), breeds[1].capitalize()], 
+				TWO_PAIR_MULTIPLIER)
+		elif breeds.size() == M.BREEDS_LIST.size():
+			add_line_to_report("Every breed of chicken: ", ALL_BREEDS_MODIFIER)
+		elif breeds.size() >= 0.5 * M.BREEDS_LIST.size():
+			add_line_to_report("Differnet kinds of chickens: ", MANY_BREEDS_MODIFIER)
+		if colours.size() >= 5:
+			add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
+
 		final_report.add_text("Total Guests: " + str(round(total)))
 		for stats in save_game.get_all():
 			stats.fatigue += 1
-	if count > 0:
+	
+	else:
 		var peon:Node2D
 		if randf() <= rate:
 			peon = Adult.instance()
@@ -108,7 +170,8 @@ func _add_human(count:int, rate:float):
 		t.one_shot = true
 		add_child(t)
 		t.start(rand_range(0.7, 1.7) * pen_modifier)
-		
+
+
 
 func _on_ToCoop_pressed():
 	save_game.money += report.collect_money()
@@ -125,7 +188,4 @@ func _on_ToCoop_pressed():
 
 func _on_Start_timeout():
 	var rate:float = adult_count/(adult_count+child_count)
-	total = adult_count + child_count
-	for m in modifiers:
-		total *= m
 	_add_human(round(total), rate)

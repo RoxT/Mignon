@@ -10,6 +10,8 @@ var RACING := "[b]RACING[/b]\n\nThere are two kinds of races, the kind that happ
 
 var BREEDING := "[b]BREEDING[/b]\n\nRacing chickens need very little to get in the mood - just a private spot a some dark lighting. If you have a breeding pen you just need to put two chickens there and wait. The more tired they are the longer you may have to wait. Once they have laid an egg they'll need undisturbed time with it but once the chick is born the 'family' will seek out their old friends on their own.\n\nEach of a chick's traits (colour, breed, and speed) is inherited from one parrent or the other. \n\nSpeed is more complicated than one simple gene and might be slightly different from it's parent, usually chicks born on your farm will be faster than the parent they inherited speed from. The only way to know for sure what your new chick's speed is is to race it when it's fully rested and eating plain food.\n\nGenes for breed sometimes combine to make somthing new instead of being just one or the other - you should take notes of what you've discovered. This is called hybridizing and the resulting chick will often be a little faster.\n\nColour is the most straight forward trait. Chicks inherit one or the other parent's colour variation, but it will look different on different breeds."
 
+const PETTING_ZOO := "[b]PETTING ZOO[/b]\n\nTo earn extra money and get a sense of your farm you can open it up to visitors. Visitors will find any excuse to see your chickens and once the doors are closed you can make a report of what you've seen. Admission is the same but adults come to see the fast chickens and children prefer slower ones they can pet."
+
 var CHICKEN_COUNT := "[b]Day %s[/b]\nChickens in coop: %s\n"
 var WINS_AND_LOSSES := "Wins: %s\nLosses: %s\n"
 var RIVAL := "%s (%s wins against you) from %s"
@@ -95,3 +97,9 @@ func add_beast(breed:String, i:int):
 	content.add_child(beast)
 	beast.rect_position.y = i * 128
 	
+
+
+func _on_PettingZoo_toggled(button_pressed):
+	if button_pressed:
+		switch_to($Links/PettingZoo)
+		content.bbcode_text = PETTING_ZOO

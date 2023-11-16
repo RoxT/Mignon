@@ -36,8 +36,8 @@ editor_only = false
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 17.0
 margin_top = 51.0
-margin_right = 195.0
-margin_bottom = 87.0
+margin_right = 199.0
+margin_bottom = 149.0
 text = "< Back to Coop"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -253,9 +253,18 @@ theme_type_variation = "LinkButton2"
 toggle_mode = true
 text = "Beastiary"
 
+[node name="PettingZoo" type="LinkButton" parent="Links"]
+margin_left = 1269.0
+margin_top = 117.0
+margin_right = 1415.0
+margin_bottom = 149.0
+toggle_mode = true
+text = "Petting Zoo"
+
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
 [connection signal="toggled" from="Links/Diary" to="." method="_on_Diary_toggled"]
 [connection signal="toggled" from="Links/Care" to="." method="_on_Care_toggled"]
 [connection signal="toggled" from="Links/Racing" to="." method="_on_Racing_toggled"]
 [connection signal="toggled" from="Links/Breeding" to="." method="_on_Breeding_toggled"]
 [connection signal="toggled" from="Links/Beastiary" to="." method="_on_Beastiary_toggled"]
+[connection signal="toggled" from="Links/PettingZoo" to="." method="_on_PettingZoo_toggled"]
