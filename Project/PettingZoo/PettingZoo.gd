@@ -14,7 +14,7 @@ var fatigue_penalty := false
 var many_fatigue_penalty := false
 const FATIGUE_MULTIPLIER := 0.80
 const MANY_FATIGUE_MULIPLIER := 0.4
-const FLUSH_MULTIPLIER := 1.7
+const FLUSH_MULTIPLIER := 1.6
 const TWO_PAIR_MULTIPLIER := 1.5
 const RAINBOW_MODIFIER := 1.2
 const MANY_BREEDS_MODIFIER := 1.15
@@ -147,7 +147,7 @@ func _add_human(count:int, rate:float):
 
 		final_report.add_text("Total Guests: " + str(round(total)))
 		for stats in save_game.get_all():
-			stats.fatigue += 1
+			stats.tire(1)
 	
 	else:
 		var peon:Node2D

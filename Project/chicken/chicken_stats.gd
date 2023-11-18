@@ -33,6 +33,9 @@ func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 
 
 func is_chick()->bool:
 	return age < 2
+	
+func is_mature()->bool:
+	return age > 20
 
 func get_speed()->int:
 	
@@ -41,6 +44,11 @@ func get_speed()->int:
 
 func is_exhausted()->bool:
 	return fatigue >= 3 and get_speed() <= LOW_SPEED
+	
+func tire(amount:int):
+	fatigue += amount
+	if is_mature(): 
+		fatigue += 1
 	
 func set_speed_guess(value:float):
 	if speed_guess == top_speed: return
@@ -68,8 +76,17 @@ func _random_colour()->Color:
 func _random_breed()->String:
 	return M.DEFUALT_BREEDS[randi() % M.DEFUALT_BREEDS.size()]
 
-func get_sprite_frames()->SpriteFrames:
-	return load(TEXTURE_PATH % breed) as SpriteFrames
+func apply_sprite(sprite:AnimatedSprite):
+	sprite.frames = load(TEXTURE_PATH % breed) as SpriteFrames
+	sprite.modulate = colour
+	if is_mature():
+		if breed == M.WHITE:
+			sprite.modulate.b += 0.1
+			sprite.modulate.g += 0.1 
+			sprite.modulate.r += 0.1 
+		sprite.material = preload("res://chicken/mature_shader_material.tres")
+	else:
+		sprite.material = null
 
 func _to_string():
 	var text := ""

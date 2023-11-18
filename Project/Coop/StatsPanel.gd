@@ -72,6 +72,8 @@ func set_stats(value:Chicken):
 		block.add_text("%s day%s old" % [str(stats.age), "" if stats.age == 1 else "s"])
 		if stats.is_chick():
 			block.add_text(" (chick)")
+		elif stats.is_mature():
+			block.add_text(" (mature)")
 		block.newline()
 		if stats.speed_guess == -1:
 			block.add_text("Speed: ???")

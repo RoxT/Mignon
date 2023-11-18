@@ -55,10 +55,9 @@ func random_meander(pos:float)->float:
 
 func set_stats(value:Chicken):
 	stats = value
-	modulate = stats.colour
 	top_speed = stats.get_speed()
 	set_label()
-	frames = stats.get_sprite_frames()
+	value.apply_sprite(self)
 
 func set_label():
 	if label:

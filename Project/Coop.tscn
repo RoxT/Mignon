@@ -181,9 +181,9 @@ text = "RESET"
 
 [node name="Race" type="Button" parent="UI"]
 margin_left = 1349.0
-margin_top = 36.0
+margin_top = 27.0
 margin_right = 1887.0
-margin_bottom = 118.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 48 )
 focus_neighbour_left = NodePath("../New")
 focus_next = NodePath("../Money")
@@ -194,12 +194,12 @@ shortcut = SubResource( 6 )
 text = "RACE ($5) "
 
 [node name="Drop" type="ReferenceRect" parent="UI/Race" groups=["drop"]]
-visible = false
-margin_left = -13.0
-margin_top = -12.0
-margin_right = 254.0
-margin_bottom = 61.0
+margin_left = -4.0
+margin_top = -4.0
+margin_right = 541.0
+margin_bottom = 86.0
 border_color = Color( 0.964706, 0.905882, 0.588235, 1 )
+border_width = 3.0
 editor_only = false
 
 [node name="New" type="Button" parent="UI"]
@@ -413,9 +413,9 @@ texture = ExtResource( 16 )
 layer = -1
 
 [node name="PenRect" type="ReferenceRect" parent="BreedingPen"]
-margin_left = 1540.0
+margin_left = 1545.0
 margin_top = 799.0
-margin_right = 1879.0
+margin_right = 1884.0
 margin_bottom = 1049.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
@@ -426,9 +426,12 @@ border_width = 3.0
 one_shot = true
 
 [node name="Drop" type="ReferenceRect" parent="BreedingPen/PenRect" groups=["drop"]]
-margin_right = 340.0
-margin_bottom = 250.0
-border_color = Color( 1, 0.901961, 0.709804, 1 )
+margin_left = -4.0
+margin_top = -2.0
+margin_right = 341.0
+margin_bottom = 253.0
+border_color = Color( 0.964706, 0.905882, 0.588235, 1 )
+border_width = 3.0
 editor_only = false
 
 [node name="Birthing" type="Timer" parent="BreedingPen/PenRect"]

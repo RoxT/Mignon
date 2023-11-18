@@ -114,7 +114,6 @@ func _on_chicken_unclicked(chicken:Node):
 		var d:ReferenceRect = drop as ReferenceRect
 		if  d.get_global_rect().has_point(get_viewport().get_mouse_position()):
 			var place:String = d.get_parent().name
-			print("Dropped chicken in " + place)
 			if place == "Race": _on_Race_pressed(chicken)
 			elif place == "PenRect": _on_StatsPanel_requested_breed(chicken)
 			break
@@ -237,7 +236,7 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		mate2 = null
 	if mate and mate2:
 		var fatigue = max(mate.stats.fatigue, mate2.stats.fatigue)
-		mating.start(rand_range(2, 5) * (1 + fatigue))
+		mating.start(rand_range(1, 3) * (1 + fatigue))
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 
 func remove_dot(dot:Node):
@@ -268,10 +267,10 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	baby.age = 0
 	
 	_on_New_pressed(baby, egg.position)
-	mate.stats.fatigue += 1
+	mate.stats.tire(1)
 	mate.breeding = false
 	mate.wait()
-	mate2.stats.fatigue += 1
+	mate2.stats.tire(1)
 	mate2.breeding = false
 	mate2.wait()
 	remove_dot(mate_dot)

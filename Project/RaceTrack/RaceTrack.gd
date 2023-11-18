@@ -58,7 +58,7 @@ func _on_racer_finished():
 		$CL/Lost.show()
 		save_game.losses += 1
 	if not has_tired:
-		your_chicken.stats.fatigue += 2
+		your_chicken.stats.tire(2)
 	has_tired = true
 	your_chicken.stats.speed_guess = speed_guess
 	save_game.save()
@@ -75,7 +75,7 @@ func add_lane(stats:Chicken):
 	track += 1
 
 func _on_ToCoop_pressed():
-	if not has_tired: $Lane/Racer.stats.fatigue += 2
+	if not has_tired: $Lane/Racer.stats.tire(2)
 	save_game.pass_day()
 	var err := get_tree().change_scene("res://Coop.tscn")
 	if err != OK:
