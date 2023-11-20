@@ -2,7 +2,7 @@ extends AnimatedSprite
 
 onready var sweat := $Sweat
 
-onready var FINISH_LINE:int = ProjectSettings.get_setting("display/window/size/width")-64
+export(float) var finish_line = 0.0
 
 export(Resource) var stats setget set_stats
 var speed
@@ -14,6 +14,7 @@ func _ready():
 	pass
 	
 func start():
+	assert(finish_line != 0.0)
 	set_process(true)
 	if stats.fatigue > 0:
 		sweat.show()
@@ -39,7 +40,7 @@ func stop():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	position.x += speed * delta
-	if position.x > FINISH_LINE:
+	if position.x > finish_line:
 		$Trophy.show()
 		stats.wins += 1
 		emit_signal("finished")

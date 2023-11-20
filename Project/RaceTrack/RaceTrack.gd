@@ -2,13 +2,14 @@ extends Node2D
 
 onready var Lane := preload("res://RaceTrack/Lane.tscn")
 
-const lane_offset_y := 112
+const lane_offset_y := 150
 const lane_separation_y := 192
 const lane_count := 4
 const winnings := 50
 var track := 0
 var has_tired := false
 var speed_guess := -1
+
 
 var save_game:AllChickens
 
@@ -24,7 +25,6 @@ func _ready():
 	first_chicken.boost = save_game.speed_boost
 	speed_guess = first_chicken.get_speed()
 	save_game.speed_boost = 1.0
-
 	add_lane(first_chicken)
 	var competition := save_game.get_competition(lane_count-1)
 	for c in competition:

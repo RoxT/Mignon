@@ -104,7 +104,7 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 		one_of_two(a, b, "farm"), 
 		2, 
 		breed,
-		[a.unique_no, b.unique_no, ],
+		lineage,
 		get_new_unique_no())
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
