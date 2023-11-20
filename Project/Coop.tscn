@@ -371,9 +371,9 @@ text = "Shop"
 
 [node name="PettingZoo" type="Button" parent="UI"]
 margin_left = 963.0
-margin_top = 36.0
+margin_top = 23.0
 margin_right = 1270.0
-margin_bottom = 118.0
+margin_bottom = 109.0
 rect_min_size = Vector2( 0, 48 )
 custom_styles/hover = ExtResource( 15 )
 custom_styles/normal = ExtResource( 14 )
@@ -451,7 +451,7 @@ expand = true
 
 [connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="UI/Race" to="." method="_on_Race_pressed"]
-[connection signal="pressed" from="UI/New" to="." method="_on_New_pressed"]
+[connection signal="pressed" from="UI/New" to="." method="_on_New_pressed" binds= [ true ]]
 [connection signal="chose_racer" from="UI/StatsPanel" to="." method="_on_StatsPanel_chose_racer"]
 [connection signal="edited" from="UI/StatsPanel" to="." method="_on_StatsPanel_edited"]
 [connection signal="requested_breed" from="UI/StatsPanel" to="." method="_on_StatsPanel_requested_breed"]

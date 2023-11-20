@@ -96,8 +96,12 @@ func set_mate(mate:Node, mate2:Node, birthing:=false):
 		breed_btn.text = breed_stop_str
 	elif mate2:
 		breed_btn.text = breed_with_str + mate2.stats.nom
+		if stats.is_related(mate2.stats):
+			breed_btn.disabled = true	
 	elif mate:
 		breed_btn.text = breed_with_str + mate.stats.nom
+		if stats.is_related(mate.stats):
+			breed_btn.disabled = true
 	else:
 		breed_btn.text = breed_str
 

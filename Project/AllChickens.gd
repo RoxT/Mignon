@@ -15,6 +15,7 @@ export(int) var wins
 export(int) var losses
 export(Dictionary) var discovered
 export(Resource) var last_racer
+export(int) var next_unique_no
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -24,7 +25,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer=null, new_pen="Starter", new_enemy_farms=generate_enemy_list(), new_foods=[0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = generate_new_discovered(), new_last_racer=null):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = [], new_last_racer=null, new_next_unique_no := 0):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -40,7 +41,13 @@ func _init(new_all = generate_mignon(), new_racer=null, new_money := 50, new_dea
 	losses = new_losses
 	discovered = new_discovered
 	last_racer = new_last_racer
-		
+	next_unique_no = new_next_unique_no
+
+func initialize_game():
+	all = generate_mignon()
+	enemy_farms = generate_enemy_list()
+	discovered = generate_new_discovered()
+
 func pass_day():
 	day += 1
 	speed_boost = 1
@@ -85,6 +92,10 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 					bonus += 5
 	if not breed: breed = one_of_two(a, b, "breed")
 	
+	var lineage := [a.unique_no, b.unique_no]
+	lineage.append_array(a.parents_grandparents.slice(0,1))
+	lineage.append_array(b.parents_grandparents.slice(0,1))
+	
 	return Chicken.new(
 		round(one_of_two(a, b, "top_speed")+bonus), 
 		Chicken.random_name(), 
@@ -92,7 +103,9 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 		one_of_two(a, b, "colour"), 
 		one_of_two(a, b, "farm"), 
 		2, 
-		breed)
+		breed,
+		[a.unique_no, b.unique_no, ],
+		get_new_unique_no())
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
 	return [a.get(property), b.get(property)][randi()%2]
@@ -110,6 +123,8 @@ func sell(chicken:Chicken, price:int):
 
 func add_chicken_stats(value:Chicken):
 	assert(value != null)
+	if value.unique_no < 0:
+		value.unique_no = get_new_unique_no()
 	all.append(value)
 	save()
 
@@ -122,6 +137,10 @@ func set_temp_racer(value:Resource):
 		temp_racer = value as Chicken
 	else: temp_racer = value
 	save()
+
+func get_new_unique_no()->int:
+	next_unique_no += 1
+	return next_unique_no
 
 func death(value:Chicken):
 	if racer == value:
@@ -167,16 +186,19 @@ func generate_mignon()->Array:
 	mignon.breed = "brown"
 	mignon.farm = YOU
 	mignon.nom = "Mignon"
+	mignon.unique_no = get_new_unique_no()
 	new_coop.append(mignon)
 	
 	var one := Chicken.new()
 	one.top_speed = 240
 	one.farm = YOU
+	one.unique_no = get_new_unique_no()
 	new_coop.append(one)
 	
 	var two := Chicken.new()
 	two.top_speed = 250
 	two.farm = YOU
+	two.unique_no = get_new_unique_no()
 	new_coop.append(two)
 	
 	return new_coop

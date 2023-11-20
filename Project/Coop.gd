@@ -28,6 +28,7 @@ func _ready():
 		save_game = load(AllChickens.PATH) as AllChickens
 	else:
 		save_game = AllChickens.new()
+		save_game.initialize_game()
 		print("New Game")
 	save_game.save()
 	
@@ -171,11 +172,12 @@ func _on_Reset_pressed():
 	if err != OK:
 		print("Error reseting game (loading coop)")
 
-func _on_New_pressed(stats:= Chicken.new(), new_pos:=Vector2(pen.rect_position.x, pen.rect_position.y)):
+func _on_New_pressed(paid:bool, stats:= Chicken.new(), new_pos:=Vector2(pen.rect_position.x, pen.rect_position.y)):
 	var new_chicken = preload("res://Coop/CoopChicken.tscn").instance()
 	stats.farm = "YOU"
 	new_chicken.stats = stats
-	save_game.money -= COST_NEW
+	if paid:
+		save_game.money -= COST_NEW
 	save_game.add_chicken_stats(stats)
 	update_money()
 	add_child(new_chicken)
@@ -207,6 +209,8 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		chicken = selected
 	if chicken.stats.is_chick(): return
 	if not mate:
+		if mate2 and chicken.stats.is_related(mate2.stats):
+			return
 		mate_dot.get_parent().remove_child(mate_dot)
 		mate = chicken
 		mate.add_child(mate_dot)
@@ -221,6 +225,8 @@ func _on_StatsPanel_requested_breed(chicken:Node=null):
 		remove_dot(mate_dot)
 		mate = null
 	elif not mate2:
+		if mate and chicken.stats.is_related(mate.stats):
+			return
 		mate_dot2.get_parent().remove_child(mate_dot2)
 		mate2 = chicken
 		mate2.add_child(mate_dot2)
@@ -266,7 +272,7 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	var baby:Chicken = save_game.do_mating(mate2.stats, mate.stats)
 	baby.age = 0
 	
-	_on_New_pressed(baby, egg.position)
+	_on_New_pressed(false, baby, egg.position)
 	mate.stats.tire(1)
 	mate.breeding = false
 	mate.wait()

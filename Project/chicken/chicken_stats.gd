@@ -8,10 +8,12 @@ export(int) var top_speed
 export(Color) var colour
 export(String) var farm
 export(String) var breed
+export(int) var unique_no
 
 export(int) var wins
 export(int) var fatigue
 export(int) var age
+export(Array) var parents_grandparents
 var boost := 1.0
 export(float)var speed_guess setget set_speed_guess
 
@@ -20,7 +22,7 @@ const TEXTURE_PATH := "res://chicken/breeds/%s_spf.tres"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_age:=2, new_speed_guess=-1.0):
+func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_parents_grandparents = [], new_unique_no := -1, new_age:=2, new_speed_guess=-1.0):
 	top_speed = new_top_speed
 	nom = new_nom
 	wins = new_wins
@@ -30,6 +32,8 @@ func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 
 	breed = new_breed
 	age = new_age
 	speed_guess = new_speed_guess
+	parents_grandparents = new_parents_grandparents
+	unique_no = new_unique_no
 
 func is_chick()->bool:
 	return age < 2
@@ -53,6 +57,17 @@ func tire(amount:int):
 func set_speed_guess(value:float):
 	if speed_guess == top_speed: return
 	speed_guess = value
+	
+func is_related(b:Chicken)->bool:
+	if b.parents_grandparents.has(unique_no):
+		return true
+	if parents_grandparents.has(b.unique_no):
+		return true
+	for p in parents_grandparents:
+		if b.parents_grandparents.has(p):
+			return true
+	return false
+	
 
 func get_bracket()->String:
 	if top_speed < 200: return "poor"
