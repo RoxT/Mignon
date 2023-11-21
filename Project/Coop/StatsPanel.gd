@@ -12,6 +12,7 @@ const breed_with_str := "Breed with "
 const breed_stop_str := "Stop Breeding"
 const portrait_scaling := Vector2(0.095, 0.095)
 const sell_str := "Sell ($%s)"
+const panel_box:StyleBoxFlat = preload("res://resources/panel_stats.tres")
 
 signal chose_racer
 signal requested_breed
@@ -31,6 +32,7 @@ func _ready():
 		set_stats(stats)
 
 func set_stats(value:Chicken):
+	add_stylebox_override("panel", panel_box)
 	if breed_btn:
 		$Sell.disabled = false
 		$Choose.disabled = false
@@ -72,6 +74,8 @@ func set_stats(value:Chicken):
 		block.add_text("%s day%s old" % [str(stats.age), "" if stats.age == 1 else "s"])
 		if stats.is_chick():
 			block.add_text(" (chick)")
+		elif stats.is_elderly():
+			block.add_text(" (elderly) ")
 		elif stats.is_mature():
 			block.add_text(" (mature)")
 		block.newline()
@@ -143,7 +147,10 @@ func get_price()->int:
 	var tired = 1-(stats.fatigue * 0.05)
 	if stats.wins == 0:
 		return int(5 * tired)
-	return 5 + int((stats.wins * 10) * tired)
+	if stats.is_famous():
+		return 5 + int((stats.wins * 20) * tired)
+	else:
+		return 5 + int((stats.wins * 10) * tired)
 
 func _on_Sell_pressed():
 	emit_signal("sell_requested", get_price())

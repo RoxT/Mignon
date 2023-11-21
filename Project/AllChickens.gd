@@ -10,12 +10,14 @@ export(String) var pen
 export(Array) var foods
 export(bool) var speed_boost
 export(bool) var has_day1
+export(bool) var has_hybrid
 export(int) var day
 export(int) var wins
 export(int) var losses
 export(Dictionary) var discovered
 export(Resource) var last_racer
 export(int) var next_unique_no
+export(Array) var events
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -25,7 +27,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = [], new_last_racer=null, new_next_unique_no := 0):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -42,6 +44,8 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	discovered = new_discovered
 	last_racer = new_last_racer
 	next_unique_no = new_next_unique_no
+	events = new_events
+	has_hybrid = new_has_hybrid
 
 func initialize_game():
 	all = generate_mignon()
@@ -83,13 +87,18 @@ func get_enemy_farms()->Array:
 func do_mating(a:Chicken, b:Chicken)->Chicken:
 	var bonus := rand_range(-2,5)
 	var breed
+	var nom = Chicken.random_name()
 	for key in M.pairs.keys():
 		if key == a.breed:
 			for subkey in M.pairs[key].keys():
 				if subkey == b.breed:
 					breed = M.pairs[key][subkey]
 					discovered[breed] = true
-					bonus += 5
+					bonus += 3
+					if not has_hybrid:
+						has_hybrid = true
+						events.append(Event.new(day, "HYBRID", 
+							[a.nom, b.nom, nom, breed.capitalize()]))
 	if not breed: breed = one_of_two(a, b, "breed")
 	
 	var lineage := [a.unique_no, b.unique_no]
@@ -98,7 +107,7 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 	
 	return Chicken.new(
 		round(one_of_two(a, b, "top_speed")+bonus), 
-		Chicken.random_name(), 
+		nom, 
 		0, 
 		one_of_two(a, b, "colour"), 
 		one_of_two(a, b, "farm"), 

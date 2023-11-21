@@ -14,6 +14,7 @@ func _ready():
 	if !save_game.has_day1:
 		player.play("Day1")
 		save_game.has_day1 = true
+		save_game.events.append(Event.new(save_game.day, "DIARY1"))
 		save_game.save()
 	else:
 		$Contents.visible_characters = -1

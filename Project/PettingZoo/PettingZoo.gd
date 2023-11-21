@@ -18,7 +18,8 @@ const FLUSH_MULTIPLIER := 1.6
 const TWO_PAIR_MULTIPLIER := 1.5
 const RAINBOW_MODIFIER := 1.2
 const MANY_BREEDS_MODIFIER := 1.15
-const ALL_BREEDS_MODIFIER := 1.2
+const ALL_BREEDS_MODIFIER := 1.22
+const FAMOUS_MULTIPLIER := 1.17
 var uncommon_chickens := 0
 var uncommon_breeds:Array = M.get_uncommon_list().duplicate()
 var modifiers := []
@@ -66,7 +67,8 @@ func _ready():
 			breeds.append(stats.breed)
 		if not stats.colour in colours: 
 			colours.append(stats.colour)
-		
+		if stats.wins >= 10:
+			modifiers.append(FAMOUS_MULTIPLIER)
 		
 		if stats.top_speed >= 280:
 			adult_count += 1
@@ -102,7 +104,7 @@ func _ready():
 	elif breeds.size() > 0.5 * M.BREEDS_LIST.size():
 		modifiers.append(MANY_BREEDS_MODIFIER)
 		
-	if breeds.size() >= 5:
+	if colours.size() >= 5:
 		modifiers.append(RAINBOW_MODIFIER)
 		
 	total = adult_count + child_count
@@ -125,23 +127,30 @@ func add_line_to_report(text:String, multiplier:float):
 func _add_human(count:int, rate:float):
 	if count <= 0:
 		final_report.clear()
-		if fatigue_penalty:
-			final_report.add_text("Tired Chickens: " + multiplier_to_str(FATIGUE_MULTIPLIER))
+		for mod in modifiers:
+			match(mod):
+				FATIGUE_MULTIPLIER:
+					final_report.add_text("Tired Chickens: " + multiplier_to_str(FATIGUE_MULTIPLIER))
+				MANY_FATIGUE_MULIPLIER:
+					final_report.add_text("Most Chickens Tired: " + multiplier_to_str(MANY_FATIGUE_MULIPLIER))
+				FLUSH_MULTIPLIER:
+					add_line_to_report("All " + breeds[0].capitalize() + " chickens: ", FLUSH_MULTIPLIER)
+				TWO_PAIR_MULTIPLIER:
+					var line := "All %s and %s: "
+					add_line_to_report(
+						line % [breeds[0].capitalize(), breeds[1].capitalize()], 
+					TWO_PAIR_MULTIPLIER)
+				ALL_BREEDS_MODIFIER:
+					add_line_to_report("Every breed of chicken: ", ALL_BREEDS_MODIFIER)
+				MANY_BREEDS_MODIFIER:
+					add_line_to_report("Differnet kinds of chickens: ", MANY_BREEDS_MODIFIER)
+				RAINBOW_MODIFIER:
+					add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
+				FAMOUS_MULTIPLIER:
+					add_line_to_report("Famous chicken: ", FAMOUS_MULTIPLIER)
+			
 			final_report.newline()
-		if many_fatigue_penalty:
-			final_report.add_text("Most Chickens Tired: " + multiplier_to_str(MANY_FATIGUE_MULIPLIER))
-			final_report.newline()
-		if breeds.size() == 1:
-			add_line_to_report("All " + breeds[0].capitalize() + " chickens: ", FLUSH_MULTIPLIER)
-		elif breeds.size() == 2:
-			var line := "All %s and %s: "
-			add_line_to_report(
-				line % [breeds[0].capitalize(), breeds[1].capitalize()], 
-				TWO_PAIR_MULTIPLIER)
-		elif breeds.size() == M.BREEDS_LIST.size():
-			add_line_to_report("Every breed of chicken: ", ALL_BREEDS_MODIFIER)
-		elif breeds.size() >= 0.5 * M.BREEDS_LIST.size():
-			add_line_to_report("Differnet kinds of chickens: ", MANY_BREEDS_MODIFIER)
+
 		if colours.size() >= 5:
 			add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
 

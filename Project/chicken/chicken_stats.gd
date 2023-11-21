@@ -39,7 +39,10 @@ func is_chick()->bool:
 	return age < 2
 	
 func is_mature()->bool:
-	return age > 20
+	return age > 15
+	
+func is_elderly()->bool:
+	return age > 30
 
 func get_speed()->int:
 	
@@ -49,9 +52,14 @@ func get_speed()->int:
 func is_exhausted()->bool:
 	return fatigue >= 3 and get_speed() <= LOW_SPEED
 	
+func is_famous()->bool:
+	return wins >= 10
+	
 func tire(amount:int):
 	fatigue += amount
 	if is_mature(): 
+		fatigue += 1
+	if is_elderly():
 		fatigue += 1
 	
 func set_speed_guess(value:float):

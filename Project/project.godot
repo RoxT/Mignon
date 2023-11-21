@@ -25,6 +25,11 @@ _global_script_classes=[ {
 "path": "res://EnemyChickens.gd"
 }, {
 "base": "Resource",
+"class": "Event",
+"language": "GDScript",
+"path": "res://Journal/Event.gd"
+}, {
+"base": "Resource",
 "class": "Farm",
 "language": "GDScript",
 "path": "res://Common/Farm.gd"
@@ -33,6 +38,7 @@ _global_script_class_icons={
 "AllChickens": "",
 "Chicken": "",
 "EnemyChickens": "",
+"Event": "",
 "Farm": ""
 }
 
@@ -110,6 +116,10 @@ coop={
 [input_devices]
 
 pointing/emulate_touch_from_mouse=true
+
+[locale]
+
+translations=PoolStringArray( "res://Journal/event_dialog.en.translation" )
 
 [physics]
 

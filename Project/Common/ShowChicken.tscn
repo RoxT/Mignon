@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://chicken/breeds/brown_spf.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://Common/ShowChicken.gd" type="Script" id=2]
+
+[node name="ShowChicken" type="AnimatedSprite" groups=["show"]]
+frames = ExtResource( 1 )
+animation = "stand"
+centered = false
+script = ExtResource( 2 )
+
+[node name="Name" type="Label" parent="."]
+margin_left = -9.0
+margin_top = 68.0
+margin_right = 78.0
+margin_bottom = 100.0
+text = "Mignon"
+align = 1
+valign = 1
+
+[node name="Wins" type="Label" parent="."]
+margin_left = -6.0
+margin_top = 101.0
+margin_right = 71.0
+margin_bottom = 133.0
+text = "5 Wins"
+align = 1
+valign = 1

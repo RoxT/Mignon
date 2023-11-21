@@ -1,6 +1,7 @@
 [gd_resource type="Theme" load_steps=7 format=2]
 
 [ext_resource path="res://resources/Roboto-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://resources/flatblue_stylebox.tres" type="StyleBox" id=2]
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.1682, 0.19053, 0.29, 1 )
@@ -15,23 +16,6 @@ border_color = Color( 0, 0, 0, 1 )
 border_blend = true
 corner_radius_top_left = 5
 corner_radius_top_right = 30
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-expand_margin_left = 5.0
-expand_margin_right = 5.0
-expand_margin_top = 5.0
-expand_margin_bottom = 5.0
-
-[sub_resource type="StyleBoxFlat" id=3]
-bg_color = Color( 0.145098, 0.180392, 0.329412, 1 )
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color( 0, 0, 0, 1 )
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 expand_margin_left = 5.0
@@ -56,7 +40,7 @@ font_data = ExtResource( 1 )
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.509804 )
 Button/styles/disabled = SubResource( 5 )
 Button/styles/hover = SubResource( 8 )
-Button/styles/normal = SubResource( 3 )
+Button/styles/normal = ExtResource( 2 )
 LinkButton/colors/font_color_focus = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_hover = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_pressed = Color( 0.564706, 0.545098, 0.960784, 1 )

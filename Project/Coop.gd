@@ -167,6 +167,7 @@ func update_food_box():
 	
 func _on_Reset_pressed():
 	save_game = AllChickens.new()
+	save_game.initialize_game()
 	save_game.save()
 	var err := get_tree().change_scene("res://Coop.tscn")
 	if err != OK:
@@ -348,3 +349,7 @@ func _goto_scene(path:String):
 
 func _on_WebChickens_pressed():
 	_goto_scene("res://Browser/Browser.tscn")
+
+
+func _on_Journal_pressed():
+	_goto_scene("res://Journal/Journal.tscn")
