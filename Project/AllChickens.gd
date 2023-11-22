@@ -18,6 +18,7 @@ export(Dictionary) var discovered
 export(Resource) var last_racer
 export(int) var next_unique_no
 export(Array) var events
+export(String, "BRONZE", "SILVER", "GOLD", "END") var current_league
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -27,7 +28,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false, new_current_league = "BRONZE"):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -46,6 +47,7 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	next_unique_no = new_next_unique_no
 	events = new_events
 	has_hybrid = new_has_hybrid
+	current_league = new_current_league
 
 func initialize_game():
 	all = generate_mignon()
@@ -83,6 +85,15 @@ func get_all()->Array:
 	
 func get_enemy_farms()->Array:
 	return enemy_farms
+	
+func get_some_farms(farm_names:Array)->Array:
+	var a := []
+	for name in farm_names:
+		for farm in enemy_farms:
+			if farm.nom == name:
+				a.append(farm)
+	assert(a.size() == farm_names.size())
+	return a
 	
 func do_mating(a:Chicken, b:Chicken)->Chicken:
 	var bonus := rand_range(-2,5)
@@ -164,7 +175,7 @@ func get_competition(lanes:int)->Array:
 	var farms = choose_farms(lanes, bag(enemy_farms.size()), enemy_farms)
 	for f in farms:
 		f = f as Farm
-		competition.append(f.chickens[randi() % f.chickens.size()])
+		competition.append(f.get_random())
 	return competition
 
 static func choose_farms(lanes, bag_of_indexes, enemies)->Array:

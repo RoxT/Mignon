@@ -32,9 +32,17 @@ margin_right = 1517.0
 margin_bottom = 988.0
 text = "TBD ;)"
 
+[node name="Go" type="Button" parent="Panel"]
+margin_left = 1212.0
+margin_top = 17.0
+margin_right = 1491.0
+margin_bottom = 86.0
+text = "Go"
+
 [node name="ToCoop" type="Button" parent="."]
 margin_right = 240.0
 margin_bottom = 100.0
 text = "<-- Back To Coop"
 
+[connection signal="pressed" from="Panel/Go" to="." method="_on_Go_pressed"]
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]

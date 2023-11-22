@@ -15,3 +15,6 @@ func _init(new_nom = "FARM", new_chickens=[]):
 
 func get_enemies()->Array:
 	return chickens
+
+func get_random()->Chicken:
+	return chickens[randi() % chickens.size()]
