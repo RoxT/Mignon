@@ -1,0 +1,158 @@
+[gd_scene format=2]
+
+[node name="DiaryBase" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 220.0
+margin_top = 31.0
+margin_right = 1339.0
+margin_bottom = 857.0
+color = Color( 0.145098, 0.180392, 0.329412, 1 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+margin_left = 220.0
+margin_top = 31.0
+margin_right = 1339.0
+margin_bottom = 857.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 4.0
+editor_only = false
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="."]
+margin_left = 220.0
+margin_top = 31.0
+margin_right = 1339.0
+margin_bottom = 95.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 4.0
+editor_only = false
+
+[node name="Squares" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Square" type="ColorRect" parent="Squares"]
+margin_left = 262.0
+margin_top = 51.0
+margin_right = 287.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square2" type="ColorRect" parent="Squares"]
+margin_left = 294.0
+margin_top = 51.0
+margin_right = 319.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square3" type="ColorRect" parent="Squares"]
+margin_left = 327.0
+margin_top = 51.0
+margin_right = 352.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square4" type="ColorRect" parent="Squares"]
+margin_left = 360.0
+margin_top = 51.0
+margin_right = 385.0
+margin_bottom = 76.0
+color = Color( 0.447059, 0.458824, 0.32549, 1 )
+
+[node name="Square5" type="ColorRect" parent="Squares"]
+margin_left = 433.0
+margin_top = 51.0
+margin_right = 458.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square6" type="ColorRect" parent="Squares"]
+margin_left = 465.0
+margin_top = 51.0
+margin_right = 490.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square7" type="ColorRect" parent="Squares"]
+margin_left = 498.0
+margin_top = 51.0
+margin_right = 523.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square8" type="ColorRect" parent="Squares"]
+margin_left = 531.0
+margin_top = 51.0
+margin_right = 556.0
+margin_bottom = 76.0
+color = Color( 0.458824, 0.32549, 0.439216, 1 )
+
+[node name="Square9" type="ColorRect" parent="Squares"]
+margin_left = 661.0
+margin_top = 51.0
+margin_right = 686.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square10" type="ColorRect" parent="Squares"]
+margin_left = 693.0
+margin_top = 51.0
+margin_right = 718.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square11" type="ColorRect" parent="Squares"]
+margin_left = 726.0
+margin_top = 51.0
+margin_right = 751.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square12" type="ColorRect" parent="Squares"]
+margin_left = 759.0
+margin_top = 51.0
+margin_right = 784.0
+margin_bottom = 76.0
+color = Color( 0.32549, 0.439216, 0.458824, 1 )
+
+[node name="Square13" type="ColorRect" parent="Squares"]
+margin_left = 805.0
+margin_top = 51.0
+margin_right = 830.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square14" type="ColorRect" parent="Squares"]
+margin_left = 837.0
+margin_top = 51.0
+margin_right = 862.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square15" type="ColorRect" parent="Squares"]
+margin_left = 870.0
+margin_top = 51.0
+margin_right = 895.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Square16" type="ColorRect" parent="Squares"]
+margin_left = 903.0
+margin_top = 51.0
+margin_right = 928.0
+margin_bottom = 76.0
+color = Color( 0.223529, 0.25098, 0.356863, 1 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 287.0
+margin_top = 140.0
+margin_right = 1272.0
+margin_bottom = 816.0
+text = "Day %s
+
+I defeated the members of of the Bronze League. I think it's time to get a small place with more room for the chickens.
+The chickens all performed amazingly, "
+autowrap = true
+max_lines_visible = 7

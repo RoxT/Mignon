@@ -22,7 +22,8 @@ valign = 1
 margin_top = 86.0
 margin_right = 1517.0
 margin_bottom = 188.0
-text = "Three days of races, if you want to win you must win them all.  THIS FEATURE NOT READY YET
+text = "Three races in one day, if you want to win the league you must win them all.  
+Prize per race: $20               Prize for league: $200
 
  "
 
@@ -30,7 +31,6 @@ text = "Three days of races, if you want to win you must win them all.  THIS FEA
 margin_top = 164.0
 margin_right = 1517.0
 margin_bottom = 988.0
-text = "TBD ;)"
 
 [node name="Go" type="Button" parent="Panel"]
 margin_left = 1212.0

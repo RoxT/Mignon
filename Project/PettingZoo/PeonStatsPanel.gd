@@ -12,6 +12,7 @@ func _ready():
 
 func _on_Human_clicked(peon:Node, thoughts:Array):
 	add_stylebox_override("panel", preload("res://resources/panel_stats.tres"))
+	spyglass.position = Vector2.ZERO
 	spyglass.get_parent().remove_child(spyglass)
 	peon.add_child(spyglass
 	)

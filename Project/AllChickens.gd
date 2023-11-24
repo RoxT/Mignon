@@ -19,6 +19,7 @@ export(Resource) var last_racer
 export(int) var next_unique_no
 export(Array) var events
 export(String, "BRONZE", "SILVER", "GOLD", "END") var current_league
+export(Dictionary) var league_in_progress
 export(Dictionary) var last_zoo_report
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
@@ -29,7 +30,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -50,6 +51,7 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	has_hybrid = new_has_hybrid
 	current_league = new_current_league
 	last_zoo_report = new_last_zoo_report
+	league_in_progress = new_league_in_progress
 
 func initialize_game():
 	all = generate_mignon()
@@ -175,6 +177,37 @@ func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array):
 	
 func already_zooed()->bool:
 	return last_zoo_report and last_zoo_report.day == day
+
+func update_league_in_progress(winner:String)->bool:
+	match current_round():
+		1:
+			league_in_progress.day = day
+			league_in_progress.round1 = winner
+			league_in_progress.league = current_league
+		2:
+			league_in_progress.round2 = winner
+		3:
+			league_in_progress.round3 = winner
+			events.append(Event.new(day, "BRONZE", [
+				league_in_progress.round1, 
+				league_in_progress.round2, 
+				league_in_progress.round3 ]))
+			league_in_progress = {}
+			match current_league:
+				"BRONZE": current_league = "SILVER"
+				"SILVER": current_league = "GOLD"
+			return true
+	return false
+
+func current_round()->int:
+	if league_in_progress.has("round2"):
+		return 3
+	elif league_in_progress.has("round1"):
+		return 2
+	else:
+		return 1
+
+
 
 func death(value:Chicken):
 	if racer == value:

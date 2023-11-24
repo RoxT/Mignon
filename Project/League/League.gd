@@ -3,14 +3,18 @@ extends Node2D
 var ShowChicken:PackedScene = preload("res://Common/ShowChicken.tscn")
 onready var panel := $Panel
 onready var rich_text:RichTextLabel = $Panel/Diary
+onready var go_button := $Panel/Go
+var stadium:Node
 
 var leagues := {
 	"BRONZE" : ["St. Germain’s", "Anualonacu", "QkChkns"],
-	"SILVER" : ["Bec-de-Beak", "Jam Jar Farms", "QkChkns", "Anualonacu"],
-	"GOLD" : ["Vanchokons", "Martot", "Jam Jar Farms", "Bec-de-Beak"]
+	"SILVER" : ["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
+	"GOLD" : ["Vanchokons", "Martot", "Bec-de-Beak"]
 }
 
 var save_game:AllChickens
+
+var farm_names:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -19,7 +23,8 @@ func _ready():
 		save_game.save()
 	else:
 		push_error("No save file found")
-	var enemy_farms:Array = save_game.enemy_farms
+	farm_names = leagues[save_game.current_league]
+	var enemy_farms:Array = save_game.get_some_farms(farm_names)
 	rich_text.clear()
 	var offset = 0
 	for farm in enemy_farms:
@@ -37,6 +42,7 @@ func _ready():
 			chicken.position = Vector2(width, 32+3)
 			width += 128
 		offset += 256
+	go_button.text = "Round " + str(save_game.current_round()) + ", Go!"
 			
 
 func _on_ToCoop_pressed():
@@ -50,13 +56,15 @@ func _on_ToCoop_pressed():
 
 
 func _on_Go_pressed():
+	
 	remove_child(panel)
-	var stadium:Node2D = load("res://League/Stadium.tscn").instance()
+	stadium = load("res://League/Stadium.tscn").instance()
+	stadium.position = Vector2(0, 192)
 	var lanes := stadium.get_children()
-	var farm_names:Array = leagues[save_game.current_league]
+	lanes[0].stats = save_game.racer
 	for i in range(farm_names.size()):
 		var farm:Farm = save_game.get_some_farms(farm_names)[i]
-		lanes[i].stats = farm.get_random()
+		lanes[i+1].stats = farm.get_random()
 	add_child(stadium)
 	for r in get_tree().get_nodes_in_group("racer"):
 		var err = r.connect("finished", self, "_on_racer_finished")
@@ -64,7 +72,7 @@ func _on_Go_pressed():
 	
 func _on_racer_finished():
 	get_tree().call_group("racer", "stop")
-	var your_chicken := get_node("Lane/Racer")
+	var your_chicken := stadium.get_node("Lane/Racer")
 	if your_chicken.stats.is_exhausted():
 		your_chicken.play("death")
 		var modal = load("res://RaceTrack/ModalDeath.tscn").instance()
@@ -73,3 +81,8 @@ func _on_racer_finished():
 		modal.reason = "Death"
 		save_game.death(your_chicken.stats)
 		add_child(modal)
+	if stadium.get_node("Lane").did_win():
+		var won_league = save_game.update_league_in_progress(your_chicken.stats.nom)
+	else:
+		save_game.league_in_progress = {}
+	save_game.save()
