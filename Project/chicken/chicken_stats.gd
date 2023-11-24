@@ -1,7 +1,7 @@
 extends Resource
 class_name Chicken
 const LOW_SPEED := 40
-const HIGH_SPEED := 500
+const HIGH_SPEED := 290
 
 export(String) var nom
 export(int) var top_speed
@@ -84,7 +84,7 @@ func get_bracket()->String:
 
 func _random_speed()->int:
 	randomize()
-	return randi() % (HIGH_SPEED-100-LOW_SPEED) + LOW_SPEED
+	return randi() % (HIGH_SPEED-LOW_SPEED) + LOW_SPEED
 
 static func random_name()->String:
 	return EnemyChickens.get_random_nom()

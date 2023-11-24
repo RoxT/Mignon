@@ -14,11 +14,12 @@ export(bool) var has_hybrid
 export(int) var day
 export(int) var wins
 export(int) var losses
-export(Dictionary) var discovered
+export(Dictionary) var breeds_discovered
 export(Resource) var last_racer
 export(int) var next_unique_no
 export(Array) var events
 export(String, "BRONZE", "SILVER", "GOLD", "END") var current_league
+export(Dictionary) var last_zoo_report
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -28,7 +29,7 @@ const YOU := "YOU"
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false, new_current_league = "BRONZE"):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -42,17 +43,18 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	day = new_day
 	wins = new_wins
 	losses = new_losses
-	discovered = new_discovered
+	breeds_discovered = new_breeds_discovered
 	last_racer = new_last_racer
 	next_unique_no = new_next_unique_no
 	events = new_events
 	has_hybrid = new_has_hybrid
 	current_league = new_current_league
+	last_zoo_report = new_last_zoo_report
 
 func initialize_game():
 	all = generate_mignon()
 	enemy_farms = generate_enemy_list()
-	discovered = generate_new_discovered()
+	breeds_discovered = generate_new_discovered()
 
 func pass_day():
 	day += 1
@@ -104,7 +106,7 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 			for subkey in M.pairs[key].keys():
 				if subkey == b.breed:
 					breed = M.pairs[key][subkey]
-					discovered[breed] = true
+					breeds_discovered[breed] = true
 					bonus += 3
 					if not has_hybrid:
 						has_hybrid = true
@@ -161,6 +163,18 @@ func set_temp_racer(value:Resource):
 func get_new_unique_no()->int:
 	next_unique_no += 1
 	return next_unique_no
+	
+func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array):
+	var report := {}
+	report["day"] = day
+	report["adults"] = adults
+	report["children"] = children
+	report["modifiers"] = modifiers
+	report["breeds"] = breeds
+	last_zoo_report = report
+	
+func already_zooed()->bool:
+	return last_zoo_report and last_zoo_report.day == day
 
 func death(value:Chicken):
 	if racer == value:

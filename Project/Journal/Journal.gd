@@ -61,8 +61,8 @@ func _on_Breeds_toggled(button_pressed):
 	if button_pressed:
 		switch_to($Links/Breeds)
 		var i := 0
-		for key in save_game.discovered.keys():
-			if save_game.discovered[key]:
+		for key in save_game.breeds_discovered.keys():
+			if save_game.breeds_discovered[key]:
 				add_beast(key, i)
 			else: 
 				add_beast("unknown", i)

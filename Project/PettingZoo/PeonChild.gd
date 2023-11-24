@@ -22,7 +22,7 @@ const SEE := "Did you see that!?"
 const ADULT_THOGUHTS := [FAST, SEE]
 const BREED_THOUGHTS := ["Is that a rare breed?", "What is that?", "Is that a duck?"]
 
-signal clicked(child, thoughts)
+signal clicked(peon, thoughts)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,7 +38,7 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 	
 	if thoughts.size() >= 10: return
 	if child:
-		if chicken.stats.fatigue >= 3:
+		if chicken.stats.fatigue >= 4:
 			thoughts.append(TIRED)
 		elif chicken.meander < 200:
 			add_child(wow)
@@ -56,4 +56,4 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 
 func _on_Peon_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton:
-		emit_signal("clicked", child, thoughts)
+		emit_signal("clicked", self, thoughts)

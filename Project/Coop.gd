@@ -74,7 +74,8 @@ func _ready():
 			add_badge(sorted[2],1)
 		else:
 			for c in sorted: add_badge(c, 1)
-	
+	if save_game.already_zooed():
+		$UI/PettingZoo.text = "Today's Zoo Report"
 		
 	set_racer(marked)
 	update_money()

@@ -14,8 +14,8 @@ var fatigue_penalty := false
 var many_fatigue_penalty := false
 const FATIGUE_MULTIPLIER := 0.80
 const MANY_FATIGUE_MULIPLIER := 0.4
-const FLUSH_MULTIPLIER := 1.6
-const TWO_PAIR_MULTIPLIER := 1.5
+const FLUSH_MULTIPLIER := 1.65
+const TWO_PAIR_MULTIPLIER := 1.6
 const RAINBOW_MODIFIER := 1.2
 const MANY_BREEDS_MODIFIER := 1.15
 const ALL_BREEDS_MODIFIER := 1.22
@@ -30,8 +30,6 @@ var colours:= []
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$UI/PeonStatsPanel/RichTextStats.text = "Click on a guest to see what they're saying"
-	$UI/PeonStatsPanel/RichTextStats.show()
 	
 	var chicken_stats := []
 	save_game = load(AllChickens.PATH) as AllChickens
@@ -53,6 +51,11 @@ func _ready():
 			camera.zoom = Vector2(1.0, 1.0)
 			pen_modifier = 0.25
 	
+	if save_game.already_zooed():
+		print_report(true)
+		$UI/PeonStatsPanel.hide()
+		return
+
 	var tired := 0
 	for stats in chicken_stats:
 		stats = stats as Chicken
@@ -88,7 +91,7 @@ func _ready():
 			tired += 1
 	
 
-	if tired/(adult_count+child_count) >= 0.5:
+	if tired/(float(chicken_stats.size())) >= 0.5:
 		many_fatigue_penalty = true
 		modifiers.append(MANY_FATIGUE_MULIPLIER)
 	elif tired >= 2:
@@ -110,53 +113,35 @@ func _ready():
 	total = adult_count + child_count
 	for m in modifiers:
 		total *= m
+	
+	$UI/ToCoop.disabled = true
+	$Start.start()
 
 func _on_chicken_clicked(chicken:Node2D):
-		$UI/PeonStatsPanel.stats = chicken.stats
+		#$UI/PeonStatsPanel.stats = chicken.stats
+		pass
 		
-func multiplier_to_str(value:float)->String:
+func modifier_to_str(value:float)->String:
 	var text := str( -(1.0-value) * 100) + "%"
 	if value > 1:
 		text = "+" + text
 	return text
 
 func add_line_to_report(text:String, multiplier:float):
-	final_report.add_text(text + multiplier_to_str(multiplier))
+	final_report.add_text(text + modifier_to_str(multiplier))
 	final_report.newline()
+	
 		
 func _add_human(count:int, rate:float):
 	if count <= 0:
-		final_report.clear()
-		for mod in modifiers:
-			match(mod):
-				FATIGUE_MULTIPLIER:
-					final_report.add_text("Tired Chickens: " + multiplier_to_str(FATIGUE_MULTIPLIER))
-				MANY_FATIGUE_MULIPLIER:
-					final_report.add_text("Most Chickens Tired: " + multiplier_to_str(MANY_FATIGUE_MULIPLIER))
-				FLUSH_MULTIPLIER:
-					add_line_to_report("All " + breeds[0].capitalize() + " chickens: ", FLUSH_MULTIPLIER)
-				TWO_PAIR_MULTIPLIER:
-					var line := "All %s and %s: "
-					add_line_to_report(
-						line % [breeds[0].capitalize(), breeds[1].capitalize()], 
-					TWO_PAIR_MULTIPLIER)
-				ALL_BREEDS_MODIFIER:
-					add_line_to_report("Every breed of chicken: ", ALL_BREEDS_MODIFIER)
-				MANY_BREEDS_MODIFIER:
-					add_line_to_report("Differnet kinds of chickens: ", MANY_BREEDS_MODIFIER)
-				RAINBOW_MODIFIER:
-					add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
-				FAMOUS_MULTIPLIER:
-					add_line_to_report("Famous chicken: ", FAMOUS_MULTIPLIER)
-			
-			final_report.newline()
-
-		if colours.size() >= 5:
-			add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
-
-		final_report.add_text("Total Guests: " + str(round(total)))
+		$UI/ToCoop.disabled = false
+		print_report()
+		
+		save_game.create_zoo_report(report.adults, report.children, modifiers, breeds)
+		save_game.money += report.collect_money()
 		for stats in save_game.get_all():
 			stats.tire(1)
+		save_game.save()
 	
 	else:
 		var peon:Node2D
@@ -180,10 +165,42 @@ func _add_human(count:int, rate:float):
 		add_child(t)
 		t.start(rand_range(0.7, 1.7) * pen_modifier)
 
-
+func print_report(done_already:=false):
+	final_report.clear()
+	if done_already:
+		var last_report = save_game.last_zoo_report
+		modifiers = last_report["modifiers"]
+		child_count = last_report["children"]
+		adult_count = last_report["adults"]
+		breeds = last_report["breeds"]
+		total = round(child_count + adult_count)
+	for mod in modifiers:
+		match(mod):
+			FATIGUE_MULTIPLIER:
+				add_line_to_report("Tired Chickens: ", FATIGUE_MULTIPLIER)
+			MANY_FATIGUE_MULIPLIER:
+				add_line_to_report("Most Chickens Tired: ", MANY_FATIGUE_MULIPLIER)
+			FLUSH_MULTIPLIER:
+				add_line_to_report("All " + breeds[0].capitalize() + " chickens: ", FLUSH_MULTIPLIER)
+			TWO_PAIR_MULTIPLIER:
+				var line := "All %s and %s: "
+				add_line_to_report(
+					line % [breeds[0].capitalize(), breeds[1].capitalize()], 
+				TWO_PAIR_MULTIPLIER)
+			ALL_BREEDS_MODIFIER:
+				add_line_to_report("Every breed of chicken: ", ALL_BREEDS_MODIFIER)
+			MANY_BREEDS_MODIFIER:
+				add_line_to_report("Differnet kinds of chickens: ", MANY_BREEDS_MODIFIER)
+			RAINBOW_MODIFIER:
+				add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
+			FAMOUS_MULTIPLIER:
+				add_line_to_report("Famous chicken: ", FAMOUS_MULTIPLIER)
+	
+	if done_already:
+		report.show_all(round(child_count), round(adult_count))
+	final_report.add_text("Total Guests: " + str(report.children+report.adults))
 
 func _on_ToCoop_pressed():
-	save_game.money += report.collect_money()
 	save_game.save()
 	var coop := "res://Coop.tscn"
 	var err = get_tree().change_scene(coop)
@@ -193,8 +210,6 @@ func _on_ToCoop_pressed():
 		 ERR_CANT_CREATE : push_error("ERR_CANT_CREATE " + coop + " cannot be instantiated.")
 	push_error("Error " + str(err) + "changing to  " + coop + " ")
 
-
-
 func _on_Start_timeout():
 	var rate:float = adult_count/(adult_count+child_count)
-	_add_human(round(total), rate)
+	_add_human(int(round(total)), rate)

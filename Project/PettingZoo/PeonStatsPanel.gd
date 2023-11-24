@@ -1,16 +1,22 @@
 extends Panel
 
 onready var block : = $RichTextStats
+onready var spyglass := $SpyGlass
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	block.text = "Click on a guest to see what they're saying"
+	block.show()
 
 
-func _on_Human_clicked(child:bool, thoughts:Array):
+func _on_Human_clicked(peon:Node, thoughts:Array):
+	add_stylebox_override("panel", preload("res://resources/panel_stats.tres"))
+	spyglass.get_parent().remove_child(spyglass)
+	peon.add_child(spyglass
+	)
 	block.clear()
-	if child:
+	if peon.child:
 		block.add_text("Age: Child")
 	else:
 		block.add_text("Age: Adult")

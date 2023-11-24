@@ -119,10 +119,10 @@ func show(value := true):
 		$Sell.visible = value
 		$Edit.visible = value
 		
-func _on_Human_clicked(child:bool, thoughts:Array):
+func _on_Human_clicked(peon:Node, thoughts:Array):
 	show(false)
 	block.clear()
-	if child:
+	if peon.child:
 		block.add_text("Age: Child")
 	else:
 		block.add_text("Age: Adult")
