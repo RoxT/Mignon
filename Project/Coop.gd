@@ -26,11 +26,12 @@ func _ready():
 	var chicken_stats := []
 	if AllChickens.exists():
 		save_game = load(AllChickens.PATH) as AllChickens
+		if save_game == null:
+			_on_Reset_pressed()
+		else:
+			save_game.save()
 	else:
-		save_game = AllChickens.new()
-		save_game.initialize_game()
-		print("New Game")
-	save_game.save()
+		_on_Reset_pressed()
 	
 	if !save_game.has_day1:
 		_goto_scene("res://Diary/Diary.tscn")
