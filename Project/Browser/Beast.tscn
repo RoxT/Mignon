@@ -7,7 +7,6 @@
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 2 )
-nom = "brown_varied"
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )

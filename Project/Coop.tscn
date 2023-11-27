@@ -290,24 +290,26 @@ text = "NO FOOD"
 [node name="StatsPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -380.0
+margin_left = -409.0
 margin_top = 118.0
-margin_right = -37.0
+margin_right = -25.0
 margin_bottom = 793.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 17 )
 script = ExtResource( 2 )
 
 [node name="Portrait" type="Sprite" parent="UI/StatsPanel"]
-position = Vector2( 148.5, 185.672 )
+position = Vector2( 166, 194 )
 scale = Vector2( 0.201642, 0.201642 )
 texture = ExtResource( 3 )
 
-[node name="Name" type="Label" parent="UI/StatsPanel"]
-margin_left = 4.0
-margin_top = 6.0
-margin_right = 51.0
-margin_bottom = 20.0
+[node name="Name" type="RichTextLabel" parent="UI/StatsPanel"]
+margin_left = 38.0
+margin_top = 12.0
+margin_right = 304.0
+margin_bottom = 54.0
+bbcode_enabled = true
+bbcode_text = "[b]Mignon[b]"
 text = "Mignon"
 
 [node name="NameEdit" type="LineEdit" parent="UI/StatsPanel/Name"]
@@ -318,9 +320,9 @@ max_length = 17
 
 [node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
 margin_left = 38.0
-margin_top = 329.0
+margin_top = 346.0
 margin_right = 290.0
-margin_bottom = 516.0
+margin_bottom = 533.0
 text = "Breed: brown
 Wins: 5 
 Fatigue: 3
@@ -328,9 +330,9 @@ Fatigue: 3
 Speed:  400"
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
-margin_left = 181.0
+margin_left = 192.0
 margin_top = 525.0
-margin_right = 336.0
+margin_right = 373.0
 margin_bottom = 588.0
 rect_min_size = Vector2( 0, 48 )
 text = "Set as Racer"
@@ -338,7 +340,7 @@ text = "Set as Racer"
 [node name="Sell" type="Button" parent="UI/StatsPanel"]
 margin_left = 10.0
 margin_top = 525.0
-margin_right = 166.0
+margin_right = 173.0
 margin_bottom = 588.0
 rect_min_size = Vector2( 0, 48 )
 text = "Sell ($5)"
@@ -346,17 +348,24 @@ text = "Sell ($5)"
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
 margin_left = 10.0
 margin_top = 603.0
-margin_right = 274.0
+margin_right = 373.0
 margin_bottom = 664.0
-rect_min_size = Vector2( 0, 48 )
+rect_min_size = Vector2( 363, 48 )
 text = "Breed Chicken"
 
 [node name="Edit" type="Button" parent="UI/StatsPanel"]
-margin_left = 284.0
-margin_top = 6.0
-margin_right = 336.0
-margin_bottom = 58.0
+margin_left = 304.0
+margin_top = -5.0
+margin_right = 358.0
+margin_bottom = 49.0
 icon = ExtResource( 11 )
+
+[node name="ColorRect" type="ColorRect" parent="UI/StatsPanel"]
+modulate = Color( 1, 1, 1, 0.541176 )
+margin_left = 56.0
+margin_top = 46.0
+margin_right = 324.0
+margin_bottom = 346.0
 
 [node name="Info" type="Button" parent="UI"]
 margin_left = 21.0
