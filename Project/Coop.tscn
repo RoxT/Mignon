@@ -364,8 +364,8 @@ icon = ExtResource( 11 )
 modulate = Color( 1, 1, 1, 0.541176 )
 margin_left = 56.0
 margin_top = 46.0
-margin_right = 324.0
-margin_bottom = 346.0
+margin_right = 320.0
+margin_bottom = 350.0
 
 [node name="Info" type="Button" parent="UI"]
 margin_left = 21.0
