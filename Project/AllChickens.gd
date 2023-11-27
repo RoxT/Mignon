@@ -301,4 +301,3 @@ static func generate_enemy_list()->Array:
 	
 	file.close()
 	return e
-
