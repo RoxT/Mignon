@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/JingleFullSuccess.ogg-cad45f483f92f5ff7a78d22809c2ea94.oggstr"
+
+[deps]
+
+source_file="res://Common/ChillJazzMusicPackEasyLoopOGG/JingleFullSuccess.ogg"
+dest_files=[ "res://.import/JingleFullSuccess.ogg-cad45f483f92f5ff7a78d22809c2ea94.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

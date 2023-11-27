@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var Lane := preload("res://RaceTrack/Lane.tscn")
+onready var audioStreamPlayer := $AudioStreamPlayer
 
 const lane_offset_y := 150
 const lane_separation_y := 192
@@ -10,6 +11,8 @@ var track := 0
 var has_tired := false
 var speed_guess := -1
 
+signal began_race
+signal race_finished(you_won)
 
 var save_game:AllChickens
 
@@ -33,9 +36,16 @@ func _ready():
 		add_lane(c)
 	$ToCoop.disabled = first_chicken.is_exhausted()
 	
+	var err
 	for r in get_tree().get_nodes_in_group("racer"):
-		var err = r.connect("finished", self, "_on_racer_finished")
+		err = r.connect("finished", self, "_on_racer_finished")
 		if err != OK: push_error("Error connect finished signal: " + str(err))
+	
+	err = connect("began_race", Music, "began_race")
+	if err != OK: push_error("Error connect began_race signal: " + str(err))
+	err = connect("race_finished", Music, "race_finished")
+	if err != OK: push_error("Error connect race_finished signal: " + str(err))
+	emit_signal("began_race")
 	
 func _on_racer_finished():
 	get_tree().call_group("racer", "stop")
@@ -49,14 +59,17 @@ func _on_racer_finished():
 		save_game.death(your_chicken.stats)
 		add_child(modal)
 	if $Lane.did_win():
+		audioStreamPlayer.stream = Music.get_success()
 		save_game.money += winnings
 		$CL/Winnings.text = "YOU WON $" + str(winnings) 
 		$CL/Winnings.show()
 		$CL/Winnings/Rice.emitting = true
 		save_game.wins += 1
 	else:
+		audioStreamPlayer.stream = Music.get_failure()
 		$CL/Lost.show()
 		save_game.losses += 1
+	audioStreamPlayer.play()
 	if not has_tired:
 		your_chicken.stats.tire(2)
 	has_tired = true
@@ -75,6 +88,9 @@ func add_lane(stats:Chicken):
 	track += 1
 
 func _on_ToCoop_pressed():
+	emit_signal("race_finished")
+	disconnect("began_race", Music, "began_race")
+	disconnect("race_finished", Music, "race_finished")
 	if not has_tired: $Lane/Racer.stats.tire(2)
 	save_game.pass_day()
 	var err := get_tree().change_scene("res://Coop.tscn")

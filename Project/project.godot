@@ -51,6 +51,7 @@ config/icon="res://android/chicken_icon.webp"
 [autoload]
 
 M="*res://Mignon.gd"
+Music="*res://Common/Music.gd"
 
 [display]
 

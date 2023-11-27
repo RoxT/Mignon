@@ -33,7 +33,7 @@ const pairs := {WHITE: {
 				}
 
 static func get_uncommon_list()->Array:
-	var u := BREEDS_LIST.duplicate()
+	var u := BREEDS_LIST.duplicate()    
 	for d in DEFUALT_BREEDS:
 		u.erase(d)
 	return u

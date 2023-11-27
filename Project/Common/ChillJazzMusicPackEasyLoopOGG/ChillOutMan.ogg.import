@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ChillOutMan.ogg-0cddc608f87eb8eec0e978a08030862c.oggstr"
+
+[deps]
+
+source_file="res://Common/ChillJazzMusicPackEasyLoopOGG/ChillOutMan.ogg"
+dest_files=[ "res://.import/ChillOutMan.ogg-0cddc608f87eb8eec0e978a08030862c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

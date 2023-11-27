@@ -73,5 +73,8 @@ margin_bottom = 149.0
 custom_styles/normal = SubResource( 2 )
 text = "YOU LOST"
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -9.75
+
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
 [connection signal="timeout" from="StartGun" to="." method="_on_StartGun_timeout"]

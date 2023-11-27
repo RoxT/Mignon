@@ -4,12 +4,12 @@ var DIARY1 := "[b]Day 1[/b]\n\nDear Diary,\nI'm really doing it. My cousin got m
 
 var save_game:AllChickens
 
-var CHICKEN_COUNT := "[b]Day %s[/b]\nChickens in coop: %s\n"
+const DATE := "[b]Day %s[/b]\n\n"
+var CHICKEN_COUNT := DATE + "Chickens in coop: %s\n"
 var WINS_AND_LOSSES := "Wins: %s\nLosses: %s\n"
 var RIVAL := "%s (%s wins against you) from %s"
 
-const BEAST := "res://Browser/Beast.tscn"
-const DATE := "[b]Day %s[/b]\n\n"
+const BEAST := "res://Journal/Beast.tscn"
 
 onready var content := $Content
 onready var links := $Links

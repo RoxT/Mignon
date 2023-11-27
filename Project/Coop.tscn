@@ -81,10 +81,10 @@ __meta__ = {
 }
 
 [node name="building_view" type="TextureRect" parent="."]
-margin_left = 269.0
-margin_top = 200.0
-margin_right = 1347.0
-margin_bottom = 986.0
+margin_left = 182.0
+margin_top = 256.0
+margin_right = 1260.0
+margin_bottom = 1042.0
 texture = ExtResource( 7 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
