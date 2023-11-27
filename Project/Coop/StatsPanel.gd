@@ -41,16 +41,16 @@ func set_stats(value:Chicken):
 		breed_btn.text = breed_str
 	stats = value
 	if portrait:
-		if stats.breed == "floof":
+		if stats.breed == M.FLOOF:
 			portrait.texture = load("res://chicken/portraits/Test_Headshot.png")
 			portrait.scale = portrait_scaling
-		elif stats.breed == "bigger floof":
+		elif stats.breed == M.BIGGER_FLOOF:
 			portrait.texture = load("res://chicken/portraits/Test_Full_body.jpg")
 			portrait.scale = portrait_scaling
-		elif stats.breed == "rooster":
+		elif stats.breed == M.BROWN_ROOSTER:
 			portrait.texture = load("res://chicken/portraits/rooster.jpg")
 			portrait.scale = Vector2(0.202, 0.202)
-		elif stats.breed == "white":
+		elif stats.breed == M.WHITE:
 			portrait.texture = load("res://chicken/portraits/white1.png")
 			portrait.scale = Vector2.ONE
 		else:

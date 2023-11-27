@@ -18,10 +18,10 @@ shortcut = SubResource( 5 )
 script = ExtResource( 5 )
 
 [node name="TextureRect2" type="TextureRect" parent="."]
-margin_left = -312.0
-margin_top = -113.0
-margin_right = 766.0
-margin_bottom = 673.0
+margin_left = -535.0
+margin_top = -177.0
+margin_right = 543.0
+margin_bottom = 609.0
 mouse_filter = 2
 texture = ExtResource( 8 )
 

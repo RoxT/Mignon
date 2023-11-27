@@ -73,11 +73,10 @@ __meta__ = {
 }
 
 [node name="building_view" type="TextureRect" parent="."]
-visible = false
-margin_left = 231.0
-margin_top = 229.0
-margin_right = 1309.0
-margin_bottom = 1015.0
+margin_left = 269.0
+margin_top = 200.0
+margin_right = 1347.0
+margin_bottom = 986.0
 texture = ExtResource( 7 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -85,6 +84,7 @@ margin_left = 296.0
 margin_top = 348.0
 margin_right = 1374.0
 margin_bottom = 1134.0
+rect_pivot_offset = Vector2( 320, 331 )
 mouse_filter = 2
 texture = ExtResource( 12 )
 
@@ -95,10 +95,10 @@ layer = -1
 
 [node name="Large" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 461.0
-margin_top = 257.0
-margin_right = 1539.0
-margin_bottom = 1043.0
+margin_left = 433.0
+margin_top = 309.0
+margin_right = 1511.0
+margin_bottom = 1095.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 __meta__ = {
@@ -116,6 +116,9 @@ margin_right = 1334.0
 margin_bottom = 942.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="Pens/Medium"]
 position = Vector2( 0, 72 )
