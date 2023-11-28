@@ -1,6 +1,5 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=28 format=2]
 
-[ext_resource path="res://BG.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
 [ext_resource path="res://chicken/portraits/brown_rooster.jpg" type="Texture" id=3]
 [ext_resource path="res://chicken/mate_tag.png" type="Texture" id=4]
@@ -76,11 +75,6 @@ bg_color = Color( 0.27451, 0.301961, 0.25098, 1 )
 [node name="Coop" type="Node2D"]
 script = ExtResource( 6 )
 
-[node name="BG" parent="." instance=ExtResource( 1 )]
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="building_view" type="TextureRect" parent="."]
 margin_left = 182.0
 margin_top = 256.0
@@ -141,11 +135,14 @@ position = Vector2( 0, 72 )
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
 margin_left = 611.0
-margin_top = 540.0
+margin_top = 531.0
 margin_right = 1252.0
-margin_bottom = 908.0
+margin_bottom = 899.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="Position2D" type="Position2D" parent="Pens/Starter"]
 position = Vector2( 331, 181 )
@@ -442,6 +439,11 @@ margin_top = 5.0
 margin_right = 269.0
 margin_bottom = 100.0
 texture = ExtResource( 16 )
+
+[node name="Line2D" type="Line2D" parent="UI"]
+position = Vector2( 153.853, 256 )
+points = PoolVector2Array( 1357.15, 785, 279.147, 785 )
+default_color = Color( 0.4, 0.501961, 1, 1 )
 
 [node name="BreedingPen" type="CanvasLayer" parent="."]
 layer = -1

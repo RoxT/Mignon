@@ -44,10 +44,20 @@ func _ready():
 	$TextureRect.texture = load("res://Coop/Grass%s.jpg" % save_game.pen)
 	$TextureRect.rect_position = pen.rect_position
 	
-	match save_game.pen:
-		"Starter": camera.zoom = Vector2(0.6, 0.6)
-		"Medium": camera.zoom = Vector2(0.7, 0.7)
-		"Large": camera.zoom = Vector2(1.0, 1.0)
+	var line:Line2D = $UI/Line2D
+	var left_bottom := line.points[1]
+	var right_bottom := line.points[0]
+	var desired_length := right_bottom.x-left_bottom.x
+	
+	pen.get_rect()
+	var pen_length := pen.get_rect().size.x
+	var difference := pen_length/desired_length
+	camera.zoom = Vector2(difference, difference)
+	
+#	match save_game.pen:
+#		"Starter": camera.zoom = Vector2(0.6, 0.6)
+#		"Medium": camera.zoom = Vector2(0.7, 0.7)
+#		"Large": camera.zoom = Vector2(1.0, 1.0)
 
 	save_game.temp_racer = null
 	var marked
