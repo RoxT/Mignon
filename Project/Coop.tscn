@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://BG.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://resources/race_stylebox_hover.tres" type="StyleBox" id=15]
 [ext_resource path="res://Coop/title.png" type="Texture" id=16]
 [ext_resource path="res://resources/panel_empty.tres" type="StyleBox" id=17]
+[ext_resource path="res://Coop/BorderStarter.png" type="Texture" id=18]
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.141176, 0.0235294, 0.0588235, 1 )
@@ -96,6 +97,12 @@ rect_pivot_offset = Vector2( 320, 331 )
 mouse_filter = 2
 texture = ExtResource( 12 )
 
+[node name="Border" type="Sprite" parent="TextureRect"]
+show_behind_parent = true
+position = Vector2( -9, -9 )
+texture = ExtResource( 18 )
+centered = false
+
 [node name="BG2" type="CanvasLayer" parent="."]
 layer = -1
 
@@ -133,15 +140,12 @@ position = Vector2( 0, 72 )
 
 [node name="Starter" type="ReferenceRect" parent="Pens"]
 modulate = Color( 1, 1, 1, 0.498039 )
-margin_left = 632.0
+margin_left = 611.0
 margin_top = 540.0
-margin_right = 1273.0
+margin_right = 1252.0
 margin_bottom = 908.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="Position2D" type="Position2D" parent="Pens/Starter"]
 position = Vector2( 331, 181 )
