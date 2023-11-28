@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://RaceTrack/RaceTrack.gd" type="Script" id=1]
-[ext_resource path="res://Coop/GrassLarge.jpg" type="Texture" id=3]
+[ext_resource path="res://Coop/Pens/GrassLarge.jpg" type="Texture" id=3]
 
 [sub_resource type="InputEventAction" id=5]
 action = "coop"

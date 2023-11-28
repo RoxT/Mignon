@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Coop/GrassLarge.jpg" type="Texture" id=1]
+[ext_resource path="res://Coop/Pens/GrassLarge.jpg" type="Texture" id=1]
 [ext_resource path="res://PettingZoo/PeonStatsPanel.gd" type="Script" id=2]
 [ext_resource path="res://PettingZoo/Report.gd" type="Script" id=3]
 [ext_resource path="res://Coop/spy_glass.png" type="Texture" id=4]

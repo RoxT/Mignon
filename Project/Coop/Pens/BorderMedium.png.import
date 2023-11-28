@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/GrassLarge.jpg-527f9545f25a443d372dc4f429ade6a7.stex"
+path="res://.import/BorderMedium.png-65aad8114fc5e2e478eb32de7448cf5a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Coop/GrassLarge.jpg"
-dest_files=[ "res://.import/GrassLarge.jpg-527f9545f25a443d372dc4f429ade6a7.stex" ]
+source_file="res://Coop/Pens/BorderMedium.png"
+dest_files=[ "res://.import/BorderMedium.png-65aad8114fc5e2e478eb32de7448cf5a.stex" ]
 
 [params]
 

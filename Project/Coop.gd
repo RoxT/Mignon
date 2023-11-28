@@ -38,26 +38,13 @@ func _ready():
 		_goto_scene("res://Diary/Diary.tscn")
 	chicken_stats = save_game.get_all()
 	
-	pen = get_node("Pens/" + save_game.pen) as ReferenceRect
+#	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()
+#	$Pens.add_child(pen)
+	pen = $Pens.get_node(save_game.pen)
+	pen.show()
 	pen.border_color = Color.greenyellow
 	pen.modulate = Color.white
-	$TextureRect.texture = load("res://Coop/Grass%s.jpg" % save_game.pen)
-	$TextureRect.rect_position = pen.rect_position
-	
-	var line:Line2D = $UI/Line2D
-	var left_bottom := line.points[1]
-	var right_bottom := line.points[0]
-	var desired_length := right_bottom.x-left_bottom.x
-	
-	pen.get_rect()
-	var pen_length := pen.get_rect().size.x
-	var difference := pen_length/desired_length
-	camera.zoom = Vector2(difference, difference)
-	
-#	match save_game.pen:
-#		"Starter": camera.zoom = Vector2(0.6, 0.6)
-#		"Medium": camera.zoom = Vector2(0.7, 0.7)
-#		"Large": camera.zoom = Vector2(1.0, 1.0)
+	camera.zoom = pen.get_zoom()
 
 	save_game.temp_racer = null
 	var marked
@@ -182,7 +169,7 @@ func _on_Reset_pressed():
 	save_game = AllChickens.new()
 	save_game.initialize_game()
 	save_game.save()
-	var err := get_tree().change_scene("res://Coop.tscn")
+	var err := get_tree().change_scene("res://Diary/Diary.tscn")
 	if err != OK:
 		print("Error reseting game (loading coop)")
 

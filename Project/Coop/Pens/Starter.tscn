@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Common/Pen.gd" type="Script" id=1]
+[ext_resource path="res://Coop/Pens/GrassStarter.jpg" type="Texture" id=2]
+[ext_resource path="res://Coop/Pens/BorderStarter.png" type="Texture" id=3]
+
+[node name="Starter" type="ReferenceRect"]
+margin_right = 641.0
+margin_bottom = 368.0
+mouse_filter = 2
+mouse_default_cursor_shape = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 331, 181 )
+
+[node name="Grass" type="TextureRect" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+texture = ExtResource( 2 )
+
+[node name="Border" type="TextureRect" parent="Grass"]
+show_behind_parent = true
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 650.0
+margin_bottom = 377.0
+texture = ExtResource( 3 )
