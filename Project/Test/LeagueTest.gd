@@ -1,9 +1,11 @@
 extends Node2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
+var leagues := {
+	"BRONZE" : ["St. Germain’s", "Anualonacu", "QkChkns"],
+	"SILVER" : ["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
+	"GOLD" : ["Vanchokons", "Martot", "Bec-de-Beak"]
+}
 
 
 # Called when the node enters the scene tree for the first time.
