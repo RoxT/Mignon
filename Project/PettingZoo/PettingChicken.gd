@@ -12,8 +12,6 @@ var target
 var meander:float
 var top_speed
 
-signal clicked(chicken)
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	label.hide()
@@ -79,7 +77,3 @@ func _on_Area2D_mouse_exited():
 
 func _on_Rest_timeout():
 	set_process(true)
-
-
-func _on_TouchScreenButton_pressed():
-	emit_signal("clicked", self)

@@ -5,8 +5,10 @@
 [ext_resource path="res://Coop/Pens/BorderMedium.png" type="Texture" id=3]
 
 [node name="Medium" type="ReferenceRect"]
-margin_right = 792.0
-margin_bottom = 550.0
+margin_left = 558.0
+margin_top = 364.0
+margin_right = 1350.0
+margin_bottom = 914.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
 script = ExtResource( 1 )

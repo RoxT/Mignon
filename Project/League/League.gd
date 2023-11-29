@@ -56,7 +56,6 @@ func _on_ToCoop_pressed():
 
 
 func _on_Go_pressed():
-	
 	remove_child(panel)
 	stadium = load("res://League/Stadium.tscn").instance()
 	stadium.position = Vector2(0, 192)

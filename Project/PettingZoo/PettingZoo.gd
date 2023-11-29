@@ -13,10 +13,10 @@ var adult_count := 0.0
 var fatigue_penalty := false
 var many_fatigue_penalty := false
 const FATIGUE_MULTIPLIER := 0.80
-const MANY_FATIGUE_MULIPLIER := 0.4
+const MANY_FATIGUE_MULIPLIER := 0.40
 const FLUSH_MULTIPLIER := 1.65
-const TWO_PAIR_MULTIPLIER := 1.6
-const RAINBOW_MODIFIER := 1.2
+const TWO_PAIR_MULTIPLIER := 1.60
+const RAINBOW_MODIFIER := 1.10
 const MANY_BREEDS_MODIFIER := 1.15
 const ALL_BREEDS_MODIFIER := 1.22
 const FAMOUS_MULTIPLIER := 1.17
@@ -62,7 +62,6 @@ func _ready():
 		var chicken = preload("res://PettingZoo/PettingChicken.tscn").instance()
 		chicken.stats = stats
 		add_child(chicken)
-		chicken.connect("clicked", self, "_on_chicken_clicked")
 		var rect := pen.get_rect()
 		chicken.pen = rect
 		chicken.position = Vector2(rand_range(rect.position.x, rect.position.x + rect.size.x), rand_range(rect.position.y, rect.position.y + rect.size.y))
@@ -116,10 +115,6 @@ func _ready():
 	
 	$UI/ToCoop.disabled = true
 	$Start.start()
-
-func _on_chicken_clicked(chicken:Node2D):
-		#$UI/PeonStatsPanel.stats = chicken.stats
-		pass
 		
 func modifier_to_str(value:float)->String:
 	var text := str( -(1.0-value) * 100) + "%"

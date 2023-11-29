@@ -22,6 +22,10 @@ var selected:Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if M.fade:
+		modulate = Color("02004a")
+		$AnimationPlayer.play("fade_in")
+	M.fade = false
 	get_tree().call_group("drop", "hide")
 	var chicken_stats := []
 	if AllChickens.exists():
@@ -38,10 +42,8 @@ func _ready():
 		_goto_scene("res://Diary/Diary.tscn")
 	chicken_stats = save_game.get_all()
 	
-#	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()
-#	$Pens.add_child(pen)
-	pen = $Pens.get_node(save_game.pen)
-	pen.show()
+	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()
+	$Pens.add_child(pen)
 	pen.border_color = Color.greenyellow
 	pen.modulate = Color.white
 	camera.zoom = pen.get_zoom()
@@ -266,6 +268,7 @@ func _on_Mating_timeout():
 	if selected == mate or selected == mate2: 
 		$UI/StatsPanel.show(false)
 		remove_dot(selected_dot)
+	get_tree().set_group("action", "disabled", true)
 	set_can_race()
 	
 func _on_Birthing_timeout(egg:AnimatedSprite):
@@ -286,6 +289,7 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	mate2 = null
 	$UI/StatsPanel.set_mate(mate, mate2, birthing.time_left > 0)
 	set_can_race()
+	get_tree().set_group("action", "disabled", false)
 	egg.queue_free()
 
 	

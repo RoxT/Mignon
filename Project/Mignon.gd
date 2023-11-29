@@ -18,6 +18,8 @@ const BREEDS_LIST := [
 	WHITE, BROWN, MOTTLED, FLOOF, BIGGER_FLOOF, BROWN_ROOSTER
 ]
 
+var fade := true
+
 const pairs := {WHITE: {
 					BROWN: MOTTLED, 
 					FLOOF: BIGGER_FLOOF},

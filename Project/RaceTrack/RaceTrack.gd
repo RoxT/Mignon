@@ -18,6 +18,7 @@ var save_game:AllChickens
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	M.fade = true
 	if AllChickens.exists():
 		save_game = load(AllChickens.PATH)
 	else:
@@ -79,7 +80,6 @@ func _on_racer_finished():
 	$ToCoop.disabled = false
 	$ToCoop.grab_focus()
 	
-	
 func add_lane(stats:Chicken):
 	var lane := Lane.instance()
 	lane.stats = stats
@@ -93,10 +93,12 @@ func _on_ToCoop_pressed():
 	disconnect("race_finished", Music, "race_finished")
 	if not has_tired: $Lane/Racer.stats.tire(2)
 	save_game.pass_day()
+	$AnimationPlayer.play("fade_out")
+
+func go_to_coop():
 	var err := get_tree().change_scene("res://Coop.tscn")
 	if err != OK:
 		push_error("Error switching scenes: " + str(err))
-
 
 func _on_StartGun_timeout():
 	get_tree().call_group("racer", "start")

@@ -63,9 +63,9 @@ func set_stats(value:Chicken):
 		show()
 	if block:
 		block.clear()
+		block.add_text("Breed: " + stats.breed.capitalize())
+		block.newline()
 		if stats.age >= 2:
-			block.add_text("Breed: " + stats.breed.capitalize())
-			block.newline()
 			block.add_text("Wins: " + str(stats.wins))
 			if stats.fatigue > 0:
 				block.newline()
@@ -155,7 +155,6 @@ func get_price()->int:
 func _on_Sell_pressed():
 	emit_signal("sell_requested", get_price())
 
-
 func _on_Edit_pressed():
 	if name_edit.visible == true:
 		_on_NameEdit_text_entered(name_edit.text)
@@ -163,7 +162,6 @@ func _on_Edit_pressed():
 		name_edit.text = stats.nom
 		name_edit.show()
 		name_edit.grab_focus()
-
 
 func _on_NameEdit_text_entered(new_text):
 	stats.nom = new_text

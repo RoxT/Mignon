@@ -20,6 +20,10 @@ func _ready():
 		$Contents.visible_characters = -1
 
 func _on_ToCoop_pressed():
+	player.play("fade_away")
+
+
+func go_to_coop():
 	var path := "res://Coop.tscn"
 	var err = get_tree().change_scene(path)
 	match err:
