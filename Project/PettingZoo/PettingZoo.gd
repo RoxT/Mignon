@@ -36,20 +36,12 @@ func _ready():
 	save_game.save()
 	chicken_stats = save_game.get_all()
 	
-	var pen_name = save_game.pen
-	pen = get_node("Pens/" + pen_name) as ReferenceRect
-	$TextureRect.texture = load("res://Coop/Grass%s.jpg" % pen_name)
-	$TextureRect.rect_position = pen.rect_position
-		
-	match pen_name:
-		"Starter": 
-			camera.zoom = Vector2(0.7, 0.7)
-		"Medium": 
-			camera.zoom = Vector2(0.8, 0.8)
-			pen_modifier = 0.6
-		"Large": 
-			camera.zoom = Vector2(1.0, 1.0)
-			pen_modifier = 0.25
+	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()
+	$Pens.add_child(pen)
+	pen.border_color = Color.greenyellow
+	pen.modulate = Color.white
+	camera.zoom = pen.get_zoom()
+	
 	
 	if save_game.already_zooed():
 		print_report(true)

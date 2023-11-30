@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Test/LeagueTest.gd" type="Script" id=1]
+[ext_resource path="res://Test/TestChicken.tscn" type="PackedScene" id=2]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
@@ -9,3 +10,87 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 32.0
 text = "Bronze: \"St. Germain’s\", \"Anualonacu\", \"QkChkns\""
+
+[node name="TestChicken" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 75, 137 )
+
+[node name="TestChicken2" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 251, 143 )
+
+[node name="TestChicken3" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 437, 145 )
+
+[node name="TestChicken4" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 642, 146 )
+
+[node name="TestChicken5" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 848, 156 )
+
+[node name="TestChicken6" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 1062, 153 )
+
+[node name="TestChicken7" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 1252, 156 )
+
+[node name="TestChicken8" parent="Bronze" instance=ExtResource( 2 )]
+position = Vector2( 1430, 152 )
+
+[node name="Silver" type="Label" parent="."]
+margin_top = 337.0
+margin_right = 554.0
+margin_bottom = 369.0
+text = "Silver: \"Bec-de-Beak\", \"Jam Jar Farms\", \"QkChkns\""
+
+[node name="TestChicken" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 75, 137 )
+
+[node name="TestChicken2" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 251, 143 )
+
+[node name="TestChicken3" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 437, 145 )
+
+[node name="TestChicken4" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 642, 146 )
+
+[node name="TestChicken5" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 848, 156 )
+
+[node name="TestChicken6" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 1062, 153 )
+
+[node name="TestChicken7" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 1252, 156 )
+
+[node name="TestChicken8" parent="Silver" instance=ExtResource( 2 )]
+position = Vector2( 1430, 152 )
+
+[node name="Gold" type="Label" parent="."]
+margin_top = 692.0
+margin_right = 564.0
+margin_bottom = 724.0
+text = "Gold: \"Vanchokons\", \"Martot\", \"Bec-de-Beak\""
+
+[node name="TestChicken" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 75, 137 )
+
+[node name="TestChicken2" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 251, 143 )
+
+[node name="TestChicken3" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 437, 145 )
+
+[node name="TestChicken4" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 642, 146 )
+
+[node name="TestChicken5" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 848, 156 )
+
+[node name="TestChicken6" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 1062, 153 )
+
+[node name="TestChicken7" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 1252, 156 )
+
+[node name="TestChicken8" parent="Gold" instance=ExtResource( 2 )]
+position = Vector2( 1430, 152 )

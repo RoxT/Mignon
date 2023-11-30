@@ -90,12 +90,11 @@ func get_all()->Array:
 func get_enemy_farms()->Array:
 	return enemy_farms
 	
-func get_some_farms(farm_names:Array)->Array:
+static func get_some_farms(farm_names:Array, pool:Array)->Array:
 	var a := []
-	for name in farm_names:
-		for farm in enemy_farms:
-			if farm.nom == name:
-				a.append(farm)
+	for farm in pool:
+		if farm_names.find(farm.nom) >= 0:
+			a.append(farm)
 	assert(a.size() == farm_names.size())
 	return a
 	
@@ -109,7 +108,7 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 				if subkey == b.breed:
 					breed = M.pairs[key][subkey]
 					breeds_discovered[breed] = true
-					bonus += 3
+					bonus += 1
 					if not has_hybrid:
 						has_hybrid = true
 						events.append(Event.new(day, "HYBRID", 

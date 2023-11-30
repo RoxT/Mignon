@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://chicken/standing_chicken.png" type="Texture" id=1]
+[ext_resource path="res://chicken/breeds/bigger_floof_spf.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Test/TestChicken.gd" type="Script" id=2]
 
-[node name="TestChicken" type="Sprite"]
-texture = ExtResource( 1 )
+[node name="TestChicken" type="AnimatedSprite"]
+frames = ExtResource( 1 )
+animation = "run"
 script = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="."]

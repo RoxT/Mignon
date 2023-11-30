@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends TouchScreenButton
 
 
 var target
@@ -57,3 +57,7 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 func _on_Peon_input_event(_viewport: Node, event: InputEvent, _shape_idx: int):
 	if event is InputEventMouseButton:
 		emit_signal("clicked", self, thoughts)
+
+
+func _on_Peon_pressed():
+	emit_signal("clicked", self, thoughts)

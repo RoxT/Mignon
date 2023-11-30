@@ -7,7 +7,7 @@ onready var go_button := $Panel/Go
 var stadium:Node
 
 var leagues := {
-	"BRONZE" : ["St. Germain’s", "Anualonacu", "QkChkns"],
+	"BRONZE" : ["St. Germain's", "Anualonacu", "QkChkns"],
 	"SILVER" : ["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
 	"GOLD" : ["Vanchokons", "Martot", "Bec-de-Beak"]
 }
@@ -24,7 +24,8 @@ func _ready():
 	else:
 		push_error("No save file found")
 	farm_names = leagues[save_game.current_league]
-	var enemy_farms:Array = save_game.get_some_farms(farm_names)
+	var enemy_farms:Array = save_game.get_some_farms(
+		farm_names, save_game.get_enemy_farms)
 	rich_text.clear()
 	var offset = 0
 	for farm in enemy_farms:
@@ -62,7 +63,8 @@ func _on_Go_pressed():
 	var lanes := stadium.get_children()
 	lanes[0].stats = save_game.racer
 	for i in range(farm_names.size()):
-		var farm:Farm = save_game.get_some_farms(farm_names)[i]
+		var farm:Farm = save_game.get_some_farms(
+			farm_names, save_game.get_enemy_farms)[i]
 		lanes[i+1].stats = farm.get_random()
 	add_child(stadium)
 	for r in get_tree().get_nodes_in_group("racer"):

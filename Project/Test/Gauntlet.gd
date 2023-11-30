@@ -2,7 +2,7 @@ extends Node2D
 
 var enemies:Array
 export var total :float= 1000
-export var my_speed := 350
+export var my_speed := 322
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

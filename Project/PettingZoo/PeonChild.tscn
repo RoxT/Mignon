@@ -1,31 +1,28 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://PettingZoo/PeonChild.gd" type="Script" id=1]
-[ext_resource path="res://PettingZoo/peon_child.png" type="Texture" id=2]
+[ext_resource path="res://PettingZoo/child_sprite.png" type="Texture" id=2]
 
-[sub_resource type="CircleShape2D" id=7]
-radius = 12.0
+[sub_resource type="CircleShape2D" id=10]
+radius = 20.0
 
 [sub_resource type="CircleShape2D" id=9]
 radius = 38.0132
 
-[node name="PeonChild" type="KinematicBody2D"]
-collision_layer = 2
-collision_mask = 2
-input_pickable = true
+[node name="PeonChild" type="TouchScreenButton"]
+shape = SubResource( 10 )
+shape_centered = false
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 7 )
 
 [node name="ChickenSearch" type="Area2D" parent="."]
 collision_layer = 8388608
 input_pickable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChickenSearch"]
+visible = false
 shape = SubResource( 9 )
 
 [node name="Line2D" type="Line2D" parent="."]
@@ -34,5 +31,5 @@ shape = SubResource( 9 )
 margin_right = 40.0
 margin_bottom = 32.0
 
-[connection signal="input_event" from="." to="." method="_on_Peon_input_event"]
+[connection signal="pressed" from="." to="." method="_on_Peon_pressed"]
 [connection signal="area_entered" from="ChickenSearch" to="." method="_on_ChickenSearch_area_entered"]

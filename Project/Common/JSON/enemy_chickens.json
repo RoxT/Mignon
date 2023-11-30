@@ -44,7 +44,7 @@
 		"Pauline" :{ "top_speed":247},
 		"Capucine" :{ "top_speed":328}
 	}},
-	"St. Germain’s" :{ "chickens": {
+	"St. Germain's" :{ "chickens": {
 		"Luna" :{ "top_speed":57},
 		"Thaïs" :{ "top_speed":92},
 		"Marie" :{ "top_speed":152},

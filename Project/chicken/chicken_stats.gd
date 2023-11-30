@@ -45,7 +45,6 @@ func is_elderly()->bool:
 	return age > 30
 
 func get_speed()->int:
-	
 	var entropy:float = 1.0 - fatigue*0.1
 	return top_speed * entropy * boost
 
