@@ -4,36 +4,66 @@ var ShowChicken:PackedScene = preload("res://Common/ShowChicken.tscn")
 onready var panel := $Panel
 onready var rich_text:RichTextLabel = $Panel/Diary
 onready var go_button := $Panel/Go
+onready var prizes := $Panel/Prizes
+onready var welcome := $Panel/Welcome
 var stadium:Node
+var control:Control
+var league_name:String
+var your_racer:Chicken
+
+const WELCOME := "Welcome to %s League"
+const PRIZE := "Prize per race: $%s               Prize for league: %s"
+const GO_BUTTON := "Round %s, Go!"
 
 var leagues := {
-	"BRONZE" : ["St. Germain's", "Anualonacu", "QkChkns"],
-	"SILVER" : ["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
-	"GOLD" : ["Vanchokons", "Martot", "Bec-de-Beak"]
+	"BRONZE" : {"farms":["St. Germain's", "Anualonacu", "QkChkns"],
+				"prize_race": 20, "prize_all":200},
+	"SILVER" : {"farms":["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
+				"prize_race": 20, "prize_all":400},
+	"GOLD" : {"farms":["Vanchokons", "Martot", "Bec-de-Beak"],
+			  "prize_race": 20, "prize_all":600}
 }
 
 var save_game:AllChickens
-
-var farm_names:Array
+var enemy_farms:Array
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if AllChickens.exists():
-		save_game = load(AllChickens.PATH)
-		save_game.save()
+	save_game = M.save_game
+	your_racer = save_game.temp_racer if save_game.temp_racer else save_game.racer
+	$Panel/ShowChicken.stats = your_racer
+	var in_progress = save_game.league_in_progress
+	if in_progress:
+		$Panel/Bronze.disabled = in_progress.league != "BRONZE"
+		$Panel/Silver.disabled = in_progress.league != "SILVER"
+		$Panel/Gold.disabled = in_progress.league != "GOLD"
+		load_league(in_progress.league)
 	else:
-		push_error("No save file found")
-	farm_names = leagues[save_game.current_league]
-	var enemy_farms:Array = save_game.get_some_farms(
-		farm_names, save_game.get_enemy_farms)
+		load_league(save_game.current_league)
+
+func _on_League_toggled(button_pressed:bool, new_league_name:String):
+	if button_pressed:
+		call_deferred("load_league", new_league_name)
+			
+func load_league(title:String):
+	league_name = title
+	var league:Dictionary = leagues[title]
+	welcome.text = WELCOME % title
+	prizes.text = PRIZE % [str(league.prize_race), str(league.prize_all)]
+	enemy_farms = save_game.get_some_farms(
+		league.farms, save_game.enemy_farms)
 	rich_text.clear()
+	if control: control.queue_free()
+	control = Control.new()
+	$Panel/Diary.add_child(control)
+	
 	var offset = 0
 	for farm in enemy_farms:
 		farm = farm as Farm
 		var label := Label.new()
 		label.text = (farm.nom + "\n")
 		label.name = farm.nom
-		rich_text.add_child(label)
+		control.add_child(label)
 		label.rect_position.y = offset
 		var width = 64
 		for stats in farm.chickens:
@@ -43,8 +73,7 @@ func _ready():
 			chicken.position = Vector2(width, 32+3)
 			width += 128
 		offset += 256
-	go_button.text = "Round " + str(save_game.current_round()) + ", Go!"
-			
+	go_button.text = "Round " + str(save_game.current_round()) + ", Go!"	
 
 func _on_ToCoop_pressed():
 	var path := "res://Coop.tscn"
@@ -61,10 +90,9 @@ func _on_Go_pressed():
 	stadium = load("res://League/Stadium.tscn").instance()
 	stadium.position = Vector2(0, 192)
 	var lanes := stadium.get_children()
-	lanes[0].stats = save_game.racer
-	for i in range(farm_names.size()):
-		var farm:Farm = save_game.get_some_farms(
-			farm_names, save_game.get_enemy_farms)[i]
+	lanes[0].stats = your_racer
+	for i in range(enemy_farms.size()):
+		var farm:Farm = enemy_farms[i]
 		lanes[i+1].stats = farm.get_random()
 	add_child(stadium)
 	for r in get_tree().get_nodes_in_group("racer"):
@@ -83,7 +111,9 @@ func _on_racer_finished():
 		save_game.death(your_chicken.stats)
 		add_child(modal)
 	if stadium.get_node("Lane").did_win():
-		var won_league = save_game.update_league_in_progress(your_chicken.stats.nom)
+		save_game.update_league_in_progress(your_chicken.stats.nom, league_name)
 	else:
 		save_game.league_in_progress = {}
 	save_game.save()
+
+

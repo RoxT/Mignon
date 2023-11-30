@@ -32,8 +32,7 @@ var colours:= []
 func _ready():
 	
 	var chicken_stats := []
-	save_game = load(AllChickens.PATH) as AllChickens
-	save_game.save()
+	save_game = M.save_game
 	chicken_stats = save_game.get_all()
 	
 	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()

@@ -19,10 +19,7 @@ var save_game:AllChickens
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	M.fade = true
-	if AllChickens.exists():
-		save_game = load(AllChickens.PATH)
-	else:
-		push_error("No save file found")
+	save_game = M.save_game
 	var first_chicken:Chicken
 	first_chicken = save_game.temp_racer if save_game.temp_racer else save_game.racer
 	save_game.last_racer = first_chicken

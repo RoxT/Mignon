@@ -3,7 +3,7 @@ extends Node
 var player:AudioStreamPlayer
 var tween_out :Tween
 onready var rng = RandomNumberGenerator.new()
-var err := OK
+var okay := true
 
 const PATH := "res://Common/ChillJazzMusicPackEasyLoopOGG/%s.ogg"
 
@@ -37,8 +37,8 @@ func _ready():
 	
 func play_random():
 	if tween_out.is_active():
-		err = tween_out.stop_all()
-		if err != OK and err != FAILED: push_error("Tween Failed: " + str(err))
+		okay = tween_out.stop_all()
+		if !okay: push_error("Tween Failed")
 	rng.randomize()
 	var song:AudioStreamOGGVorbis = load(
 		PATH % songs[rng.randi_range(0, songs.size()-1)])
@@ -54,17 +54,16 @@ func get_failure()->AudioStreamOGGVorbis:
 func began_race():
 	# https://ask.godotengine.org/27939/how-to-fade-in-out-an-audio-stream
 	# tween music volume down to 0
-	err = tween_out.interpolate_property(
+	okay = tween_out.interpolate_property(
 		player, "volume_db", 0, -40, 
 		transition_duration, transition_type, Tween.EASE_IN, 0)
-	if err != OK and err != FAILED : push_error("Tween Failed: " + str(err))
-	err = tween_out.start()
-	if err != OK and err != FAILED  : push_error("Tween Failed: " + str(err))
+	if !okay: push_error("Tween Failed")
+	okay = tween_out.start()
+	if !okay: push_error("Tween Failed")
 
 func race_finished():
 	player.volume_db = 0
 	play_random()
-	
 	
 func _on_TweenOut_tween_completed(object, _key):
 	# stop the music -- otherwise it continues to run at silent volume

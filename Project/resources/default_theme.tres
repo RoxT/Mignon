@@ -1,7 +1,9 @@
-[gd_resource type="Theme" load_steps=7 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
 [ext_resource path="res://resources/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resources/flatblue_stylebox.tres" type="StyleBox" id=2]
+[ext_resource path="res://resources/race_stylebox.tres" type="StyleBox" id=3]
+[ext_resource path="res://resources/race_stylebox_hover.tres" type="StyleBox" id=4]
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.1682, 0.19053, 0.29, 1 )
@@ -46,4 +48,7 @@ LinkButton/colors/font_color_hover = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_pressed = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/constants/underline_spacing = 4
 LinkButton/fonts/font = SubResource( 6 )
+RaceStyleBtn/base_type = "Button"
+RaceStyleBtn/styles/hover = ExtResource( 4 )
+RaceStyleBtn/styles/normal = ExtResource( 3 )
 RichTextLabel/fonts/bold_font = SubResource( 7 )

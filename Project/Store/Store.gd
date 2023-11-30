@@ -17,13 +17,7 @@ const NEXT := "Next: "
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if AllChickens.exists():
-		save_game = load(AllChickens.PATH) as AllChickens
-	else:
-		save_game = AllChickens.new()
-		save_game.save()
-		print("New Game")
-	save_game.save()
+	save_game = M.save_game
 	refresh_UI()
 
 func multiplier()->int:

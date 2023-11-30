@@ -53,7 +53,7 @@ func do_run(hero:Chicken)->bool:
 	var competition := []
 	for f in farms:
 		f = f as Farm
-		competition.append(f.chickens[randi() % f.chickens.size()])
+		competition.append(f.get_random())
 	for c in competition:
 		c.boost = 1.07
 		if c.get_speed() > hero.get_speed():

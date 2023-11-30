@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
 [ext_resource path="res://chicken/portraits/brown_rooster.jpg" type="Texture" id=3]
@@ -10,8 +10,6 @@
 [ext_resource path="res://Common/info.png" type="Texture" id=10]
 [ext_resource path="res://Common/button/edit.png" type="Texture" id=11]
 [ext_resource path="res://Common/AFood.tscn" type="PackedScene" id=13]
-[ext_resource path="res://resources/race_stylebox.tres" type="StyleBox" id=14]
-[ext_resource path="res://resources/race_stylebox_hover.tres" type="StyleBox" id=15]
 [ext_resource path="res://Coop/title.png" type="Texture" id=16]
 [ext_resource path="res://resources/panel_empty.tres" type="StyleBox" id=17]
 
@@ -160,8 +158,7 @@ rect_min_size = Vector2( 0, 48 )
 focus_neighbour_left = NodePath("../New")
 focus_next = NodePath("../Money")
 focus_previous = NodePath("../New")
-custom_styles/hover = ExtResource( 15 )
-custom_styles/normal = ExtResource( 14 )
+theme_type_variation = "RaceStyleBtn"
 shortcut = SubResource( 6 )
 text = "RACE ($5) "
 
@@ -350,8 +347,7 @@ margin_top = 23.0
 margin_right = 1270.0
 margin_bottom = 109.0
 rect_min_size = Vector2( 0, 48 )
-custom_styles/hover = ExtResource( 15 )
-custom_styles/normal = ExtResource( 14 )
+theme_type_variation = "RaceStyleBtn"
 text = "Start Petting Zoo"
 
 [node name="LeagueRace" type="Button" parent="UI" groups=["action"]]
@@ -361,6 +357,16 @@ margin_right = 300.0
 margin_bottom = 783.0
 rect_min_size = Vector2( 0, 48 )
 text = "League Race"
+
+[node name="Drop" type="ReferenceRect" parent="UI/LeagueRace" groups=["league_drop"]]
+visible = false
+margin_left = -4.0
+margin_top = -2.0
+margin_right = 279.0
+margin_bottom = 82.0
+border_color = Color( 0.964706, 0.905882, 0.588235, 1 )
+border_width = 3.0
+editor_only = false
 
 [node name="WebChickens" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
@@ -414,7 +420,7 @@ border_width = 3.0
 [node name="Mating" type="Timer" parent="BreedingPen/PenRect"]
 one_shot = true
 
-[node name="Drop" type="ReferenceRect" parent="BreedingPen/PenRect" groups=["drop"]]
+[node name="Drop" type="ReferenceRect" parent="BreedingPen/PenRect" groups=["drop", "league_drop"]]
 margin_left = -4.0
 margin_top = -2.0
 margin_right = 341.0

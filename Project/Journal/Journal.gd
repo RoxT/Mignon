@@ -17,11 +17,7 @@ onready var links := $Links
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if AllChickens.exists():
-		save_game = load(AllChickens.PATH) as AllChickens
-	else:
-		push_error("No chickens found")
-	save_game.save()
+	save_game = M.save_game
 	$Links/Diary.pressed = true
 
 func switch_to(target:LinkButton):

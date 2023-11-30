@@ -1,10 +1,5 @@
 extends Node
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
 	 # Breeds #
 const BROWN := "brown"
 const WHITE := "white"
@@ -34,6 +29,22 @@ const pairs := {WHITE: {
 					WHITE: BIGGER_FLOOF}
 				}
 
+var save_game:AllChickens setget ,get_save_game
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	if AllChickens.exists():
+		save_game = load(AllChickens.PATH) as AllChickens
+		if save_game == null:
+			print(load(AllChickens.PATH))
+		else:
+			save_game.save()
+
+func get_save_game()->AllChickens:
+	if save_game == null and AllChickens.exists():
+		print(load(AllChickens.PATH))
+	return save_game
+
 static func get_uncommon_list()->Array:
 	var u := BREEDS_LIST.duplicate()    
 	for d in DEFUALT_BREEDS:
@@ -47,4 +58,9 @@ static func parents(breed:String)->Array:
 				return [a, b]
 	return []
 
-
+func reset():
+	get_tree().current_scene.save_game = null
+	save_game = AllChickens.new()
+	save_game.initialize_game()
+	save_game.save()
+	get_tree().current_scene.save_game = save_game

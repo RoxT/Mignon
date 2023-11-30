@@ -5,11 +5,7 @@ onready var player:AnimationPlayer = $AnimationPlayer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	if AllChickens.exists():
-		save_game = load(AllChickens.PATH) as AllChickens
-		save_game.save()
-	else:
-		push_error("No save game found")
+	save_game = M.save_game
 	
 	if !save_game.has_day1:
 		player.play("Day1")

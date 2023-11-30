@@ -27,16 +27,12 @@ func _ready():
 		$AnimationPlayer.play("fade_in")
 	M.fade = false
 	get_tree().call_group("drop", "hide")
+	get_tree().call_group("league_drop", "hide")
 	var chicken_stats := []
-	if AllChickens.exists():
-		save_game = load(AllChickens.PATH) as AllChickens
-		if save_game == null:
-			print(save_game)
-			_on_Reset_pressed()
-		else:
-			save_game.save()
-	else:
+	save_game = M.save_game
+	if save_game == null:
 		_on_Reset_pressed()
+		return
 	
 	if !save_game.has_day1:
 		_goto_scene("res://Diary/Diary.tscn")
@@ -82,6 +78,10 @@ func _ready():
 	update_money()
 	update_food_box()
 	
+	if save_game.league_in_progress:
+		$UI/Race.disabled = true
+		$UI/PettingZoo.disabled = true
+		$UI/LeagueRace.theme_type_variation="RaceStyleBtn"
 	#$Race.call_deferred("grab_focus") 
 	
 func compare_wins(a, b)->bool:
@@ -96,8 +96,11 @@ func add_badge(chicken, rank):
 func _on_chicken_clicked(chicken:Node):
 	select_chicken(chicken)
 	if not chicken.stats.is_chick():
-		get_tree().call_group("drop", "show")
-		set_race_text(chicken)
+		if save_game.current_league:
+			get_tree().call_group("league_drop", "show")
+		else:
+			get_tree().call_group("drop", "show")
+			set_race_text(chicken)
 		if chicken.breeding == true:
 			_on_StatsPanel_requested_breed(chicken)
 			
@@ -112,16 +115,23 @@ func select_chicken(chicken:Node):
 		$UI/StatsPanel.stop_sell(true)
 
 func _on_chicken_unclicked(chicken:Node):
-	var drops:= get_tree().get_nodes_in_group("drop")
+	var drops
+	if save_game.current_league:
+		drops = get_tree().get_nodes_in_group("league_drop")
+	else:
+		drops = get_tree().get_nodes_in_group("drop")
+		set_race_text(racer)
 	for drop in drops:
 		var d:ReferenceRect = drop as ReferenceRect
 		if  d.get_global_rect().has_point(get_viewport().get_mouse_position()):
 			var place:String = d.get_parent().name
 			if place == "Race": _on_Race_pressed(chicken)
 			elif place == "PenRect": _on_StatsPanel_requested_breed(chicken)
+			elif place == "LeagueRace": _on_LeagueRace_pressed(chicken)
 			break
+	get_tree().call_group("league_drop", "hide")
 	get_tree().call_group("drop", "hide")
-	set_race_text(racer)
+	
 
 func set_racer(chicken:Node):
 	if not valid_adult_chicken(chicken):
@@ -153,7 +163,7 @@ func set_race_text(chicken):
 	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + nom
 	
 func set_can_race():
-	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0:
+	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0 or save_game.current_league:
 		$UI/Race.disabled = true
 	else:
 		$UI/Race.disabled = false
@@ -168,12 +178,8 @@ func update_food_box():
 	food_box.get_node("BASIC").count = save_game.foods[AllChickens.FOOD_TYPES.BASIC]
 	
 func _on_Reset_pressed():
-	save_game = AllChickens.new()
-	save_game.initialize_game()
-	save_game.save()
-	var err := get_tree().change_scene("res://Diary/Diary.tscn")
-	if err != OK:
-		print("Error reseting game (loading coop)")
+	M.reset()
+	_goto_scene("res://Diary/Diary.tscn")
 
 func _on_New_pressed(paid:bool, stats:= Chicken.new(), new_pos:=Vector2(pen.rect_position.x, pen.rect_position.y)):
 	var new_chicken = preload("res://Coop/CoopChicken.tscn").instance()
@@ -340,7 +346,9 @@ func _on_PettingZoo_pressed():
 	var zoo := "res://PettingZoo/PettingZoo.tscn"
 	_goto_scene(zoo)
 
-func _on_LeagueRace_pressed():
+func _on_LeagueRace_pressed(chicken=null):
+	if chicken:
+		save_game.temp_racer = chicken.stats
 	_goto_scene("res://League/League.tscn")
 
 func _goto_scene(path:String):
