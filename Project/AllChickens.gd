@@ -18,6 +18,7 @@ export(Dictionary) var breeds_discovered
 export(Resource) var last_racer
 export(int) var next_unique_no
 export(Array) var events
+export(bool) var new_alert
 export(String, "BRONZE", "SILVER", "GOLD", "END") var current_league
 export(Dictionary) var league_in_progress
 export(Dictionary) var last_zoo_report
@@ -28,10 +29,12 @@ enum FOOD_TYPES {BEST, GOOD, BASIC}
 const PATH := "user://chickens.tres"
 const YOU := "YOU"
 
+signal alert
+
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -54,6 +57,7 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	last_zoo_report = new_last_zoo_report
 	league_in_progress = new_league_in_progress
 	league_wins = new_league_wins
+	new_alert = new_new_alert
 
 func initialize_game():
 	all = generate_mignon()
@@ -110,10 +114,11 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 				if subkey == b.breed:
 					breed = M.pairs[key][subkey]
 					breeds_discovered[breed] = true
-					bonus += 1
+					bonus += 2
 					if not has_hybrid:
 						has_hybrid = true
-						events.append(Event.new(day, "HYBRID", 
+						new_alert = true
+						new_alert_event(Event.new(day, "HYBRID", 
 							[a.nom, b.nom, nom, breed.capitalize()]))
 	if not breed: breed = one_of_two(a, b, "breed")
 	
@@ -131,6 +136,11 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 		breed,
 		lineage,
 		get_new_unique_no())
+
+func new_alert_event(event:Event):
+	new_alert = true
+	emit_signal("alert")
+	events.append(event)
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
 	return [a.get(property), b.get(property)][randi()%2]
@@ -189,7 +199,7 @@ func update_league_in_progress(winner:String, league:String):
 			league_in_progress.round2 = winner
 		3:
 			league_in_progress.round3 = winner
-			events.append(Event.new(day, league, [
+			new_alert_event(Event.new(day, league, [
 				league_in_progress.round1, 
 				league_in_progress.round2, 
 				league_in_progress.round3 ]))
@@ -226,7 +236,6 @@ static func choose_farms(lanes, bag_of_indexes, enemies)->Array:
 		var i:int = bag_of_indexes[randi() % bag_of_indexes.size()]
 		farms.append(enemies[i])
 		bag_of_indexes.erase(i)
-	
 	return farms
 
 static func bag(things:int)->Array:

@@ -4,6 +4,7 @@ var save_game:AllChickens
 var Badge:PackedScene = load("res://Coop/Badge.tscn")
 const COST_RACE := 5
 const COST_NEW := 10
+const WHAT_ROUND := "League: %s\nRound: %s"
 onready var racer_label := $RacerLabel
 onready var selected_dot := $SelectedDot
 onready var mate_dot := $MateDot
@@ -37,6 +38,9 @@ func _ready():
 	if !save_game.has_day1:
 		_goto_scene("res://Diary/Diary.tscn")
 	chicken_stats = save_game.get_all()
+	if save_game.connect("alert", self, "_on_alerted") != OK: 
+		push_error("signal connection to save game failed")
+	
 	
 	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()
 	$Pens.add_child(pen)
@@ -82,7 +86,15 @@ func _ready():
 		$UI/Race.disabled = true
 		$UI/PettingZoo.disabled = true
 		$UI/LeagueRace.theme_type_variation="RaceStyleBtn"
+		$UI/LeagueRace/WhatLeague.text = WHAT_ROUND % [save_game.league_in_progress.league, save_game.current_round()]
+	else:
+		$UI/LeagueRace/WhatLeague.text = ""
+
+	$UI/Journal/Bang.visible = save_game.new_alert
 	#$Race.call_deferred("grab_focus") 
+	
+func _on_alerted():
+	$UI/Journal/Bang.show()
 	
 func compare_wins(a, b)->bool:
 	return a.stats.wins > b.stats.wins
@@ -163,7 +175,7 @@ func set_race_text(chicken):
 	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + nom
 	
 func set_can_race():
-	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0 or save_game.current_league:
+	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0 or save_game.league_in_progress:
 		$UI/Race.disabled = true
 	else:
 		$UI/Race.disabled = false

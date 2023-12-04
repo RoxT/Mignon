@@ -79,7 +79,7 @@ group = ExtResource( 2 )
 text = "Gold"
 
 [node name="ShowChicken" parent="Panel" instance=ExtResource( 3 )]
-position = Vector2( 1212, 757 )
+position = Vector2( 1115, 840 )
 
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 32.0

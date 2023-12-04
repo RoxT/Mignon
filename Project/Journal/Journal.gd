@@ -19,6 +19,7 @@ onready var links := $Links
 func _ready():
 	save_game = M.save_game
 	$Links/Diary.pressed = true
+	save_game.new_alert = false
 
 func switch_to(target:LinkButton):
 	content.clear()
