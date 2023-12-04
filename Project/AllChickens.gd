@@ -9,7 +9,7 @@ export(int) var deaths
 export(String) var pen
 export(Array) var foods
 export(bool) var speed_boost
-export(bool) var has_day1
+export(bool) var show_diary
 export(bool) var has_hybrid
 export(int) var day
 export(int) var wins
@@ -34,7 +34,7 @@ signal alert
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_has_day1=false, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -44,7 +44,6 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	enemy_farms = new_enemy_farms
 	foods = new_foods
 	speed_boost = new_speed_boost
-	has_day1 = new_has_day1
 	day = new_day
 	wins = new_wins
 	losses = new_losses
@@ -58,6 +57,7 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	league_in_progress = new_league_in_progress
 	league_wins = new_league_wins
 	new_alert = new_new_alert
+	show_diary = new_show_diary
 
 func initialize_game():
 	all = generate_mignon()
@@ -141,6 +141,12 @@ func new_alert_event(event:Event):
 	new_alert = true
 	emit_signal("alert")
 	events.append(event)
+
+func find_event(event:String)->int:
+	for i in range(events.size()):
+		if event == events[i].key:
+			return i
+	return -1
 
 static func one_of_two(a:Chicken, b:Chicken, property:String):
 	return [a.get(property), b.get(property)][randi()%2]

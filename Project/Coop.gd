@@ -35,7 +35,7 @@ func _ready():
 		_on_Reset_pressed()
 		return
 	
-	if !save_game.has_day1:
+	if save_game.show_diary:
 		_goto_scene("res://Diary/Diary.tscn")
 	chicken_stats = save_game.get_all()
 	if save_game.connect("alert", self, "_on_alerted") != OK: 

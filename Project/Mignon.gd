@@ -36,7 +36,7 @@ func _ready():
 	if AllChickens.exists():
 		save_game = load(AllChickens.PATH) as AllChickens
 		if save_game == null:
-			print(load(AllChickens.PATH))
+			print(str(load(AllChickens.PATH)))
 		else:
 			save_game.save()
 
