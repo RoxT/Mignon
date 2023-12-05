@@ -37,9 +37,9 @@ texture = ExtResource( 3 )
 
 [node name="building_view" type="TextureRect" parent="."]
 show_behind_parent = true
-margin_left = -425.0
+margin_left = -428.0
 margin_top = -328.0
-margin_right = 653.0
+margin_right = 650.0
 margin_bottom = 458.0
 mouse_filter = 2
 texture = ExtResource( 4 )

@@ -25,6 +25,8 @@ func _ready():
 		
 func _on_animation_finished(_anim_name: String):
 	$ToCoop.show()
+	if $Dots:
+		$Dots.queue_free()
 
 func _on_ToCoop_pressed():
 	player.play("fade_away")

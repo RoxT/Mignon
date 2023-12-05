@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Diary/Diary.gd" type="Script" id=1]
 [ext_resource path="res://Common/ComputerBackground.tscn" type="PackedScene" id=2]
@@ -33,7 +33,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=1]
 resource_name = "Day1"
-length = 24.0
+length = 15.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:max_lines_visible")
 tracks/0/interp = 1
@@ -41,7 +41,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.7, 2.1, 5.1, 11.1, 15, 20, 22.9 ),
+"times": PoolRealArray( 0, 0.6, 1.8, 4.1, 6.3, 9.2, 12.8, 14.6 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 5, 8, 10, 13, 15, 17 ]
@@ -139,6 +139,38 @@ tracks/1/keys = {
 } ]
 }
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ -1 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "dots"
+length = 1.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visible_characters")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.7 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ -1, 3 ]
+}
+
 [node name="Diary" type="Control"]
 script = ExtResource( 1 )
 
@@ -154,7 +186,6 @@ border_width = 4.0
 editor_only = false
 
 [node name="Day1" type="Label" parent="." groups=["content"]]
-visible = false
 margin_left = 262.0
 margin_top = 141.0
 margin_right = 1654.0
@@ -174,7 +205,6 @@ There's a race every day, I guess I'll see how she does!
 
 <3"
 autowrap = true
-percent_visible = -0.00199601
 
 [node name="Bronze" type="Label" parent="." groups=["content"]]
 visible = false
@@ -211,6 +241,7 @@ anims/fade_away = SubResource( 3 )
 margin_right = 40.0
 margin_bottom = 40.0
 __meta__ = {
+"_edit_group_": true,
 "_edit_lock_": true
 }
 
@@ -336,6 +367,19 @@ text = "Day 1"
 [node name="Timer" type="Timer" parent="Day"]
 one_shot = true
 autostart = true
+
+[node name="Dots" type="Label" parent="."]
+margin_left = 262.0
+margin_top = 720.0
+margin_right = 330.0
+margin_bottom = 752.0
+text = "... ..."
+percent_visible = -0.166667
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Dots"]
+autoplay = "dots"
+anims/RESET = SubResource( 5 )
+anims/dots = SubResource( 6 )
 
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
 [connection signal="timeout" from="Day/Timer" to="." method="_on_Day_Timer_timeout"]

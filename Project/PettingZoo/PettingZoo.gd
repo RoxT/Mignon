@@ -42,7 +42,7 @@ func _ready():
 	camera.zoom = pen.get_zoom()
 	match pen.name:
 		"Large": pen_modifier = 0.25
-		"Medium": pen_modifier = 0.7
+		"Medium": pen_modifier = 0.5
 	
 	
 	if save_game.already_zooed():

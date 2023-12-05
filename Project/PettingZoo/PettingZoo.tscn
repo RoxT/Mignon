@@ -18,7 +18,7 @@ script = ExtResource( 5 )
 [node name="Pens" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 876, 540 )
+position = Vector2( 962, 540 )
 current = true
 
 [node name="UI" type="CanvasLayer" parent="."]
@@ -57,9 +57,9 @@ texture = ExtResource( 4 )
 [node name="ReportPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -1887.0
+margin_left = -1908.0
 margin_top = 194.0
-margin_right = -1467.0
+margin_right = -1521.0
 margin_bottom = 835.0
 mouse_filter = 2
 custom_styles/panel = ExtResource( 6 )
@@ -73,7 +73,8 @@ margin_bottom = 618.0
 text = "Final Report Pending..."
 
 [node name="Label" type="Label" parent="UI/ReportPanel"]
-margin_right = 343.0
+margin_left = 27.0
+margin_right = 370.0
 margin_bottom = 46.0
 text = "Report"
 align = 1

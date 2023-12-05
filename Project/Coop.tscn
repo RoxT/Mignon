@@ -371,10 +371,10 @@ rect_min_size = Vector2( 363, 48 )
 text = "Breed Chicken"
 
 [node name="Edit" type="Button" parent="UI/StatsPanel"]
-margin_left = 342.0
+margin_left = 325.0
 margin_top = 6.0
 margin_right = 378.0
-margin_bottom = 42.0
+margin_bottom = 54.0
 custom_styles/normal = SubResource( 13 )
 icon = ExtResource( 11 )
 icon_align = 1
@@ -478,9 +478,9 @@ default_color = Color( 0.4, 0.501961, 1, 1 )
 layer = -1
 
 [node name="PenRect" type="ReferenceRect" parent="BreedingPen"]
-margin_left = 1511.0
+margin_left = 1514.0
 margin_top = 793.0
-margin_right = 1850.0
+margin_right = 1853.0
 margin_bottom = 1043.0
 mouse_filter = 2
 mouse_default_cursor_shape = 2
