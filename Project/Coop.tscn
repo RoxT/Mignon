@@ -159,6 +159,7 @@ layer = -1
 [node name="Pens" type="Node2D" parent="."]
 
 [node name="PensCanvas" type="CanvasLayer" parent="."]
+layer = -1
 
 [node name="RacerLabel" type="Label" parent="."]
 margin_left = -30.0

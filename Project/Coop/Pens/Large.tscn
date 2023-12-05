@@ -22,6 +22,7 @@ position = Vector2( 0, 58 )
 [node name="Grass" type="TextureRect" parent="."]
 margin_right = 1078.0
 margin_bottom = 786.0
+mouse_filter = 2
 texture = ExtResource( 2 )
 
 [node name="Border" type="TextureRect" parent="Grass"]
@@ -31,5 +32,6 @@ margin_left = -21.0
 margin_top = -18.0
 margin_right = 1099.0
 margin_bottom = 807.0
+mouse_filter = 2
 texture = ExtResource( 3 )
 stretch_mode = 1

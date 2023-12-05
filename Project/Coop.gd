@@ -112,7 +112,7 @@ func add_badge(chicken, rank):
 func _on_chicken_clicked(chicken:Node):
 	select_chicken(chicken)
 	if not chicken.stats.is_chick():
-		if save_game.current_league:
+		if save_game.league_in_progress:
 			get_tree().call_group("league_drop", "show")
 		else:
 			get_tree().call_group("drop", "show")
@@ -132,7 +132,7 @@ func select_chicken(chicken:Node):
 
 func _on_chicken_unclicked(chicken:Node):
 	var drops
-	if save_game.current_league:
+	if save_game.league_in_progress:
 		drops = get_tree().get_nodes_in_group("league_drop")
 	else:
 		drops = get_tree().get_nodes_in_group("drop")

@@ -32,46 +32,46 @@ texture = ExtResource( 1 )
 
 [node name="BuyBasic" type="Button" parent="."]
 margin_left = 1221.0
-margin_top = 195.0
+margin_top = 177.0
 margin_right = 1820.0
-margin_bottom = 231.0
+margin_bottom = 233.0
 text = "Buy $1"
 icon = ExtResource( 2 )
 
 [node name="BuyBasicL" type="Label" parent="BuyBasic"]
-margin_top = 46.0
+margin_top = 71.0
 margin_right = 640.0
-margin_bottom = 148.0
+margin_bottom = 173.0
 text = "Nutritious pellets in bulk. Chickens recover 1 fatigue."
 autowrap = true
 
 [node name="BuyGood" type="Button" parent="."]
 margin_left = 1221.0
-margin_top = 343.0
+margin_top = 327.0
 margin_right = 1820.0
-margin_bottom = 379.0
+margin_bottom = 381.0
 text = "Buy $10"
 icon = ExtResource( 3 )
 
 [node name="BuyGoodL" type="Label" parent="BuyGood"]
-margin_top = 46.0
+margin_top = 64.0
 margin_right = 599.0
-margin_bottom = 148.0
+margin_bottom = 166.0
 text = "Fine grasses. Chickens recover 1 fatigue and gain a speed boost during the next race."
 autowrap = true
 
 [node name="BuyBest" type="Button" parent="."]
 margin_left = 1221.0
-margin_top = 523.0
+margin_top = 506.0
 margin_right = 1820.0
-margin_bottom = 559.0
+margin_bottom = 561.0
 text = "Buy $50"
 icon = ExtResource( 4 )
 
 [node name="BuyBestL" type="Label" parent="BuyBest"]
-margin_top = 46.0
+margin_top = 70.0
 margin_right = 599.0
-margin_bottom = 183.0
+margin_bottom = 207.0
 text = "A delicious blend of herbs and insects. Chickens recover 2 fatigue and gain a speed boost during the next race."
 autowrap = true
 
@@ -106,7 +106,7 @@ text = "Next: Small Farm pen"
 [node name="Upgrade" type="Button" parent="Farm"]
 margin_top = 150.0
 margin_right = 385.0
-margin_bottom = 186.0
+margin_bottom = 211.0
 text = "Upgrade Pen $100"
 
 [node name="InfoLabel" type="Label" parent="."]

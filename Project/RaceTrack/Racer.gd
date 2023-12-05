@@ -61,9 +61,13 @@ func stop():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	s_passed += delta
-	x_on_curve = s_passed/time_s
+	x_on_curve = s_passed/time_s	
 	var y_on_curve = this_curve.interpolate_baked(x_on_curve)
-	position.x = start_x + y_on_curve * distance
+	var x_pos:float = start_x + y_on_curve * distance
+	var speed_this_tick = (x_pos - position.x) / delta
+	speed_scale = speed_this_tick / speed
+	
+	position.x = x_pos
 	if position.x > finish_line:
 		$Trophy.show()
 		stats.wins += 1
