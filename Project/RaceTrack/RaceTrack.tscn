@@ -76,11 +76,11 @@ expand = true
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 12.0
 margin_top = 12.0
-margin_right = 188.0
+margin_right = 334.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 4 )
-text = "TO COOP"
+text = "<-- Leave Early (Forfeit)"
 
 [node name="StartGun" type="Timer" parent="."]
 wait_time = 0.7

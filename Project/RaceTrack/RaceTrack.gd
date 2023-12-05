@@ -74,6 +74,7 @@ func _on_racer_finished():
 	your_chicken.stats.speed_guess = speed_guess
 	save_game.save()
 	get_tree().call_group("Lane", "update_wins")
+	$ToCoop.text = "<-- To Coop"
 	$ToCoop.disabled = false
 	$ToCoop.grab_focus()
 	

@@ -26,6 +26,7 @@ func _ready():
 	if M.fade:
 		modulate = Color("02004a")
 		$AnimationPlayer.play("fade_in")
+		
 	M.fade = false
 	get_tree().call_group("drop", "hide")
 	get_tree().call_group("league_drop", "hide")
@@ -90,11 +91,14 @@ func _ready():
 	else:
 		$UI/LeagueRace/WhatLeague.text = ""
 
-	$UI/Journal/Bang.visible = save_game.new_alert
+	if save_game.new_alert:
+		_on_alerted()
+	else:
+		$UI/Journal/Bang.hide()
 	#$Race.call_deferred("grab_focus") 
 	
 func _on_alerted():
-	$UI/Journal/Bang.show()
+	$AnimationPlayer.play("alert")
 	
 func compare_wins(a, b)->bool:
 	return a.stats.wins > b.stats.wins

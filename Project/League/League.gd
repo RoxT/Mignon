@@ -12,7 +12,7 @@ var league_name:String
 var your_racer:Chicken
 
 const WELCOME := "Welcome to %s League"
-const PRIZE := "Prize per race: $%s               Prize for league: %s"
+const PRIZE := "Prize per race: $%s               Prize for league: $%s"
 const GO_BUTTON := "Round %s, Go!"
 
 var leagues := {
@@ -94,6 +94,7 @@ func _on_Go_pressed():
 	for i in range(enemy_farms.size()):
 		var farm:Farm = enemy_farms[i]
 		lanes[i+1].stats = farm.get_random()
+		
 	add_child(stadium)
 	for r in get_tree().get_nodes_in_group("racer"):
 		var err = r.connect("finished", self, "_on_racer_finished")

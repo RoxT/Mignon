@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://RaceTrack/Lane.tscn" type="PackedScene" id=1]
+[ext_resource path="res://League/StartGun.gd" type="Script" id=2]
 
 [node name="Stadium" type="Node2D"]
 
@@ -14,3 +15,10 @@ position = Vector2( 0, 384 )
 
 [node name="Lane4" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, 576 )
+
+[node name="StartGun" type="Timer" parent="."]
+one_shot = true
+autostart = true
+script = ExtResource( 2 )
+
+[connection signal="timeout" from="StartGun" to="StartGun" method="_on_StartGun_timeout"]

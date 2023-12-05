@@ -52,7 +52,6 @@ scale = Vector2( 1.2, 1.2 )
 frames = ExtResource( 1 )
 animation = "run"
 frame = 1
-playing = true
 script = ExtResource( 2 )
 
 [node name="Trophy" type="Sprite" parent="Racer"]
@@ -64,6 +63,9 @@ visible = false
 frames = SubResource( 8 )
 animation = "2"
 playing = true
+
+[node name="Tween" type="Tween" parent="Racer"]
+playback_process_mode = 0
 
 [node name="HSeparator" type="HSeparator" parent="."]
 margin_left = 2.0
