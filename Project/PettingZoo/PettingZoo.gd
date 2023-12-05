@@ -40,6 +40,9 @@ func _ready():
 	pen.border_color = Color.greenyellow
 	pen.modulate = Color.white
 	camera.zoom = pen.get_zoom()
+	match pen.name:
+		"Large": pen_modifier = 0.25
+		"Medium": pen_modifier = 0.7
 	
 	
 	if save_game.already_zooed():

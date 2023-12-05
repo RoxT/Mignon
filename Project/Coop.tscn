@@ -405,6 +405,7 @@ theme_type_variation = "RaceStyleBtn"
 text = "Start Petting Zoo"
 
 [node name="LeagueRace" type="Button" parent="UI" groups=["action"]]
+visible = false
 margin_left = 21.0
 margin_top = 701.0
 margin_right = 300.0
