@@ -39,10 +39,10 @@ func is_chick()->bool:
 	return age < 2
 	
 func is_mature()->bool:
-	return age > 15
+	return age > 30
 	
 func is_elderly()->bool:
-	return age > 30
+	return age > 60
 
 func get_speed()->int:
 	var entropy:float = 1.0 - fatigue*0.1
