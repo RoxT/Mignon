@@ -8,8 +8,6 @@ onready var final_report:RichTextLabel = $UI/ReportPanel/FinalReport
 
 var save_game:AllChickens
 var pen:ReferenceRect
-var child_count := 0.0
-var adult_count := 0.0
 var fatigue_penalty := false
 var many_fatigue_penalty := false
 const FATIGUE_MULTIPLIER := 0.80
@@ -19,7 +17,7 @@ const TWO_PAIR_MULTIPLIER := 1.60
 const RAINBOW_MODIFIER := 1.10
 const MANY_BREEDS_MODIFIER := 1.15
 const ALL_BREEDS_MODIFIER := 1.22
-const FAMOUS_MULTIPLIER := 1.17
+const FAMOUS_MULTIPLIER := 1.05
 var uncommon_chickens := 0
 var uncommon_breeds:Array = M.get_uncommon_list().duplicate()
 var modifiers := []
@@ -27,6 +25,9 @@ var total:float
 var pen_modifier := 1.0
 var breeds := []
 var colours:= []
+var regulars := 0
+var fans := 0
+var rate_adults := 0.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,13 +45,14 @@ func _ready():
 		"Large": pen_modifier = 0.25
 		"Medium": pen_modifier = 0.5
 	
-	
 	if save_game.already_zooed():
 		print_report(true)
 		$UI/PeonStatsPanel.hide()
 		return
 
 	var tired := 0
+	var add_child := 0
+	var add_adult := 0
 	for stats in chicken_stats:
 		stats = stats as Chicken
 		var chicken = preload("res://PettingZoo/PettingChicken.tscn").instance()
@@ -67,21 +69,17 @@ func _ready():
 			modifiers.append(FAMOUS_MULTIPLIER)
 		
 		if stats.top_speed >= 280:
-			adult_count += 1
-			if uncommon_breeds.has(stats.breed):
-				uncommon_chickens += 1
-				adult_count += 1			
+			add_adult += 1
 		else:
-			child_count += 1
-			if uncommon_breeds.has(stats.breed):
-				uncommon_chickens += 1
-				child_count += 1
-		
-		if stats.is_chick():
-			if stats.fatigue >= 5:
-				tired += 1
-		elif stats.fatigue >= 3:
+			add_child += 1
+	
+		if stats.fatigue >= 3:
 			tired += 1
+			
+		if stats.is_mature():
+			regulars += 1
+		if stats.is_elderly():
+			regulars += 2
 	
 
 	if tired/(float(chicken_stats.size())) >= 0.5:
@@ -102,8 +100,9 @@ func _ready():
 		
 	if colours.size() >= 5:
 		modifiers.append(RAINBOW_MODIFIER)
-		
-	total = adult_count + child_count
+	
+	rate_adults = float(add_adult)/float(add_adult+add_child)
+	total = add_child + add_adult + regulars
 	for m in modifiers:
 		total *= m
 	
@@ -126,7 +125,7 @@ func _add_human(count:int, rate:float):
 		$UI/ToCoop.disabled = false
 		print_report()
 		
-		save_game.create_zoo_report(report.adults, report.children, modifiers, breeds)
+		save_game.create_zoo_report(report.adults, report.children, modifiers, breeds, regulars)
 		save_game.money += report.collect_money()
 		for stats in save_game.get_all():
 			stats.tire(1)
@@ -141,7 +140,8 @@ func _add_human(count:int, rate:float):
 			peon = Child.instance()
 			report.child()
 		add_child(peon)
-		peon.position = Vector2(rand_range(pen.rect_position.x, pen.rect_position.x + pen.rect_size.x), rand_range(pen.rect_position.y, pen.rect_position.y + pen.rect_size.y))
+		peon.position = Vector2(
+			rand_range(pen.rect_position.x, pen.rect_position.x + pen.rect_size.x), rand_range(pen.rect_position.y, pen.rect_position.y + pen.rect_size.y))
 		var err = peon.connect("clicked", $UI/PeonStatsPanel, "_on_Human_clicked")
 		if err != OK:
 			push_error("Error connecting to peon: " + str(err))
@@ -159,10 +159,12 @@ func print_report(done_already:=false):
 	if done_already:
 		var last_report = save_game.last_zoo_report
 		modifiers = last_report["modifiers"]
-		child_count = last_report["children"]
-		adult_count = last_report["adults"]
+		report.children = last_report["children"]
+		report.adults = last_report["adults"]
 		breeds = last_report["breeds"]
-		total = round(child_count + adult_count)
+		regulars = last_report["regulars"]
+		total = report.children + report.adults
+	var fame := 0.0
 	for mod in modifiers:
 		match(mod):
 			FATIGUE_MULTIPLIER:
@@ -183,11 +185,17 @@ func print_report(done_already:=false):
 			RAINBOW_MODIFIER:
 				add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
 			FAMOUS_MULTIPLIER:
-				add_line_to_report("Famous chicken: ", FAMOUS_MULTIPLIER)
+				fame += (FAMOUS_MULTIPLIER-1)
+	if fame > 0.0:
+		add_line_to_report("Famous chickens: ", 1 + fame)
+	if regulars > 0:
+		final_report.add_text("Regulars: " + str(regulars))
+		final_report.newline()
 	
 	if done_already:
-		report.show_all(round(child_count), round(adult_count))
-	final_report.add_text("Total Guests: " + str(report.children+report.adults))
+		report.show_all()
+	final_report.newline()
+	final_report.add_text("Total Guests: " + str(round(total)))
 
 func _on_ToCoop_pressed():
 	save_game.save()
@@ -200,5 +208,4 @@ func _on_ToCoop_pressed():
 	push_error("Error " + str(err) + "changing to  " + coop + " ")
 
 func _on_Start_timeout():
-	var rate:float = adult_count/(adult_count+child_count)
-	_add_human(int(round(total)), rate)
+	_add_human(int(round(total)), rate_adults)

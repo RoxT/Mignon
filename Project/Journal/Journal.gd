@@ -49,6 +49,7 @@ func _on_Diary_toggled(button_pressed):
 	for i in range(events.size()-1,-1,-1):
 		var e:Event = events[i]
 		content.append_bbcode(DATE % e.day)
+		var t := tr(e.key)
 		content.append_bbcode(tr(e.key) % e.args)
 		content.append_bbcode("\n\n")
 	

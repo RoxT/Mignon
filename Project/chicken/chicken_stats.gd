@@ -19,6 +19,9 @@ export(float)var speed_guess setget set_speed_guess
 
 const TEXTURE_PATH := "res://chicken/breeds/%s_spf.tres"
 
+const MATURE := 30
+const ELDERLY := 60
+
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
@@ -39,13 +42,15 @@ func is_chick()->bool:
 	return age < 2
 	
 func is_mature()->bool:
-	return age > 30
+	return age >= MATURE
 	
 func is_elderly()->bool:
-	return age > 60
+	return age >= ELDERLY
 
 func get_speed()->int:
 	var entropy:float = 1.0 - fatigue*0.1
+	if is_chick():
+		return top_speed * entropy * boost / 2
 	return top_speed * entropy * boost
 
 func is_exhausted()->bool:

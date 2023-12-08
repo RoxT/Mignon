@@ -23,6 +23,8 @@ export(String, "BRONZE", "SILVER", "GOLD", "END") var current_league
 export(Dictionary) var league_in_progress
 export(Dictionary) var last_zoo_report
 export(Dictionary) var league_wins
+export(bool) var has_mature
+export(bool) var has_elderly
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -34,7 +36,7 @@ signal alert
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}):
+func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}, new_has_mature=false, new_has_elderly=false):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -58,6 +60,8 @@ func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_t
 	league_wins = new_league_wins
 	new_alert = new_new_alert
 	show_diary = new_show_diary
+	has_mature = new_has_mature
+	has_elderly = new_has_elderly
 
 func initialize_game():
 	all = generate_mignon()
@@ -84,6 +88,12 @@ func pass_day():
 	for c in all:
 		c.fatigue = max(c.fatigue-recovery, 0)
 		c.age += 1
+		if !has_mature and c.age == c.MATURE:
+			new_alert_event(Event.new(day, "MATURE", [c.nom]))
+			has_mature = true
+		if !has_elderly and c.age == c.ELDERLY:
+			new_alert_event(Event.new(day, "ELDERLY", [c.nom]))
+			has_elderly = true
 	save()
 
 
@@ -132,7 +142,7 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 		0, 
 		one_of_two(a, b, "colour"), 
 		one_of_two(a, b, "farm"), 
-		2, 
+		0, 
 		breed,
 		lineage,
 		get_new_unique_no())
@@ -183,13 +193,14 @@ func get_new_unique_no()->int:
 	next_unique_no += 1
 	return next_unique_no
 	
-func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array):
+func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array, regulars:int):
 	var report := {}
 	report["day"] = day
 	report["adults"] = adults
 	report["children"] = children
 	report["modifiers"] = modifiers
 	report["breeds"] = breeds
+	report["regulars"] = regulars
 	last_zoo_report = report
 	
 func already_zooed()->bool:

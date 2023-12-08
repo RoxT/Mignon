@@ -27,6 +27,7 @@ signal clicked(peon, thoughts)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rare_breeds = M.get_uncommon_list()
+	$Sprite.look_at(Vector2.UP)
 		
 
 func _on_ChickenSearch_area_entered(area:Area2D):

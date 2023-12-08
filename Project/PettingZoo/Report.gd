@@ -26,9 +26,7 @@ func child():
 func admissions():
 	$Admissions.text = ADMISSIONS + str(collect_money())
 	
-func show_all(set_children:int, set_adults:int):
-	children = set_children
-	adults = set_adults
+func show_all():
 	$ChildCount.text = CHILDREN + str(children)
 	$AdultCount.text = ADULTS + str(adults)
 	admissions()
