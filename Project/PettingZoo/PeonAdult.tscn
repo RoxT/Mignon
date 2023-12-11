@@ -16,6 +16,7 @@ script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+hframes = 2
 
 [node name="ChickenSearch" type="Area2D" parent="."]
 collision_layer = 8388609

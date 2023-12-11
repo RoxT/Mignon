@@ -98,7 +98,7 @@ func _ready():
 	#$Race.call_deferred("grab_focus") 
 	
 func _on_alerted():
-	$AnimationPlayer.play("alert")
+	$UI/Journal/Bang/AnimationPlayer.play("alert")
 	
 func compare_wins(a, b)->bool:
 	return a.stats.wins > b.stats.wins

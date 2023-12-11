@@ -6,9 +6,10 @@ var speed := 500
 onready var line := $Line2D
 onready var Floater:PackedScene = preload("res://Common/Floater.tscn")
 onready var Wow:Texture = preload("res://PettingZoo/speech_bubble_WOW.png")
+onready var meeple:Sprite = $Sprite
 var thoughts := []
-onready var child:bool = $ChickenSearch/CollisionShape2D.shape.radius < 50
 var rare_breeds:Array
+onready var child:bool = $ChickenSearch/CollisionShape2D.shape.radius < 50
 
 const PET := "I pet the chicken!"
 const SOFT := "So soft..."
@@ -27,7 +28,6 @@ signal clicked(peon, thoughts)
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	rare_breeds = M.get_uncommon_list()
-	$Sprite.look_at(Vector2.UP)
 		
 
 func _on_ChickenSearch_area_entered(area:Area2D):
@@ -35,7 +35,8 @@ func _on_ChickenSearch_area_entered(area:Area2D):
 	if !chicken.has_method("random_meander"):return
 	var wow = Floater.instance()
 	wow.texture = Wow
-	$Sprite.look_at(area.global_position)
+	meeple.flip_h = chicken.global_position.x > global_position.x
+	meeple.frame = int(chicken.global_position.y < global_position.y)
 	
 	if thoughts.size() >= 10: return
 	if child:
