@@ -41,20 +41,20 @@ func set_stats(value:Chicken):
 		breed_btn.text = breed_str
 	stats = value
 	if portrait:
-		if stats.breed == M.FLOOF:
+		if stats.breed == M.RUSSIAN_ORLOFF:
 			portrait.texture = load("res://chicken/portraits/Test_Headshot.png")
 			portrait.scale = portrait_scaling
-		elif stats.breed == M.BIGGER_FLOOF:
-			portrait.texture = load("res://chicken/portraits/Test_Full_body.jpg")
+		elif stats.breed == M.SILKIE:
+			portrait.texture = load("res://chicken/portraits/silkie.jpg")
 			portrait.scale = portrait_scaling
 		elif stats.breed == M.BROWN_ROOSTER:
 			portrait.texture = load("res://chicken/portraits/brown_rooster.jpg")
 			#portrait.scale = Vector2(0.15, 0.15)
-		elif stats.breed == M.WHITE:
-			portrait.texture = load("res://chicken/portraits/white1.png")
+		elif stats.breed == M.WHITE_CORNISH_HEN:
+			portrait.texture = load("res://chicken/portraits/white_cornish_hen.png")
 			portrait.scale = Vector2.ONE
 		else:
-			portrait.texture = load("res://chicken/portraits/brown1.png")
+			portrait.texture = load("res://chicken/portraits/leghorn_brown.png")
 			portrait.scale = Vector2.ONE
 		portrait.modulate = stats.colour
 		show()

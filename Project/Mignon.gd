@@ -1,36 +1,36 @@
 extends Node
 
 	 # Breeds #
-const BROWN := "brown"
-const WHITE := "white"
-const MOTTLED := "mottled"
-const FLOOF := "floof"
-const BIGGER_FLOOF := "bigger_floof"
+const LEGHORN_BROWN := "leghorn_brown"
+const WHITE_CORNISH_HEN := "white_cornish_hen"
+const SUSSEX := "sussex"
+const RUSSIAN_ORLOFF := "russian_orloff"
+const SILKIE := "silkie"
 const BROWN_ROOSTER := "brown_rooster"
 const BLACK_ONYX := "black_onyx"
 
-const DEFUALT_BREEDS := [BROWN, WHITE]
+const DEFUALT_BREEDS := [LEGHORN_BROWN, WHITE_CORNISH_HEN]
 const BREEDS_LIST := [
-	WHITE, BROWN, MOTTLED, FLOOF, BIGGER_FLOOF, BROWN_ROOSTER, BLACK_ONYX
+	WHITE_CORNISH_HEN, LEGHORN_BROWN, SUSSEX, RUSSIAN_ORLOFF, SILKIE, BROWN_ROOSTER, BLACK_ONYX
 ]
 
 var fade := true
 
-const pairs := {WHITE: {
-					BROWN: MOTTLED, 
-					FLOOF: BIGGER_FLOOF},
-				BROWN: {
-					WHITE: MOTTLED, 
-					MOTTLED: FLOOF,
-					FLOOF: BROWN_ROOSTER,
-					BIGGER_FLOOF: BLACK_ONYX},
-				MOTTLED: {
-					BROWN: FLOOF},
-				FLOOF: {
-					BROWN: BROWN_ROOSTER,
-					WHITE: BIGGER_FLOOF},
-				BIGGER_FLOOF: {
-					BROWN: BLACK_ONYX
+const pairs := {WHITE_CORNISH_HEN: {
+					LEGHORN_BROWN: SUSSEX, 
+					RUSSIAN_ORLOFF: SILKIE},
+				LEGHORN_BROWN: {
+					WHITE_CORNISH_HEN: SUSSEX, 
+					SUSSEX: RUSSIAN_ORLOFF,
+					RUSSIAN_ORLOFF: BROWN_ROOSTER,
+					SILKIE: BLACK_ONYX},
+				SUSSEX: {
+					LEGHORN_BROWN: RUSSIAN_ORLOFF},
+				RUSSIAN_ORLOFF: {
+					LEGHORN_BROWN: BROWN_ROOSTER,
+					WHITE_CORNISH_HEN: SILKIE},
+				SILKIE: {
+					LEGHORN_BROWN: BLACK_ONYX
 				}
 				}
 

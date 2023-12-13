@@ -354,9 +354,9 @@ max_length = 17
 [node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
 margin_left = 38.0
 margin_top = 346.0
-margin_right = 290.0
+margin_right = 344.0
 margin_bottom = 533.0
-text = "Breed: brown
+text = "Breed: White Cornish Hen
 Wins: 5 
 Fatigue: 3
 5 days old

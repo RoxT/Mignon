@@ -128,7 +128,7 @@ func do_mating(a:Chicken, b:Chicken)->Chicken:
 				if subkey == b.breed:
 					breed = M.pairs[key][subkey]
 					breeds_discovered[breed] = true
-					bonus += 2
+					bonus += 3
 					if not has_hybrid:
 						has_hybrid = true
 						new_alert = true
@@ -281,7 +281,7 @@ func generate_mignon()->Array:
 	var mignon := Chicken.new()
 	mignon.top_speed = 280
 	mignon.colour = Color.white
-	mignon.breed = "brown"
+	mignon.breed = M.LEGHORN_BROWN
 	mignon.farm = YOU
 	mignon.nom = "Mignon"
 	mignon.unique_no = get_new_unique_no()

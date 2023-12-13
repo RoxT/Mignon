@@ -107,7 +107,7 @@ func apply_sprite(sprite:AnimatedSprite):
 	sprite.frames = load(TEXTURE_PATH % breed) as SpriteFrames
 	sprite.modulate = colour
 	if is_mature():
-		if breed == M.WHITE:
+		if breed == M.WHITE_CORNISH_HEN:
 			sprite.modulate.b += 0.1
 			sprite.modulate.g += 0.1 
 			sprite.modulate.r += 0.1 
