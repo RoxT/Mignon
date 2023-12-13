@@ -35,3 +35,11 @@ margin_bottom = 807.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 stretch_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+show_behind_parent = true
+margin_left = -411.0
+margin_top = -259.0
+margin_right = 1099.0
+margin_bottom = 956.0
+color = Color( 0.31636, 0.33, 0.1254, 1 )

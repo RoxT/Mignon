@@ -92,21 +92,23 @@ text = "FARM"
 align = 1
 
 [node name="Current" type="Label" parent="Farm"]
-margin_top = 77.0
-margin_right = 385.0
-margin_bottom = 112.0
+margin_top = 53.0
+margin_right = 640.0
+margin_bottom = 108.0
 text = "Current: Covert Balcony pen"
+autowrap = true
 
 [node name="Next" type="Label" parent="Farm"]
-margin_top = 108.0
-margin_right = 321.0
-margin_bottom = 150.0
+margin_top = 242.0
+margin_right = 599.0
+margin_bottom = 329.0
 text = "Next: Small Farm pen"
+autowrap = true
 
 [node name="Upgrade" type="Button" parent="Farm"]
-margin_top = 150.0
+margin_top = 164.0
 margin_right = 385.0
-margin_bottom = 211.0
+margin_bottom = 225.0
 text = "Upgrade Pen $100"
 
 [node name="InfoLabel" type="Label" parent="."]

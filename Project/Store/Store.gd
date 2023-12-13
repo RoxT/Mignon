@@ -6,10 +6,13 @@ const GOOD_PRICE := 10
 const BEST_PRICE := 50
 
 const STARTER := "Starter"
+const START_DESC := "Covert Balcony Pen\nA small coop in the heart of the city, great for a few chickens."
 const MEDIUM := "Medium"
+const MEDIUM_DESC := "Small Farm Pen\nThe perfect little backyard coop."
 const LARGE := "Large"
+const LARGE_DESC := "Large Farm Pen\nAn extra large coop out in the country for those that want a lot of chickens."
 
-const MEDIUM_PRICE := 200
+const MEDIUM_PRICE := 300
 const LARGE_PRICE := 400
 
 const CURRENT := "Current: "
@@ -67,22 +70,22 @@ func refresh_UI():
 	var next:Label = $Farm/Next
 	match save_game.pen:
 		"Starter":
-			current.text = CURRENT + "Covert Balcony Pen"
-			next.text = NEXT + "Small Farm Pen"
+			current.text = CURRENT + START_DESC
+			next.text = NEXT + MEDIUM_DESC
 		"Medium":
-			current.text = CURRENT + "Small Farm Pen"
-			next.text = NEXT + "Large Farm Pen"
+			current.text = CURRENT + MEDIUM_DESC
+			next.text = NEXT + LARGE_DESC
 		"Large":
-			current.text = CURRENT + "Large Farm Pen"
+			current.text = CURRENT + LARGE_DESC
 			next.text = ""
 	
 	var upgrade:Button = $Farm/Upgrade
 	match save_game.pen:
 		"Starter":
-			upgrade.text = "Upgrade Farm $" + str(MEDIUM_PRICE*multiplier())
+			upgrade.text = "Upgrade Farm $" + str(MEDIUM_PRICE)
 #			upgrade.disabled = save_game.money < MEDIUM_PRICE*multiplier()
 		"Medium":
-			upgrade.text = "Upgrade Farm $" + str(LARGE_PRICE*multiplier())
+			upgrade.text = "Upgrade Farm $" + str(LARGE_PRICE)
 #			upgrade.disabled = save_game.money < LARGE_PRICE*multiplier()
 		"Large":
 			upgrade.disabled = true

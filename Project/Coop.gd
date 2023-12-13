@@ -45,8 +45,6 @@ func _ready():
 	
 	pen = load("res://Coop/Pens/" + save_game.pen + ".tscn").instance()
 	$Pens.add_child(pen)
-	pen.border_color = Color.greenyellow
-	pen.modulate = Color.white
 	camera.zoom = pen.get_zoom()
 
 	save_game.temp_racer = null
@@ -313,7 +311,6 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	set_can_race()
 	get_tree().set_group("action", "disabled", false)
 	egg.queue_free()
-
 	
 func _on_Info_pressed():
 	var modal = load("res://Common/ModalBig.tscn").instance()

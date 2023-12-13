@@ -10,8 +10,9 @@ const BEASTIARY := {
 	"white" : "A common racing chicken breed.",
 	"floof" : "Soft, gorgeous feathers.",
 	"mottled" : "An interesting mix.",
-	"brown_rooster" : "A curious chicken with an unusualy large comb and wattles.",
+	"brown_rooster" : "It's a boy! A curious chicken with an unusualy large comb and wattles.",
 	"bigger_floof" : "This racing chicken looks huge but its all feathers.",
+	M.BLACK_ONYX : "There's a green shimmer when the light hits this chicken.",
 	"unknown" : "There must be more breeds to discover."
 	}
 	
@@ -38,7 +39,7 @@ func _set_text():
 		label.pop()
 		label.newline()
 		label.append_bbcode(BEASTIARY[breed])
-		var parents = M.parents(breed)
+		var parents = M.capitalized_parents(breed)
 		if parents.size() == 2:
 			label.append_bbcode(BRED_FROM % parents)
 		$Sprite.texture = load(TEXTURES % breed)

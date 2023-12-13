@@ -86,6 +86,7 @@ func add_lane(stats:Chicken):
 	track += 1
 
 func _on_ToCoop_pressed():
+	save_game.save_backup()
 	emit_signal("race_finished")
 	disconnect("began_race", Music, "began_race")
 	disconnect("race_finished", Music, "race_finished")

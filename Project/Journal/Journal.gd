@@ -49,7 +49,6 @@ func _on_Diary_toggled(button_pressed):
 	for i in range(events.size()-1,-1,-1):
 		var e:Event = events[i]
 		content.append_bbcode(DATE % e.day)
-		var t := tr(e.key)
 		content.append_bbcode(tr(e.key) % e.args)
 		content.append_bbcode("\n\n")
 	
@@ -59,18 +58,22 @@ func _on_Breeds_toggled(button_pressed):
 	if button_pressed:
 		switch_to($Links/Breeds)
 		var i := 0
+		var x := 0
+		var y := 0
 		for key in save_game.breeds_discovered.keys():
+			if i > 3: x = 700
+			y = (i % 4) * 160
 			if save_game.breeds_discovered[key]:
-				add_beast(key, i)
+				add_beast(key, Vector2(x, y))
 			else: 
-				add_beast("unknown", i)
+				add_beast("unknown", Vector2(x, y))
 			i += 1
 	
-func add_beast(breed:String, i:int):
+func add_beast(breed:String, pos:Vector2):
 	var beast:Control = load(BEAST).instance()
 	beast.breed = breed
 	content.add_child(beast)
-	beast.rect_position.y = i * 128
+	beast.rect_position = pos
 
 
 func _on_ToCoop_pressed():

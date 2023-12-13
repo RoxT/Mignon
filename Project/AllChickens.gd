@@ -29,6 +29,7 @@ export(bool) var has_elderly
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
 const PATH := "user://chickens.tres"
+const PATH_BACKUP := "user://chickens_backup.tres"
 const YOU := "YOU"
 
 signal alert
@@ -36,7 +37,7 @@ signal alert
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 50, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}, new_has_mature=false, new_has_elderly=false):
+func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}, new_has_mature=false, new_has_elderly=false):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -99,6 +100,9 @@ func pass_day():
 
 static func exists()->bool:
 	return ResourceLoader.exists(PATH)
+	
+static func backup_exists()->bool:
+	return ResourceLoader.exists(PATH_BACKUP)
 
 func get_all()->Array:
 	return all
@@ -164,7 +168,13 @@ static func one_of_two(a:Chicken, b:Chicken, property:String):
 func save():
 	var err := ResourceSaver.save(PATH, self)
 	if err != OK: push_error("Error saving! " + str(err))
-
+	assert(err == OK)
+	
+func save_backup():
+	var err := ResourceSaver.save(PATH_BACKUP, self)
+	if err != OK: push_error("Error saving backup! " + str(err))
+	assert(err == OK)
+	
 func sell(chicken:Chicken, price:int):
 	if racer == chicken:
 		racer = null
