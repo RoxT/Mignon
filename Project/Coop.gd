@@ -29,7 +29,6 @@ func _ready():
 		
 	M.fade = false
 	get_tree().call_group("drop", "hide")
-	get_tree().call_group("league_drop", "hide")
 	var chicken_stats := []
 	save_game = M.save_game
 	if save_game == null:
@@ -80,14 +79,6 @@ func _ready():
 	set_racer(marked)
 	update_money()
 	update_food_box()
-	
-	if save_game.league_in_progress:
-		$UI/Race.disabled = true
-		$UI/PettingZoo.disabled = true
-		$UI/LeagueRace.theme_type_variation="RaceStyleBtn"
-		$UI/LeagueRace/WhatLeague.text = WHAT_ROUND % [save_game.league_in_progress.league, save_game.current_round()]
-	else:
-		$UI/LeagueRace/WhatLeague.text = ""
 
 	if save_game.new_alert:
 		_on_alerted()
@@ -110,11 +101,8 @@ func add_badge(chicken, rank):
 func _on_chicken_clicked(chicken:Node):
 	select_chicken(chicken)
 	if not chicken.stats.is_chick():
-		if save_game.league_in_progress:
-			get_tree().call_group("league_drop", "show")
-		else:
-			get_tree().call_group("drop", "show")
-			set_race_text(chicken)
+		get_tree().call_group("drop", "show")
+		set_race_text(chicken)
 		if chicken.breeding == true:
 			_on_StatsPanel_requested_breed(chicken)
 			
@@ -130,20 +118,15 @@ func select_chicken(chicken:Node):
 
 func _on_chicken_unclicked(chicken:Node):
 	var drops
-	if save_game.league_in_progress:
-		drops = get_tree().get_nodes_in_group("league_drop")
-	else:
-		drops = get_tree().get_nodes_in_group("drop")
-		set_race_text(racer)
+	drops = get_tree().get_nodes_in_group("drop")
+	set_race_text(racer)
 	for drop in drops:
 		var d:ReferenceRect = drop as ReferenceRect
 		if  d.get_global_rect().has_point(get_viewport().get_mouse_position()):
 			var place:String = d.get_parent().name
 			if place == "Race": _on_Race_pressed(chicken)
 			elif place == "PenRect": _on_StatsPanel_requested_breed(chicken)
-			elif place == "LeagueRace": _on_LeagueRace_pressed(chicken)
 			break
-	get_tree().call_group("league_drop", "hide")
 	get_tree().call_group("drop", "hide")
 	
 
@@ -177,7 +160,7 @@ func set_race_text(chicken):
 	$UI/Race.text = "RACE ($" + str(COST_RACE) + ") " + nom
 	
 func set_can_race():
-	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0 or save_game.league_in_progress:
+	if racer == null or save_game.all.empty() or $BreedingPen/PenRect/Birthing.time_left > 0:
 		$UI/Race.disabled = true
 	else:
 		$UI/Race.disabled = false
@@ -359,9 +342,7 @@ func _on_PettingZoo_pressed():
 	var zoo := "res://PettingZoo/PettingZoo.tscn"
 	_goto_scene(zoo)
 
-func _on_LeagueRace_pressed(chicken=null):
-	if chicken:
-		save_game.temp_racer = chicken.stats
+func _on_LeagueRace_pressed():
 	_goto_scene("res://League/League.tscn")
 
 func _goto_scene(path:String):

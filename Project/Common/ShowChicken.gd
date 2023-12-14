@@ -16,3 +16,6 @@ func set_stats(value:Chicken):
 		animation = "stand"
 		$Name.text = stats.nom
 		$Wins.text = "Wins: " + str(stats.wins)
+		
+func defeated(value:bool):
+	$Defeated.visible = value

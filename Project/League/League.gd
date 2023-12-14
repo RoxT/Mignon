@@ -15,14 +15,7 @@ const WELCOME := "Welcome to %s League"
 const PRIZE := "Prize per race: $%s               Prize for league: $%s"
 const GO_BUTTON := "Round %s, Go!"
 
-var leagues := {
-	"BRONZE" : {"farms":["St. Germain's", "Anualonacu", "QkChkns"],
-				"prize_race": 20, "prize_all":200},
-	"SILVER" : {"farms":["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
-				"prize_race": 20, "prize_all":400},
-	"GOLD" : {"farms":["Vanchokons", "Martot", "Bec-de-Beak"],
-			  "prize_race": 20, "prize_all":600}
-}
+
 
 var save_game:AllChickens
 var enemy_farms:Array
@@ -31,15 +24,8 @@ var enemy_farms:Array
 func _ready():
 	save_game = M.save_game
 	your_racer = save_game.temp_racer if save_game.temp_racer else save_game.racer
-	$Panel/ShowChicken.stats = your_racer
-	var in_progress = save_game.league_in_progress
-	if in_progress:
-		$Panel/Bronze.disabled = in_progress.league != "BRONZE"
-		$Panel/Silver.disabled = in_progress.league != "SILVER"
-		$Panel/Gold.disabled = in_progress.league != "GOLD"
-		load_league(in_progress.league)
-	else:
-		load_league(save_game.current_league)
+	#$Panel/ShowChicken.stats = your_racer
+	load_league(save_game.current_league)
 
 func _on_League_toggled(button_pressed:bool, new_league_name:String):
 	if button_pressed:
@@ -47,7 +33,7 @@ func _on_League_toggled(button_pressed:bool, new_league_name:String):
 			
 func load_league(title:String):
 	league_name = title
-	var league:Dictionary = leagues[title]
+	var league:Dictionary = M.leagues[title]
 	welcome.text = WELCOME % title
 	prizes.text = PRIZE % [str(league.prize_race), str(league.prize_all)]
 	enemy_farms = save_game.get_some_farms(
@@ -56,9 +42,10 @@ func load_league(title:String):
 	if control: control.queue_free()
 	control = Control.new()
 	$Panel/Diary.add_child(control)
-	
+	var farm_i := 1
 	var offset = 0
 	for farm in enemy_farms:
+		var defeated:Array = save_game.leagues_ongoing[league_name][farm.nom].losers
 		farm = farm as Farm
 		var label := Label.new()
 		label.text = (farm.nom + "\n")
@@ -66,14 +53,25 @@ func load_league(title:String):
 		control.add_child(label)
 		label.rect_position.y = offset
 		var width = 64
+		
 		for stats in farm.chickens:
 			var chicken = ShowChicken.instance()
 			chicken.stats = stats
 			label.add_child(chicken)
 			chicken.position = Vector2(width, 32+3)
 			width += 128
+			chicken.defeated(stats in defeated)
+			
+		var winner_nodes := get_node("Panel/Farm" + str(farm_i)).get_children()
+		for w in winner_nodes: w.hide()
+		var winner_i := 0
+		for winner in save_game.leagues_ongoing[league_name][farm.nom].winners:
+			winner_nodes[winner_i].stats = winner
+			winner_nodes[winner_i].show()
+			winner_i += 1
+		farm_i += 1
 		offset += 256
-	go_button.text = "Round " + str(save_game.current_round()) + ", Go!"	
+		
 
 func _on_ToCoop_pressed():
 	var path := "res://Coop.tscn"

@@ -26,3 +26,11 @@ margin_bottom = 133.0
 text = "5 Wins"
 align = 1
 valign = 1
+
+[node name="Defeated" type="Label" parent="."]
+visible = false
+margin_left = -30.0
+margin_top = 130.0
+margin_right = 96.0
+margin_bottom = 162.0
+text = "DEFEATED"

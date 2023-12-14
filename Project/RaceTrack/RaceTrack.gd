@@ -63,6 +63,10 @@ func _on_racer_finished():
 		$CL/Winnings.show()
 		$CL/Winnings/Rice.emitting = true
 		save_game.wins += 1
+		var league_farms:Array = M.leagues[save_game.current_league].farms
+		for loser in get_tree().get_nodes_in_group("racer"):
+			save_game.add_to_leagues_ongoing(loser.stats, your_chicken.stats)
+			
 	else:
 		audioStreamPlayer.stream = Music.get_failure()
 		$CL/Lost.show()

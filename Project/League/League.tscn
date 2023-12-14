@@ -25,8 +25,7 @@ margin_left = 38.0
 margin_top = 86.0
 margin_right = 1517.0
 margin_bottom = 188.0
-text = "Three races in one day, if you want to win the league you must win them all.
-
+text = "Beat 3 chickens from each farm to advance.
  "
 
 [node name="Prizes" type="Label" parent="Panel"]
@@ -40,11 +39,12 @@ text = "Prize per race: $20               Prize for league: $200
 
 [node name="Diary" type="RichTextLabel" parent="Panel"]
 margin_left = 38.0
-margin_top = 164.0
+margin_top = 258.0
 margin_right = 1480.0
-margin_bottom = 988.0
+margin_bottom = 1082.0
 
 [node name="Go" type="Button" parent="Panel"]
+visible = false
 margin_left = 1212.0
 margin_top = 894.0
 margin_right = 1491.0
@@ -52,34 +52,77 @@ margin_bottom = 963.0
 text = "Go"
 
 [node name="Bronze" type="Button" parent="Panel"]
-margin_left = 1253.0
-margin_top = 28.0
-margin_right = 1480.0
-margin_bottom = 86.0
+margin_left = 820.0
+margin_top = 100.0
+margin_right = 1047.0
+margin_bottom = 158.0
 toggle_mode = true
 group = ExtResource( 2 )
 text = "Bronze"
 
 [node name="Silver" type="Button" parent="Panel"]
-margin_left = 1253.0
-margin_top = 86.0
-margin_right = 1480.0
-margin_bottom = 144.0
+margin_left = 1047.0
+margin_top = 100.0
+margin_right = 1274.0
+margin_bottom = 158.0
 toggle_mode = true
 group = ExtResource( 2 )
 text = "Silver"
 
 [node name="Gold" type="Button" parent="Panel"]
-margin_left = 1253.0
-margin_top = 144.0
-margin_right = 1480.0
-margin_bottom = 202.0
+margin_left = 1274.0
+margin_top = 100.0
+margin_right = 1501.0
+margin_bottom = 158.0
 toggle_mode = true
 group = ExtResource( 2 )
 text = "Gold"
 
-[node name="ShowChicken" parent="Panel" instance=ExtResource( 3 )]
-position = Vector2( 1115, 840 )
+[node name="Label" type="Label" parent="Panel"]
+margin_left = 1215.0
+margin_top = 226.0
+margin_right = 1361.0
+margin_bottom = 258.0
+text = "Defeated By:"
+
+[node name="Farm1" type="Control" parent="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ShowChicken" parent="Panel/Farm1" instance=ExtResource( 3 )]
+position = Vector2( 1105, 290 )
+
+[node name="ShowChicken4" parent="Panel/Farm1" instance=ExtResource( 3 )]
+position = Vector2( 1240, 290 )
+
+[node name="ShowChicken5" parent="Panel/Farm1" instance=ExtResource( 3 )]
+position = Vector2( 1380, 290 )
+
+[node name="Farm2" type="Control" parent="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ShowChicken2" parent="Panel/Farm2" instance=ExtResource( 3 )]
+position = Vector2( 1105, 522 )
+
+[node name="ShowChicken6" parent="Panel/Farm2" instance=ExtResource( 3 )]
+position = Vector2( 1239, 522 )
+
+[node name="ShowChicken7" parent="Panel/Farm2" instance=ExtResource( 3 )]
+position = Vector2( 1377, 522 )
+
+[node name="Farm3" type="Control" parent="Panel"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="ShowChicken3" parent="Panel/Farm3" instance=ExtResource( 3 )]
+position = Vector2( 1105, 782 )
+
+[node name="ShowChicken8" parent="Panel/Farm3" instance=ExtResource( 3 )]
+position = Vector2( 1240, 782 )
+
+[node name="ShowChicken9" parent="Panel/Farm3" instance=ExtResource( 3 )]
+position = Vector2( 1377, 782 )
 
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 32.0

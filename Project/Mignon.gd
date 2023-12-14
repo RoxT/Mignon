@@ -1,5 +1,19 @@
 extends Node
 
+
+var leagues := {
+	BRONZE : {"farms":["St. Germain's", "Anualonacu", "QkChkns"],
+				"prize_race": 20, "prize_all":200},
+	SILVER : {"farms":["Bec-de-Beak", "Jam Jar Farms", "QkChkns",],
+				"prize_race": 20, "prize_all":400},
+	GOLD : {"farms":["Vanchokons", "Martot", "Bec-de-Beak"],
+			  "prize_race": 20, "prize_all":600}
+}
+
+const BRONZE := "BRONZE"
+const SILVER := "SILVER"
+const GOLD := "GOLD"
+
 	 # Breeds #
 const BROWN := "brown"
 const WHITE := "white"

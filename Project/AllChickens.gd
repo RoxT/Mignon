@@ -20,9 +20,8 @@ export(int) var next_unique_no
 export(Array) var events
 export(bool) var new_alert
 export(String, "BRONZE", "SILVER", "GOLD", "END") var current_league
-export(Dictionary) var league_in_progress
+export(Dictionary) var leagues_ongoing
 export(Dictionary) var last_zoo_report
-export(Dictionary) var league_wins
 export(bool) var has_mature
 export(bool) var has_elderly
 
@@ -37,7 +36,7 @@ signal alert
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_league_in_progress = {}, new_league_wins={"BRONZE":0, "SILVER":0, "GOLD":0}, new_has_mature=false, new_has_elderly=false):
+func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_leagues_ongoing = {}, new_has_mature=false, new_has_elderly=false):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -57,8 +56,7 @@ func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_
 	has_hybrid = new_has_hybrid
 	current_league = new_current_league
 	last_zoo_report = new_last_zoo_report
-	league_in_progress = new_league_in_progress
-	league_wins = new_league_wins
+	leagues_ongoing = new_leagues_ongoing
 	new_alert = new_new_alert
 	show_diary = new_show_diary
 	has_mature = new_has_mature
@@ -68,6 +66,7 @@ func initialize_game():
 	all = generate_mignon()
 	enemy_farms = generate_enemy_list()
 	breeds_discovered = generate_new_discovered()
+	leagues_ongoing = create_leagues_ongoing()
 
 func pass_day():
 	day += 1
@@ -216,30 +215,36 @@ func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array, 
 func already_zooed()->bool:
 	return last_zoo_report and last_zoo_report.day == day
 
-func update_league_in_progress(winner:String, league:String):
-	match current_round():
-		1:
-			league_in_progress.day = day
-			league_in_progress.round1 = winner
-			league_in_progress.league = league
-		2:
-			league_in_progress.round2 = winner
-		3:
-			league_in_progress.round3 = winner
-			new_alert_event(Event.new(day, league, [
-				league_in_progress.round1, 
-				league_in_progress.round2, 
-				league_in_progress.round3 ]))
-			league_in_progress = {}
-			league_wins[league] += 1
+func add_to_leagues_ongoing(loser:Chicken, winner:Chicken):
+	if current_league == "END": return
+	var bracket = leagues_ongoing[current_league]
+	if bracket.has(loser.farm):
+		var i = bracket[loser.farm].winners.size()
+		if i < 3:
+			bracket[loser.farm].winners.append(winner)
+			bracket[loser.farm].losers.append(loser)
+			if i == 2:
+				if was_league_won(current_league):
+					new_alert_event(Event.new(current_league))
+					match current_league:
+						M.BRONZE: current_league = M.SILVER
+						M.SILVER: current_league = M.GOLD
+						M.GOLD: current_league = "END"
+	
+func create_leagues_ongoing()->Dictionary:
+	var leagues = {}
+	for key in M.leagues.keys():
+		var bracket := {}
+		for farm in M.leagues[key].farms:
+			bracket[farm] = {"winners": [], "losers": []}
+		leagues[key] = bracket
+	return leagues
 
-func current_round()->int:
-	if league_in_progress.has("round2"):
-		return 3
-	elif league_in_progress.has("round1"):
-		return 2
-	else:
-		return 1
+func was_league_won(league:String)->bool:
+	for farm in leagues_ongoing[league]:
+		if leagues_ongoing[league][farm].winners.size() < 3:
+			return false
+	return true
 
 func death(value:Chicken):
 	if racer == value:
