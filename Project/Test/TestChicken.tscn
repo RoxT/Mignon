@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://chicken/breeds/bigger_floof_spf.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://chicken/breeds/silkie_spf.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Test/TestChicken.gd" type="Script" id=2]
 
 [node name="TestChicken" type="AnimatedSprite"]
