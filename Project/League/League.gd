@@ -70,6 +70,13 @@ func load_league(title:String):
 			winner_nodes[winner_i].show()
 			winner_i += 1
 		farm_i += 1
+		match league_name:
+			M.BRONZE: $Panel/DefeatedBy/NotYet.hide()
+			M.SILVER: 
+				$Panel/DefeatedBy/NotYet.visible = save_game.current_league == M.BRONZE
+			M.GOLD:
+				$Panel/DefeatedBy/NotYet.visible = save_game.current_league == M.BRONZE or save_game.current_league == M.SILVER
+				
 		offset += 256
 		
 

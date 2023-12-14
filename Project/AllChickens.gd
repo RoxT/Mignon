@@ -67,6 +67,7 @@ func initialize_game():
 	enemy_farms = generate_enemy_list()
 	breeds_discovered = generate_new_discovered()
 	leagues_ongoing = create_leagues_ongoing()
+	save_backup()
 
 func pass_day():
 	day += 1

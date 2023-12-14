@@ -78,12 +78,21 @@ toggle_mode = true
 group = ExtResource( 2 )
 text = "Gold"
 
-[node name="Label" type="Label" parent="Panel"]
+[node name="DefeatedBy" type="Label" parent="Panel"]
 margin_left = 1215.0
 margin_top = 226.0
 margin_right = 1361.0
 margin_bottom = 258.0
 text = "Defeated By:"
+
+[node name="NotYet" type="Label" parent="Panel/DefeatedBy"]
+margin_left = -65.0
+margin_top = 132.0
+margin_right = 202.0
+margin_bottom = 199.0
+text = "You have not reached 
+this league yet"
+align = 1
 
 [node name="Farm1" type="Control" parent="Panel"]
 margin_right = 40.0
