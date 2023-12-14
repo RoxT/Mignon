@@ -53,6 +53,10 @@ func set_stats(value:Chicken):
 		elif stats.breed == M.WHITE_CORNISH_HEN:
 			portrait.texture = load("res://chicken/portraits/white_cornish_hen.png")
 			portrait.scale = Vector2.ONE
+		elif stats.breed == M.POLISH_CHICKEN:
+			portrait.texture = load("res://chicken/portraits/white_cornish_hen.png")
+			portrait.scale = Vector2.ONE
+			
 		else:
 			portrait.texture = load("res://chicken/portraits/leghorn_brown.png")
 			portrait.scale = Vector2.ONE

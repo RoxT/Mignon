@@ -1,6 +1,6 @@
 [gd_resource type="SpriteFrames" load_steps=6 format=2]
 
-[ext_resource path="res://chicken/breeds/russian_orloff.png" type="Texture" id=1]
+[ext_resource path="res://chicken/breeds/polish_chicken.png" type="Texture" id=1]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 1 )

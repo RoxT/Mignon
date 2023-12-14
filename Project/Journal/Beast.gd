@@ -13,6 +13,7 @@ const BEASTIARY := {
 	M.BROWN_ROOSTER : "It's a boy! A curious chicken with an unusualy large comb and wattles.",
 	M.SILKIE : "This racing chicken looks huge but its all feathers.",
 	M.BLACK_ONYX : "There's a green shimmer when the light hits this chicken.",
+	M.POLISH_CHICKEN : "Huge head.",
 	"unknown" : "There must be more breeds to discover."
 	}
 	

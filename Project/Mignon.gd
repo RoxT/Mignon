@@ -8,10 +8,11 @@ const RUSSIAN_ORLOFF := "russian_orloff"
 const SILKIE := "silkie"
 const BROWN_ROOSTER := "brown_rooster"
 const BLACK_ONYX := "black_onyx"
+const POLISH_CHICKEN := "polish_chicken"
 
 const DEFUALT_BREEDS := [LEGHORN_BROWN, WHITE_CORNISH_HEN]
 const BREEDS_LIST := [
-	WHITE_CORNISH_HEN, LEGHORN_BROWN, SUSSEX, RUSSIAN_ORLOFF, SILKIE, BROWN_ROOSTER, BLACK_ONYX
+	WHITE_CORNISH_HEN, LEGHORN_BROWN, SUSSEX, RUSSIAN_ORLOFF, SILKIE, BROWN_ROOSTER, BLACK_ONYX, POLISH_CHICKEN
 ]
 
 var fade := true
@@ -28,9 +29,11 @@ const pairs := {WHITE_CORNISH_HEN: {
 					LEGHORN_BROWN: RUSSIAN_ORLOFF},
 				RUSSIAN_ORLOFF: {
 					LEGHORN_BROWN: BROWN_ROOSTER,
-					WHITE_CORNISH_HEN: SILKIE},
+					WHITE_CORNISH_HEN: SILKIE,
+					SILKIE: POLISH_CHICKEN},
 				SILKIE: {
-					LEGHORN_BROWN: BLACK_ONYX
+					LEGHORN_BROWN: BLACK_ONYX,
+					RUSSIAN_ORLOFF: POLISH_CHICKEN
 				}
 				}
 
@@ -56,6 +59,8 @@ func load_game():
 			if save_game == null:
 				label.text = "Save file corrupted"
 		else:
+			if !save_game.breeds_discovered.has(M.POLISH_CHICKEN):
+				save_game.breeds_discovered[M.POLISH_CHICKEN] = false
 			save_game.save()
 	else:
 		reset()
