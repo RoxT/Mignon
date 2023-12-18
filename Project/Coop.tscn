@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Coop/bang.png" type="Texture" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
@@ -25,12 +25,6 @@ expand_margin_left = 4.0
 expand_margin_right = 3.0
 expand_margin_top = 2.0
 expand_margin_bottom = 1.0
-
-[sub_resource type="InputEventAction" id=10]
-action = "reset"
-
-[sub_resource type="ShortCut" id=2]
-shortcut = SubResource( 10 )
 
 [sub_resource type="InputEventAction" id=11]
 action = "race"
@@ -206,18 +200,6 @@ current = true
 [node name="UI" type="CanvasLayer" parent="."]
 layer = 3
 
-[node name="Reset" type="Button" parent="UI"]
-margin_left = 21.0
-margin_top = 312.0
-margin_right = 300.0
-margin_bottom = 394.0
-rect_min_size = Vector2( 48, 48 )
-focus_neighbour_right = NodePath("../New")
-focus_next = NodePath("../New")
-focus_previous = NodePath("../Money")
-shortcut = SubResource( 2 )
-text = "RESET"
-
 [node name="Race" type="Button" parent="UI"]
 margin_left = 1349.0
 margin_top = 24.0
@@ -246,10 +228,8 @@ margin_top = 215.0
 margin_right = 300.0
 margin_bottom = 297.0
 rect_min_size = Vector2( 82, 48 )
-focus_neighbour_left = NodePath("../Reset")
 focus_neighbour_right = NodePath("../Race")
 focus_next = NodePath("../Race")
-focus_previous = NodePath("../Reset")
 shortcut = SubResource( 4 )
 text = "NEW CHICKEN ($10)"
 
@@ -265,7 +245,6 @@ margin_left = 32.0
 margin_top = 996.0
 margin_right = 182.0
 margin_bottom = 1028.0
-focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
 text = "Money: $100"
 
@@ -274,7 +253,6 @@ margin_left = 32.0
 margin_top = 901.0
 margin_right = 120.0
 margin_bottom = 933.0
-focus_next = NodePath("../Reset")
 focus_previous = NodePath("../Race")
 text = "Food:"
 
@@ -397,9 +375,9 @@ icon_align = 1
 
 [node name="Info" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
-margin_top = 604.0
+margin_top = 311.0
 margin_right = 300.0
-margin_bottom = 686.0
+margin_bottom = 393.0
 icon = ExtResource( 10 )
 icon_align = 1
 
@@ -422,28 +400,11 @@ text = "Start Petting Zoo"
 
 [node name="LeagueRace" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
-margin_top = 701.0
+margin_top = 603.0
 margin_right = 300.0
-margin_bottom = 783.0
+margin_bottom = 685.0
 rect_min_size = Vector2( 0, 48 )
-text = "League Race"
-
-[node name="Drop" type="ReferenceRect" parent="UI/LeagueRace" groups=["league_drop"]]
-visible = false
-margin_left = -4.0
-margin_top = -2.0
-margin_right = 279.0
-margin_bottom = 82.0
-border_color = Color( 0.964706, 0.905882, 0.588235, 1 )
-border_width = 3.0
-editor_only = false
-
-[node name="WhatLeague" type="Label" parent="UI/LeagueRace"]
-margin_top = 92.0
-margin_right = 197.0
-margin_bottom = 159.0
-text = "League: BRONZE
-Round: w"
+text = "LeagueRanking"
 
 [node name="WebChickens" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
@@ -539,7 +500,6 @@ autoplay = "RESET"
 anims/RESET = SubResource( 14 )
 anims/fade_in = SubResource( 15 )
 
-[connection signal="pressed" from="UI/Reset" to="." method="_on_Reset_pressed"]
 [connection signal="pressed" from="UI/Race" to="." method="_on_Race_pressed"]
 [connection signal="pressed" from="UI/New" to="." method="_on_New_pressed" binds= [ true ]]
 [connection signal="chose_racer" from="UI/StatsPanel" to="." method="_on_StatsPanel_chose_racer"]

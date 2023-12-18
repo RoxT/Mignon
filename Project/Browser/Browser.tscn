@@ -19,6 +19,9 @@ margin_bottom = 95.0
 border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
 border_width = 4.0
 editor_only = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 17.0
@@ -56,6 +59,9 @@ These are special event you can enter. They are multiple days long and to win yo
 [node name="Squares" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Square" type="ColorRect" parent="Squares"]
 margin_left = 262.0
@@ -170,13 +176,20 @@ margin_bottom = 76.0
 color = Color( 0.223529, 0.25098, 0.356863, 1 )
 
 [node name="URLRect" type="ReferenceRect" parent="Squares"]
-margin_left = 883.0
-margin_top = 51.0
-margin_right = 1304.0
-margin_bottom = 76.0
+margin_left = 887.0
+margin_top = 46.0
+margin_right = 1309.0
+margin_bottom = 78.0
 border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
 border_width = 4.0
 editor_only = false
+
+[node name="URL" type="Label" parent="Squares/URLRect"]
+modulate = Color( 1, 1, 1, 0.313726 )
+margin_left = 9.0
+margin_right = 314.0
+margin_bottom = 32.0
+text = "hu;pwef.webchickens[\\''ul]"
 
 [node name="Content" type="RichTextLabel" parent="."]
 margin_left = 262.0

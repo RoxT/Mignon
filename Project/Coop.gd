@@ -32,7 +32,8 @@ func _ready():
 	var chicken_stats := []
 	save_game = M.save_game
 	if save_game == null:
-		_on_Reset_pressed()
+		M.reset()
+		_goto_scene("res://Diary/Diary.tscn")
 		return
 	
 	if save_game.show_diary:
@@ -173,10 +174,6 @@ func update_food_box():
 	food_box.get_node("BEST").count = save_game.foods[AllChickens.FOOD_TYPES.BEST]
 	food_box.get_node("GOOD").count = save_game.foods[AllChickens.FOOD_TYPES.GOOD]
 	food_box.get_node("BASIC").count = save_game.foods[AllChickens.FOOD_TYPES.BASIC]
-	
-func _on_Reset_pressed():
-	M.reset()
-	_goto_scene("res://Diary/Diary.tscn")
 
 func _on_New_pressed(paid:bool, stats:= Chicken.new(), new_pos:=Vector2(pen.rect_position.x, pen.rect_position.y)):
 	var new_chicken = preload("res://Coop/CoopChicken.tscn").instance()
@@ -296,9 +293,7 @@ func _on_Birthing_timeout(egg:AnimatedSprite):
 	egg.queue_free()
 	
 func _on_Info_pressed():
-	var modal = load("res://Common/ModalBig.tscn").instance()
-	add_child(modal)
-	modal.set_text(modal.HELP)
+	_goto_scene("res://InfoSettings/InfoSettings.tscn")
 
 
 func _on_StatsPanel_sell_requested(price:int):

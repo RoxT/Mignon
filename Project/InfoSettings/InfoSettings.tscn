@@ -1,0 +1,295 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://InfoSettings/sky.jpg" type="Texture" id=1]
+[ext_resource path="res://chicken/breeds/leghorn_brown.png" type="Texture" id=2]
+[ext_resource path="res://chicken/breeds/white_cornish_hen.png" type="Texture" id=3]
+[ext_resource path="res://Coop/badge1.png" type="Texture" id=4]
+[ext_resource path="res://chicken/mate_tag.png" type="Texture" id=5]
+[ext_resource path="res://InfoSettings/ResetControl.gd" type="Script" id=6]
+
+[node name="InfoSettings" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 6 )
+
+[node name="Sky" type="TextureRect" parent="."]
+margin_right = 1920.0
+margin_bottom = 1080.0
+texture = ExtResource( 1 )
+stretch_mode = 5
+
+[node name="ToCoop" type="Button" parent="."]
+margin_left = 30.0
+margin_top = 65.0
+margin_right = 202.0
+margin_bottom = 150.0
+text = "<-- To Coop"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color( 1, 1, 1, 0.839216 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -731.0
+margin_top = -444.0
+margin_right = 732.0
+margin_bottom = 476.0
+color = Color( 0.145098, 0.180392, 0.329412, 1 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="ColorRect"]
+margin_right = 1463.0
+margin_bottom = 920.0
+border_color = Color( 0.4536, 0.48888, 0.63, 1 )
+border_width = 4.0
+editor_only = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ReferenceRect2" type="ReferenceRect" parent="ColorRect"]
+margin_left = 0.5
+margin_right = 1463.5
+margin_bottom = 64.0
+border_color = Color( 0.3328, 0.36712, 0.52, 1 )
+border_width = 4.0
+editor_only = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Squares" type="Control" parent="ColorRect"]
+margin_left = -199.5
+margin_top = -31.0
+margin_right = -159.5
+margin_bottom = 9.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Square" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 361.5
+margin_top = 51.0
+margin_right = 386.5
+margin_bottom = 76.0
+color = Color( 0.536708, 0.55, 0.3905, 1 )
+
+[node name="Square2" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 393.5
+margin_top = 51.0
+margin_right = 418.5
+margin_bottom = 76.0
+color = Color( 0.536708, 0.55, 0.3905, 1 )
+
+[node name="Square3" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 426.5
+margin_top = 51.0
+margin_right = 451.5
+margin_bottom = 76.0
+color = Color( 0.536708, 0.55, 0.3905, 1 )
+
+[node name="Square4" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 459.5
+margin_top = 51.0
+margin_right = 484.5
+margin_bottom = 76.0
+color = Color( 0.536708, 0.55, 0.3905, 1 )
+
+[node name="Square5" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 532.5
+margin_top = 51.0
+margin_right = 557.5
+margin_bottom = 76.0
+color = Color( 0.58, 0.4118, 0.55477, 1 )
+
+[node name="Square6" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 564.5
+margin_top = 51.0
+margin_right = 589.5
+margin_bottom = 76.0
+color = Color( 0.58, 0.4118, 0.55477, 1 )
+
+[node name="Square7" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 597.5
+margin_top = 51.0
+margin_right = 622.5
+margin_bottom = 76.0
+color = Color( 0.58, 0.4118, 0.55477, 1 )
+
+[node name="Square8" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 630.5
+margin_top = 51.0
+margin_right = 655.5
+margin_bottom = 76.0
+color = Color( 0.58, 0.4118, 0.55477, 1 )
+
+[node name="Square9" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1106.5
+margin_top = 51.0
+margin_right = 1131.5
+margin_bottom = 76.0
+color = Color( 0.3905, 0.526075, 0.55, 1 )
+
+[node name="Square10" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1138.5
+margin_top = 51.0
+margin_right = 1163.5
+margin_bottom = 76.0
+color = Color( 0.3905, 0.526075, 0.55, 1 )
+
+[node name="Square11" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1171.5
+margin_top = 51.0
+margin_right = 1196.5
+margin_bottom = 76.0
+color = Color( 0.3905, 0.526075, 0.55, 1 )
+
+[node name="Square12" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1204.5
+margin_top = 51.0
+margin_right = 1229.5
+margin_bottom = 76.0
+color = Color( 0.3905, 0.526075, 0.55, 1 )
+
+[node name="Square13" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1250.5
+margin_top = 51.0
+margin_right = 1275.5
+margin_bottom = 76.0
+color = Color( 0.4095, 0.4576, 0.65, 1 )
+
+[node name="Square14" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1282.5
+margin_top = 51.0
+margin_right = 1307.5
+margin_bottom = 76.0
+color = Color( 0.4095, 0.4576, 0.65, 1 )
+
+[node name="Square15" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1315.5
+margin_top = 51.0
+margin_right = 1340.5
+margin_bottom = 76.0
+color = Color( 0.4095, 0.4576, 0.65, 1 )
+
+[node name="Square16" type="ColorRect" parent="ColorRect/Squares"]
+margin_left = 1348.5
+margin_top = 51.0
+margin_right = 1373.5
+margin_bottom = 76.0
+color = Color( 0.4095, 0.4576, 0.65, 1 )
+
+[node name="Title" type="RichTextLabel" parent="ColorRect"]
+margin_top = 20.0
+margin_right = 1464.0
+margin_bottom = 98.0
+bbcode_enabled = true
+bbcode_text = "[center][b]MIGNON[/b][center]"
+text = "MIGNON"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ReferenceRect3" type="ReferenceRect" parent="ColorRect"]
+show_behind_parent = true
+margin_left = 456.0
+margin_top = 920.0
+margin_right = 1008.0
+margin_bottom = 984.0
+border_color = Color( 0.32549, 0.352941, 0.458824, 1 )
+border_width = 10.0
+editor_only = false
+
+[node name="ColorRect" type="ColorRect" parent="ColorRect/ReferenceRect3"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+color = Color( 0.0981445, 0.101043, 0.113281, 1 )
+
+[node name="ControlsText" type="Label" parent="."]
+margin_left = 264.0
+margin_top = 231.0
+margin_right = 1635.0
+margin_bottom = 508.0
+text = "CONTROLS:
+Tap a chicken to see information about it and actions you can take with it, or tap and drag a chicken over to a higlighted action. If you tap the Race button the chicken identified by the Racer badge will race. If you drop a chicken onto the race button, that chicken will race that day.
+Dropping two unrelated chickens in the breeding pen at the bottom right of the screen will start the breeding process. You will know they are mating if they both have the heart badge next to them. Once the egg has been laid you won't be able to do much untill it's hatched.
+The day ends after a race. Chickens need to eat every day to recover fatigue. You can see how many days of food you have in the bottom left corner.
+Once a day you can open your farm to guests as a petting zoo to make some extra money.
+Winning races against the other farms will increase your league ranking and show you more of the story."
+autowrap = true
+
+[node name="AboutText" type="Label" parent="."]
+margin_left = 264.0
+margin_top = 642.0
+margin_right = 919.0
+margin_bottom = 940.0
+text = "ABOUT: 
+Mignon was made by Roxanne Taylor using Godot
+godotengine.org/license
+
+Portraits by Amy Mcleod
+
+Music: Chill Jazz Music Pack by IsiahGames
+https://isiahgames.itch.io/chill-jazz-music-pack"
+autowrap = true
+
+[node name="LeghornBrown" type="Sprite" parent="."]
+position = Vector2( 756, 224 )
+texture = ExtResource( 2 )
+hframes = 4
+
+[node name="Badge1" type="Sprite" parent="LeghornBrown"]
+position = Vector2( 48, 9 )
+scale = Vector2( 1.22727, 1.1875 )
+texture = ExtResource( 4 )
+
+[node name="WhiteCornishHen" type="Sprite" parent="."]
+position = Vector2( 1177, 224 )
+texture = ExtResource( 3 )
+flip_h = true
+hframes = 4
+
+[node name="heart" type="Sprite" parent="WhiteCornishHen"]
+position = Vector2( -48, 7 )
+texture = ExtResource( 5 )
+
+[node name="ResetControl" type="Control" parent="."]
+margin_left = 919.0
+margin_top = 642.0
+margin_right = 959.0
+margin_bottom = 682.0
+
+[node name="NewGame" type="Label" parent="ResetControl"]
+margin_right = 716.0
+margin_bottom = 32.0
+text = "RESET:"
+align = 1
+
+[node name="Reset" type="Button" parent="ResetControl/NewGame"]
+modulate = Color( 1, 1, 1, 0.862745 )
+margin_left = 274.0
+margin_top = 123.0
+margin_right = 444.0
+margin_bottom = 192.0
+text = "New Game"
+
+[node name="AreYouSure" type="Label" parent="ResetControl"]
+margin_right = 716.0
+margin_bottom = 67.0
+text = "You will lose all progress and start a new game, are you sure?"
+align = 1
+autowrap = true
+uppercase = true
+
+[node name="YesReset" type="Button" parent="ResetControl/AreYouSure"]
+modulate = Color( 1, 1, 1, 0.894118 )
+margin_left = 226.0
+margin_top = 83.0
+margin_right = 483.0
+margin_bottom = 152.0
+text = "Yes, New Game"
+
+[connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
+[connection signal="pressed" from="ResetControl/NewGame/Reset" to="." method="_on_Reset_pressed"]
+[connection signal="pressed" from="ResetControl/AreYouSure/YesReset" to="." method="_on_YesReset_pressed"]
