@@ -35,11 +35,18 @@ margin_bottom = 377.0
 mouse_filter = 2
 texture = ExtResource( 3 )
 
-[node name="building_view" type="TextureRect" parent="."]
-show_behind_parent = true
-margin_left = -428.0
-margin_top = -328.0
-margin_right = 650.0
-margin_bottom = 458.0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.301961, 0.301961, 0.301961, 1 )
+
+[node name="building_view" type="TextureRect" parent="CanvasLayer"]
+margin_left = -83.0
+margin_right = 1920.0
+margin_bottom = 848.0
 mouse_filter = 2
 texture = ExtResource( 4 )
+stretch_mode = 2
