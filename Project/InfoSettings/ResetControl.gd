@@ -9,6 +9,7 @@ var save_game:AllChickens
 func _ready():
 	save_game = M.save_game
 	$ResetControl/AreYouSure.hide()
+	$ResetControl/NewGame.show()
 
 func _on_Reset_pressed():
 	$ResetControl/NewGame.hide()

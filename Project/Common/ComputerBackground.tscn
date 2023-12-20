@@ -7,7 +7,7 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="MartinsBokeh" type="TextureRect" parent="."]
-modulate = Color( 0.72, 0.72, 0.72, 1 )
+modulate = Color( 0.721569, 0.721569, 0.721569, 1 )
 margin_left = 5.0
 margin_top = -141.0
 margin_right = 2053.0

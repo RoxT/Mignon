@@ -13,6 +13,7 @@ anchor_bottom = 1.0
 script = ExtResource( 6 )
 
 [node name="Sky" type="TextureRect" parent="."]
+self_modulate = Color( 0.529412, 0.529412, 0.529412, 1 )
 margin_right = 1920.0
 margin_bottom = 1080.0
 texture = ExtResource( 1 )
@@ -26,7 +27,7 @@ margin_bottom = 150.0
 text = "<-- To Coop"
 
 [node name="ColorRect" type="ColorRect" parent="."]
-modulate = Color( 1, 1, 1, 0.839216 )
+modulate = Color( 1, 1, 1, 0.901961 )
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -264,30 +265,26 @@ margin_bottom = 682.0
 margin_right = 716.0
 margin_bottom = 32.0
 text = "RESET:"
-align = 1
 
 [node name="Reset" type="Button" parent="ResetControl/NewGame"]
-modulate = Color( 1, 1, 1, 0.862745 )
-margin_left = 274.0
-margin_top = 123.0
-margin_right = 444.0
-margin_bottom = 192.0
+modulate = Color( 1, 1, 1, 0.92549 )
+margin_top = 82.0
+margin_right = 170.0
+margin_bottom = 151.0
 text = "New Game"
 
 [node name="AreYouSure" type="Label" parent="ResetControl"]
 margin_right = 716.0
 margin_bottom = 67.0
 text = "You will lose all progress and start a new game, are you sure?"
-align = 1
 autowrap = true
 uppercase = true
 
 [node name="YesReset" type="Button" parent="ResetControl/AreYouSure"]
 modulate = Color( 1, 1, 1, 0.894118 )
-margin_left = 226.0
-margin_top = 83.0
-margin_right = 483.0
-margin_bottom = 152.0
+margin_top = 210.0
+margin_right = 257.0
+margin_bottom = 279.0
 text = "Yes, New Game"
 
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]

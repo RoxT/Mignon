@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Common/Pen.gd" type="Script" id=1]
 [ext_resource path="res://Coop/Pens/GrassMedium.jpg" type="Texture" id=2]
 [ext_resource path="res://Coop/Pens/BorderMedium.png" type="Texture" id=3]
+[ext_resource path="res://Coop/Pens/Leaves.jpg" type="Texture" id=4]
 
 [node name="Medium" type="ReferenceRect"]
 margin_left = 559.0
@@ -31,3 +32,12 @@ margin_right = 650.0
 margin_bottom = 377.0
 mouse_filter = 2
 texture = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+
+[node name="Leaves" type="TextureRect" parent="CanvasLayer"]
+margin_right = 1920.0
+margin_bottom = 1041.0
+texture = ExtResource( 4 )
+stretch_mode = 2
