@@ -212,7 +212,7 @@ margin_top = 231.0
 margin_right = 1635.0
 margin_bottom = 508.0
 text = "CONTROLS:
-Tap a chicken to see information about it and actions you can take with it, or tap and drag a chicken over to a higlighted action. If you tap the Race button the chicken identified by the \"Racer\" badge will race. If you drop a chicken onto the race button, that chicken will race that day.
+Tap a chicken to see information about it and actions you can take with it, or tap and drag a chicken over to a higlighted action. If you tap the Race button the chicken identified by the \"Racer\" label will race. If you drop a chicken onto the race button, that chicken will race that day.
 Dropping two unrelated chickens in the breeding pen at the bottom right of the screen will start the breeding process. You will know they are mating if they both have the heart badge next to them. Once the egg has been laid you won't be able to do much untill it's hatched.
 The day ends after a race. Chickens need to eat every day to recover fatigue. You can see how many days of food you have in the bottom left corner.
 Once a day you can open your farm to guests as a petting zoo to make some extra money.
