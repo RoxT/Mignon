@@ -65,7 +65,7 @@ func _ready():
 			breeds.append(stats.breed)
 		if not stats.colour in colours: 
 			colours.append(stats.colour)
-		if stats.wins >= 10:
+		for i in range(stats.fame):
 			modifiers.append(FAMOUS_MULTIPLIER)
 		
 		if stats.top_speed >= 280:
@@ -102,7 +102,8 @@ func _ready():
 		modifiers.append(RAINBOW_MODIFIER)
 	
 	rate_adults = float(add_adult)/float(add_adult+add_child)
-	total = add_child + add_adult + regulars
+	total = (add_child + add_adult)/3
+	total += regulars
 	for m in modifiers:
 		total *= m
 	

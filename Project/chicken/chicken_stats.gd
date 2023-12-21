@@ -16,6 +16,7 @@ export(int) var age
 export(Array) var parents_grandparents
 var boost := 1.0
 export(float)var speed_guess setget set_speed_guess
+export(int) var fame setget , get_fame
 
 const TEXTURE_PATH := "res://chicken/breeds/%s_spf.tres"
 
@@ -25,7 +26,7 @@ const ELDERLY := 60
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_parents_grandparents = [], new_unique_no := -1, new_age:=2, new_speed_guess=-1.0):
+func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 0, new_colour:=_random_colour(), new_farm:="", new_fatigue := 0, new_breed := _random_breed(), new_parents_grandparents = [], new_unique_no := -1, new_age:=2, new_speed_guess=-1.0, new_fame=0):
 	top_speed = new_top_speed
 	nom = new_nom
 	wins = new_wins
@@ -37,7 +38,8 @@ func _init(new_top_speed = _random_speed(), new_nom = random_name(), new_wins = 
 	speed_guess = new_speed_guess
 	parents_grandparents = new_parents_grandparents
 	unique_no = new_unique_no
-
+	fame = new_fame
+	
 func is_chick()->bool:
 	return age < 2
 	
@@ -55,7 +57,13 @@ func get_speed()->int:
 
 func is_exhausted()->bool:
 	return fatigue >= 3 and get_speed() <= LOW_SPEED
-	
+
+func get_fame()->int:
+	if is_famous():
+		return fame + 1
+	else:
+		return fame
+
 func is_famous()->bool:
 	return wins >= 10
 	

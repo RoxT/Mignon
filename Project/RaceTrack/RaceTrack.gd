@@ -64,6 +64,10 @@ func _on_racer_finished():
 		$CL/Winnings/Rice.emitting = true
 		save_game.wins += 1
 		for loser in get_tree().get_nodes_in_group("racer"):
+			if !save_game.has_beat_vanchockens and loser.stats.farm == "Vanchokons":
+				save_game.has_beat_vanchockens = true
+				save_game.new_alert_event(Event.new(save_game.day, "BEAT_VANCHOKENS", your_chicken.stats.nom))
+				your_chicken.stats.fame += 1
 			save_game.add_to_leagues_ongoing(loser.stats, your_chicken.stats)
 			
 	else:

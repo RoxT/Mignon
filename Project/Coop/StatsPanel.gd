@@ -61,6 +61,12 @@ func set_stats(value:Chicken):
 			portrait.texture = load("res://chicken/portraits/leghorn_brown.png")
 			portrait.scale = Vector2.ONE
 		portrait.modulate = stats.colour
+		var bottom:float = portrait.rect_size.y
+		for i in range(stats.fame):
+			var star := TextureRect.new()
+			star.texture = preload("res://chicken/fame.png")
+			portrait.add_child(star)
+			star.position = Vector2(star.rect_size.x * i, bottom)
 		show()
 	if nom:
 		nom.bbcode_text = "[b]"+stats.nom+"[b]"

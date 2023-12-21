@@ -2,7 +2,7 @@ extends Panel
 
 export(int) var children = 0
 export(int) var adults = 0
-const ADMISSION := 3
+const ADMISSION := 5
 
 const CHILDREN := "Children: "
 const ADULTS := "Adults: "

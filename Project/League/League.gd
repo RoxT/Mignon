@@ -25,6 +25,8 @@ func _ready():
 	save_game = M.save_game
 	your_racer = save_game.temp_racer if save_game.temp_racer else save_game.racer
 	#$Panel/ShowChicken.stats = your_racer
+	var this_button:Button = get_node("Panel/" + save_game.current_league.capitalize())
+	this_button.theme_type_variation = "gold_button"
 	load_league(save_game.current_league)
 
 func _on_League_toggled(button_pressed:bool, new_league_name:String):
