@@ -310,9 +310,14 @@ mouse_filter = 2
 custom_styles/panel = ExtResource( 17 )
 script = ExtResource( 2 )
 
-[node name="Portrait" type="Sprite" parent="UI/StatsPanel"]
-position = Vector2( 166, 194 )
+[node name="Portrait" type="TextureRect" parent="UI/StatsPanel"]
+margin_left = 54.0
+margin_top = 54.0
+margin_right = 309.0
+margin_bottom = 364.0
 texture = ExtResource( 3 )
+expand = true
+stretch_mode = 5
 
 [node name="Name" type="RichTextLabel" parent="UI/StatsPanel"]
 margin_left = 38.0

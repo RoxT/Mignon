@@ -100,9 +100,13 @@ func pass_day():
 		if !has_mature and c.age == c.MATURE:
 			new_alert_event(Event.new(day, "MATURE", [c.nom]))
 			has_mature = true
-		if !has_elderly and c.age == c.ELDERLY:
-			new_alert_event(Event.new(day, "ELDERLY", [c.nom]))
-			has_elderly = true
+		if c.age == c.ELDERLY:
+			if c.fame > 0:
+				new_alert_event(Event.new(day, "FAMOUS_ELDERLY", [c.nom]))
+			if !has_elderly:
+				new_alert_event(Event.new(day, "ELDERLY", [c.nom]))
+				has_elderly = true
+
 	last_sold_chicken = null
 	save()
 
@@ -221,7 +225,7 @@ func get_new_unique_no()->int:
 	next_unique_no += 1
 	return next_unique_no
 	
-func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array, regulars:int):
+func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array, regulars:int, fans:int):
 	var report := {}
 	report["day"] = day
 	report["adults"] = adults
@@ -229,6 +233,7 @@ func create_zoo_report(adults:int, children:int, modifiers:Array, breeds:Array, 
 	report["modifiers"] = modifiers
 	report["breeds"] = breeds
 	report["regulars"] = regulars
+	report["fans"] = fans
 	last_zoo_report = report
 	
 func already_zooed()->bool:

@@ -17,7 +17,7 @@ const TWO_PAIR_MULTIPLIER := 1.60
 const RAINBOW_MODIFIER := 1.10
 const MANY_BREEDS_MODIFIER := 1.15
 const ALL_BREEDS_MODIFIER := 1.22
-const FAMOUS_MULTIPLIER := 1.05
+const FAMOUS_MULTIPLIER := 1.02
 var uncommon_chickens := 0
 var uncommon_breeds:Array = M.get_uncommon_list().duplicate()
 var modifiers := []
@@ -51,8 +51,8 @@ func _ready():
 		return
 
 	var tired := 0
-	var add_child := 0
-	var add_adult := 0
+	var add_child := 0.0
+	var add_adult := 0.0
 	for stats in chicken_stats:
 		stats = stats as Chicken
 		var chicken = preload("res://PettingZoo/PettingChicken.tscn").instance()
@@ -65,8 +65,8 @@ func _ready():
 			breeds.append(stats.breed)
 		if not stats.colour in colours: 
 			colours.append(stats.colour)
-		for i in range(stats.fame):
-			modifiers.append(FAMOUS_MULTIPLIER)
+		for _i in range(stats.fame):
+			fans += 2
 		
 		if stats.top_speed >= 280:
 			add_adult += 1
@@ -77,9 +77,9 @@ func _ready():
 			tired += 1
 			
 		if stats.is_mature():
-			regulars += 1
-		if stats.is_elderly():
 			regulars += 2
+		if stats.is_elderly():
+			regulars += 3
 	
 
 	if tired/(float(chicken_stats.size())) >= 0.5:
@@ -101,11 +101,12 @@ func _ready():
 	if colours.size() >= 5:
 		modifiers.append(RAINBOW_MODIFIER)
 	
-	rate_adults = float(add_adult)/float(add_adult+add_child)
+	rate_adults = add_adult/add_adult+add_child
 	total = (add_child + add_adult)/3
-	total += regulars
 	for m in modifiers:
 		total *= m
+	total += regulars
+	total += fans
 	
 	$UI/ToCoop.disabled = true
 	$Start.start()
@@ -126,7 +127,7 @@ func _add_human(count:int, rate:float):
 		$UI/ToCoop.disabled = false
 		print_report()
 		
-		save_game.create_zoo_report(report.adults, report.children, modifiers, breeds, regulars)
+		save_game.create_zoo_report(report.adults, report.children, modifiers, breeds, regulars, fans)
 		save_game.money += report.collect_money()
 		for stats in save_game.get_all():
 			stats.tire(1)
@@ -164,8 +165,8 @@ func print_report(done_already:=false):
 		report.adults = last_report["adults"]
 		breeds = last_report["breeds"]
 		regulars = last_report["regulars"]
+		fans = last_report["fans"]
 		total = report.children + report.adults
-	var fame := 0.0
 	for mod in modifiers:
 		match(mod):
 			FATIGUE_MULTIPLIER:
@@ -185,10 +186,9 @@ func print_report(done_already:=false):
 				add_line_to_report("Differnet kinds of chickens: ", MANY_BREEDS_MODIFIER)
 			RAINBOW_MODIFIER:
 				add_line_to_report("Rainbow chickens: ", RAINBOW_MODIFIER)
-			FAMOUS_MULTIPLIER:
-				fame += (FAMOUS_MULTIPLIER-1)
-	if fame > 0.0:
-		add_line_to_report("Famous chickens: ", 1 + fame)
+	if fans > 0.0:
+		final_report.add_text("Fans: " + str(fans))
+		final_report.newline()
 	if regulars > 0:
 		final_report.add_text("Regulars: " + str(regulars))
 		final_report.newline()
@@ -209,4 +209,5 @@ func _on_ToCoop_pressed():
 	push_error("Error " + str(err) + "changing to  " + coop + " ")
 
 func _on_Start_timeout():
-	_add_human(int(round(total)), rate_adults)
+	total = round(total)
+	_add_human(int(total), rate_adults)

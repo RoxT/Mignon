@@ -103,6 +103,13 @@ margin_right = 320.0
 margin_bottom = 662.0
 text = "Unlock To Move"
 
+[node name="FoodWarning" type="Label" parent="Farm"]
+margin_left = -65.0
+margin_top = 710.0
+margin_right = 483.0
+margin_bottom = 818.0
+text = "Days of food will change when you move farms."
+
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 55.0
 margin_top = 67.0

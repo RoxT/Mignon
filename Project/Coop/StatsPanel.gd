@@ -1,7 +1,7 @@
 extends Panel
 
 export(Resource) var stats setget set_stats
-onready var portrait
+onready var portrait:TextureRect
 onready var nom
 onready var block : = $RichTextStats
 onready var breed_btn
@@ -10,7 +10,6 @@ onready var name_edit
 const breed_str := "Breed"
 const breed_with_str := "Breed with "
 const breed_stop_str := "Stop Breeding"
-const portrait_scaling := Vector2(0.095, 0.095)
 const sell_str := "Sell ($%s)"
 const panel_box:StyleBoxFlat = preload("res://resources/panel_stats.tres")
 
@@ -32,6 +31,7 @@ func _ready():
 		set_stats(stats)
 
 func set_stats(value:Chicken):
+	get_tree().call_group("star", "queue_free")
 	add_stylebox_override("panel", panel_box)
 	if breed_btn:
 		$Sell.disabled = false
@@ -43,30 +43,27 @@ func set_stats(value:Chicken):
 	if portrait:
 		if stats.breed == M.RUSSIAN_ORLOFF:
 			portrait.texture = load("res://chicken/portraits/Test_Headshot.png")
-			portrait.scale = portrait_scaling
 		elif stats.breed == M.SILKIE:
 			portrait.texture = load("res://chicken/portraits/silkie.jpg")
-			portrait.scale = portrait_scaling
 		elif stats.breed == M.BROWN_ROOSTER:
 			portrait.texture = load("res://chicken/portraits/brown_rooster.jpg")
-			#portrait.scale = Vector2(0.15, 0.15)
 		elif stats.breed == M.WHITE_CORNISH_HEN:
 			portrait.texture = load("res://chicken/portraits/white_cornish_hen.png")
-			portrait.scale = Vector2.ONE
 		elif stats.breed == M.POLISH_CHICKEN:
 			portrait.texture = load("res://chicken/portraits/white_cornish_hen.png")
-			portrait.scale = Vector2.ONE
 			
 		else:
 			portrait.texture = load("res://chicken/portraits/leghorn_brown.png")
-			portrait.scale = Vector2.ONE
+		portrait.rect_size.y = 293
 		portrait.modulate = stats.colour
 		var bottom:float = portrait.rect_size.y
 		for i in range(stats.fame):
 			var star := TextureRect.new()
+			star.add_to_group("star")
 			star.texture = preload("res://chicken/fame.png")
+			star.show_on_top = true
 			portrait.add_child(star)
-			star.position = Vector2(star.rect_size.x * i, bottom)
+			star.rect_position = Vector2(star.rect_size.x * i, bottom-star.rect_size.y)
 		show()
 	if nom:
 		nom.bbcode_text = "[b]"+stats.nom+"[b]"
