@@ -154,7 +154,7 @@ func _add_human(count:int, rate:float):
 			push_error("Error connecting to timer: " + str(err))
 		t.one_shot = true
 		add_child(t)
-		t.start(rand_range(0.7, 1.7) * pen_modifier)
+		t.start(rand_range(0.6, 1.2) * pen_modifier)
 
 func print_report(done_already:=false):
 	final_report.clear()
