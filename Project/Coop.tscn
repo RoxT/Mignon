@@ -231,7 +231,7 @@ rect_min_size = Vector2( 82, 48 )
 focus_neighbour_right = NodePath("../Race")
 focus_next = NodePath("../Race")
 shortcut = SubResource( 4 )
-text = "NEW CHICKEN ($10)"
+text = "New Chicken ($10)"
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
 margin_left = 16.0

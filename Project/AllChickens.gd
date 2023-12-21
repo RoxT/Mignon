@@ -24,6 +24,9 @@ export(Dictionary) var leagues_ongoing
 export(Dictionary) var last_zoo_report
 export(bool) var has_mature
 export(bool) var has_elderly
+export(Resource) var last_sold_chicken
+export(bool) var has_medium_pen
+export(bool) var has_large_pen
 
 enum FOOD_TYPES {BEST, GOOD, BASIC}
 
@@ -36,7 +39,7 @@ signal alert
 # Make sure that every parameter has a default value.
 # Otherwise, there will be problems with creating and editing
 # your resource via the inspector.
-func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_leagues_ongoing = {}, new_has_mature=false, new_has_elderly=false):
+func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_temp_racer = null, new_pen="Starter", new_enemy_farms = [], new_foods = [0,10,0], new_speed_boost:=1.0, new_show_diary:=true, new_day=1, new_wins=0, new_losses=0, new_breeds_discovered = {}, new_last_racer=null, new_next_unique_no := 0, new_events:=[], new_new_alert:=false, new_has_hybrid = false, new_current_league = "BRONZE", new_last_zoo_report = {}, new_leagues_ongoing = {}, new_has_mature=false, new_has_elderly=false, new_last_sold_chicken=null, new_has_medium_pen=false, new_has_large_pen=false):
 	all = new_all
 	racer = new_racer
 	money = new_money
@@ -61,6 +64,9 @@ func _init(new_all = [], new_racer=null, new_money := 100, new_deaths := 0, new_
 	show_diary = new_show_diary
 	has_mature = new_has_mature
 	has_elderly = new_has_elderly
+	last_sold_chicken = new_last_sold_chicken
+	has_medium_pen = new_has_medium_pen
+	has_large_pen = new_has_large_pen
 
 func initialize_game():
 	all = generate_mignon()
@@ -95,6 +101,7 @@ func pass_day():
 		if !has_elderly and c.age == c.ELDERLY:
 			new_alert_event(Event.new(day, "ELDERLY", [c.nom]))
 			has_elderly = true
+	last_sold_chicken = null
 	save()
 
 
@@ -178,8 +185,17 @@ func save_backup():
 func sell(chicken:Chicken, price:int):
 	if racer == chicken:
 		racer = null
+	last_sold_chicken = chicken.duplicate()
 	all.erase(chicken)
 	money += price
+	save()
+
+func buy_back_last():
+	var come_back:Chicken = last_sold_chicken.duplicate()
+	all.append(come_back)
+	last_racer = come_back
+	money -= come_back.get_price()
+	last_sold_chicken = null
 	save()
 
 func add_chicken_stats(value:Chicken):

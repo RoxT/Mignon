@@ -102,6 +102,15 @@ func _random_colour()->Color:
 	
 func _random_breed()->String:
 	return M.DEFUALT_BREEDS[randi() % M.DEFUALT_BREEDS.size()]
+	
+func get_price()->int:
+	var tired = 1-(fatigue * 0.05)
+	if wins == 0:
+		return int(5 * tired)
+	if is_famous():
+		return 5 + int((wins * 20) * tired)
+	else:
+		return 5 + int((wins * 10) * tired)
 
 func apply_sprite(sprite:AnimatedSprite):
 	sprite.frames = load(TEXTURE_PATH % breed) as SpriteFrames

@@ -14,6 +14,11 @@ const BRONZE := "BRONZE"
 const SILVER := "SILVER"
 const GOLD := "GOLD"
 
+	 # Farms #
+const STARTER_PRICE := 200
+const MEDIUM_PRICE := 300
+const LARGE_PRICE := 400
+
 	 # Breeds #
 const LEGHORN_BROWN := "leghorn_brown"
 const WHITE_CORNISH_HEN := "white_cornish_hen"

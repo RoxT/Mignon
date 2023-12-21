@@ -1,6 +1,8 @@
 extends Node2D
 
 var save_game:AllChickens
+onready var upgrade_btn:Button = $Farm/Upgrade
+
 const BASIC_PRICE := 1
 const GOOD_PRICE := 10
 const BEST_PRICE := 50
@@ -12,10 +14,7 @@ const MEDIUM_DESC := "Small Farm Pen\nThe perfect little backyard coop."
 const LARGE := "Large"
 const LARGE_DESC := "Large Farm Pen\nAn extra large coop out in the country for those that want a lot of chickens."
 
-const MEDIUM_PRICE := 300
-const LARGE_PRICE := 400
-
-const CURRENT := "Current: "
+const CURRENT := "Best Available: "
 const NEXT := "Next: "
 
 # Called when the node enters the scene tree for the first time.
@@ -47,13 +46,14 @@ func _on_BuyBest_pressed():
 
 func _on_Upgrade_pressed():
 	if save_game.pen == "Starter":
-		save_game.money -= MEDIUM_PRICE 
+		save_game.money -= M.MEDIUM_PRICE
 		save_game.pen = "Medium"
+		save_game.has_medium_pen = true
 	elif save_game.pen == "Medium":
-		save_game.money -= LARGE_PRICE
+		save_game.money -= M.LARGE_PRICE
 		save_game.pen = "Large"
-	save_game.save()
-	refresh_UI()
+		save_game.has_large_pen = true
+	_on_ToCoop_pressed()
 	
 func refresh_UI():
 	$UI/Money.text = "Money: $" + str(save_game.money)
@@ -68,33 +68,34 @@ func refresh_UI():
 	
 	var current:Label = $Farm/Current
 	var next:Label = $Farm/Next
-	match save_game.pen:
-		"Starter":
-			current.text = CURRENT + START_DESC
-			next.text = NEXT + MEDIUM_DESC
-		"Medium":
-			current.text = CURRENT + MEDIUM_DESC
-			next.text = NEXT + LARGE_DESC
-		"Large":
-			current.text = CURRENT + LARGE_DESC
-			next.text = ""
 	
-	var upgrade:Button = $Farm/Upgrade
-	match save_game.pen:
-		"Starter":
-			upgrade.text = "Upgrade Farm $" + str(MEDIUM_PRICE)
-#			upgrade.disabled = save_game.money < MEDIUM_PRICE*multiplier()
-		"Medium":
-			upgrade.text = "Upgrade Farm $" + str(LARGE_PRICE)
-#			upgrade.disabled = save_game.money < LARGE_PRICE*multiplier()
-		"Large":
-			upgrade.disabled = true
-			upgrade.text = "Farm Completely Upgraded"
-		var pen:
-			push_error(pen + "not a pen")
+	if save_game.has_large_pen:
+		current.text = CURRENT + LARGE_DESC
+		next.text = ""
+		upgrade_btn.disabled = true
+		upgrade_btn.text = "Farm Completely Upgraded"
+	elif save_game.has_medium_pen:
+		current.text = CURRENT + MEDIUM_DESC
+		next.text = NEXT + LARGE_DESC
+		upgrade_btn.text = "Upgrade Farm $" + str(M.LARGE_PRICE)
+#			upgrade_btn.disabled = save_game.money < LARGE_PRICE*multiplier()
+	else:
+		current.text = CURRENT + START_DESC
+		next.text = NEXT + MEDIUM_DESC
+		upgrade_btn.text = "Upgrade Farm $" + str(M.MEDIUM_PRICE)
+#			upgrade_btn.disabled = save_game.money < MEDIUM_PRICE*multiplier()
+	
+
 
 func _on_ToCoop_pressed():
 	save_game.save()
 	var err := get_tree().change_scene("res://Coop.tscn")
 	if err != OK:
 		push_error("Error switching scenes: " + str(err))
+
+
+func _on_More_pressed():
+	save_game.save()
+	var err := get_tree().change_scene("res://Store/StorePage2.tscn")
+	if err != OK:
+		push_error("Error switching scenes to page 2: " + str(err))

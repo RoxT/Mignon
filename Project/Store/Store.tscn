@@ -100,8 +100,8 @@ autowrap = true
 
 [node name="Next" type="Label" parent="Farm"]
 margin_top = 242.0
-margin_right = 599.0
-margin_bottom = 329.0
+margin_right = 485.0
+margin_bottom = 345.0
 text = "Next: Small Farm pen"
 autowrap = true
 
@@ -197,8 +197,16 @@ margin_bottom = 34.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
 text = "NO FOOD"
 
+[node name="More" type="Button" parent="."]
+margin_left = 1706.0
+margin_top = 996.0
+margin_right = 1884.0
+margin_bottom = 1058.0
+text = "More >"
+
 [connection signal="pressed" from="BuyBasic" to="." method="_on_BuyBasic_pressed"]
 [connection signal="pressed" from="BuyGood" to="." method="_on_BuyGood_pressed"]
 [connection signal="pressed" from="BuyBest" to="." method="_on_BuyBest_pressed"]
 [connection signal="pressed" from="Farm/Upgrade" to="." method="_on_Upgrade_pressed"]
 [connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
+[connection signal="pressed" from="More" to="." method="_on_More_pressed"]

@@ -1,0 +1,185 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Common/ShowChicken.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Store/StorePage2.gd" type="Script" id=2]
+[ext_resource path="res://Common/AFood.tscn" type="PackedScene" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0.168627, 0.168627, 0.168627, 0.639216 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.741176, 0.992157, 0.968627, 0.615686 )
+border_blend = true
+expand_margin_left = 2.0
+expand_margin_right = 2.0
+expand_margin_top = 2.0
+expand_margin_bottom = 2.0
+
+[node name="Store" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BuyBackLast" type="Label" parent="."]
+margin_left = 1013.0
+margin_top = 92.0
+margin_right = 1612.0
+margin_bottom = 124.0
+text = "BUY BACK LAST CHICKEN"
+align = 1
+
+[node name="BuyBack" type="Button" parent="BuyBackLast"]
+margin_left = 250.0
+margin_top = 71.0
+margin_right = 481.0
+margin_bottom = 204.0
+text = "None sold recently"
+
+[node name="ShowChicken" parent="BuyBackLast" instance=ExtResource( 1 )]
+position = Vector2( 98, 71 )
+
+[node name="ReferenceRect" type="ReferenceRect" parent="BuyBackLast"]
+margin_left = 53.0
+margin_top = 71.0
+margin_right = 226.0
+margin_bottom = 204.0
+border_color = Color( 0.756863, 0.756863, 0.756863, 1 )
+border_width = 2.0
+editor_only = false
+
+[node name="Farm" type="Label" parent="."]
+margin_left = 455.0
+margin_top = 92.0
+margin_right = 1013.0
+margin_bottom = 124.0
+text = "MOVE FARM"
+align = 1
+
+[node name="SmallDesc" type="Label" parent="Farm"]
+margin_left = -65.0
+margin_top = 71.0
+margin_right = 558.0
+margin_bottom = 173.0
+text = "Covert Balcony Pen
+A small coop in the heart of the city, great for a few chickens."
+autowrap = true
+
+[node name="SmallMove" type="Button" parent="Farm"]
+margin_left = -65.0
+margin_top = 185.0
+margin_right = 320.0
+margin_bottom = 246.0
+text = "Move"
+
+[node name="MediumDesc" type="Label" parent="Farm"]
+margin_left = -65.0
+margin_top = 290.0
+margin_right = 575.0
+margin_bottom = 357.0
+text = "Small Farm Pen
+The perfect little backyard coop."
+autowrap = true
+
+[node name="MediumMove" type="Button" parent="Farm"]
+margin_left = -65.0
+margin_top = 376.0
+margin_right = 320.0
+margin_bottom = 437.0
+text = "Unlock To Move"
+
+[node name="LargeDesc" type="Label" parent="Farm"]
+margin_left = -65.0
+margin_top = 486.0
+margin_right = 575.0
+margin_bottom = 588.0
+text = "Large Farm Pen
+An extra large coop out in the country for those that want a lot of chickens."
+autowrap = true
+
+[node name="LargeMove" type="Button" parent="Farm"]
+margin_left = -65.0
+margin_top = 601.0
+margin_right = 320.0
+margin_bottom = 662.0
+text = "Unlock To Move"
+
+[node name="ToCoop" type="Button" parent="."]
+margin_left = 55.0
+margin_top = 67.0
+margin_right = 286.0
+margin_bottom = 149.0
+text = "< Back To Coop"
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Money" type="Label" parent="UI"]
+margin_left = 14.0
+margin_top = 845.0
+margin_right = 164.0
+margin_bottom = 877.0
+text = "Money: $100"
+
+[node name="Food" type="Label" parent="UI"]
+margin_left = 14.0
+margin_top = 764.0
+margin_right = 102.0
+margin_bottom = 796.0
+text = "Food:"
+
+[node name="Panel" type="PanelContainer" parent="UI/Food"]
+margin_left = 7.0
+margin_top = 32.0
+margin_right = 88.0
+margin_bottom = 72.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 1 )
+
+[node name="FoodBox" type="HBoxContainer" parent="UI/Food/Panel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 167.0
+margin_bottom = 38.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="BEST" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 8 )]
+margin_right = 51.0
+margin_bottom = 36.0
+
+[node name="GOOD" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 8 )]
+visible = false
+margin_left = 55.0
+margin_right = 106.0
+margin_bottom = 36.0
+food_type = 1
+
+[node name="BASIC" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 8 )]
+visible = false
+margin_left = 55.0
+margin_right = 106.0
+margin_bottom = 36.0
+food_type = 2
+
+[node name="Label" type="Label" parent="UI/Food/Panel/FoodBox"]
+margin_left = 55.0
+margin_top = 2.0
+margin_right = 165.0
+margin_bottom = 34.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+text = "NO FOOD"
+
+[node name="More" type="Button" parent="."]
+margin_left = 23.0
+margin_top = 1002.0
+margin_right = 188.0
+margin_bottom = 1056.0
+text = "< More"
+
+[connection signal="pressed" from="BuyBackLast/BuyBack" to="." method="_on_BuyBack_pressed"]
+[connection signal="pressed" from="Farm/SmallMove" to="." method="_on_Move_pressed" binds= [ "Starter" ]]
+[connection signal="pressed" from="Farm/MediumMove" to="." method="_on_Move_pressed" binds= [ "Medium" ]]
+[connection signal="pressed" from="Farm/LargeMove" to="." method="_on_Move_pressed" binds= [ "Large" ]]
+[connection signal="pressed" from="ToCoop" to="." method="_on_ToCoop_pressed"]
+[connection signal="pressed" from="More" to="." method="_on_More_pressed"]

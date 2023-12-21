@@ -92,7 +92,7 @@ func set_stats(value:Chicken):
 			
 			
 	if breed_btn:
-		$Sell.text = sell_str % get_price()
+		$Sell.text = sell_str % stats.get_price()
 		if stats.is_chick():
 			$Choose.disabled = true
 			breed_btn.disabled = true
@@ -147,17 +147,8 @@ func _on_Choose_pressed():
 func _on_Breed_pressed():
 	emit_signal("requested_breed")
 
-func get_price()->int:
-	var tired = 1-(stats.fatigue * 0.05)
-	if stats.wins == 0:
-		return int(5 * tired)
-	if stats.is_famous():
-		return 5 + int((stats.wins * 20) * tired)
-	else:
-		return 5 + int((stats.wins * 10) * tired)
-
 func _on_Sell_pressed():
-	emit_signal("sell_requested", get_price())
+	emit_signal("sell_requested", stats.get_price())
 
 func _on_Edit_pressed():
 	if name_edit.visible == true:

@@ -37,7 +37,14 @@ texture = ExtResource( 3 )
 layer = -2
 
 [node name="Leaves" type="TextureRect" parent="CanvasLayer"]
+margin_right = 1366.0
+margin_bottom = 1080.0
+texture = ExtResource( 4 )
+stretch_mode = 2
+
+[node name="Leaves2" type="TextureRect" parent="CanvasLayer"]
+margin_left = 1366.0
 margin_right = 1920.0
-margin_bottom = 1041.0
+margin_bottom = 798.0
 texture = ExtResource( 4 )
 stretch_mode = 2
