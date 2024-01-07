@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white_cornish_hen.png-b9e1ec997874b74c208a7b8a9d38220c.stex"
+path="res://.import/plymouth_rock.jpg-5a36429a53bb24af3ef54bb4453c378c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/breeds/white_cornish_hen.png"
-dest_files=[ "res://.import/white_cornish_hen.png-b9e1ec997874b74c208a7b8a9d38220c.stex" ]
+source_file="res://chicken/portraits/plymouth_rock.jpg"
+dest_files=[ "res://.import/plymouth_rock.jpg-5a36429a53bb24af3ef54bb4453c378c.stex" ]
 
 [params]
 

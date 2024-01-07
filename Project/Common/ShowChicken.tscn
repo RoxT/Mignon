@@ -1,8 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://chicken/breeds/leghorn_brown_spf.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://chicken/breeds/plymouth_rock_spf.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://Common/ShowChicken.gd" type="Script" id=2]
-
 
 [node name="ShowChicken" type="AnimatedSprite" groups=["show"]]
 frames = ExtResource( 1 )

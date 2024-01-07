@@ -19,6 +19,7 @@ export(float)var speed_guess setget set_speed_guess
 export(int) var fame setget , get_fame
 
 const TEXTURE_PATH := "res://chicken/breeds/%s_spf.tres"
+const PORTRAIT_PATH := "res://chicken/portraits/%s.jpg"
 
 const MATURE := 30
 const ELDERLY := 60
@@ -124,13 +125,16 @@ func apply_sprite(sprite:AnimatedSprite):
 	sprite.frames = load(TEXTURE_PATH % breed) as SpriteFrames
 	sprite.modulate = colour
 	if is_mature():
-		if breed == M.WHITE_CORNISH_HEN:
+		if breed == M.WHITE_CORNISH:
 			sprite.modulate.b += 0.1
 			sprite.modulate.g += 0.1 
 			sprite.modulate.r += 0.1 
 		sprite.material = preload("res://chicken/mature_shader_material.tres")
 	else:
 		sprite.material = null
+
+func get_portrait()->Texture:
+	return load(PORTRAIT_PATH % breed) as Texture
 
 func _to_string():
 	var text := ""

@@ -1,9 +1,11 @@
-[gd_resource type="Theme" load_steps=9 format=2]
+[gd_resource type="Theme" load_steps=11 format=2]
 
 [ext_resource path="res://resources/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resources/flatblue_stylebox.tres" type="StyleBox" id=2]
 [ext_resource path="res://resources/race_stylebox.tres" type="StyleBox" id=3]
 [ext_resource path="res://resources/race_stylebox_hover.tres" type="StyleBox" id=4]
+[ext_resource path="res://resources/Genos_Button.tres" type="DynamicFont" id=5]
+[ext_resource path="res://resources/genos_light.tres" type="DynamicFont" id=6]
 
 [sub_resource type="StyleBoxFlat" id=5]
 bg_color = Color( 0.1682, 0.19053, 0.29, 1 )
@@ -40,9 +42,12 @@ font_data = ExtResource( 1 )
 
 [resource]
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.509804 )
+Button/fonts/font = ExtResource( 5 )
 Button/styles/disabled = SubResource( 5 )
 Button/styles/hover = SubResource( 8 )
 Button/styles/normal = ExtResource( 2 )
+Button_Light/base_type = "Button"
+Button_Light/fonts/font = ExtResource( 6 )
 LinkButton/colors/font_color_focus = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_hover = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_pressed = Color( 0.564706, 0.545098, 0.960784, 1 )

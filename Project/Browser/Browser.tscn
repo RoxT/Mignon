@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Browser/Browser.gd" type="Script" id=1]
 [ext_resource path="res://Common/ComputerBackground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Common/genos_font.tres" type="DynamicFont" id=3]
 
 [node name="Browser" type="Control"]
 anchor_right = 1.0
@@ -196,6 +197,7 @@ margin_left = 262.0
 margin_top = 222.0
 margin_right = 1648.0
 margin_bottom = 994.0
+custom_fonts/normal_font = ExtResource( 3 )
 bbcode_enabled = true
 bbcode_text = "[b]BOLD[/b]
 There are two kinds of races, the kind that happen every day and are for anyone, and league races which are special events\\n\\n[b]EVERY DAY RACES[/b]\\nIn order to be part of the racing circut, you must compete  in one the races held every day. Every farm in the circuit competes but because there are multiple races held on the same day your racer will only face 3 other farms per race. This is a great way to show off your flock and maybe earn some money.\\n\\n[b]LEAGUE RACES[/b]\\nThese are special event you can enter. They are multiple days long and to win you must win every race."

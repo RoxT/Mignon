@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/black_onyx.png-fc6cf6d6837b922a6735ec4ff8a5889d.stex"
+path="res://.import/leghorn.png-4751c39fd933952376f88d19d8761812.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/breeds/black_onyx.png"
-dest_files=[ "res://.import/black_onyx.png-fc6cf6d6837b922a6735ec4ff8a5889d.stex" ]
+source_file="res://chicken/breeds/leghorn.png"
+dest_files=[ "res://.import/leghorn.png-4751c39fd933952376f88d19d8761812.stex" ]
 
 [params]
 

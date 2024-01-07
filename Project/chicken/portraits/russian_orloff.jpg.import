@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/brown_rooster.png-10d7f6141c2166e8e41b4c757ee63ec8.stex"
+path="res://.import/russian_orloff.jpg-e178f2038f8b116ba4ce1aadf245cfd2.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/breeds/brown_rooster.png"
-dest_files=[ "res://.import/brown_rooster.png-10d7f6141c2166e8e41b4c757ee63ec8.stex" ]
+source_file="res://chicken/portraits/russian_orloff.jpg"
+dest_files=[ "res://.import/russian_orloff.jpg-e178f2038f8b116ba4ce1aadf245cfd2.stex" ]
 
 [params]
 

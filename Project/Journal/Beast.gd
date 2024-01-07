@@ -6,13 +6,13 @@ export(String) var breed := "" setget set_breed
 onready var label := $RichTextLabel
 
 const BEASTIARY := {
-	M.LEGHORN_BROWN : "The most common racing chicken.",
-	M.WHITE_CORNISH_HEN : "A common racing chicken breed.",
+	M.PLYMOUTH_ROCK : "The most common racing chicken.",
+	M.WHITE_CORNISH : "A common racing chicken breed.",
 	M.RUSSIAN_ORLOFF : "Soft, gorgeous feathers.",
 	M.SUSSEX : "An interesting mix with a mottled pattern.",
-	M.BROWN_ROOSTER : "It's a boy! A curious chicken with an unusualy large comb and wattles.",
+	M.LEGHORN : "It's a boy! A curious chicken with an unusualy large comb and wattles.",
 	M.SILKIE : "This racing chicken looks huge but its all feathers.",
-	M.BLACK_ONYX : "There's a green shimmer when the light hits this chicken.",
+	M.MYSTIC_ONYX : "There's a green shimmer when the light hits this chicken.",
 	M.POLISH_CHICKEN : "Huge head.",
 	"unknown" : "There must be more breeds to discover."
 	}

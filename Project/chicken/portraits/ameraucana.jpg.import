@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/leghorn_brown.png-17e5a8be0e43b45c5b82d98076d8a4d1.stex"
+path="res://.import/ameraucana.jpg-d96cd5e82f073390549ffea3211d2b43.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/portraits/leghorn_brown.png"
-dest_files=[ "res://.import/leghorn_brown.png-17e5a8be0e43b45c5b82d98076d8a4d1.stex" ]
+source_file="res://chicken/portraits/ameraucana.jpg"
+dest_files=[ "res://.import/ameraucana.jpg-d96cd5e82f073390549ffea3211d2b43.stex" ]
 
 [params]
 

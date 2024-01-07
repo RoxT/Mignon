@@ -1,11 +1,12 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Coop/bang.png" type="Texture" id=1]
 [ext_resource path="res://Coop/StatsPanel.gd" type="Script" id=2]
-[ext_resource path="res://chicken/portraits/brown_rooster.jpg" type="Texture" id=3]
+[ext_resource path="res://chicken/portraits/leghorn.jpg" type="Texture" id=3]
 [ext_resource path="res://chicken/mate_tag.png" type="Texture" id=4]
 [ext_resource path="res://Coop/fence.png" type="Texture" id=5]
 [ext_resource path="res://Coop.gd" type="Script" id=6]
+[ext_resource path="res://resources/Genos_Button.tres" type="DynamicFont" id=7]
 [ext_resource path="res://Coop/spy_glass.png" type="Texture" id=8]
 [ext_resource path="res://Coop/BreedingPen.jpg" type="Texture" id=9]
 [ext_resource path="res://Common/info.png" type="Texture" id=10]
@@ -231,7 +232,7 @@ rect_min_size = Vector2( 82, 48 )
 focus_neighbour_right = NodePath("../Race")
 focus_next = NodePath("../Race")
 shortcut = SubResource( 4 )
-text = "New Chicken ($10)"
+text = "NEW CHICKEN ($10)"
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
 margin_left = 16.0
@@ -324,6 +325,7 @@ margin_left = 38.0
 margin_top = 12.0
 margin_right = 325.0
 margin_bottom = 54.0
+custom_fonts/normal_font = ExtResource( 7 )
 bbcode_enabled = true
 bbcode_text = "[b]Mignon[b]"
 text = "Mignon"
@@ -339,19 +341,20 @@ margin_left = 38.0
 margin_top = 346.0
 margin_right = 344.0
 margin_bottom = 533.0
-text = "Breed: White Cornish Hen
+text = "Breed: White Cornish
 Wins: 5 
 Fatigue: 3
 5 days old
 Speed:  400"
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
-margin_left = 192.0
+margin_left = 190.0
 margin_top = 516.0
-margin_right = 373.0
+margin_right = 462.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 0, 48 )
-text = "Set as Racer"
+theme_type_variation = "Button_Light"
+text = "SET AS RACER"
 
 [node name="Sell" type="Button" parent="UI/StatsPanel"]
 margin_left = 10.0
@@ -359,7 +362,8 @@ margin_top = 516.0
 margin_right = 173.0
 margin_bottom = 579.0
 rect_min_size = Vector2( 0, 48 )
-text = "Sell ($5)"
+theme_type_variation = "Button_Light"
+text = "SELL ($5)"
 
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
 margin_left = 10.0
@@ -367,7 +371,8 @@ margin_top = 594.0
 margin_right = 373.0
 margin_bottom = 655.0
 rect_min_size = Vector2( 363, 48 )
-text = "Breed Chicken"
+theme_type_variation = "Button_Light"
+text = "BREED CHICKEN"
 
 [node name="Edit" type="Button" parent="UI/StatsPanel"]
 margin_left = 325.0
@@ -392,16 +397,16 @@ margin_top = 118.0
 margin_right = 300.0
 margin_bottom = 200.0
 rect_min_size = Vector2( 82, 48 )
-text = "Shop"
+text = "SHOP"
 
 [node name="PettingZoo" type="Button" parent="UI" groups=["action"]]
-margin_left = 963.0
-margin_top = 23.0
-margin_right = 1270.0
-margin_bottom = 109.0
+margin_left = 859.0
+margin_top = 24.0
+margin_right = 1244.0
+margin_bottom = 110.0
 rect_min_size = Vector2( 0, 48 )
 theme_type_variation = "RaceStyleBtn"
-text = "Start Petting Zoo"
+text = "START PETTING ZOO"
 
 [node name="LeagueRace" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
@@ -409,7 +414,7 @@ margin_top = 603.0
 margin_right = 300.0
 margin_bottom = 685.0
 rect_min_size = Vector2( 0, 48 )
-text = "LeagueRanking"
+text = "LEAGUE RANKING"
 
 [node name="WebChickens" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
@@ -417,7 +422,7 @@ margin_top = 409.0
 margin_right = 300.0
 margin_bottom = 491.0
 rect_min_size = Vector2( 0, 48 )
-text = "WebChickens"
+text = "WEBCHICKENS"
 
 [node name="Journal" type="Button" parent="UI" groups=["action"]]
 margin_left = 21.0
@@ -425,7 +430,7 @@ margin_top = 507.0
 margin_right = 300.0
 margin_bottom = 589.0
 rect_min_size = Vector2( 0, 48 )
-text = "Journal"
+text = "JOURNAL"
 
 [node name="Bang" type="TextureRect" parent="UI/Journal"]
 visible = false

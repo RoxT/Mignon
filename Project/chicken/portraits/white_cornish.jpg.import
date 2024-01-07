@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Test_Headshot.png-cfa3db63398ea681ab7b2daa49643a09.stex"
+path="res://.import/white_cornish.jpg-4f5d0f7539ea1437af2c87f17380832f.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/portraits/Test_Headshot.png"
-dest_files=[ "res://.import/Test_Headshot.png-cfa3db63398ea681ab7b2daa49643a09.stex" ]
+source_file="res://chicken/portraits/white_cornish.jpg"
+dest_files=[ "res://.import/white_cornish.jpg-4f5d0f7539ea1437af2c87f17380832f.stex" ]
 
 [params]
 

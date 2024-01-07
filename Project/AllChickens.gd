@@ -311,7 +311,7 @@ func generate_mignon()->Array:
 	var mignon := Chicken.new()
 	mignon.top_speed = 280
 	mignon.colour = Color.white
-	mignon.breed = M.LEGHORN_BROWN
+	mignon.breed = M.PLYMOUTH_ROCK
 	mignon.farm = YOU
 	mignon.nom = "Mignon"
 	mignon.unique_no = get_new_unique_no()

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white_cornish_hen.png-01d4cc67caa97bfa8b394a294c9a6a44.stex"
+path="res://.import/sussex.jpg-b0d7e0d20d70721f55130a909a81f890.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/portraits/white_cornish_hen.png"
-dest_files=[ "res://.import/white_cornish_hen.png-01d4cc67caa97bfa8b394a294c9a6a44.stex" ]
+source_file="res://chicken/portraits/sussex.jpg"
+dest_files=[ "res://.import/sussex.jpg-b0d7e0d20d70721f55130a909a81f890.stex" ]
 
 [params]
 

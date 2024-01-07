@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/greying.png-2b6504ce26e644a4d1d2cd0a57dbcf83.stex"
+path="res://.import/polish_chicken.jpg-6aefcbbda5355b40d3258ead328f6646.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://chicken/breeds/greying.png"
-dest_files=[ "res://.import/greying.png-2b6504ce26e644a4d1d2cd0a57dbcf83.stex" ]
+source_file="res://chicken/portraits/polish_chicken.jpg"
+dest_files=[ "res://.import/polish_chicken.jpg-6aefcbbda5355b40d3258ead328f6646.stex" ]
 
 [params]
 
