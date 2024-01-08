@@ -43,7 +43,7 @@ margin_left = 17.0
 margin_top = 51.0
 margin_right = 199.0
 margin_bottom = 149.0
-text = "< Back to Coop"
+text = "<- COOP"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 visible = false

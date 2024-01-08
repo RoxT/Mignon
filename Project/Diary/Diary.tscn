@@ -228,7 +228,7 @@ margin_left = 21.0
 margin_top = 31.0
 margin_right = 194.0
 margin_bottom = 107.0
-text = "<-- To Coop"
+text = "<- COOP"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Day1")

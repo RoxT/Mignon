@@ -175,8 +175,8 @@ layer = -1
 [node name="RacerLabel" type="Label" parent="."]
 margin_left = -30.0
 margin_top = 36.0
-margin_right = 37.0
-margin_bottom = 68.0
+margin_right = 46.0
+margin_bottom = 66.0
 custom_styles/normal = SubResource( 7 )
 text = "Racer"
 align = 1
@@ -275,7 +275,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BEST" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 13 )]
-margin_right = 51.0
+margin_right = 52.0
 margin_bottom = 36.0
 
 [node name="GOOD" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 13 )]
@@ -350,30 +350,30 @@ Fatigue: 3
 Speed:  400"
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
-margin_left = 174.0
-margin_top = 516.0
-margin_right = 387.0
-margin_bottom = 579.0
+margin_left = 172.0
+margin_top = 517.0
+margin_right = 385.0
+margin_bottom = 580.0
 rect_min_size = Vector2( 0, 48 )
-theme_type_variation = "Button_Light"
-text = "SET AS RACER"
+theme_type_variation = "button_small"
+text = "Set As Racer"
 
 [node name="Sell" type="Button" parent="UI/StatsPanel"]
-margin_left = 10.0
-margin_top = 516.0
-margin_right = 148.0
-margin_bottom = 579.0
+margin_left = 14.0
+margin_top = 517.0
+margin_right = 152.0
+margin_bottom = 580.0
 rect_min_size = Vector2( 0, 48 )
-theme_type_variation = "Button_Light"
+theme_type_variation = "button_small"
 text = "SELL ($5)"
 
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
-margin_left = 11.0
+margin_left = 14.0
 margin_top = 594.0
-margin_right = 387.0
+margin_right = 385.0
 margin_bottom = 653.0
 rect_min_size = Vector2( 363, 48 )
-theme_type_variation = "Button_Light"
+theme_type_variation = "button_small"
 text = "BREED CHICKEN"
 
 [node name="Edit" type="Button" parent="UI/StatsPanel"]
@@ -436,10 +436,10 @@ text = "JOURNAL"
 
 [node name="Bang" type="TextureRect" parent="UI/Journal"]
 visible = false
-margin_left = 189.0
-margin_top = 25.0
-margin_right = 229.0
-margin_bottom = 65.0
+margin_left = 232.0
+margin_top = 28.0
+margin_right = 272.0
+margin_bottom = 68.0
 texture = ExtResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI/Journal/Bang"]

@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
+[ext_resource path="res://resources/default_theme.tres" type="Theme" id=1]
 [ext_resource path="res://PettingZoo/PeonStatsPanel.gd" type="Script" id=2]
 [ext_resource path="res://PettingZoo/Report.gd" type="Script" id=3]
 [ext_resource path="res://Coop/spy_glass.png" type="Texture" id=4]
@@ -30,7 +31,7 @@ margin_right = 188.0
 margin_bottom = 96.0
 rect_min_size = Vector2( 0, 48 )
 shortcut = SubResource( 6 )
-text = "TO COOP"
+text = "<- COOP"
 
 [node name="PeonStatsPanel" type="Panel" parent="UI"]
 anchor_left = 1.0
@@ -48,6 +49,8 @@ margin_left = 38.0
 margin_top = 21.0
 margin_right = 290.0
 margin_bottom = 618.0
+theme = ExtResource( 1 )
+theme_type_variation = "rich_text_small"
 text = "Click on a guest to see what they're saying"
 
 [node name="SpyGlass" type="Sprite" parent="UI/PeonStatsPanel"]
@@ -70,6 +73,7 @@ margin_left = 27.0
 margin_top = 164.0
 margin_right = 387.0
 margin_bottom = 618.0
+theme_type_variation = "rich_text_small"
 text = "Final Report Pending..."
 
 [node name="Label" type="Label" parent="UI/ReportPanel"]
@@ -98,7 +102,7 @@ text = "Adults: 0"
 margin_left = 27.0
 margin_top = 110.0
 margin_right = 219.0
-margin_bottom = 142.0
+margin_bottom = 144.0
 text = "Admissions: $0"
 
 [node name="Start" type="Timer" parent="."]

@@ -65,7 +65,7 @@ window/stretch/aspect="keep"
 
 common/drop_mouse_on_gui_input_disabled=true
 theme/custom="res://resources/default_theme.tres"
-theme/custom_font="res://resources/Roboto-Regular.tres"
+theme/custom_font="res://resources/genos_rich_text_small.tres"
 
 [importer_defaults]
 

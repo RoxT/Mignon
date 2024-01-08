@@ -73,10 +73,10 @@ func load_game():
 			label.rect_position = Vector2(400, 300)
 			get_tree().current_scene.add_child(layer)
 			if AllChickens.backup_exists():
-				label.text = "Save file corrupted, re-loaded from last day"
+				label.text = "Error loading save file, re-loaded from last day"
 				save_game = load(AllChickens.PATH_BACKUP) as AllChickens
 			if save_game == null:
-				label.text = "Save file corrupted"
+				label.text = "Error loading save file"
 		else:
 			if !save_game.breeds_discovered.has(M.POLISH_CHICKEN):
 				save_game.breeds_discovered[M.POLISH_CHICKEN] = false

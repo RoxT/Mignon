@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=2]
+[gd_resource type="Theme" load_steps=14 format=2]
 
 [ext_resource path="res://resources/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://resources/flatblue_stylebox.tres" type="StyleBox" id=2]
@@ -43,10 +43,6 @@ extra_spacing_bottom = 2
 extra_spacing_char = 2
 font_data = ExtResource( 7 )
 
-[sub_resource type="DynamicFont" id=9]
-size = 32
-font_data = ExtResource( 7 )
-
 [resource]
 Button/colors/font_color_disabled = Color( 0.901961, 0.901961, 0.901961, 0.509804 )
 Button/fonts/font = ExtResource( 5 )
@@ -55,6 +51,7 @@ Button/styles/hover = SubResource( 8 )
 Button/styles/normal = ExtResource( 2 )
 Button_Light/base_type = "Button"
 Button_Light/fonts/font = ExtResource( 6 )
+Label/fonts/font = null
 LinkButton/colors/font_color_focus = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_hover = Color( 0.564706, 0.545098, 0.960784, 1 )
 LinkButton/colors/font_color_pressed = Color( 0.564706, 0.545098, 0.960784, 1 )
@@ -66,7 +63,7 @@ RaceStyleBtn/styles/normal = ExtResource( 3 )
 RichTextLabel/fonts/bold_font = SubResource( 7 )
 RichTextLabel/fonts/normal_font = ExtResource( 8 )
 button_small/base_type = "Button"
-button_small/fonts/font = SubResource( 9 )
+button_small/fonts/font = ExtResource( 9 )
 gold_button/base_type = "Button"
 gold_button/colors/font_color = Color( 0.992157, 0.764706, 0.239216, 1 )
 gold_button/colors/font_color_disabled = Color( 0.992157, 0.764706, 0.239216, 1 )

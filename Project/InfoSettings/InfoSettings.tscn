@@ -24,7 +24,7 @@ margin_left = 30.0
 margin_top = 65.0
 margin_right = 202.0
 margin_bottom = 150.0
-text = "<-- To Coop"
+text = "<- COOP"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 modulate = Color( 1, 1, 1, 0.901961 )
