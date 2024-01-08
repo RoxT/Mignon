@@ -10,7 +10,7 @@ var BREEDING := "[b]BREEDING[/b]\n\nRacing chickens need very little to get in t
 
 const PETTING_ZOO := "[b]PETTING ZOO[/b]\n\nTo earn extra money and get a sense of your farm you can open it up to visitors. Visitors will find any excuse to see your chickens and once the doors are closed you can make a report of what you've seen. Admission is the same but adults come to see the fast chickens and children prefer slower ones they can pet."
 
-onready var content := $Content
+onready var content :RichTextLabel= $Content
 onready var links := $Links
 
 # Called when the node enters the scene tree for the first time.
