@@ -8,9 +8,9 @@
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
-margin_left = 295.0
-margin_top = 33.0
-margin_right = 1812.0
+margin_left = 26.0
+margin_top = 28.0
+margin_right = 1885.0
 margin_bottom = 1021.0
 
 [node name="Welcome" type="Label" parent="Panel"]
@@ -21,18 +21,18 @@ align = 1
 valign = 1
 
 [node name="Label2" type="Label" parent="Panel"]
-margin_left = 38.0
-margin_top = 86.0
-margin_right = 1517.0
-margin_bottom = 188.0
+margin_left = 40.0
+margin_top = 111.0
+margin_right = 1519.0
+margin_bottom = 213.0
 text = "Beat 3 chickens from each farm to advance.
  "
 
 [node name="Prizes" type="Label" parent="Panel"]
 margin_left = 38.0
-margin_top = 124.0
+margin_top = 153.0
 margin_right = 1517.0
-margin_bottom = 226.0
+margin_bottom = 255.0
 text = "Prize per race: $20               Prize for league: $200
 
  "
@@ -40,7 +40,7 @@ text = "Prize per race: $20               Prize for league: $200
 [node name="Diary" type="RichTextLabel" parent="Panel"]
 margin_left = 38.0
 margin_top = 258.0
-margin_right = 1480.0
+margin_right = 1313.0
 margin_bottom = 1082.0
 
 [node name="Go" type="Button" parent="Panel"]
@@ -52,36 +52,36 @@ margin_bottom = 963.0
 text = "Go"
 
 [node name="Bronze" type="Button" parent="Panel"]
-margin_left = 820.0
-margin_top = 100.0
-margin_right = 1047.0
-margin_bottom = 158.0
+margin_left = 981.0
+margin_top = 21.0
+margin_right = 1208.0
+margin_bottom = 79.0
 toggle_mode = true
 group = ExtResource( 2 )
 text = "Bronze"
 
 [node name="Silver" type="Button" parent="Panel"]
-margin_left = 1047.0
-margin_top = 100.0
-margin_right = 1274.0
-margin_bottom = 158.0
+margin_left = 1208.0
+margin_top = 21.0
+margin_right = 1435.0
+margin_bottom = 79.0
 toggle_mode = true
 group = ExtResource( 2 )
 text = "Silver"
 
 [node name="Gold" type="Button" parent="Panel"]
-margin_left = 1274.0
-margin_top = 100.0
-margin_right = 1501.0
-margin_bottom = 158.0
+margin_left = 1435.0
+margin_top = 21.0
+margin_right = 1662.0
+margin_bottom = 79.0
 toggle_mode = true
 group = ExtResource( 2 )
 text = "Gold"
 
 [node name="DefeatedBy" type="Label" parent="Panel"]
-margin_left = 1215.0
+margin_left = 1514.0
 margin_top = 226.0
-margin_right = 1361.0
+margin_right = 1706.0
 margin_bottom = 258.0
 text = "Defeated By:"
 
@@ -99,39 +99,39 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ShowChicken" parent="Panel/Farm1" instance=ExtResource( 3 )]
-position = Vector2( 1105, 290 )
+position = Vector2( 1404, 290 )
 
 [node name="ShowChicken4" parent="Panel/Farm1" instance=ExtResource( 3 )]
-position = Vector2( 1240, 290 )
+position = Vector2( 1539, 290 )
 
 [node name="ShowChicken5" parent="Panel/Farm1" instance=ExtResource( 3 )]
-position = Vector2( 1380, 290 )
+position = Vector2( 1679, 290 )
 
 [node name="Farm2" type="Control" parent="Panel"]
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ShowChicken2" parent="Panel/Farm2" instance=ExtResource( 3 )]
-position = Vector2( 1105, 522 )
+position = Vector2( 1404, 522 )
 
 [node name="ShowChicken6" parent="Panel/Farm2" instance=ExtResource( 3 )]
-position = Vector2( 1239, 522 )
+position = Vector2( 1538, 522 )
 
 [node name="ShowChicken7" parent="Panel/Farm2" instance=ExtResource( 3 )]
-position = Vector2( 1377, 522 )
+position = Vector2( 1676, 522 )
 
 [node name="Farm3" type="Control" parent="Panel"]
 margin_right = 40.0
 margin_bottom = 40.0
 
 [node name="ShowChicken3" parent="Panel/Farm3" instance=ExtResource( 3 )]
-position = Vector2( 1105, 782 )
+position = Vector2( 1404, 782 )
 
 [node name="ShowChicken8" parent="Panel/Farm3" instance=ExtResource( 3 )]
-position = Vector2( 1240, 782 )
+position = Vector2( 1539, 782 )
 
 [node name="ShowChicken9" parent="Panel/Farm3" instance=ExtResource( 3 )]
-position = Vector2( 1377, 782 )
+position = Vector2( 1676, 782 )
 
 [node name="ToCoop" type="Button" parent="."]
 margin_left = 32.0

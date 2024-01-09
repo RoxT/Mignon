@@ -236,32 +236,33 @@ shortcut = SubResource( 4 )
 text = "NEW CHICKEN ($10)"
 
 [node name="ColorRect" type="ColorRect" parent="UI"]
-margin_left = 16.0
-margin_top = 893.0
-margin_right = 219.0
-margin_bottom = 1043.0
+margin_left = 12.0
+margin_top = 873.0
+margin_right = 249.0
+margin_bottom = 1060.0
 color = Color( 0, 0, 0, 0.298039 )
 
 [node name="Money" type="Label" parent="UI"]
-margin_left = 32.0
-margin_top = 996.0
-margin_right = 182.0
-margin_bottom = 1028.0
+margin_left = 30.0
+margin_top = 975.0
+margin_right = 221.0
+margin_bottom = 1013.0
 focus_previous = NodePath("../Race")
 text = "Money: $100"
 
 [node name="Food" type="Label" parent="UI"]
-margin_left = 32.0
-margin_top = 901.0
-margin_right = 120.0
-margin_bottom = 933.0
+margin_left = 30.0
+margin_top = 880.0
+margin_right = 118.0
+margin_bottom = 918.0
 focus_previous = NodePath("../Race")
 text = "Food:"
 
 [node name="Panel" type="PanelContainer" parent="UI/Food"]
-margin_top = 36.0
-margin_right = 81.0
-margin_bottom = 76.0
+margin_left = 2.0
+margin_top = 52.0
+margin_right = 83.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_styles/panel = SubResource( 8 )
@@ -270,13 +271,13 @@ custom_styles/panel = SubResource( 8 )
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 79.0
-margin_bottom = 38.0
+margin_bottom = 40.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="BEST" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 13 )]
-margin_right = 52.0
-margin_bottom = 36.0
+margin_right = 56.0
+margin_bottom = 38.0
 
 [node name="GOOD" parent="UI/Food/Panel/FoodBox" instance=ExtResource( 13 )]
 visible = false
@@ -337,22 +338,22 @@ margin_bottom = 42.0
 max_length = 17
 
 [node name="RichTextStats" type="RichTextLabel" parent="UI/StatsPanel"]
-margin_left = 38.0
+margin_left = 32.0
 margin_top = 344.0
-margin_right = 384.0
+margin_right = 367.0
 margin_bottom = 514.0
 theme = ExtResource( 12 )
 theme_type_variation = "rich_text_small"
-text = "Breed: White Cornish
+text = "Breed: Plymouth Rock
 Wins: 5 
 Fatigue: 3
 5 days old
 Speed:  400"
 
 [node name="Choose" type="Button" parent="UI/StatsPanel"]
-margin_left = 172.0
-margin_top = 517.0
-margin_right = 385.0
+margin_left = 179.0
+margin_top = 514.0
+margin_right = 390.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 48 )
 theme_type_variation = "button_small"
@@ -360,7 +361,7 @@ text = "Set As Racer"
 
 [node name="Sell" type="Button" parent="UI/StatsPanel"]
 margin_left = 14.0
-margin_top = 517.0
+margin_top = 514.0
 margin_right = 152.0
 margin_bottom = 580.0
 rect_min_size = Vector2( 0, 48 )
@@ -369,7 +370,7 @@ text = "SELL ($5)"
 
 [node name="Breed" type="Button" parent="UI/StatsPanel"]
 margin_left = 14.0
-margin_top = 594.0
+margin_top = 593.0
 margin_right = 385.0
 margin_bottom = 653.0
 rect_min_size = Vector2( 363, 48 )
@@ -466,6 +467,13 @@ visible = false
 position = Vector2( 153.853, 256 )
 points = PoolVector2Array( 1357.15, 785, 279.147, 785 )
 default_color = Color( 0.4, 0.501961, 1, 1 )
+
+[node name="Label" type="Label" parent="UI"]
+margin_left = 30.0
+margin_top = 1019.0
+margin_right = 143.0
+margin_bottom = 1049.0
+text = "Day: 35"
 
 [node name="BreedingPen" type="CanvasLayer" parent="."]
 layer = -1

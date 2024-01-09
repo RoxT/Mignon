@@ -10,18 +10,18 @@ centered = false
 script = ExtResource( 2 )
 
 [node name="Name" type="Label" parent="."]
-margin_left = -9.0
+margin_left = -15.0
 margin_top = 68.0
-margin_right = 78.0
+margin_right = 92.0
 margin_bottom = 100.0
 text = "Mignon"
 align = 1
 valign = 1
 
 [node name="Wins" type="Label" parent="."]
-margin_left = -6.0
+margin_left = -13.0
 margin_top = 101.0
-margin_right = 71.0
+margin_right = 86.0
 margin_bottom = 133.0
 text = "5 Wins"
 align = 1
@@ -29,8 +29,8 @@ valign = 1
 
 [node name="Defeated" type="Label" parent="."]
 visible = false
-margin_left = -30.0
+margin_left = -45.0
 margin_top = 130.0
-margin_right = 96.0
+margin_right = 123.0
 margin_bottom = 162.0
 text = "DEFEATED"

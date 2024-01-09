@@ -15,8 +15,6 @@ const WELCOME := "Welcome to %s League"
 const PRIZE := "Prize per race: $%s               Prize for league: $%s"
 const GO_BUTTON := "Round %s, Go!"
 
-
-
 var save_game:AllChickens
 var enemy_farms:Array
 
@@ -61,7 +59,7 @@ func load_league(title:String):
 			chicken.stats = stats
 			label.add_child(chicken)
 			chicken.position = Vector2(width, 32+3)
-			width += 128
+			width += 170
 			chicken.defeated(stats in defeated)
 			
 		var winner_nodes := get_node("Panel/Farm" + str(farm_i)).get_children()

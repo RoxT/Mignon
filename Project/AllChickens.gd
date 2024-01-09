@@ -321,6 +321,7 @@ func generate_mignon()->Array:
 	one.top_speed = 240
 	one.farm = YOU
 	one.unique_no = get_new_unique_no()
+	one.breed = M.WHITE_CORNISH
 	new_coop.append(one)
 	
 	var two := Chicken.new()

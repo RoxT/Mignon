@@ -51,10 +51,10 @@ margin_right = 290.0
 margin_bottom = 618.0
 theme = ExtResource( 1 )
 theme_type_variation = "rich_text_small"
-text = "Click on a guest to see what they're saying"
+text = "Tap on a guest to see what they're saying"
 
 [node name="SpyGlass" type="Sprite" parent="UI/PeonStatsPanel"]
-position = Vector2( 140, 103 )
+position = Vector2( 56, 141 )
 texture = ExtResource( 4 )
 
 [node name="ReportPanel" type="Panel" parent="UI"]
